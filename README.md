@@ -4,7 +4,7 @@ Simple application for task managment.
 
 ## Designed by Netcracker students
   - Ilya Kozlov
-  - Andrey Ryazanov
+  - Andrei Riazanov
   - Vladislav Selickiy
   
 ## Additional information  
