@@ -3,8 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
+// todo what is J? we dicscuss that this entity is journal
 public class JTasks {
     private ArrayList<Task> tasks;
+    // todo useless variable
     private int taskCount;
 
     public void addTask(Task task) {
