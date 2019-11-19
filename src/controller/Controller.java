@@ -6,10 +6,8 @@ import view.*;
 import java.util.Date;
 
 public class Controller {
-    // todo create objects not from constructor is bad practice
-    // also view in controller???
-    View view = new JavaFXView();
-    private JTasks jtasks = new JTasks();
+    MainWindow view = new MainWindow();
+    private Journal jtasks = new Journal();
 
     public void addTask(Task task) {
         jtasks.addTask(task);
