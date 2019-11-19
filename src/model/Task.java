@@ -5,7 +5,9 @@ import java.util.Date;
 public class Task {
     private String name;
     private String description;
+    // todo plannedDate or datePlan?
     private Date datePlan;
+    // todo the same
     private Date dateDone;
     private Status status;
     private int id;
