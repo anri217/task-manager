@@ -4,7 +4,7 @@ import java.io.*;
 import model.*;
 
 public class IOUtil {
-    public static void serializeObject (JTasks jtasks, OutputStream out) throws IOException {
+    public static void serializeObject (Journal jtasks, OutputStream out) throws IOException {
         if (jtasks != null) {
             // todo close stream or use try with resource for autocloseable objects
             // research: is the next object autocloseable?
@@ -13,10 +13,10 @@ public class IOUtil {
         }
     }
 
-    public static JTasks deserizeObject (InputStream in) throws IOException, ClassNotFoundException {
-        JTasks result;
+    public static Journal deserizeObject (InputStream in) throws IOException, ClassNotFoundException {
+        Journal result;
         ObjectInputStream ois = new ObjectInputStream(in);
-        result = (JTasks) ois.readObject();
+        result = (Journal) ois.readObject();
         return result;
     }
 }
