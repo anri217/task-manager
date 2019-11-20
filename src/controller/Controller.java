@@ -26,7 +26,4 @@ public class Controller {
         newTask.setDatePlan(newDate);
         newTask.setStatus(Status.DEFERRED);
     }
-
-
-
 }
