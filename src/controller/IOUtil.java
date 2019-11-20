@@ -10,6 +10,7 @@ public class IOUtil {
             // research: is the next object autocloseable?
             ObjectOutputStream oos = new ObjectOutputStream(out);
             oos.writeObject(jtasks);
+            oos.close();
         }
     }
 
@@ -17,6 +18,7 @@ public class IOUtil {
         JTasks result;
         ObjectInputStream ois = new ObjectInputStream(in);
         result = (JTasks) ois.readObject();
+        ois.close();
         return result;
     }
 }

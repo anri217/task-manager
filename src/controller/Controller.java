@@ -6,8 +6,8 @@ import view.*;
 import java.util.Date;
 
 public class Controller {
-    MainWindow view = new MainWindow();
-    private Journal jtasks = new Journal();
+    View view = new JavaFXView();
+    private JTasks jtasks = new JTasks();
 
     public void addTask(Task task) {
         jtasks.addTask(task);
