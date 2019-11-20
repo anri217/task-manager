@@ -4,20 +4,19 @@ import java.io.*;
 import model.*;
 
 public class IOUtil {
-    public static void serializeObject (JTasks jtasks, OutputStream out) throws IOException {
-        if (jtasks != null) {
+    public static void serializeObject (Journal journal, OutputStream out) throws IOException {
+        if (journal != null) {
             // todo close stream or use try with resource for autocloseable objects
             // research: is the next object autocloseable?
             ObjectOutputStream oos = new ObjectOutputStream(out);
-            oos.writeObject(jtasks);
-            oos.close();
+            oos.writeObject(journal);
         }
     }
 
-    public static JTasks deserizeObject (InputStream in) throws IOException, ClassNotFoundException {
-        JTasks result;
+    public static Journal deserializeObject (InputStream in) throws IOException, ClassNotFoundException {
+        Journal result;
         ObjectInputStream ois = new ObjectInputStream(in);
-        result = (JTasks) ois.readObject();
+        result = (Journal) ois.readObject();
         ois.close();
         return result;
     }

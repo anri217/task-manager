@@ -1,28 +1,26 @@
 package controller;
 
 import model.*;
-import view.*;
 
 import java.util.Date;
 
 public class Controller {
-    View view = new JavaFXView();
-    private JTasks jtasks = new JTasks();
+    private Journal journal = new Journal();
 
     public void addTask(Task task) {
-        jtasks.addTask(task);
+        journal.addTask(task);
     }
 
     public void deleteTask(Task task) {
-        jtasks.deleteTask(task);
+        journal.deleteTask(task);
     }
 
     public void changeTask(Task task1, Task task2) {
-        jtasks.setTask(task1.getName(), task2);
+        journal.setTask(task1.getName(), task2);
     }
 
     public void putAsideTask(Task task, Date newDate) {
-        Task newTask = jtasks.getTaskByName(task.getName());
+        Task newTask = journal.getTaskByName(task.getName());
         newTask.setDatePlan(newDate);
         newTask.setStatus(Status.DEFERRED);
     }
