@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -19,14 +21,16 @@ public class MainWindow extends Application {
     public void start(Stage stage) throws Exception {
         GridPane root = new GridPane();
         GridPane root1 = new GridPane();
-        root.setStyle("-fx-background-color:rgb(159, 174, 195)");
+        root.setStyle("-fx-background-color:#df665d");
 
         root.setPadding(new Insets(20));
         root.setHgap(25);
         root.setVgap(15);
 
-        Label labelTitle = new Label("Журнал задач");
-        root.add(labelTitle, 0, 0);
+        Label labelTitle = new Label("ЖУРНАЛ ЗАДАЧ");
+        labelTitle.setFont(new Font("Impact", 30));
+        labelTitle.setTextFill(Color.web("#ffcf04"));
+        root.add(labelTitle, 0, 0, 2, 1);
 
         Button exit = new Button("Выйти");
         root.add(exit, 4, 7);
@@ -44,15 +48,19 @@ public class MainWindow extends Application {
         root.add(fileButton, 0, 1);
 
         Label checkBoxes = new Label("№");
+        checkBoxes.setFont(new Font("Arial Black", 20));
         root.add(checkBoxes, 0, 2);
 
         Label nameTask = new Label("Наименование");
+        nameTask.setFont(new Font("Arial Black", 20));
         root.add(nameTask, 1, 2);
 
         Label descriptionLabel = new Label("Описание");
+        descriptionLabel.setFont(new Font("Arial Black", 20));
         root.add(descriptionLabel, 2, 2);
 
         Label dateLabel = new Label("Дата");
+        dateLabel.setFont(new Font("Arial Black", 20));
         root.add(dateLabel, 3, 2);
 
         CheckBox checkBox1 = new CheckBox();
@@ -94,7 +102,7 @@ public class MainWindow extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("TASK MANAGER");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 }
-
