@@ -15,23 +15,23 @@ public class Notifier {
         timer.schedule(timerTask, alr.getDateAlert());
     }
 
-    public void CreateTimer(Notification alr, TimerTask tTask){
-        timer.schedule(tTask,alr.getDateAlert());
+    public void CreateTimer(Notification alr, TimerTask tTask) {
+        timer.schedule(tTask, alr.getDateAlert());
     }
 
-    public Timer getTimer(){
+    public Timer getTimer() {
         return this.timer;
     }
 
-    public void setTimer(Timer utimer){
+    public void setTimer(Timer utimer) {
         timer = utimer;
     }
 
-    public void setTimerTask(TimerTask tTask){
+    public void setTimerTask(TimerTask tTask) {
         timerTask = tTask;
     }
 
-    public TimerTask getTimerTask(){
+    public TimerTask getTimerTask() {
         return this.timerTask;
     }
 }

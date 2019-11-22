@@ -6,9 +6,9 @@ public class Task {
     private String name;
     private String description;
     // todo plannedDate or datePlan?
-    private Date datePlan;
+    private Date plannedDate;
     // todo the same
-    private Date dateDone;
+    private Date dateOfDone;
     private Status status;
     private int id;
 
@@ -36,19 +36,19 @@ public class Task {
         this.status = status;
     }
 
-    public Date getDatePlan() {
-        return datePlan;
+    public Date getPlannedDate() {
+        return plannedDate;
     }
 
-    public void setDatePlan(Date datePlan) {
-        this.datePlan = datePlan;
+    public void setPlannedDate(Date plannedDate) {
+        this.plannedDate = plannedDate;
     }
 
-    public Date getDateDone() {
-        return dateDone;
+    public Date getDateOfDone() {
+        return dateOfDone;
     }
 
-    public void setDateDone(Date dateDone) {
-        this.dateDone = dateDone;
+    public void setDateOfDone(Date dateOfDone) {
+        this.dateOfDone = dateOfDone;
     }
 }

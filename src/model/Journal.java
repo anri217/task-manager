@@ -25,12 +25,12 @@ public class Journal {
     public Task getTaskByDate(Date date) {
         Task res = new Task();
         for (int i = 0; i < tasks.size(); ++i) {
-            if (date == tasks.get(i).getDatePlan()) res = tasks.get(i);
+            if (date == tasks.get(i).getPlannedDate()) res = tasks.get(i);
         }
         return res;
     }
 
-    public void setTask (String taskName, Task newTask) {
+    /*public void setTask(String taskName, Task newTask) {
         Task task = getTaskByName(taskName);
 
         {
@@ -41,7 +41,7 @@ public class Journal {
             task.setDateDone(newTask.getDateDone());
         }
 
-    }
+    }*/
 
     public void changeStatus(String taskName, Status status) {
         getTaskByName(taskName).setStatus(status);

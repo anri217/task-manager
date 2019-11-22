@@ -1,11 +1,17 @@
 package controller;
 
-import model.*;
-
-import java.util.Date;
+import model.Journal;
+import model.Task;
 
 public class Controller {
-    private Journal journal = new Journal();
+    private Journal journal;
+
+    //singleton later...
+    //notifier wait...
+
+    Controller(Journal journal) {
+        this.journal = journal;
+    }
 
     public void addTask(Task task) {
         journal.addTask(task);
@@ -16,12 +22,10 @@ public class Controller {
     }
 
     public void changeTask(Task task1, Task task2) {
-        journal.setTask(task1.getName(), task2);
-    }
-
-    public void putAsideTask(Task task, Date newDate) {
-        Task newTask = journal.getTaskByName(task.getName());
-        newTask.setDatePlan(newDate);
-        newTask.setStatus(Status.DEFERRED);
+        task1.setStatus(task2.getStatus());
+        task1.setDateOfDone(task2.getDateOfDone());
+        task1.setDescription(task2.getDescription());
+        task1.setName(task2.getName());
+        task1.setPlannedDate(task2.getPlannedDate());
     }
 }

@@ -1,23 +1,24 @@
 package controller;
 
+import model.Journal;
+
 import java.io.*;
-import model.*;
 
 public class IOUtil {
-    public static void serializeObject (Journal journal, OutputStream out) throws IOException {
-        if (journal != null) {
+    public static void serializeObject(Object obj) throws IOException {
+        if (obj != null) {
             // todo close stream or use try with resource for autocloseable objects
             // research: is the next object autocloseable?
-            ObjectOutputStream oos = new ObjectOutputStream(out);
-            oos.writeObject(journal);
+            try (OutputStream out = new FileOutputStream(new File("Z://directory")); //pathname is abstract...
+                 ObjectOutputStream oos = new ObjectOutputStream(out)) {
+                oos.writeObject(obj);
+            }
         }
     }
 
-    public static Journal deserializeObject (InputStream in) throws IOException, ClassNotFoundException {
-        Journal result;
-        ObjectInputStream ois = new ObjectInputStream(in);
-        result = (Journal) ois.readObject();
-        ois.close();
-        return result;
+    public static Object deserializeObject(InputStream in) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(in)) {
+            return ois.readObject();
+        }
     }
 }

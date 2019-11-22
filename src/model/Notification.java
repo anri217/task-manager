@@ -8,9 +8,9 @@ public class Notification {
     private String textAlert;
     private Notifier notifier;
 
-    public Notification(Task task, TimerTask timerTask){
-        this.textAlert = task.getName()+" ."+ task.getDescription();
-        this.dateAlert  = task.getDatePlan();
+    public Notification(Task task, TimerTask timerTask) {
+        this.textAlert = task.getName() + " ." + task.getDescription();
+        this.dateAlert = task.getPlannedDate();
         notifier = new Notifier(this);
         notifier.CreateTimer(this, timerTask);
     }
