@@ -51,4 +51,12 @@ public class Task {
     public void setDateOfDone(Date dateOfDone) {
         this.dateOfDone = dateOfDone;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

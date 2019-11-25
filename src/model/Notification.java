@@ -11,8 +11,6 @@ public class Notification {
     public Notification(Task task, TimerTask timerTask) {
         this.textAlert = task.getName() + " ." + task.getDescription();
         this.dateAlert = task.getPlannedDate();
-        notifier = new Notifier(this);
-        notifier.CreateTimer(this, timerTask);
     }
 
     public Date getDateAlert() {
