@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+
 public class Task {
     private String name;
     private String description;
@@ -10,6 +11,7 @@ public class Task {
     // todo the same
     private Date dateOfDone;
     private Status status;
+
     private int id;
 
     public String getName() {

@@ -9,7 +9,7 @@ public class IdGenerator {
         this.id = id;
     }
 
-    public int getId() {
+    static public int getId() {
         return id++;
     }
 }

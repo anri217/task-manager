@@ -14,20 +14,21 @@ public class Notifier {
         notificationMap = new LinkedHashMap<>();
     }
 
-    public void createTask(Task task, Timer timerr){
+    public void createTask(Task task, Timer timerr) {
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Оповещение о задаче "+task.getName());
+                System.out.println("Оповещение о задаче " + task.getName());
                 timerr.cancel();
             }
         };
     }
+
     public void addNotification(Task task) {
         notificationMap.putIfAbsent(task.getId(), timerTask);
     }
 
-    public void deleteNotification(Task task){
+    public void deleteNotification(Task task) {
         notificationMap.remove(task.getId());
     }
 
