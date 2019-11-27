@@ -5,16 +5,20 @@ import model.Notification;
 import model.Notifier;
 import model.Task;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class Controller {
+    private static Controller instanse;
+
+    public static synchronized Controller getInstance() {
+        if (instanse == null) {
+            instanse = new Controller();
+        }
+        return instanse;
+    }
+
     private Journal journal;
     private Notifier notifier = new Notifier();
 
-    //singleton later...
-
-    public Controller(Journal journal) {
+    public void setJournal(Journal journal) {
         this.journal = journal;
     }
 
