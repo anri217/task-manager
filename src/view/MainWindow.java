@@ -21,7 +21,7 @@ public class MainWindow extends Application {
     public void start(Stage stage) throws Exception {
         GridPane root = new GridPane();
         GridPane root1 = new GridPane();
-        root.setStyle("-fx-background-color:#df665d");
+        root.setStyle("-fx-background-color:#df665d"); //kkk
 
         root.setPadding(new Insets(20));
         root.setHgap(25);
