@@ -15,7 +15,7 @@ public class Journal {
     }
 
     public Task getTaskByName(String name) {
-        Task res = new Task();
+        Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
             if (name == tasks.get(i).getName()) res = tasks.get(i);
         }
@@ -23,7 +23,7 @@ public class Journal {
     }
 
     public Task getTaskByDate(Date date) {
-        Task res = new Task();
+        Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
             if (date == tasks.get(i).getPlannedDate()) res = tasks.get(i);
         }
