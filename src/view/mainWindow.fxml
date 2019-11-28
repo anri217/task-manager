@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="view.MainWindow" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane>
          <top>
@@ -36,9 +36,9 @@
          <bottom>
             <HBox prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
-                  <Button mnemonicParsing="false" text="Добавить задачу" />
-                  <Button mnemonicParsing="false" text="Изменить" />
+                  <Button fx:id="delTask" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
+                  <Button fx:id="addTask" mnemonicParsing="false" onAction="#clickAddTask" text="Добавить задачу" />
+                  <Button fx:id="changeTask" mnemonicParsing="false" text="Изменить" />
                </children>
             </HBox>
          </bottom>
