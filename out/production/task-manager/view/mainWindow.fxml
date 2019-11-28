@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.media.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
 
-<VBox fx:controller="view.MainWindow" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindow">
    <children>
       <BorderPane>
          <top>
@@ -24,21 +20,21 @@
             </MenuBar>
          </top>
          <center>
-            <TableView BorderPane.alignment="CENTER">
+            <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn editable="false" prefWidth="75.0" text="Выбрать" />
-                  <TableColumn editable="false" prefWidth="137.0" text="Наименование" />
-                  <TableColumn editable="false" prefWidth="255.0" text="Описание" />
-                  <TableColumn editable="false" minWidth="0.0" prefWidth="172.0" text="Дата" />
+                <TableColumn fx:id="chooseColumn" editable="false" prefWidth="75.0" text="Выбрать" />
+                  <TableColumn fx:id="nameColumn" editable="false" prefWidth="137.0" text="Наименование" />
+                  <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="255.0" text="Описание" />
+                  <TableColumn fx:id="dateColumn" editable="false" minWidth="0.0" prefWidth="172.0" text="Дата" />
               </columns>
             </TableView>
          </center>
          <bottom>
             <HBox prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="delTask" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
+                  <Button fx:id="delTask" disable="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
                   <Button fx:id="addTask" mnemonicParsing="false" onAction="#clickAddTask" text="Добавить задачу" />
-                  <Button fx:id="changeTask" mnemonicParsing="false" text="Изменить" />
+                  <Button fx:id="changeTask" disable="true" mnemonicParsing="false" text="Изменить" />
                </children>
             </HBox>
          </bottom>

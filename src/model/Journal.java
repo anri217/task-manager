@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Journal {
-    private ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;//todo ArrayList to Map
 
     public void addTask(Task task) {
         tasks.add(task);
@@ -25,23 +25,10 @@ public class Journal {
     public Task getTaskByDate(Date date) {
         Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
-            if (date == tasks.get(i).getPlannedDate()) res = tasks.get(i);
+            if (date == tasks.get(i).getDatePlan()) res = tasks.get(i);
         }
         return res;
     }
-
-    /*public void setTask(String taskName, Task newTask) {
-        Task task = getTaskByName(taskName);
-
-        {
-            task.setStatus(newTask.getStatus());
-            task.setName(newTask.getName());
-            task.setDescription(newTask.getDescription());
-            task.setDatePlan(newTask.getDatePlan());
-            task.setDateDone(newTask.getDateDone());
-        }
-
-    }*/
 
     public void changeStatus(String taskName, Status status) {
         getTaskByName(taskName).setStatus(status);

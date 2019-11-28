@@ -38,10 +38,10 @@ public class Controller {
     public void changeTask(Task task1, Task task2) {
         notifier.deleteNotification(task1);
         task1.setStatus(task2.getStatus());
-        task1.setDateOfDone(task2.getDateOfDone());
+        task1.setDateDone(task2.getDateDone());
         task1.setDescription(task2.getDescription());
         task1.setName(task2.getName());
-        task1.setPlannedDate(task2.getPlannedDate());
+        task1.setDatePlan(task2.getDatePlan());
         notifier.addNotification(task1);
     }
 }
