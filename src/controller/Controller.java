@@ -11,7 +11,7 @@ public class Controller {
     private Notifier notifier;
 
     public static synchronized Controller getInstance() {
-        ifcпшgigigigigi (instance == null) {
+        if (instance == null) {
             instance = new Controller();
         }
         return instance;

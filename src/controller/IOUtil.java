@@ -1,7 +1,5 @@
 package controller;
 
-import model.Journal;
-
 import java.io.*;
 
 public class IOUtil {
@@ -16,8 +14,9 @@ public class IOUtil {
         }
     }
 
-    public static Object deserializeObject(InputStream in) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(in)) {
+    public static Object deserializeObject() throws IOException, ClassNotFoundException {
+        try (InputStream in = new FileInputStream(new File("Z://directory"));
+             ObjectInputStream ois = new ObjectInputStream(in)) {
             return ois.readObject();
         }
     }
