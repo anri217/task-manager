@@ -1,3 +1,4 @@
+package model;
 
 // todo nigo is it work? looks like you do not try to generate value
 // also please use Code Convention

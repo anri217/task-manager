@@ -5,8 +5,13 @@ import model.Notification;
 import model.Notifier;
 import model.Task;
 
+import java.util.ArrayList;
+
 public class Controller {
     private static Controller instanse;
+
+    private Journal journal;
+    private Notifier notifier = new Notifier();
 
     public static synchronized Controller getInstance() {
         if (instanse == null) {
@@ -14,9 +19,6 @@ public class Controller {
         }
         return instanse;
     }
-
-    private Journal journal;
-    private Notifier notifier = new Notifier();
 
     public void setJournal(Journal journal) {
         this.journal = journal;
@@ -43,5 +45,9 @@ public class Controller {
         task1.setName(task2.getName());
         task1.setDatePlan(task2.getDatePlan());
         notifier.addNotification(task1);
+    }
+
+    public ArrayList<Task> getAll() {
+        return journal.getAll();
     }
 }

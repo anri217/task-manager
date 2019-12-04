@@ -2,12 +2,13 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class Journal {
-    private ArrayList<Task> tasks;//todo ArrayList to Map
+    private Map<Integer, Task> tasks;
 
     public void addTask(Task task) {
-        tasks.add(task);
+        tasks.put(IdGenerator.getId(),task);
     }
 
     public void deleteTask(Task task) {
@@ -32,5 +33,13 @@ public class Journal {
 
     public void changeStatus(String taskName, Status status) {
         getTaskByName(taskName).setStatus(status);
+    }
+
+    public ArrayList<Task> getAll() {
+        ArrayList<Task> tasksArr = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksArr.add(tasks.get(i));
+        }
+        return tasksArr;
     }
 }

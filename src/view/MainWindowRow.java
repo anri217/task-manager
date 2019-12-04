@@ -1,26 +1,27 @@
 package view;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.CheckBox;
 import model.Task;
 
 public class MainWindowRow {
-    private Task task;
-    private CheckBox checkBox;
+    private SimpleObjectProperty<Task> task;
+    private SimpleObjectProperty<CheckBox> checkBox;
 
-    public MainWindowRow() {
-        task = new Task();
-        checkBox = new CheckBox();
+    public MainWindowRow(Task task) {
+        this.task = new SimpleObjectProperty<Task>(task);
+        checkBox = new SimpleObjectProperty<CheckBox>(new CheckBox());
     }
 
     public CheckBox getCheckBox() {
-        return checkBox;
+        return checkBox.get();
     }
 
     public Task getTask() {
-        return task;
+        return task.get();
     }
 
     public void setTask(Task task) {
-        this.task = task;
+        this.task.set(task);
     }
 }
