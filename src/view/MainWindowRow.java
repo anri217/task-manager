@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 import model.Task;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class MainWindowRow {
     private SimpleStringProperty name;
