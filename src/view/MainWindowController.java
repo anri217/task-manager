@@ -1,17 +1,18 @@
 package view;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Status;
 import model.Task;
 
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.Date;
+import java.util.ResourceBundle;
 
-public class MainWindowController {
+public class MainWindowController implements Initializable {
     public Button addTask;
     public Button delTask;
     public Button changeTask;
@@ -26,6 +27,21 @@ public class MainWindowController {
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initColumns();
+    }
+
+    private void initColumns() {
+        chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+    }
+
     @FXML
     public void clickAddTask(ActionEvent actionEvent) {
         Task newTask = new Task();
@@ -35,15 +51,9 @@ public class MainWindowController {
         newTask.setDatePlan(new Date(2007 - 1900, 0, 9, 9, 41));
         newTask.setDescription("Say something about new iPhone");
         newTask.setId(model.IdGenerator.getId());
+
         MainWindowRow row = new MainWindowRow(newTask);
+
         taskTable.getItems().add(row);
-
-        chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
-
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
     }
 }
