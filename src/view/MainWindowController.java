@@ -48,12 +48,12 @@ public class MainWindowController implements Initializable {
     @FXML
     public void clickAddTask(ActionEvent actionEvent) {
         Task newTask = new Task();
-        newTask.setName("New iPhone");
         newTask.setStatus(Status.PLANNED);
         newTask.setDateDone(null);
         newTask.setDatePlan(new Date(2007 - 1900, 0, 9, 9, 41));
         newTask.setDescription("Say something about new iPhone");
         newTask.setId(model.IdGenerator.getId());
+        newTask.setName("New iPhone" + " " + newTask.getId());
 
         MainWindowRow row = new MainWindowRow(newTask);
         rows.add(row);
@@ -82,5 +82,15 @@ public class MainWindowController implements Initializable {
         });
 
         taskTable.getItems().add(row);
+    }
+
+
+    public void clickDelTask(ActionEvent actionEvent) {
+        for (int i = 0; i < MainWindowController.rows.size(); i++) {
+            if(rows.get(i).getCheckBox().isSelected()){
+                taskTable.getItems().remove(i);
+                rows.get(i).getCheckBox().setSelected(false);
+            }
+        }
     }
 }

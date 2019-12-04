@@ -32,7 +32,7 @@
    <bottom>
       <HBox fillHeight="false" prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="delTask" disable="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
+            <Button fx:id="delTask" disable="true" mnemonicParsing="false" onAction="#clickDelTask" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
             <Button fx:id="addTask" mnemonicParsing="false" onAction="#clickAddTask" text="Добавить задачу" />
             <Button fx:id="changeTask" disable="true" mnemonicParsing="false" text="Изменить" />
          </children>
