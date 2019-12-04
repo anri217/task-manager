@@ -1,0 +1,49 @@
+package view;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Status;
+import model.Task;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class MainWindowController {
+    public Button addTask;
+    public Button delTask;
+    public Button changeTask;
+
+    public TableView<MainWindowRow> taskTable;
+
+    public TableColumn<MainWindowRow, CheckBox> chooseColumn;
+    public TableColumn<MainWindowRow, String> nameColumn;
+    public TableColumn<MainWindowRow, String> descriptionColumn;
+    public TableColumn<MainWindowRow, String> dateColumn;
+
+    public MenuItem saveJournal;
+    public MenuItem downloadJournal;
+
+    @FXML
+    public void clickAddTask(ActionEvent actionEvent) {
+        Task newTask = new Task();
+        newTask.setName("New iPhone");
+        newTask.setStatus(Status.PLANNED);
+        newTask.setDateDone(null);
+        newTask.setDatePlan(new Date(2007 - 1900, 0, 9, 9, 41));
+        newTask.setDescription("Say something about new iPhone");
+        newTask.setId(model.IdGenerator.getId());
+        MainWindowRow row = new MainWindowRow(newTask);
+        taskTable.getItems().add(row);
+
+        chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+    }
+}
