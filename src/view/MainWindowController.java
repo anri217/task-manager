@@ -10,6 +10,7 @@ import model.Task;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -28,7 +29,7 @@ public class MainWindowController implements Initializable {
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
 
-    static ArrayList<MainWindowRow> rows = new ArrayList<>();
+    private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,12 +46,37 @@ public class MainWindowController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
     }
 
+    private void selectedCheckBox(){
+        int count = 0;
+
+        for (MainWindowRow row : rows) {
+            if (row.getCheckBox().isSelected()) {
+                ++count;
+            }
+        }
+
+        if (count == 0){
+            delTask.setDisable(true);
+            changeTask.setDisable(true);
+        }
+
+        if(count == 1){
+            delTask.setDisable(false);
+            changeTask.setDisable(false);
+        }
+
+        if(count > 1){
+            delTask.setDisable(false);
+            changeTask.setDisable(true);
+        }
+    }
+
     @FXML
     public void clickAddTask(ActionEvent actionEvent) {
         Task newTask = new Task();
         newTask.setStatus(Status.PLANNED);
         newTask.setDateDone(null);
-        newTask.setDatePlan(new Date(2007 - 1900, 0, 9, 9, 41));
+        newTask.setDatePlan(new Date(2007 - 1900, Calendar.JANUARY, 9, 9, 41));
         newTask.setDescription("Say something about new iPhone");
         newTask.setId(model.IdGenerator.getId());
         newTask.setName("New iPhone" + " " + newTask.getId());
@@ -58,39 +84,20 @@ public class MainWindowController implements Initializable {
         MainWindowRow row = new MainWindowRow(newTask);
         rows.add(row);
 
-        row.getCheckBox().setOnAction(actionEvent1 -> {
-            int count = 0;
-
-            for (int i = 0; i < MainWindowController.rows.size(); i++) {
-                if(rows.get(i).getCheckBox().isSelected()){ ++count; }
-            }
-
-            if (count == 0){
-                delTask.setDisable(true);
-                changeTask.setDisable(true);
-            }
-
-            if(count == 1){
-                delTask.setDisable(false);
-                changeTask.setDisable(false);
-            }
-
-            if(count > 1){
-                delTask.setDisable(false);
-                changeTask.setDisable(true);
-            }
-        });
+        row.getCheckBox().setOnAction(actionEvent1 -> selectedCheckBox());
 
         taskTable.getItems().add(row);
     }
 
-
+    @FXML
     public void clickDelTask(ActionEvent actionEvent) {
-        for (int i = 0; i < MainWindowController.rows.size(); i++) {
+        for (int i = 0; i < rows.size(); i++) {
             if(rows.get(i).getCheckBox().isSelected()){
                 taskTable.getItems().remove(i);
-                rows.get(i).getCheckBox().setSelected(false);
+                rows.remove(i);
+                i--;
             }
         }
+        selectedCheckBox();
     }
 }
