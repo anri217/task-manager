@@ -1,12 +1,14 @@
-package view;
+package view.mainWindow;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Status;
 import model.Task;
+import view.addTaskWindow.AddTaskWindow;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,22 +73,17 @@ public class MainWindowController implements Initializable {
         }
     }
 
-    @FXML
-    public void clickAddTask(ActionEvent actionEvent) {
-        Task newTask = new Task();
-        newTask.setStatus(Status.PLANNED);
-        newTask.setDateDone(null);
-        newTask.setDatePlan(new Date(2007 - 1900, Calendar.JANUARY, 9, 9, 41));
-        newTask.setDescription("Say something about new iPhone");
-        newTask.setId(model.IdGenerator.getId());
-        newTask.setName("New iPhone" + " " + newTask.getId());
-
-        MainWindowRow row = new MainWindowRow(newTask);
+    public void addTask(Task task){
+        MainWindowRow row = new MainWindowRow(task);
         rows.add(row);
-
         row.getCheckBox().setOnAction(actionEvent1 -> selectedCheckBox());
-
         taskTable.getItems().add(row);
+    }
+
+    @FXML
+    public void clickAddTask(ActionEvent actionEvent) throws Exception {
+        AddTaskWindow addTaskWindow = new AddTaskWindow();
+        addTaskWindow.start(new Stage());
     }
 
     @FXML
