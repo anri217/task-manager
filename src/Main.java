@@ -1,6 +1,7 @@
 import controller.IOUtil;
 import controller.PropertyParser;
 import model.Journal;
+import view.mainWindow.MainWindow;
 
 import java.io.IOException;
 
