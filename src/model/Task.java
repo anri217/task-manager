@@ -6,10 +6,8 @@ import java.util.Date;
 public class Task {
     private String name;
     private String description;
-    // todo plannedDate or datePlan?
-    private Date plannedDate;
-    // todo the same
-    private Date dateOfDone;
+    private Date datePlan;
+    private Date dateDone;
     private Status status;
 
     private int id;
@@ -48,20 +46,20 @@ public class Task {
         this.status = status;
     }
 
-    public Date getPlannedDate() {
-        return plannedDate;
+    public Date getDatePlan() {
+        return datePlan;
     }
 
-    public void setPlannedDate(Date plannedDate) {
-        this.plannedDate = plannedDate;
+    public void setDatePlan(Date datePlan) {
+        this.datePlan = datePlan;
     }
 
-    public Date getDateOfDone() {
-        return dateOfDone;
+    public Date getDateDone() {
+        return dateDone;
     }
 
-    public void setDateOfDone(Date dateOfDone) {
-        this.dateOfDone = dateOfDone;
+    public void setDateDone(Date dateDone) {
+        this.dateDone = dateDone;
     }
 
     public int getId() {
