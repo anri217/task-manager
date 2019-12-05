@@ -12,6 +12,16 @@ public class Task {
 
     private int id;
 
+    public Task() {};
+
+    public Task(String name, String description, Date plannedDate, Date dateOfDone, Status status) {
+        this.name = name;
+        this.description = description;
+        this.plannedDate = plannedDate;
+        this.dateOfDone = dateOfDone;
+        this.status = status;
+    }
+
     public String getName() {
         return name;
     }

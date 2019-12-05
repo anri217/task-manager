@@ -8,20 +8,23 @@ import model.Task;
 import java.util.ArrayList;
 
 public class Controller {
-    private static Controller instanse;
+    private static Controller instance;
+    private Journal journal;
+    private Notifier notifier;
 
     private Journal journal;
     private Notifier notifier = new Notifier();
 
     public static synchronized Controller getInstance() {
-        if (instanse == null) {
-            instanse = new Controller();
+        if (instance == null) {
+            instance = new Controller();
         }
-        return instanse;
+        return instance;
     }
 
-    public void setJournal(Journal journal) {
-        this.journal = journal;
+    private Controller() {
+        journal = new Journal();
+        notifier = new Notifier();
     }
 
     public void addTask(Task task) {
