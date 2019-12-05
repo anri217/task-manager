@@ -10,7 +10,7 @@ public class Notification {
 
     public Notification(Task task) {
         this.textAlert = task.getName() + " ." + task.getDescription();
-        this.dateAlert = task.getPlannedDate();
+        this.dateAlert = task.getDatePlan();
     }
 
     public Date getDateAlert() {
