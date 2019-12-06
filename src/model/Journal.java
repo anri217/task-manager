@@ -26,7 +26,7 @@ public class Journal {
     public Task getTaskByDate(Date date) {
         Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
-            if (date == tasks.get(i).getDatePlan()) res = tasks.get(i);
+            if (date == tasks.get(i).getPlannedDate()) res = tasks.get(i);
         }
         return res;
     }

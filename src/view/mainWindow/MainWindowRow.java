@@ -14,7 +14,7 @@ public class MainWindowRow {
     public MainWindowRow(Task task) {
         name = new SimpleStringProperty(task.getName());
         description = new SimpleStringProperty(task.getDescription());
-        date = new SimpleStringProperty(String.valueOf(task.getDatePlan()));
+        date = new SimpleStringProperty(String.valueOf(task.getPlannedDate()));
         checkBox = new SimpleObjectProperty<CheckBox>(new CheckBox());
     }
 

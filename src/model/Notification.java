@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Date;
-import java.util.TimerTask;
 
 public class Notification {
     private Date dateAlert;
@@ -10,7 +9,7 @@ public class Notification {
 
     public Notification(Task task) {
         this.textAlert = task.getName() + " ." + task.getDescription();
-        this.dateAlert = task.getDatePlan();
+        this.dateAlert = task.getPlannedDate();
     }
 
     public Date getDateAlert() {

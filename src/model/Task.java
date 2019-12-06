@@ -6,19 +6,19 @@ import java.util.Date;
 public class Task {
     private String name;
     private String description;
-    private Date datePlan;
-    private Date dateDone;
+    private Date plannedDate;
+    private Date dateOfDone;
     private Status status;
 
     private int id;
 
     public Task() {};
 
-    public Task(String name, String description, Date plannedDate, Date dateOfDone, Status status) {
+    public Task(String name, String description, Date plannedDate, Status status) {
         this.name = name;
         this.description = description;
         this.plannedDate = plannedDate;
-        this.dateOfDone = dateOfDone;
+        this.dateOfDone = null;
         this.status = status;
     }
 
@@ -46,20 +46,20 @@ public class Task {
         this.status = status;
     }
 
-    public Date getDatePlan() {
-        return datePlan;
+    public Date getPlannedDate() {
+        return plannedDate;
     }
 
-    public void setDatePlan(Date datePlan) {
-        this.datePlan = datePlan;
+    public void setPlannedDate(Date plannedDate) {
+        this.plannedDate = plannedDate;
     }
 
-    public Date getDateDone() {
-        return dateDone;
+    public Date getDateOfDone() {
+        return dateOfDone;
     }
 
-    public void setDateDone(Date dateDone) {
-        this.dateDone = dateDone;
+    public void setDateOfDone(Date dateOfDone) {
+        this.dateOfDone = dateOfDone;
     }
 
     public int getId() {

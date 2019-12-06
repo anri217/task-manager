@@ -12,8 +12,13 @@ public class Controller {
     private Journal journal;
     private Notifier notifier;
 
-    private Journal journal;
-    private Notifier notifier = new Notifier();
+
+    private Controller() {
+        journal = new Journal();
+        notifier = new Notifier();
+    }
+
+
 
     public static synchronized Controller getInstance() {
         if (instance == null) {
@@ -22,10 +27,6 @@ public class Controller {
         return instance;
     }
 
-    private Controller() {
-        journal = new Journal();
-        notifier = new Notifier();
-    }
 
     public void addTask(Task task) {
         journal.addTask(task);
@@ -43,10 +44,10 @@ public class Controller {
     public void changeTask(Task task1, Task task2) {
         notifier.deleteNotification(task1);
         task1.setStatus(task2.getStatus());
-        task1.setDateDone(task2.getDateDone());
+        task1.setDateOfDone(task2.getDateOfDone());
         task1.setDescription(task2.getDescription());
         task1.setName(task2.getName());
-        task1.setDatePlan(task2.getDatePlan());
+        task1.setPlannedDate(task2.getPlannedDate());
         notifier.addNotification(task1);
     }
 

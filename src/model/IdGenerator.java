@@ -7,7 +7,7 @@ public class IdGenerator {
     private static int id = 0;
 
     public IdGenerator(int id) {
-        this.id = id;
+        IdGenerator.id = id;
     }
 
     static public int getId() {
