@@ -108,5 +108,6 @@ public class Controller implements Initializable {
         Factory factory = new TaskFactory();
         Date date = new Date(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue() - 1, datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText()));
         addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), date, Status.PLANNED));
+        //ghjk
     }
 }
