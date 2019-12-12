@@ -13,6 +13,6 @@ public class AddTaskWindow extends Application {
         stage.setTitle("ADD TASK");
         stage.setResizable(false);
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
     }
 }

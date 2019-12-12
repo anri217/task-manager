@@ -90,6 +90,7 @@ public class MainWindowController implements Initializable {
         Stage stage = new Stage();
         addTaskWindow.start(stage);
 //        selectedCheckBox();
+        System.out.println("1");
         Stage stage1 = (Stage) addTask.getScene().getWindow();
         stage1.close();
     }
