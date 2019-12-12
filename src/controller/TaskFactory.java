@@ -5,7 +5,7 @@ import model.Task;
 
 import java.util.Date;
 
-public class TaskFactory implements Factory {
+public class TaskFactory {
     public Task createTask() {
         return new Task();
     }

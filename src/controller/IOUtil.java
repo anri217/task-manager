@@ -5,6 +5,7 @@ import java.io.*;
 public class IOUtil {
     
     // todo static and non static methods? for what?
+    //for using methods without create objects
     public static void serializeObject(Object obj) throws IOException {
         if (obj != null) {
             PropertyParser propertyParser = new PropertyParser();
@@ -25,11 +26,11 @@ public class IOUtil {
         }
     }
 
-    public void backupFunction(Object object) throws IOException {
+    public static void backupFunction(Object object) throws IOException {
         serializeObject(object);
     }
 
-    public void restoreFunction() throws IOException, ClassNotFoundException {
+    public static void restoreFunction() throws IOException, ClassNotFoundException {
         deserializeObject();
     }
 }

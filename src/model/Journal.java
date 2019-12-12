@@ -8,7 +8,7 @@ public class Journal {
     private Map<Integer, Task> tasks;
 
     public void addTask(Task task) {
-        tasks.put(IdGenerator.getId(),task);
+        //tasks.put(IdGenerator.getId(),task);
     }
 
     public void deleteTask(Task task) {
