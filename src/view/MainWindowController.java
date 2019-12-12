@@ -71,8 +71,6 @@ public class MainWindowController implements Initializable {
 //        for (int i = 0; i < size; i++) {
 //            taskTable.getItems().add(Controller.getInstance().getRows().get(i));
 //        }
-        selectedCheckBox();
-
         taskTable.setItems(FXCollections.observableList(Controller.getInstance().getRows()));
 
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
@@ -83,7 +81,7 @@ public class MainWindowController implements Initializable {
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-
+        selectedCheckBox();
     }
 
     @FXML
