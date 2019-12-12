@@ -83,7 +83,9 @@ public class MainWindowController implements Initializable {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
         addTaskWindow.start(stage);
-        selectedCheckBox();
+//        selectedCheckBox();
+        Stage stage1 = (Stage) addTask.getScene().getWindow();
+        stage1.close();
     }
 
     @FXML
