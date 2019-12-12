@@ -3,6 +3,8 @@ package controller;
 import java.io.*;
 
 public class IOUtil {
+    
+    // todo static and non static methods? for what?
     public static void serializeObject(Object obj) throws IOException {
         if (obj != null) {
             PropertyParser propertyParser = new PropertyParser();
