@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -56,8 +57,8 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
             <DatePicker fx:id="datePicker" layoutX="98.0" layoutY="42.0" />
-            <TextField fx:id="hoursTextField" layoutX="7.0" layoutY="42.0" prefHeight="27.0" prefWidth="30.0" />
-            <TextField fx:id="minTextField" layoutX="54.0" layoutY="42.0" prefHeight="27.0" prefWidth="30.0" />
+            <TextField fx:id="hoursTextField" layoutX="1.0" layoutY="42.0" prefHeight="27.0" prefWidth="36.0" />
+            <TextField fx:id="minTextField" layoutX="54.0" layoutY="42.0" prefHeight="27.0" prefWidth="36.0" />
             <Label layoutX="43.0" layoutY="40.0" text=":">
                <font>
                   <Font size="23.0" />
@@ -67,7 +68,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="addButton" layoutX="266.0" layoutY="16.0" onAction="#clickAdd" mnemonicParsing="false" text="Добавить" />
+            <Button fx:id="addButton" layoutX="266.0" layoutY="16.0" mnemonicParsing="false" onAction="#clickAdd" text="Добавить" />
          </children>
       </AnchorPane>
    </children>

@@ -76,6 +76,8 @@ public class MainWindowController implements Initializable {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        selectedCheckBox();
     }
 
     @FXML
