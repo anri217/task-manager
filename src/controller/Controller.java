@@ -1,9 +1,6 @@
 package controller;
 
-import model.Journal;
-import model.Notification;
-import model.Notifier;
-import model.Task;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -12,13 +9,10 @@ public class Controller {
     private Journal journal;
     private Notifier notifier;
 
-
     private Controller() {
         journal = new Journal();
         notifier = new Notifier();
     }
-
-
 
     public static synchronized Controller getInstance() {
         if (instance == null) {
@@ -26,7 +20,6 @@ public class Controller {
         }
         return instance;
     }
-
 
     public void addTask(Task task) {
         journal.addTask(task);
@@ -51,7 +44,15 @@ public class Controller {
         notifier.addNotification(task1);
     }
 
-    public ArrayList<Task> getAll() {
+    public ArrayList<Task> getAll(){
         return journal.getAll();
+    }
+
+    public ArrayList<MainWindowRow> getRows(){
+        return journal.getRows();
+    }
+
+    public void updateRows() {
+        journal.updateRows();
     }
 }

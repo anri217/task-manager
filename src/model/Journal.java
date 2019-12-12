@@ -2,10 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Journal {
-    private Map<Integer, Task> tasks;
+    private Map<Integer, Task> tasks = new HashMap<>();
+    private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
     public void addTask(Task task) {
         tasks.put(IdGenerator.getId(),task);
@@ -41,5 +43,17 @@ public class Journal {
             tasksArr.add(tasks.get(i));
         }
         return tasksArr;
+    }
+
+    public ArrayList<MainWindowRow> getRows(){
+        return rows;
+    }
+
+    public void updateRows(){
+        rows.clear();
+        for (int i = 0; i < tasks.size(); i++) {
+            MainWindowRow row = new MainWindowRow(tasks.get(i));
+            rows.add(row);
+        }
     }
 }
