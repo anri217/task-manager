@@ -31,7 +31,7 @@ public class MainWindowController implements Initializable {
     private void selectedCheckBox(){
         int count = 0;
 
-        for (MainWindowRow row : taskTable.getItems()) {
+        for (MainWindowRow row : Controller.getInstance().getRows()) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
             }
@@ -67,6 +67,12 @@ public class MainWindowController implements Initializable {
     }
 
     private void initColumns() {
+//        int size = Controller.getInstance().getRows().size();
+//        for (int i = 0; i < size; i++) {
+//            taskTable.getItems().add(Controller.getInstance().getRows().get(i));
+//        }
+        selectedCheckBox();
+
         taskTable.setItems(FXCollections.observableList(Controller.getInstance().getRows()));
 
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
@@ -77,7 +83,7 @@ public class MainWindowController implements Initializable {
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        selectedCheckBox();
+
     }
 
     @FXML
