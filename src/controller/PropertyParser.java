@@ -14,7 +14,7 @@ public class PropertyParser {
         properties = new Properties();
         try (FileInputStream fis = new FileInputStream(PATH_TO_PROPERTIES)) {
             properties.load(fis);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { // todo нормальная обработка эксепшенов, а не просто вываливать стек
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
