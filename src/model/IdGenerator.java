@@ -1,9 +1,7 @@
 package model;
 
-// todo nigo is it work? looks like you do not try to generate value
-// also please use Code Convention
-// see requirements in issue for this class
 public class IdGenerator {
+    // todo why static?
     private static int id = 0;
 
     public IdGenerator(int id) {
