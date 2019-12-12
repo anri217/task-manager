@@ -25,11 +25,11 @@ public class IOUtil {
         }
     }
 
-    public void backupFunction(Object object) throws IOException {
+    public static void backupFunction(Object object) throws IOException {
         serializeObject(object);
     }
 
-    public void restoreFunction() throws IOException, ClassNotFoundException {
+    public static void restoreFunction() throws IOException, ClassNotFoundException {
         deserializeObject();
     }
 }
