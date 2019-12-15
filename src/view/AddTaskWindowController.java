@@ -1,7 +1,6 @@
 package view;
 
 import controller.Controller;
-import controller.Factory;
 import controller.TaskFactory;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -23,7 +22,7 @@ public class AddTaskWindowController {
     public Button addButton;
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
-        Factory factory = new TaskFactory();
+        TaskFactory factory = new TaskFactory();
         Task task;
         task = factory.createTask(nameTextField.getText(), descTextArea.getText(), new Date(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue(),  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED);
         Controller.getInstance().addTask(task);
