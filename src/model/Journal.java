@@ -3,13 +3,18 @@ package model;
 import idgenerator.IdGenerator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 public class Journal implements Serializable {
     private Map<Integer, Task> tasks;
+
+    public Journal() {
+        tasks = new HashMap<Integer, Task>();
+        for (int i = 0; i < 10; ++i) {
+            tasks.put(IdGenerator.getInstance().getId(),new Task());
+        }
+
+    }
 
     public void addTask(Task task) {
         tasks.put(IdGenerator.getInstance().getId(), task);
