@@ -15,8 +15,8 @@ public class Journal implements Serializable {
         tasks.put(IdGenerator.getInstance().getId(), task);
     }
 
-    public void deleteTask(Task task) {
-        tasks.remove(task.getId());
+    public void deleteTask(int id) {
+        tasks.remove(id);
     }
 
 

@@ -7,28 +7,22 @@ import java.util.Properties;
 
 
 public class PropertyParser {
-    private static final String PATH_TO_PROPERTIES = "src/file.properties";
+    private static final String PATH_TO_PROPERTIES = "staff/file.properties";
     private Properties properties;
 
-    public PropertyParser() {
+    public PropertyParser() throws IOException {
         properties = new Properties();
         try (FileInputStream fis = new FileInputStream(PATH_TO_PROPERTIES)) {
             properties.load(fis);
         } catch (FileNotFoundException e) { // todo нормальная обработка эксепшенов, а не просто вываливать стек
-            System.out.println("File not found"); //??
+            throw new IncorrectFileNameException("File not found or pathname is incorrect"); //я не знаю как назвать адекватно этот экспешн
         } catch (IOException e) {
-            e.getMessage();
+            throw new IOException(); //и что с этим делать
         }
     }
 
-    public String getProperties() throws IOException {
-        return "icons: " + properties.getProperty("icons") + "\npath to backup file: "
-                + properties.getProperty("path_to_backup_file") + "\npath to sounds: " + properties.getProperty("path_to_sounds");
-    }
 
     public String getProperty(String key) {
         return properties.getProperty(key);
     }
-
-
 }

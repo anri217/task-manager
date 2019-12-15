@@ -36,19 +36,15 @@ public class Controller {
         notifier.createTimer(task, notification);
     }
 
-    public void deleteTask(Task task) {
-        journal.deleteTask(task);
-        notifier.deleteNotification(task);
+    public void deleteTask(int id) {
+        journal.deleteTask(id);
+        notifier.deleteNotification(journal.getTask(id));
     }
 
-    public void changeTask(Task task1, Task task2) {
-        notifier.deleteNotification(task1);
-        task1.setStatus(task2.getStatus());
-        task1.setDateOfDone(task2.getDateOfDone());
-        task1.setDescription(task2.getDescription());
-        task1.setName(task2.getName());
-        task1.setPlannedDate(task2.getPlannedDate());
-        notifier.addNotification(task1);
+    public void changeTask(int id, Task task2) {
+        notifier.deleteNotification(journal.getTask(id));
+        journal.changeTask(id, task2);
+        notifier.addNotification(journal.getTask(id));
     }
 
     public ArrayList<Task> getAll() {

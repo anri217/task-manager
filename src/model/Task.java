@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import idgenerator.IdGenerator;
 
 
 public class Task {
@@ -12,9 +13,12 @@ public class Task {
 
     private int id;
 
-    public Task() {};
+    public Task() {
+        id = IdGenerator.getInstance().getId();
+    };
 
     public Task(String name, String description, Date plannedDate, Status status) {
+        id = IdGenerator.getInstance().getId();
         this.name = name;
         this.description = description;
         this.plannedDate = plannedDate;
