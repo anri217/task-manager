@@ -35,8 +35,11 @@ public class MainWindowController implements Initializable {
         int length = Controller.getInstance().getAll().size();
         for (int i = 0; i < length; i++) {
             rows.add(new MainWindowRow(Controller.getInstance().getAll().get(i)));
+            rows.get(i).getCheckBox().setOnAction(actionEvent -> {
+                selectedCheckBox();
+            });
+//            taskTable.getItems().add(rows.get(i));
         }
-        selectedCheckBox();
         taskTable.setItems(FXCollections.observableList(rows));
     }
 
@@ -71,6 +74,8 @@ public class MainWindowController implements Initializable {
     }
 
     private void initColumns() {
+//        taskTable.setItems(FXCollections.observableList(rows));
+
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -93,8 +98,9 @@ public class MainWindowController implements Initializable {
         int length = taskTable.getItems().size();
         for (int i = 0; i < length; i++) {
             if(taskTable.getItems().get(i).getCheckBox().isSelected()){
+//                taskTable.getItems().remove(i);
+                Controller.getInstance().deleteTask(taskTable.getItems().get(i).getId());
                 taskTable.getItems().remove(i);
-                Controller.getInstance().getAll().remove(i);
                 i--;
             }
         }

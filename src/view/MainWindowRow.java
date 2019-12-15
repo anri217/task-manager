@@ -31,4 +31,40 @@ public class MainWindowRow {
     public CheckBox getCheckBox() {
         return checkBox.get();
     }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public SimpleStringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public SimpleStringProperty dateProperty() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date.set(date);
+    }
 }

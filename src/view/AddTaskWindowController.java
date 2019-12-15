@@ -28,7 +28,5 @@ public class AddTaskWindowController {
         Controller.getInstance().addTask(task);
         Stage stage = (Stage) addButton.getScene().getWindow();
         stage.close();
-        MainWindow newMainWindow = new MainWindow();
-        newMainWindow.start(new Stage());
     }
 }

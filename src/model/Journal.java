@@ -9,11 +9,7 @@ public class Journal implements Serializable {
     private Map<Integer, Task> tasks;
 
     public Journal() {
-        tasks = new HashMap<Integer, Task>();
-        for (int i = 0; i < 10; ++i) {
-            tasks.put(IdGenerator.getInstance().getId(),new Task());
-        }
-
+        tasks = new HashMap<>();
     }
 
     public void addTask(Task task) {
