@@ -27,7 +27,6 @@ public class AddTaskWindowController {
         Task task;
         task = factory.createTask(nameTextField.getText(), descTextArea.getText(), new Date(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue(),  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED);
         Controller.getInstance().addTask(task);
-        Controller.getInstance().updateRows();
         Stage stage = (Stage) addButton.getScene().getWindow();
         stage.close();
         MainWindow newMainWindow = new MainWindow();

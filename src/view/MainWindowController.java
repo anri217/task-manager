@@ -8,9 +8,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.MainWindowRow;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -28,10 +28,22 @@ public class MainWindowController implements Initializable {
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
 
+    private ArrayList<MainWindowRow> rows = new ArrayList<>();
+
+    private void refresh() {
+        rows.clear();
+        int length = Controller.getInstance().getAll().size();
+        for (int i = 0; i < length; i++) {
+            rows.add(new MainWindowRow(Controller.getInstance().getAll().get(i)));
+        }
+        selectedCheckBox();
+        taskTable.setItems(FXCollections.observableList(rows));
+    }
+
     private void selectedCheckBox(){
         int count = 0;
 
-        for (MainWindowRow row : Controller.getInstance().getRows()) {
+        for (MainWindowRow row : rows) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
             }
@@ -53,26 +65,12 @@ public class MainWindowController implements Initializable {
         }
     }
 
-//    private void addTask(Task task){
-//        MainWindowRow row = new MainWindowRow(task);
-//        row.getCheckBox().setOnAction(actionEvent -> {
-//            selectedCheckBox();
-//        });
-//        taskTable.getItems().add(row);
-//    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initColumns();
     }
 
     private void initColumns() {
-//        int size = Controller.getInstance().getRows().size();
-//        for (int i = 0; i < size; i++) {
-//            taskTable.getItems().add(Controller.getInstance().getRows().get(i));
-//        }
-        taskTable.setItems(FXCollections.observableList(Controller.getInstance().getRows()));
-
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -80,8 +78,6 @@ public class MainWindowController implements Initializable {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-
-        selectedCheckBox();
     }
 
     @FXML
@@ -89,10 +85,7 @@ public class MainWindowController implements Initializable {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
         addTaskWindow.start(stage);
-//        selectedCheckBox();
-        System.out.println("1");
-        Stage stage1 = (Stage) addTask.getScene().getWindow();
-        stage1.close();
+        refresh();
     }
 
     @FXML

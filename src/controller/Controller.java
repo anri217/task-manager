@@ -1,6 +1,9 @@
 package controller;
 
-import model.*;
+import model.Journal;
+import model.Notification;
+import model.Notifier;
+import model.Task;
 
 import java.util.ArrayList;
 
@@ -46,13 +49,5 @@ public class Controller {
 
     public ArrayList<Task> getAll(){
         return journal.getAll();
-    }
-
-    public ArrayList<MainWindowRow> getRows(){
-        return journal.getRows();
-    }
-
-    public void updateRows() {
-        journal.updateRows();
     }
 }
