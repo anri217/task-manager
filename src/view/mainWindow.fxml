@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.*?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="saveJournal" mnemonicParsing="false" text="Сохранить журнал" />
-                  <MenuItem fx:id="downloadJournal" mnemonicParsing="false" text="Загрузить журнал" />
+                <MenuItem fx:id="downloadJournal" mnemonicParsing="false" text="Загрузить журнал" />
             </items>
           </Menu>
         </menus>

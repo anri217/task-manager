@@ -1,5 +1,7 @@
 package model;
 
+import view.AddTaskWindowController;
+
 import java.util.Date;
 import idgenerator.IdGenerator;
 

@@ -12,13 +12,10 @@ public class Controller {
     private Journal journal;
     private Notifier notifier;
 
-
     private Controller() {
         journal = new Journal();
         notifier = new Notifier();
     }
-
-
 
     public static synchronized Controller getInstance() {
         if (instance == null) {
@@ -26,7 +23,6 @@ public class Controller {
         }
         return instance;
     }
-
 
     public void addTask(Task task) {
         journal.addTask(task);
@@ -47,7 +43,7 @@ public class Controller {
         notifier.addNotification(journal.getTask(id));
     }
 
-    public ArrayList<Task> getAll() {
+    public ArrayList<Task> getAll(){
         return journal.getAll();
     }
 }
