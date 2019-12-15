@@ -1,24 +1,33 @@
 package model;
 
+import idgenerator.IdGenerator;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
-public class Journal {
+public class Journal implements Serializable {
     private Map<Integer, Task> tasks;
 
     public void addTask(Task task) {
-        //tasks.put(IdGenerator.getId(),task);
+        tasks.put(IdGenerator.getInstance().getId(), task);
     }
 
     public void deleteTask(Task task) {
-        tasks.remove(task);
+        tasks.remove(task.getId());
+    }
+
+
+    public Task getTask(int id) {
+        return tasks.get(id);
     }
 
     public Task getTaskByName(String name) {
         Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
-            if (name == tasks.get(i).getName()) res = tasks.get(i);
+            if (name.equals(tasks.get(i).getName())) res = tasks.get(i);
         }
         return res;
     }
@@ -31,15 +40,17 @@ public class Journal {
         return res;
     }
 
+    public void changeTask(int id, Task task) {
+        Task res = tasks.get(id);
+        res = task;
+    }
+
     public void changeStatus(String taskName, Status status) {
         getTaskByName(taskName).setStatus(status);
     }
 
     public ArrayList<Task> getAll() {
-        ArrayList<Task> tasksArr = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            tasksArr.add(tasks.get(i));
-        }
-        return tasksArr;
+        Task[] arr = tasks.values().toArray(new Task[0]);
+        return new ArrayList<>(Arrays.asList(arr));
     }
 }
