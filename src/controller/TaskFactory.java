@@ -4,6 +4,7 @@ import idgenerator.IdGenerator;
 import model.Status;
 import model.Task;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TaskFactory {
@@ -11,7 +12,7 @@ public class TaskFactory {
         return new Task(IdGenerator.getInstance().getId());
     }
 
-    public Task createTask(String name, String description, Date plannedDate, Status status) {
+    public Task createTask(String name, String description, LocalDateTime plannedDate, Status status) {
         return new Task(IdGenerator.getInstance().getId(), name, description, plannedDate, status);
     }
 }

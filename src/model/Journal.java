@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Journal implements Serializable {
@@ -31,7 +32,7 @@ public class Journal implements Serializable {
         return res;
     }
 
-    public Task getTaskByDate(Date date) {
+    public Task getTaskByDate(LocalDateTime date) {
         Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
             if (date == tasks.get(i).getPlannedDate()) res = tasks.get(i);
