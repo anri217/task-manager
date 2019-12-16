@@ -14,8 +14,9 @@
       <Button fx:id="finishButton" layoutX="227.0" layoutY="237.0" mnemonicParsing="false" onAction="#finishTaskAction" text="Завершить задачу" />
       <Label fx:id="setDateLabel" layoutX="16.0" layoutY="74.0" text="Новое время: " visible="false" />
       <DatePicker fx:id="datePicker" layoutX="176.0" layoutY="70.0" visible="false" />
-      <TextField fx:id="hoursNewTextField" layoutX="95.0" layoutY="70.0" prefHeight="25.0" prefWidth="20.0" visible="false" />
-      <Label fx:id="pointsLabel" layoutX="118.0" layoutY="74.0" prefHeight="17.0" prefWidth="0.0" text=":" visible="false" />
-      <TextField fx:id="minutesNewTextField" layoutX="126.0" layoutY="70.0" prefHeight="25.0" prefWidth="20.0" visible="false" />
+      <TextField fx:id="hoursNewTextField" layoutX="101.0" layoutY="70.0" prefHeight="25.0" prefWidth="30.0" visible="false" />
+      <Label fx:id="pointsLabel" layoutX="134.0" layoutY="74.0" prefHeight="17.0" prefWidth="0.0" text=":" visible="false" />
+      <TextField fx:id="minutesNewTextField" layoutX="138.0" layoutY="70.0" prefHeight="25.0" prefWidth="30.0" visible="false" />
+      <Button fx:id="deferTaskButton" layoutX="125.0" layoutY="237.0" mnemonicParsing="false" onAction="#deferTaskButtonAction" prefHeight="25.0" prefWidth="128.0" text="Отложить задачу" visible="false" />
    </children>
 </Pane>
