@@ -1,7 +1,8 @@
 package controller;
 
+import exceptions.PropertyParserInitException;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -10,14 +11,13 @@ public class PropertyParser {
     private static final String PATH_TO_PROPERTIES = "staff/file.properties";
     private Properties properties;
 
-    public PropertyParser() throws IOException {
+    public PropertyParser() throws IOException, PropertyParserInitException {
         properties = new Properties();
         try (FileInputStream fis = new FileInputStream(PATH_TO_PROPERTIES)) {
             properties.load(fis);
-        } catch (FileNotFoundException e) { // todo нормальная обработка эксепшенов, а не просто вываливать стек
-            throw new IncorrectFileNameException("File not found or pathname is incorrect"); //я не знаю как назвать адекватно этот экспешн
-        } catch (IOException e) {
-            throw new IOException(); //и что с этим делать
+        } // todo нормальная обработка эксепшенов, а не просто вываливать стек
+        catch (IOException ex) {
+            throw new PropertyParserInitException("Can't init file" + ex.getMessage());
         }
     }
 

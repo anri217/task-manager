@@ -10,14 +10,10 @@ public class Journal implements Serializable {
 
     public Journal() {
         tasks = new HashMap<Integer, Task>();
-        for (int i = 0; i < 10; ++i) {
-            tasks.put(IdGenerator.getInstance().getId(),new Task());
-        }
-
     }
 
     public void addTask(Task task) {
-        tasks.put(IdGenerator.getInstance().getId(), task);
+        tasks.put(task.getId(), task);
     }
 
     public void deleteTask(int id) {
@@ -47,7 +43,13 @@ public class Journal implements Serializable {
 
     public void changeTask(int id, Task task) {
         Task res = tasks.get(id);
-        res = task;
+        {
+            res.setPlannedDate(task.getPlannedDate());
+            res.setDateOfDone(task.getDateOfDone());
+            res.setName(task.getName());
+            res.setDescription(task.getDescription());
+            res.setStatus(task.getStatus());
+        }
     }
 
     public void changeStatus(String taskName, Status status) {
