@@ -1,15 +1,13 @@
 package model;
 
-import idgenerator.IdGenerator;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 public class Task {
     private String name;
     private String description;
-    private Date plannedDate;
-    private Date dateOfDone;
+    private LocalDateTime plannedDate;
+    private LocalDateTime dateOfDone;
     private Status status;
 
     private int id;
@@ -20,7 +18,7 @@ public class Task {
 
     ;
 
-    public Task(int id,String name, String description, Date plannedDate, Status status) {
+    public Task(int id, String name, String description, LocalDateTime plannedDate, Status status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,19 +51,19 @@ public class Task {
         this.status = status;
     }
 
-    public Date getPlannedDate() {
+    public LocalDateTime getPlannedDate() {
         return plannedDate;
     }
 
-    public void setPlannedDate(Date plannedDate) {
+    public void setPlannedDate(LocalDateTime plannedDate) {
         this.plannedDate = plannedDate;
     }
 
-    public Date getDateOfDone() {
+    public LocalDateTime getDateOfDone() {
         return dateOfDone;
     }
 
-    public void setDateOfDone(Date dateOfDone) {
+    public void setDateOfDone(LocalDateTime dateOfDone) {
         this.dateOfDone = dateOfDone;
     }
 

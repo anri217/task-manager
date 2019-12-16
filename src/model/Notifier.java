@@ -1,9 +1,7 @@
 package model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.time.ZoneId;
+import java.util.*;
 
 public class Notifier {
     private Map<Integer, Notification> notificationMap;
@@ -34,7 +32,7 @@ public class Notifier {
     public void createNotification(Task task){
         Notification ntf = new Notification(task);
         addNotification(task, ntf);
-        ntf.getTimer().schedule(ntf, ntf.getDateAlert());
+        ntf.getTimer().schedule(ntf, Date.from(ntf.getDateAlert().atZone(ZoneId.systemDefault()).toInstant()));
        // ntf.startTask();
     }
 
@@ -51,7 +49,7 @@ public class Notifier {
 
     public void createTimer(Notification alr, TimerTask tTask) {
         timer = new Timer();
-        timer.schedule(tTask, alr.getDateAlert());
+        timer.schedule(tTask, Date.from(alr.getDateAlert().atZone(ZoneId.systemDefault()).toInstant()));
     }
 
     public Timer getTimer() {

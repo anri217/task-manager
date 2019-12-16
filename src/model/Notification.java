@@ -10,12 +10,14 @@ import view.NotificationController;
 import view.NotificationWindow;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Notification extends TimerTask{
-    private Date dateAlert;
+    private LocalDateTime dateAlert;
     private String textAlert;
     private Notifier notifier;
     private Timer timer;
@@ -58,14 +60,14 @@ public class Notification extends TimerTask{
     }
 
     public void startTask(){
-        timer.schedule(this, dateAlert);
+        timer.schedule(this, Date.from(dateAlert.atZone(ZoneId.systemDefault()).toInstant()));
     }
 
-    public Date getDateAlert() {
+    public LocalDateTime getDateAlert() {
         return dateAlert;
     }
 
-    public void setDateAlert(Date dateAlert) {
+    public void setDateAlert(LocalDateTime dateAlert) {
         this.dateAlert = dateAlert;
     }
 
