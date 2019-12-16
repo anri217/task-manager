@@ -96,12 +96,13 @@ public class MainWindowController implements Initializable {
     @FXML
     public void clickDelTask(ActionEvent actionEvent) {
         int length = taskTable.getItems().size();
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length && length > 0; i++) {
             if(taskTable.getItems().get(i).getCheckBox().isSelected()){
 //                taskTable.getItems().remove(i);
                 Controller.getInstance().deleteTask(taskTable.getItems().get(i).getId());
                 taskTable.getItems().remove(i);
-                i--;
+                --i;
+                --length;
             }
         }
         selectedCheckBox();
