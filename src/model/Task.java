@@ -1,9 +1,8 @@
 package model;
 
-import view.AddTaskWindowController;
+import idgenerator.IdGenerator;
 
 import java.util.Date;
-import idgenerator.IdGenerator;
 
 
 public class Task {
@@ -15,12 +14,14 @@ public class Task {
 
     private int id;
 
-    public Task() {
-        id = IdGenerator.getInstance().getId();
-    };
+    public Task(int id) {
+        this.id = id;
+    }
 
-    public Task(String name, String description, Date plannedDate, Status status) {
-        id = IdGenerator.getInstance().getId();
+    ;
+
+    public Task(int id,String name, String description, Date plannedDate, Status status) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.plannedDate = plannedDate;

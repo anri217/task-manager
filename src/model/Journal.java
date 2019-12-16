@@ -1,7 +1,5 @@
 package model;
 
-import idgenerator.IdGenerator;
-
 import java.io.Serializable;
 import java.util.*;
 
