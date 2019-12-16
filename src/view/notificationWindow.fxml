@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NotificationController">
    <children>
-      <Label fx:id="mainLabel" layoutX="148.0" layoutY="14.0" text="Оповещение" />
+         <Label fx:id="mainLabel" layoutX="148.0" layoutY="14.0" text="Оповещение" />
       <Label fx:id="descLabel" layoutX="14.0" layoutY="50.0" text="Описание" />
-      <Button fx:id="deferButton" layoutX="16.0" layoutY="237.0" mnemonicParsing="false" text="Отложить задачу" />
-      <Button fx:id="finishButton" layoutX="227.0" layoutY="237.0" mnemonicParsing="false" text="Завершить задачу" />
+      <Button fx:id="deferButton" layoutX="16.0" layoutY="237.0" mnemonicParsing="false" onAction="#deferButtonAction" text="Отложить задачу" />
+      <Button fx:id="finishButton" layoutX="227.0" layoutY="237.0" mnemonicParsing="false" onAction="#finishTaskAction" text="Завершить задачу" />
+      <Label fx:id="setDateLabel" layoutX="16.0" layoutY="74.0" text="Новое время: " visible="false" />
+      <DatePicker fx:id="datePicker" layoutX="176.0" layoutY="70.0" visible="false" />
+      <TextField fx:id="hoursNewTextField" layoutX="95.0" layoutY="70.0" prefHeight="25.0" prefWidth="20.0" visible="false" />
+      <Label fx:id="pointsLabel" layoutX="118.0" layoutY="74.0" prefHeight="17.0" prefWidth="0.0" text=":" visible="false" />
+      <TextField fx:id="minutesNewTextField" layoutX="126.0" layoutY="70.0" prefHeight="25.0" prefWidth="20.0" visible="false" />
    </children>
 </Pane>

@@ -34,6 +34,15 @@ public class Notification extends TimerTask{
         this.timer = new Timer();
     }
 
+    public Task getTask(){
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+
     public Stage createStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/notificationWindow.fxml"));
         Stage stage = new Stage( StageStyle.DECORATED);
