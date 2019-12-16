@@ -26,10 +26,7 @@ public class Controller {
 
     public void addTask(Task task) {
         journal.addTask(task);
-        Notification notification = new Notification(task);
-
-        notifier.addNotification(task);
-        notifier.createTimer(task, notification);
+        notifier.createNotification(task);
     }
 
     public void deleteTask(int id) {
@@ -40,7 +37,7 @@ public class Controller {
     public void changeTask(int id, Task task2) {
         notifier.deleteNotification(journal.getTask(id));
         journal.changeTask(id, task2);
-        notifier.addNotification(journal.getTask(id));
+        notifier.createNotification(task2);
     }
 
     public ArrayList<Task> getAll(){
