@@ -1,16 +1,17 @@
 package view;
 
 import controller.Controller;
+import controller.TaskFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Status;
+import model.Task;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -33,16 +34,19 @@ public class ChangeTaskWindowController implements Initializable {
 
         descTextArea.setText(SelectedTasksController.getInstance().getRow().getDescription());
 
-        Date date_ = new Date(String.valueOf(Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()).getPlannedDate()));
-        datePicker.setValue(LocalDate.of(date_.getYear(), date_.getMonth(), date_.getDay()));
+        LocalDateTime localDateTime = Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()).getPlannedDate();
+        datePicker.setValue(LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth()));
 
-        hoursTextField.setText(String.valueOf(date_.getHours()));
+        hoursTextField.setText(String.valueOf(localDateTime.getHour()));
 
-        minTextField.setText(String.valueOf(date_.getMinutes()));
+        minTextField.setText(String.valueOf(localDateTime.getMinute()));
     }
 
     public void clickChange(ActionEvent actionEvent) {
-        //
+        TaskFactory taskFactory = new TaskFactory();
+        Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), taskFactory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue()-1,  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED));
+        Stage stage = (Stage) changeButton.getScene().getWindow();
+        stage.close();
     }
 
     public void clickDecline(ActionEvent actionEvent) {
