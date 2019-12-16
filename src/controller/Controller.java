@@ -30,8 +30,8 @@ public class Controller {
     }
 
     public void deleteTask(int id) {
-        journal.deleteTask(id);
         notifier.deleteNotification(journal.getTask(id));
+        journal.deleteTask(id);
     }
 
     public void changeTask(int id, Task task2) {

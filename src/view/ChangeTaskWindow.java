@@ -51,14 +51,15 @@ public class ChangeTaskWindow extends Application implements Initializable {
         stage.setTitle("CHANGE TASK");
         stage.setResizable(false);
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
     }
 
     public void clickChange(ActionEvent actionEvent) {
-
+        //
     }
 
     public void clickDecline(ActionEvent actionEvent) {
-
+        Stage stage = (Stage) declineButton.getScene().getWindow();
+        stage.close();
     }
 }
