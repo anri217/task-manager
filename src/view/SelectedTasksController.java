@@ -6,7 +6,7 @@ public class SelectedTasksController {
     private static SelectedTasksController instance;
     private MainWindowRow row;
 
-    private SelectedTasksController(){
+    private SelectedTasksController() {
         row = new MainWindowRow(new Task(0));
     }
 
