@@ -24,14 +24,18 @@ public class Controller {
         return instance;
     }
 
+    public Task getTask(int id) {
+        return getTask(id);
+    }
+
     public void addTask(Task task) {
         journal.addTask(task);
         notifier.createNotification(task);
     }
 
     public void deleteTask(int id) {
-        journal.deleteTask(id);
         notifier.deleteNotification(journal.getTask(id));
+        journal.deleteTask(id);
     }
 
     public void changeTask(int id, Task task2) {
