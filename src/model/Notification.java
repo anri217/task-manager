@@ -3,6 +3,7 @@ package model;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import view.AddTaskWindow;
@@ -46,7 +47,9 @@ public class Notification extends TimerTask{
     public Stage createStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/notificationWindow.fxml"));
         Stage stage = new Stage( StageStyle.DECORATED);
+        stage.setTitle("Оповещение");
         stage.setScene(new Scene(loader.load()));
+        stage.initModality(Modality.WINDOW_MODAL);
         NotificationController nc = loader.<NotificationController>getController();
         nc.setNotification(this);
         nc.setLabel();

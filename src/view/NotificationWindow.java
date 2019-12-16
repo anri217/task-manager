@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class NotificationWindow extends Application {
         stage.setTitle("ADD TASK");
         stage.setResizable(false);
         stage.setScene(new Scene(root));*/
+        stage.initModality(Modality.WINDOW_MODAL);
         stage.show();
     }
 }
