@@ -25,7 +25,7 @@ public class Controller {
     }
 
     public Task getTask(int id) {
-        return getTask(id);
+        return journal.getTask(id);
     }
 
     public void addTask(Task task) {
