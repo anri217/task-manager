@@ -11,11 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ChangeTaskWindow extends Application implements Initializable {
@@ -37,10 +37,12 @@ public class ChangeTaskWindow extends Application implements Initializable {
 
         descTextArea.setText(SelectedTasksController.getInstance().getRow().getDescription());
 
-        LocalDate date = new LocalDate(Controller.getInstance().getAll());
-        datePicker.setValue();
+        Date date_ = new Date(String.valueOf(Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()).getPlannedDate()));
+        datePicker.setValue(LocalDate.of(date_.getYear(), date_.getMonth(), date_.getDay()));
 
-        hoursTextField.setText(SelectedTasksController.getInstance().getRow().);
+        hoursTextField.setText(String.valueOf(date_.getHours()));
+
+        minTextField.setText(String.valueOf(date_.getMinutes()));
     }
 
     @Override
