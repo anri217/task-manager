@@ -5,20 +5,66 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 import model.Task;
 
-class MainWindowRow {
+public class MainWindowRow {
     private SimpleStringProperty name;
     private SimpleStringProperty description;
     private SimpleStringProperty date;
     private SimpleObjectProperty<CheckBox> checkBox;
+    private int id;
 
-    MainWindowRow(Task task) {
+    public MainWindowRow(Task task) {
         name = new SimpleStringProperty(task.getName());
         description = new SimpleStringProperty(task.getDescription());
         date = new SimpleStringProperty(String.valueOf(task.getPlannedDate()));
-        checkBox = new SimpleObjectProperty<CheckBox>(new CheckBox());
+        checkBox = new SimpleObjectProperty<>(new CheckBox());
+        id = task.getId();
     }
 
-    CheckBox getCheckBox() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public CheckBox getCheckBox() {
         return checkBox.get();
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public SimpleStringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public SimpleStringProperty dateProperty() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date.set(date);
     }
 }
