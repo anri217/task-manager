@@ -26,7 +26,7 @@ public class AddTaskWindowController {
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
         TaskFactory factory = new TaskFactory();
-        Controller.getInstance().addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue()-1,  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED));
+        Controller.getInstance().addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth() - 1, Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED));
         Stage stage = (Stage) addButton.getScene().getWindow();
         stage.close();
     }
