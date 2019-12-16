@@ -19,6 +19,7 @@ public class Notification extends TimerTask{
     private String textAlert;
     private Notifier notifier;
     private Timer timer;
+    private Task task;
 
     public Timer getTimer(){
         return timer;
@@ -27,6 +28,7 @@ public class Notification extends TimerTask{
     public Notification(Task task) {
         this.textAlert = task.getName() + " ." + task.getDescription();
         this.dateAlert = task.getPlannedDate();
+        this.task = task;
         this.timer = new Timer();
     }
 
