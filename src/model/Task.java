@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
-public class Task {
+public class Task implements Serializable {
     private String name;
     private String description;
     private LocalDateTime plannedDate;
@@ -15,8 +16,6 @@ public class Task {
     public Task(int id) {
         this.id = id;
     }
-
-    ;
 
     public Task(int id, String name, String description, LocalDateTime plannedDate, Status status) {
         this.id = id;

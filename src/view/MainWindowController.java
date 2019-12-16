@@ -1,6 +1,9 @@
 package view;
 
 import controller.Controller;
+import controller.IOUtil;
+import exceptions.BackupFileException;
+import exceptions.PropertyParserInitException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Journal;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -114,6 +119,15 @@ public class MainWindowController implements Initializable {
         ChangeTaskWindow changeWindow = new ChangeTaskWindow();
         Stage stage = new Stage();
         changeWindow.start(stage);
+        refresh();
+    }
+
+    public void saveJournal(ActionEvent actionEvent) throws PropertyParserInitException, IOException, BackupFileException {
+        IOUtil.getInstance().serializeObject(Controller.getInstance().getJournal());
+    }
+
+    public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException, PropertyParserInitException, IOException {
+        Controller.getInstance().setJournal((Journal) IOUtil.getInstance().deserializeObject());
         refresh();
     }
 }
