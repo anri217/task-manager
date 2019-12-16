@@ -106,4 +106,17 @@ public class MainWindowController implements Initializable {
         }
         selectedCheckBox();
     }
+
+    public void clickChangeTask(ActionEvent actionEvent) throws Exception {
+        int length = taskTable.getItems().size();
+        for (int i = 0; i < length; i++) {
+            if(taskTable.getItems().get(i).getCheckBox().isSelected()){
+                SelectedTasksController.getInstance().setRow(taskTable.getItems().get(i));
+            }
+        }
+        ChangeTaskWindow changeWindow = new ChangeTaskWindow();
+        Stage stage = new Stage();
+        changeWindow.start(stage);
+        refresh();
+    }
 }
