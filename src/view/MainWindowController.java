@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Journal;
 
@@ -91,6 +92,7 @@ public class MainWindowController implements Initializable {
     public void clickAddTask(ActionEvent actionEvent) throws Exception {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
+//        stage.initModality(Modality.WINDOW_MODAL);
         addTaskWindow.start(stage);
         refresh();
     }
@@ -118,6 +120,7 @@ public class MainWindowController implements Initializable {
         }
         ChangeTaskWindow changeWindow = new ChangeTaskWindow();
         Stage stage = new Stage();
+//        stage.initModality(Modality.WINDOW_MODAL);
         changeWindow.start(stage);
         refresh();
     }
