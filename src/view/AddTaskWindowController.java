@@ -20,6 +20,7 @@ public class AddTaskWindowController {
     public TextField hoursTextField;
     public TextField minTextField;
     public Button addButton;
+    public Button declineButton;
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
         TaskFactory factory = new TaskFactory();
@@ -27,6 +28,11 @@ public class AddTaskWindowController {
         task = factory.createTask(nameTextField.getText(), descTextArea.getText(), new Date(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue()-1,  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED);
         Controller.getInstance().addTask(task);
         Stage stage = (Stage) addButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void clickDecline(ActionEvent actionEvent) {
+        Stage stage = (Stage) declineButton.getScene().getWindow();
         stage.close();
     }
 }
