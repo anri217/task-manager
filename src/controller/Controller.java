@@ -21,6 +21,14 @@ public class Controller {
         return instance;
     }
 
+    public Journal getJournal() {
+        return journal;
+    }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
+    }
+
     public Task getTask(int id) {
         return journal.getTask(id);
     }
