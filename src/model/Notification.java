@@ -49,7 +49,6 @@ public class Notification extends TimerTask{
         Stage stage = new Stage( StageStyle.DECORATED);
         stage.setTitle("Оповещение");
         stage.setScene(new Scene(loader.load()));
-        stage.initModality(Modality.WINDOW_MODAL);
         NotificationController nc = loader.<NotificationController>getController();
         nc.setNotification(this);
         nc.setLabel();
