@@ -4,15 +4,16 @@ import controller.Controller;
 import controller.TaskFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Status;
-import model.Task;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ChangeTaskWindowController implements Initializable {
@@ -35,6 +36,7 @@ public class ChangeTaskWindowController implements Initializable {
         descTextArea.setText(SelectedTasksController.getInstance().getRow().getDescription());
 
         LocalDateTime localDateTime = Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()).getPlannedDate();
+
         datePicker.setValue(LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth()));
 
         hoursTextField.setText(String.valueOf(localDateTime.getHour()));
