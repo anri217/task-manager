@@ -11,7 +11,8 @@ import javafx.stage.Stage;
 import model.Status;
 import model.Task;
 
-import java.time.ZoneId;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class AddTaskWindowController {
@@ -25,9 +26,7 @@ public class AddTaskWindowController {
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
         TaskFactory factory = new TaskFactory();
-        Task task;
-        task = factory.createTask(nameTextField.getText(), descTextArea.getText(), new Date(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue()-1,  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), Status.PLANNED);
-        Controller.getInstance().addTask(task);
+        Controller.getInstance().addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear() - 1900, datePicker.getValue().getMonthValue()-1,  datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED));
         Stage stage = (Stage) addButton.getScene().getWindow();
         stage.close();
     }

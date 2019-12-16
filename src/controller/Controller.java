@@ -44,6 +44,9 @@ public class Controller {
         notifier.createNotification(task2);
     }
 
+    public Task getTask(int id){
+        return journal.getTask(id);
+    }
 
     public ArrayList<Task> getAll(){
         return journal.getAll();
