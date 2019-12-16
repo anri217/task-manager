@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Notifier {
-    private Map<Integer, TimerTask> notificationMap;
+    private Map<Integer, Notification> notificationMap;
     private Timer timer;
     private TimerTask timerTask;
 
@@ -14,35 +14,40 @@ public class Notifier {
         notificationMap = new LinkedHashMap<>();
     }
 
-    public void createTask(Task task, Timer timerr) {
+    /*public void createTask(Task task, Timer timerr){
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Оповещение о задаче " + task.getName());
+                System.out.println("Оповещение о задаче "+task.getName());
                 timerr.cancel();
             }
         };
+    }*/
+    public void addNotification(Task task, Notification ntf) {
+        notificationMap.putIfAbsent(task.getId(), ntf);
     }
 
-    public void addNotification(Task task) {
-        notificationMap.putIfAbsent(task.getId(), timerTask);
-    }
-
-    public void deleteNotification(Task task) {
+    public void deleteNotification(Task task){
         notificationMap.remove(task.getId());
     }
 
+    public void createNotification(Task task){
+        Notification ntf = new Notification(task);
+        addNotification(task, ntf);
+        ntf.getTimer().schedule(ntf, ntf.getDateAlert());
+       // ntf.startTask();
+    }
 
     public TimerTask getNotification(int id) {
         return notificationMap.get(id);
     }
 
-    public void createTimer(Task task, Notification alr) {
+    /*public void createTimer(Task task, Notification alr) {
         Timer timerr = new Timer();
         createTask(task, timerr);
-        addNotification(task);
+        //addNotification(task);
         timerr.schedule(notificationMap.get(task.getId()), alr.getDateAlert());
-    }
+    }*/
 
     public void createTimer(Notification alr, TimerTask tTask) {
         timer = new Timer();
