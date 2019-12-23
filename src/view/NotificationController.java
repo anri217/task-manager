@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Notification;
@@ -117,6 +114,7 @@ public class NotificationController {
         stage.close();
     }
 
+
     @FXML
     public void tenMinutesButtonActive(ActionEvent actionEvent){
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(10);
@@ -159,12 +157,23 @@ public class NotificationController {
     }
 
     public void deferTaskButtonAction(ActionEvent actionEvent){
+        LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
+        if (dateFromDatePicker.isAfter(LocalDateTime.now()))
+        {
         Task deferTask = notification.getTask();
         deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
-        deferTask.setStatus(Status.DEFERRED);
-        Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
-        Stage stage = (Stage) deferButton.getScene().getWindow();
-        stage.close();
+            deferTask.setStatus(Status.DEFERRED);
+            Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
+            Stage stage = (Stage) deferButton.getScene().getWindow();
+            stage.close();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error alert");
+            alert.setHeaderText("Не удается отложить задачу");
+            alert.setContentText("Введены неверные данные. Проверьте, что назначаемая дата позже настоящей даты");
+            alert.showAndWait();
+        }
     }
 
 
