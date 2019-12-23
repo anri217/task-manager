@@ -169,9 +169,9 @@ public class NotificationController {
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error alert");
-            alert.setHeaderText("Не удается отложить задачу");
-            alert.setContentText("Введены неверные данные. Проверьте, что назначаемая дата позже настоящей даты");
+            alert.setTitle(NotificationControllerConst.ALERTTITLE);
+            alert.setHeaderText(NotificationControllerConst.ALERTHEADERTEXT);
+            alert.setContentText(NotificationControllerConst.ALERTCONTEXTTEXT);
             alert.showAndWait();
         }
     }
