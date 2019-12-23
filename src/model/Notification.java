@@ -1,5 +1,6 @@
 package model;
 
+import controller.NotificationConst;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,17 +11,18 @@ import view.AddTaskWindow;
 import view.NotificationController;
 import view.NotificationWindow;
 
+import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Notification extends TimerTask{
-    private LocalDateTime dateAlert;
-    private String textAlert;
-    private Notifier notifier;
+    /*private LocalDateTime dateAlert;
+    private String textAlert;*/
     private Timer timer;
     private Task task;
 
@@ -29,9 +31,13 @@ public class Notification extends TimerTask{
     }
 
     public Notification(Task task) {
-        this.textAlert = task.getName() + " ." + task.getDescription();
-        this.dateAlert = task.getPlannedDate();
-        this.task = task;
+        /*setTextAlert(task.getName()+" ."+task.getDescription());
+        setDateAlert(task.getPlannedDate());*/
+        setTask(task);
+        createTimer();
+    }
+
+    public void createTimer(){
         this.timer = new Timer();
     }
 
@@ -45,9 +51,16 @@ public class Notification extends TimerTask{
 
 
     public Stage createStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/notificationWindow.fxml"));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        System.out.println(width);
+        System.out.println(height);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConst.NOTIFICATIONWINDOWPATH));
         Stage stage = new Stage( StageStyle.DECORATED);
-        stage.setTitle("Оповещение");
+        stage.setTitle(NotificationConst.NOTIFICATIONTITLE);
+        stage.setX(width*0.81);
+        stage.setY(height*0.78);
         stage.setScene(new Scene(loader.load()));
         NotificationController nc = loader.<NotificationController>getController();
         nc.setNotification(this);
@@ -70,24 +83,12 @@ public class Notification extends TimerTask{
         timer.cancel();
     }
 
-    public void startTask(){
-        timer.schedule(this, Date.from(dateAlert.atZone(ZoneId.systemDefault()).toInstant()));
+    public void cancelTimer(){
+        timer.cancel();
     }
 
-    public LocalDateTime getDateAlert() {
-        return dateAlert;
-    }
-
-    public void setDateAlert(LocalDateTime dateAlert) {
-        this.dateAlert = dateAlert;
-    }
-
-    public String getTextAlert() {
-        return textAlert;
-    }
-
-    public void setTextAlert(String textAlert) {
-        this.textAlert = textAlert;
+    public void startTask() {
+        timer.schedule(this, Date.from(task.getPlannedDate().atZone(ZoneId.systemDefault()).toInstant()));
     }
 
 }
