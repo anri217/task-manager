@@ -7,7 +7,7 @@ public class SelectedTasksController {
     private MainWindowRow row;
 
     private SelectedTasksController() {
-        row = new MainWindowRow(new Task(0));
+        row = new MainWindowRow();
     }
 
     public static synchronized SelectedTasksController getInstance() {

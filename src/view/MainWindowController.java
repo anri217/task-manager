@@ -120,7 +120,6 @@ public class MainWindowController implements Initializable {
         }
         ChangeTaskWindow changeWindow = new ChangeTaskWindow();
         Stage stage = new Stage();
-//        stage.initModality(Modality.WINDOW_MODAL);
         changeWindow.start(stage);
         refresh();
     }
