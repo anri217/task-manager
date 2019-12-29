@@ -3,21 +3,13 @@ package view;
 import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import model.Notification;
+import controller.Notification;
 import model.Status;
 import model.Task;
 
-import javax.swing.*;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 
 public class NotificationController {
 

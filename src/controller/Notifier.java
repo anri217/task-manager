@@ -1,6 +1,8 @@
-package model;
+package controller;
 
-import java.time.ZoneId;
+import controller.Notification;
+import model.Task;
+
 import java.util.*;
 
 public class Notifier {

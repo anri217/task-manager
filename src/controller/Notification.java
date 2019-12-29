@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import controller.NotificationConst;
 import javafx.application.Platform;
@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Task;
 import view.AddTaskWindow;
 import view.NotificationController;
 import view.NotificationWindow;
