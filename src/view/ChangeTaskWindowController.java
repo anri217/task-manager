@@ -46,7 +46,10 @@ public class ChangeTaskWindowController implements Initializable {
 
     public void clickChange(ActionEvent actionEvent) {
         TaskFactory taskFactory = new TaskFactory();
-        Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), taskFactory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED));
+        Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(),
+                taskFactory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear(),
+                        datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
+                        Integer.parseInt(minTextField.getText())), Status.PLANNED));
         Stage stage = (Stage) changeButton.getScene().getWindow();
         stage.close();
     }

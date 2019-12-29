@@ -57,6 +57,7 @@ public class Journal implements Serializable {
 
     public ArrayList<Task> getAll() {
         Task[] arr = tasks.values().toArray(new Task[0]);
+        //Collections.unmodifiableList()
         return new ArrayList<>(Arrays.asList(arr));
     }
 }

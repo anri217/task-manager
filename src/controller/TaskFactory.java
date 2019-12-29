@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TaskFactory {
-    public Task createTask() {
+    public Task createTask() {//todo make static methods;
         return new Task(IdGenerator.getInstance().getId());
     }
 

@@ -11,7 +11,7 @@ public class PropertyParser {
     private static final String PATH_TO_PROPERTIES = "staff/file.properties";
     private Properties properties;
 
-    public PropertyParser() throws IOException, PropertyParserInitException {
+    public PropertyParser() throws  PropertyParserInitException {
         properties = new Properties();
         try (FileInputStream fis = new FileInputStream(PATH_TO_PROPERTIES)) {
             properties.load(fis);
