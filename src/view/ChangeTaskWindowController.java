@@ -13,7 +13,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class ChangeTaskWindowController implements Initializable {
@@ -33,7 +32,6 @@ public class ChangeTaskWindowController implements Initializable {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        // Disable Monday, Tuesday, Wednesday.
                         if (item.isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
                             setDisable(true);
                         }
