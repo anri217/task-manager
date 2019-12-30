@@ -1,9 +1,11 @@
 package view;
 
 import controller.Controller;
+import controller.factories.TaskFactory;
 import controller.util.IOUtil;
 import exceptions.BackupFileException;
 import exceptions.PropertyParserInitException;
+import idgenerator.IdGenerator;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Journal;
+import model.Status;
 import model.Task;
 
 import java.io.IOException;
@@ -39,7 +42,8 @@ public class MainWindowController implements Initializable {
 
     private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
-    private void refresh() {
+
+    public void refresh() {
         delTask.setDisable(true);
         changeTask.setDisable(true);
         cancelTask.setDisable(true);
@@ -154,7 +158,7 @@ public class MainWindowController implements Initializable {
         int length = taskTable.getItems().size();
         for (int i = 0; i < length; i++) {
             if(taskTable.getItems().get(i).getCheckBox().isSelected()){
-
+                Controller.getInstance().cancelTask(taskTable.getItems().get(i).getId(), taskTable.getItems().get(i));
             }
         }
     }
