@@ -70,7 +70,7 @@ public class NotificationController {
     @FXML
     public void finishTaskAction(ActionEvent actionEvent) {
         Task finishTask = notification.getTask();
-        finishTask.setStatus(Status.FINISHED);
+        finishTask.setStatus(Status.COMPLETED);
         finishTask.setDateOfDone(notification.getTask().getPlannedDate());
         Controller.getInstance().changeTask(notification.getTask().getId(), finishTask);
         Stage stage = (Stage) finishButton.getScene().getWindow();

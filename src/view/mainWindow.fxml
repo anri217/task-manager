@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
@@ -26,6 +25,7 @@
             <TableColumn fx:id="nameColumn" editable="false" prefWidth="137.0" text="Наименование" />
             <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="255.0" text="Описание" />
             <TableColumn fx:id="dateColumn" editable="false" minWidth="0.0" prefWidth="172.0" text="Дата" />
+            <TableColumn fx:id="statusColumn" editable="false" minWidth="0.0" prefWidth="172.0" text="Статус" />
         </columns>
       </TableView>
    </center>

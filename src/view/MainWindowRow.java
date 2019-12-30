@@ -10,6 +10,7 @@ public class MainWindowRow {
     private SimpleStringProperty description;
     private SimpleStringProperty date;
     private SimpleObjectProperty<CheckBox> checkBox;
+    private SimpleStringProperty status;
     private int id;
 
     public MainWindowRow(Task task) {
@@ -32,6 +33,7 @@ public class MainWindowRow {
                 " " + task.getPlannedDate().getDayOfMonth() + "." + task.getPlannedDate().getMonthValue() + "." +
                 task.getPlannedDate().getYear());
         checkBox = new SimpleObjectProperty<>(new CheckBox());
+        status = new SimpleStringProperty(task.getStatus().toString());
         id = task.getId();
     }
 
@@ -83,5 +85,17 @@ public class MainWindowRow {
 
     public void setDate(String date) {
         this.date.set(date);
+    }
+
+    public String getStatus() {
+        return status.get();
+    }
+
+    public SimpleStringProperty statusProperty() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
     }
 }

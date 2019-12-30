@@ -33,6 +33,7 @@ public class MainWindowController implements Initializable {
 
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
+    public TableColumn statusColumn;
 
     private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
@@ -88,6 +89,8 @@ public class MainWindowController implements Initializable {
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     @FXML

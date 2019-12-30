@@ -46,7 +46,7 @@ public class Controller {
     public void changeTask(int id, Task task2) {
         notifier.deleteNotification(journal.getTask(id));
         journal.changeTask(id, task2);
-        if (task2.getStatus() != Status.FINISHED) {
+        if (task2.getStatus() != Status.COMPLETED) {
             notifier.createNotification(task2);
         }
     }
