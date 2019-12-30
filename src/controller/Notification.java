@@ -46,7 +46,7 @@ public class Notification extends TimerTask {
         this.task = task;
     }
 
-
+    // todo looks like that you do not know single responsibility principle and do not delete debug code
     public Stage createStage() throws IOException {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
