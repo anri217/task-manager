@@ -48,22 +48,21 @@ public class NotificationController {
     private Button cancelButton;
 
 
-
-    public NotificationController(Notification notification){
+    public NotificationController(Notification notification) {
         this.notification = notification;
     }
 
-    public NotificationController(){
+    public NotificationController() {
     }
 
-    public void setNotification(Notification notification){
+    public void setNotification(Notification notification) {
         this.notification = notification;
     }
 
 
-    public void setLabel(){
+    public void setLabel() {
 
-        descLabel.setText(notification.getTask().getName()+" ."+notification.getTask().getDescription());
+        descLabel.setText(notification.getTask().getName() + " ." + notification.getTask().getDescription());
     }
 
     @FXML
@@ -77,7 +76,7 @@ public class NotificationController {
     }
 
     @FXML
-    public void deferButtonAction(ActionEvent actionEvent){
+    public void deferButtonAction(ActionEvent actionEvent) {
         descLabel.setVisible(false);
         finishButton.setVisible(false);
         deferButton.setVisible(false);
@@ -108,7 +107,7 @@ public class NotificationController {
 
 
     @FXML
-    public void tenMinutesButtonActive(ActionEvent actionEvent){
+    public void tenMinutesButtonActive(ActionEvent actionEvent) {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(10);
         Task newTask = notification.getTask();
         newTask.setPlannedDate(dateNow);
@@ -119,7 +118,7 @@ public class NotificationController {
     }
 
     @FXML
-    public void fifteenMinutesButtonAction(ActionEvent actionEvent){
+    public void fifteenMinutesButtonAction(ActionEvent actionEvent) {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(15);
         Task newTask = notification.getTask();
         newTask.setPlannedDate(dateNow);
@@ -131,8 +130,7 @@ public class NotificationController {
 
 
     @FXML
-    public void chooseTimeButtonAction(ActionEvent actionEvent)
-    {
+    public void chooseTimeButtonAction(ActionEvent actionEvent) {
         cancelButton.setVisible(false);
         chooseTimeButton.setVisible(false);
         chooseTimeLabel.setVisible(false);
@@ -148,18 +146,16 @@ public class NotificationController {
 
     }
 
-    public void deferTaskButtonAction(ActionEvent actionEvent){
+    public void deferTaskButtonAction(ActionEvent actionEvent) {
         LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
-        if (dateFromDatePicker.isAfter(LocalDateTime.now()))
-        {
-        Task deferTask = notification.getTask();
-        deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
+        if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
+            Task deferTask = notification.getTask();
+            deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
             deferTask.setStatus(Status.DEFERRED);
             Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
             Stage stage = (Stage) deferButton.getScene().getWindow();
             stage.close();
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(NotificationControllerConst.ALERTTITLE);
             alert.setHeaderText(NotificationControllerConst.ALERTHEADERTEXT);
@@ -170,7 +166,7 @@ public class NotificationController {
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
     }
 
 }

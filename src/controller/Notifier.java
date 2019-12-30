@@ -16,18 +16,16 @@ public class Notifier {
         notificationMap.putIfAbsent(task.getId(), notification);
     }
 
-    public void deleteNotification(Task task){
+    public void deleteNotification(Task task) {
         Notification notification = notificationMap.get(task.getId());
         notification.cancelTimer();
         notificationMap.remove(task.getId());
     }
 
-    public void createNotification(Task task){
+    public void createNotification(Task task) {
         Notification notification = new Notification(task);
         addNotification(task, notification);
         notification.startTask();
-      //  notification.getTimer().schedule(notification, Date.from(notification.getTask().getPlannedDate().atZone(ZoneId.systemDefault()).toInstant()));/*Date.from(notification.getDateAlert().atZone(ZoneId.systemDefault()).toInstant())*/
-       // ntf.startTask();
     }
 
     public TimerTask getNotification(int id) {

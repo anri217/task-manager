@@ -21,28 +21,24 @@ import java.util.SimpleTimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Notification extends TimerTask{
-    /*private LocalDateTime dateAlert;
-    private String textAlert;*/
+public class Notification extends TimerTask {
     private Timer timer;
     private Task task;
 
-    public Timer getTimer(){
+    public Timer getTimer() {
         return timer;
     }
 
     public Notification(Task task) {
-        /*setTextAlert(task.getName()+" ."+task.getDescription());
-        setDateAlert(task.getPlannedDate());*/
         setTask(task);
         createTimer();
     }
 
-    public void createTimer(){
+    public void createTimer() {
         this.timer = new Timer();
     }
 
-    public Task getTask(){
+    public Task getTask() {
         return task;
     }
 
@@ -58,10 +54,10 @@ public class Notification extends TimerTask{
         System.out.println(width);
         System.out.println(height);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConst.NOTIFICATIONWINDOWPATH));
-        Stage stage = new Stage( StageStyle.DECORATED);
+        Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle(NotificationConst.NOTIFICATIONTITLE);
-        stage.setX(width*0.81);
-        stage.setY(height*0.78);
+        stage.setX(width * 0.81);
+        stage.setY(height * 0.78);
         stage.setScene(new Scene(loader.load()));
         NotificationController nc = loader.<NotificationController>getController();
         nc.setNotification(this);
@@ -73,8 +69,9 @@ public class Notification extends TimerTask{
         NotificationWindow nw = new NotificationWindow();
         nw.start(createStage());
     }
-    public void run(){
-        Platform.runLater(()-> {
+
+    public void run() {
+        Platform.runLater(() -> {
             try {
                 showNotification();
             } catch (Exception e) {
@@ -84,7 +81,7 @@ public class Notification extends TimerTask{
         timer.cancel();
     }
 
-    public void cancelTimer(){
+    public void cancelTimer() {
         timer.cancel();
     }
 
