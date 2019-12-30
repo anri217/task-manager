@@ -87,8 +87,6 @@ public class MainWindowController implements Initializable {
     }
 
     private void initColumns() {
-        refresh();
-
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
