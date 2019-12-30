@@ -26,6 +26,7 @@ public class IOUtil {
             String path = propertyParser.getProperty("path_to_backup_file");
             try (OutputStream out = new FileOutputStream(new File(path));
                  ObjectOutputStream oos = new ObjectOutputStream(out)) {
+                // todo code format and close oos
                 oos.writeObject(obj);
             }
             catch (IOException ex) {
