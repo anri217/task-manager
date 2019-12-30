@@ -9,11 +9,12 @@ public class Main {
     public static void main(String[] args) {
         try {
             IOUtil ioUtil = IOUtil.getInstance();
-           // Journal journal = (Journal) ioUtil.restoreFunction();
+            Journal journal = (Journal) ioUtil.restoreFunction();
+            Controller.getInstance().setJournal(journal);
 
             MainWindow.run(args);
             ioUtil.backupFunction(Controller.getInstance().getJournal());
-        } catch (BackupFileException | PropertyParserInitException   e) {
+        } catch (BackupFileException | PropertyParserInitException | ClassNotFoundException  e) {
             System.out.println(e.getMessage());
         }
     }
