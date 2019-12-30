@@ -34,7 +34,8 @@
          <children>
             <Button fx:id="delTask" disable="true" mnemonicParsing="false" onAction="#clickDelTask" prefHeight="27.0" prefWidth="113.0" text="Удалить задачу" />
             <Button fx:id="addTask" mnemonicParsing="false" onAction="#clickAddTask" text="Добавить задачу" />
-            <Button fx:id="changeTask" disable="true" mnemonicParsing="false" onAction="#clickChangeTask" text="Изменить" />
+            <Button fx:id="changeTask" disable="true" mnemonicParsing="false" onAction="#clickChangeTask" text="Изменить задачу" />
+            <Button fx:id="cancelTask" disable="true" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickCancelTask" text="Отменить задачу" />
          </children>
       </HBox>
    </bottom>
