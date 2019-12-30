@@ -151,11 +151,11 @@ public class MainWindowController implements Initializable {
     }
 
     public void clickCancelTask(ActionEvent actionEvent) {
-//        int length = taskTable.getItems().size();
-//        for (int i = 0; i < length; i++) {
-//            if(taskTable.getItems().get(i).getCheckBox().isSelected()){
-//                Controller.getInstance().
-//            }
-//        }
+        int length = taskTable.getItems().size();
+        for (int i = 0; i < length; i++) {
+            if(taskTable.getItems().get(i).getCheckBox().isSelected()){
+
+            }
+        }
     }
 }
