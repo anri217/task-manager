@@ -37,6 +37,8 @@ public class MainWindowController implements Initializable {
     private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
     private void refresh() {
+        delTask.setDisable(true);
+        changeTask.setDisable(true);
         rows.clear();
         int length = Controller.getInstance().getAll().size();
         for (int i = 0; i < length; i++) {

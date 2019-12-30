@@ -14,6 +14,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.ResourceBundle;
 
 public class AddTaskWindowController implements Initializable {
@@ -52,13 +53,37 @@ public class AddTaskWindowController implements Initializable {
     private void initItems() {
         Callback<DatePicker, DateCell> dayCellFactory= this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);
+
+        hoursTextField.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 2 ? change : null));
+
+        minTextField.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 2 ? change : null));
     }
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
-        TaskFactory factory = new TaskFactory();
-        Controller.getInstance().addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()), Integer.parseInt(minTextField.getText())), Status.PLANNED));
-        Stage stage = (Stage) addButton.getScene().getWindow();
-        stage.close();
+        LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
+                datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
+                Integer.parseInt(minTextField.getText()));
+        if(nameTextField.getText().length() == 0){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ALERT");
+            alert.setHeaderText("Enter name of task");
+            alert.showAndWait();
+        }
+        else if (cur.isBefore(LocalDateTime.now())){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ALERT");
+            alert.setHeaderText("Enter correct time");
+            alert.showAndWait();
+        }
+        else {
+            TaskFactory factory = new TaskFactory();
+            Controller.getInstance().addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), cur,
+                    Status.PLANNED));
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public void clickDecline(ActionEvent actionEvent) {

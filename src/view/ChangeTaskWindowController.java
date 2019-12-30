@@ -13,6 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class ChangeTaskWindowController implements Initializable {
@@ -62,16 +63,45 @@ public class ChangeTaskWindowController implements Initializable {
         hoursTextField.setText(String.valueOf(localDateTime.getHour()));
 
         minTextField.setText(String.valueOf(localDateTime.getMinute()));
+
+        hoursTextField.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 2 ? change : null));
+
+        minTextField.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 2 ? change : null));
     }
 
     public void clickChange(ActionEvent actionEvent) {
-        TaskFactory taskFactory = new TaskFactory();
-        Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(),
-                taskFactory.createTask(nameTextField.getText(), descTextArea.getText(), LocalDateTime.of(datePicker.getValue().getYear(),
-                        datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
-                        Integer.parseInt(minTextField.getText())), Status.PLANNED));
-        Stage stage = (Stage) changeButton.getScene().getWindow();
-        stage.close();
+        LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
+                datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
+                Integer.parseInt(minTextField.getText()));
+        if(nameTextField.getText().length() == 0){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ALERT");
+            alert.setHeaderText("Enter name of task");
+            alert.showAndWait();
+        }
+        else if (cur.isBefore(LocalDateTime.now())){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ALERT");
+            alert.setHeaderText("Enter correct time");
+            alert.showAndWait();
+        }
+        else if (Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()) == null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ALERT");
+            alert.setHeaderText("This task has already deleted");
+            alert.showAndWait();
+            Stage stage = (Stage) changeButton.getScene().getWindow();
+            stage.close();
+        }
+        else {
+            TaskFactory taskFactory = new TaskFactory();
+            Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(),
+                    taskFactory.createTask(nameTextField.getText(), descTextArea.getText(), cur, Status.PLANNED));
+            Stage stage = (Stage) changeButton.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public void clickDecline(ActionEvent actionEvent) {
