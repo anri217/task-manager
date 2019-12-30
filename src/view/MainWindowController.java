@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Journal;
 
@@ -30,10 +29,10 @@ public class MainWindowController implements Initializable {
     public TableColumn<MainWindowRow, String> nameColumn;
     public TableColumn<MainWindowRow, String> descriptionColumn;
     public TableColumn<MainWindowRow, String> dateColumn;
+    public TableColumn<MainWindowRow, String> statusColumn;
 
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
-    public TableColumn statusColumn;
 
     private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
