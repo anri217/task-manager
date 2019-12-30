@@ -102,7 +102,6 @@ public class MainWindowController implements Initializable {
     public void clickAddTask(ActionEvent actionEvent) throws Exception {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
-//        stage.initModality(Modality.WINDOW_MODAL);
         addTaskWindow.start(stage);
         refresh();
     }
