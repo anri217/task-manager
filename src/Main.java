@@ -13,7 +13,7 @@ public class Main {
 
             MainWindow.run(args);
             ioUtil.backupFunction(Controller.getInstance().getJournal());
-        } catch (BackupFileException | PropertyParserInitException  e) {
+        } catch (BackupFileException | PropertyParserInitException   e) {
             System.out.println(e.getMessage());
         }
     }

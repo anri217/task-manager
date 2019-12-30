@@ -99,7 +99,7 @@ public class NotificationController {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(5);
         Task newTask = notification.getTask();
         newTask.setPlannedDate(dateNow);
-        newTask.setStatus(Status.DEFFERED);
+        newTask.setStatus(Status.DEFERRED);
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -111,7 +111,7 @@ public class NotificationController {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(10);
         Task newTask = notification.getTask();
         newTask.setPlannedDate(dateNow);
-        newTask.setStatus(Status.DEFFERED);
+        newTask.setStatus(Status.DEFERRED);
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -122,7 +122,7 @@ public class NotificationController {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(15);
         Task newTask = notification.getTask();
         newTask.setPlannedDate(dateNow);
-        newTask.setStatus(Status.DEFFERED);
+        newTask.setStatus(Status.DEFERRED);
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -151,7 +151,7 @@ public class NotificationController {
         if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
             Task deferTask = notification.getTask();
             deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
-            deferTask.setStatus(Status.DEFFERED);
+            deferTask.setStatus(Status.DEFERRED);
             Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
             Stage stage = (Stage) deferButton.getScene().getWindow();
             stage.close();
