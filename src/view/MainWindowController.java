@@ -24,6 +24,7 @@ public class MainWindowController implements Initializable {
     public Button addTask;
     public Button delTask;
     public Button changeTask;
+    public Button cancelTask;
 
     public TableView<MainWindowRow> taskTable;
 
@@ -64,16 +65,19 @@ public class MainWindowController implements Initializable {
         if (count == 0){
             delTask.setDisable(true);
             changeTask.setDisable(true);
+            cancelTask.setDisable(true);
         }
 
         if(count == 1){
             delTask.setDisable(false);
             changeTask.setDisable(false);
+            cancelTask.setDisable(false);
         }
 
         if(count > 1){
             delTask.setDisable(false);
             changeTask.setDisable(true);
+            cancelTask.setDisable(false);
         }
     }
 
@@ -83,6 +87,8 @@ public class MainWindowController implements Initializable {
     }
 
     private void initColumns() {
+        refresh();
+
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -144,5 +150,14 @@ public class MainWindowController implements Initializable {
         }
         Controller.getInstance().setJournal(journal1);
         refresh();
+    }
+
+    public void clickCancelTask(ActionEvent actionEvent) {
+//        int length = taskTable.getItems().size();
+//        for (int i = 0; i < length; i++) {
+//            if(taskTable.getItems().get(i).getCheckBox().isSelected()){
+//                Controller.getInstance().
+//            }
+//        }
     }
 }
