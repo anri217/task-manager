@@ -68,7 +68,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="changeButton" layoutX="150.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickChange" text="Изменить" />
+            <Button fx:id="changeButton" layoutX="150.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickChange" text="ОК" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">

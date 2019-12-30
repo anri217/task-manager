@@ -15,10 +15,15 @@ public class MainWindowRow {
     public MainWindowRow(Task task) {
         name = new SimpleStringProperty(task.getName());
         description = new SimpleStringProperty(task.getDescription());
-        date = new SimpleStringProperty(String.valueOf(task.getPlannedDate()));
+        date = new SimpleStringProperty(task.getPlannedDate().getMinute() + ":" + task.getPlannedDate().getHour() +
+                " " + task.getPlannedDate().getDayOfMonth() + "." + task.getPlannedDate().getMonthValue() + "." +
+                task.getPlannedDate().getYear());
+//        date = new SimpleStringProperty(String.valueOf(task.getPlannedDate()));
         checkBox = new SimpleObjectProperty<>(new CheckBox());
         id = task.getId();
     }
+
+    public MainWindowRow(){}
 
     public int getId() {
         return id;
