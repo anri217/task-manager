@@ -1,7 +1,8 @@
 package view;
 
 import controller.Controller;
-import controller.TaskFactory;
+import controller.factories.TaskFactory;
+import idgenerator.IdGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -96,7 +97,7 @@ public class ChangeTaskWindowController implements Initializable {
         else {
             TaskFactory taskFactory = new TaskFactory();
             Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(),
-                    taskFactory.createTask(nameTextField.getText(), descTextArea.getText(), cur, Status.PLANNED));
+                    taskFactory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur, Status.PLANNED));
             Stage stage = (Stage) changeButton.getScene().getWindow();
             stage.close();
         }

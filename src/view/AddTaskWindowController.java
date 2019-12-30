@@ -1,7 +1,8 @@
 package view;
 
 import controller.Controller;
-import controller.TaskFactory;
+import controller.factories.TaskFactory;
+import idgenerator.IdGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -79,7 +80,7 @@ public class AddTaskWindowController implements Initializable {
         }
         else {
             TaskFactory factory = new TaskFactory();
-            Controller.getInstance().addTask(factory.createTask(nameTextField.getText(), descTextArea.getText(), cur,
+            Controller.getInstance().addTask(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur,
                     Status.PLANNED));
             Stage stage = (Stage) addButton.getScene().getWindow();
             stage.close();

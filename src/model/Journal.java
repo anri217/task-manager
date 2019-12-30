@@ -42,22 +42,20 @@ public class Journal implements Serializable {
 
     public void changeTask(int id, Task task) {
         Task res = tasks.get(id);
-        {
-            res.setPlannedDate(task.getPlannedDate());
-            res.setDateOfDone(task.getDateOfDone());
-            res.setName(task.getName());
-            res.setDescription(task.getDescription());
-            res.setStatus(task.getStatus());
-        }
+
+        res.setPlannedDate(task.getPlannedDate());
+        res.setDateOfDone(task.getDateOfDone());
+        res.setName(task.getName());
+        res.setDescription(task.getDescription());
+        res.setStatus(task.getStatus());
     }
 
     public void changeStatus(String taskName, Status status) {
         getTaskByName(taskName).setStatus(status);
     }
 
-    public ArrayList<Task> getAll() {
+    public List<Task> getAll() {
         Task[] arr = tasks.values().toArray(new Task[0]);
-        //Collections.unmodifiableList()
-        return new ArrayList<>(Arrays.asList(arr));
+        return Collections.unmodifiableList(new ArrayList<>(Arrays.asList(arr)));
     }
 }

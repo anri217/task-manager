@@ -1,5 +1,7 @@
 package model;
 
+import idgenerator.IdGenerator;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -13,9 +15,15 @@ public class Task implements Serializable {
 
     private int id;
 
-    public Task(int id) {
-        this.id = id;
+    public Task(Task task) {
+        id = task.id;
+        name = task.name;
+        description = task.name;
+        plannedDate = task.plannedDate;
+        dateOfDone = task.dateOfDone;
+        status = task.status;
     }
+
 
     public Task(int id, String name, String description, LocalDateTime plannedDate, Status status) {
         this.id = id;
@@ -24,6 +32,10 @@ public class Task implements Serializable {
         this.plannedDate = plannedDate;
         this.dateOfDone = null;
         this.status = status;
+    }
+
+    public Task() {
+        id = IdGenerator.getInstance().getId();
     }
 
     public String getName() {

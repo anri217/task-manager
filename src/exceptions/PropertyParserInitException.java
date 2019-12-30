@@ -6,4 +6,8 @@ public class PropertyParserInitException extends Exception {
     public PropertyParserInitException(String message) {
         super(message);
     }
+
+    public PropertyParserInitException() {
+        super();
+    }
 }

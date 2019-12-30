@@ -1,7 +1,7 @@
 package view;
 
 import controller.Controller;
-import controller.IOUtil;
+import controller.util.IOUtil;
 import exceptions.BackupFileException;
 import exceptions.PropertyParserInitException;
 import javafx.collections.FXCollections;
@@ -12,10 +12,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Journal;
+import model.Task;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -132,8 +134,15 @@ public class MainWindowController implements Initializable {
         IOUtil.getInstance().serializeObject(Controller.getInstance().getJournal());
     }
 
-    public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException, PropertyParserInitException, IOException {
-        Controller.getInstance().setJournal((Journal) IOUtil.getInstance().deserializeObject());
+    public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException,
+            PropertyParserInitException, IOException {
+        Journal journal1 = Controller.getInstance().getJournal();
+        Journal journal2 = (Journal)IOUtil.getInstance().deserializeObject();
+        List<Task> arr = journal2.getAll();
+        for(int i = 0; i < arr.size(); ++i) {
+            journal1.addTask(arr.get(i));
+        }
+        Controller.getInstance().setJournal(journal1);
         refresh();
     }
 }

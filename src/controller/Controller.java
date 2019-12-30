@@ -3,6 +3,7 @@ package controller;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private static Controller instance;
@@ -51,7 +52,7 @@ public class Controller {
         }
     }
 
-    public ArrayList<Task> getAll(){
+    public List<Task> getAll(){
         return journal.getAll();
     }
 }
