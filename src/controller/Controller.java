@@ -40,7 +40,7 @@ public class Controller {
     }
 
     public void deleteTask(int id) {
-        notifier.deleteNotification(journal.getTask(id));
+        if (journal.getTask(id).getStatus() != Status.FINISHED) notifier.deleteNotification(journal.getTask(id));
         journal.deleteTask(id);
     }
 
