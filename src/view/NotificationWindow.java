@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This is class for opening window with notification
+ */
+
 public class NotificationWindow extends Application {
     @Override
     public void start(Stage stage) throws IOException {

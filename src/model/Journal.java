@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * This is main model class, which stores tasks
+ * @see Task
+ */
+
 public class Journal implements Serializable {
     private Map<Integer, Task> tasks;
 

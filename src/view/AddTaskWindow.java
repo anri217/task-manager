@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * This is class for opening window of adding task
+ */
+
 public class AddTaskWindow extends Application {
     @Override
     public void start(Stage stage) throws Exception {

@@ -2,6 +2,10 @@ package view;
 
 import model.Task;
 
+/**
+ * This is class for defining the selected task
+ */
+
 public class SelectedTasksController {
     private static SelectedTasksController instance;
     private MainWindowRow row;

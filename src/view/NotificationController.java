@@ -11,6 +11,12 @@ import model.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * This is controller of NotificationWindow
+ *
+ * @see NotificationWindow
+ */
+
 public class NotificationController {
 
     private Notification notification;
@@ -157,9 +163,9 @@ public class NotificationController {
             stage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(NotificationControllerConst.ALERTTITLE);
-            alert.setHeaderText(NotificationControllerConst.ALERTHEADERTEXT);
-            alert.setContentText(NotificationControllerConst.ALERTCONTEXTTEXT);
+            alert.setTitle(NotificationControllerConst.ALERT_TITLE);
+            alert.setHeaderText(NotificationControllerConst.ALERT_HEADER_TEXT);
+            alert.setContentText(NotificationControllerConst.ALERT_CONTEXT_TEXT);
             alert.showAndWait();
         }
     }

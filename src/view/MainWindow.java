@@ -6,6 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * This is class of main window
+ */
+
 public class MainWindow extends Application {
     public static void run(String[] args) {
         Application.launch(args);

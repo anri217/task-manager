@@ -6,6 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * This is class for opening window of changing task
+ */
+
 public class ChangeTaskWindow extends Application{
     @Override
     public void start(Stage stage) throws Exception {

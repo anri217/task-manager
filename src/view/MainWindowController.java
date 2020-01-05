@@ -23,6 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is controller of MainWindow
+ *
+ * @see MainWindow
+ */
+
 public class MainWindowController implements Initializable {
     public Button addTask;
     public Button delTask;
@@ -58,7 +64,7 @@ public class MainWindowController implements Initializable {
         taskTable.setItems(FXCollections.observableList(rows));
     }
 
-    private void selectedCheckBox(){
+    private void selectedCheckBox() {
         int count = 0;
 
         for (MainWindowRow row : rows) {
@@ -67,19 +73,19 @@ public class MainWindowController implements Initializable {
             }
         }
 
-        if (count == 0){
+        if (count == 0) {
             delTask.setDisable(true);
             changeTask.setDisable(true);
             cancelTask.setDisable(true);
         }
 
-        if(count == 1){
+        if (count == 1) {
             delTask.setDisable(false);
             changeTask.setDisable(false);
             cancelTask.setDisable(false);
         }
 
-        if(count > 1){
+        if (count > 1) {
             delTask.setDisable(false);
             changeTask.setDisable(true);
             cancelTask.setDisable(false);
@@ -115,7 +121,7 @@ public class MainWindowController implements Initializable {
     public void clickDelTask(ActionEvent actionEvent) {
         int length = taskTable.getItems().size();
         for (int i = 0; i < length && length > 0; i++) {
-            if(taskTable.getItems().get(i).getCheckBox().isSelected()){
+            if (taskTable.getItems().get(i).getCheckBox().isSelected()) {
                 Controller.getInstance().deleteTask(taskTable.getItems().get(i).getId());
                 taskTable.getItems().remove(i);
                 --i;
@@ -128,7 +134,7 @@ public class MainWindowController implements Initializable {
     public void clickChangeTask(ActionEvent actionEvent) throws Exception {
         int length = taskTable.getItems().size();
         for (int i = 0; i < length; i++) {
-            if(taskTable.getItems().get(i).getCheckBox().isSelected()){
+            if (taskTable.getItems().get(i).getCheckBox().isSelected()) {
                 SelectedTasksController.getInstance().setRow(taskTable.getItems().get(i));
             }
         }
@@ -145,9 +151,9 @@ public class MainWindowController implements Initializable {
     public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException,
             PropertyParserInitException, IOException {
         Journal journal1 = Controller.getInstance().getJournal();
-        Journal journal2 = (Journal)IOUtil.getInstance().deserializeObject();
+        Journal journal2 = (Journal) IOUtil.getInstance().deserializeObject();
         List<Task> arr = journal2.getAll();
-        for(int i = 0; i < arr.size(); ++i) {
+        for (int i = 0; i < arr.size(); ++i) {
             journal1.addTask(arr.get(i));
         }
         Controller.getInstance().setJournal(journal1);

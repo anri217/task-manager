@@ -5,6 +5,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 import model.Task;
 
+/**
+ * This is class for stores rows of table of tasks
+ */
+
 public class MainWindowRow {
     private SimpleStringProperty name;
     private SimpleStringProperty description;

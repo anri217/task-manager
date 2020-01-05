@@ -1,9 +1,16 @@
 package controller;
 
-import controller.Notification;
 import model.Task;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TimerTask;
+
+/**
+ * This is controller for Notification
+ *
+ * @see Notification
+ */
 
 public class Notifier {
     private Map<Integer, Notification> notificationMap;

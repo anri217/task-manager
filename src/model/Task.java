@@ -5,6 +5,10 @@ import idgenerator.IdGenerator;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * This is Task class, which have a name, description, date of complete, planned date and status
+ */
+
 
 public class Task implements Serializable {
     private String name;

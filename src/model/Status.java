@@ -1,6 +1,9 @@
 package model;
 
-// todo not all statuses
+/**
+ * This is enum statuses
+ */
+
 public enum Status {
-    PLANNED, COMPLETED, OVERDUE, CANCELED, DEFERRED; //add new status
+    PLANNED, COMPLETED, OVERDUE, CANCELED, DEFERRED;
 }

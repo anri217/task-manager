@@ -11,12 +11,16 @@ import javafx.util.Callback;
 import model.Status;
 
 import java.net.URL;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ResourceBundle;
+
+/**
+ * This is controller for AddTaskWindow class
+ *
+ * @see AddTaskWindow
+ */
 
 public class AddTaskWindowController implements Initializable {
     public TextField nameTextField;
@@ -52,7 +56,7 @@ public class AddTaskWindowController implements Initializable {
     }
 
     private void initItems() {
-        Callback<DatePicker, DateCell> dayCellFactory= this.getDayCellFactory();
+        Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);
 
         hoursTextField.setTextFormatter(new TextFormatter<String>(change ->
@@ -66,19 +70,17 @@ public class AddTaskWindowController implements Initializable {
         LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
                 datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
                 Integer.parseInt(minTextField.getText()));
-        if(nameTextField.getText().length() == 0){
+        if (nameTextField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ALERT");
             alert.setHeaderText("Enter name of task");
             alert.showAndWait();
-        }
-        else if (cur.isBefore(LocalDateTime.now())){
+        } else if (cur.isBefore(LocalDateTime.now())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ALERT");
             alert.setHeaderText("Enter correct time");
             alert.showAndWait();
-        }
-        else {
+        } else {
             TaskFactory factory = new TaskFactory();
             Controller.getInstance().addTask(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur,
                     Status.PLANNED));

@@ -1,9 +1,10 @@
 package idgenerator;
 
-// todo is it model? why?
+/**
+ * This is class generating id
+ */
+
 public class IdGenerator {
-    // todo why static?
-    //getId static method
 
     private static IdGenerator instance;
     private static int id = 0;

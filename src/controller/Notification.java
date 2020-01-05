@@ -1,25 +1,24 @@
 package controller;
 
-import controller.NotificationConst;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Task;
-import view.AddTaskWindow;
 import view.NotificationController;
 import view.NotificationWindow;
 
 import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.SimpleTimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+
+/**
+ * This is class for working with notifications
+ */
 
 public class Notification extends TimerTask {
     private Timer timer;
@@ -53,9 +52,9 @@ public class Notification extends TimerTask {
         double height = screenSize.getHeight();
         System.out.println(width);
         System.out.println(height);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConst.NOTIFICATIONWINDOWPATH));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConst.NOTIFICATION_WINDOW_PATH));
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(NotificationConst.NOTIFICATIONTITLE);
+        stage.setTitle(NotificationConst.NOTIFICATION_TITLE);
         stage.setX(width * 0.81);
         stage.setY(height * 0.78);
         stage.setScene(new Scene(loader.load()));

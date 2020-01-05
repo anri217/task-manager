@@ -1,11 +1,15 @@
 package controller.factories;
 
-import idgenerator.IdGenerator;
 import model.Status;
 import model.Task;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
+/**
+ * This is the Factory pattern creating tasks
+ *
+ * @see Task
+ */
 
 public class TaskFactory {
 
