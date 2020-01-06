@@ -48,7 +48,7 @@ public class Controller {
         notifier.deleteNotification(journal.getTask(id));
         journal.changeTask(id, task2);
         if ((task2.getStatus() != Status.COMPLETED) && (task2.getStatus() != Status.CANCELED)) {
-            notifier.createNotification(task2);
+            notifier.createNotification(journal.getTask(id));
         }
     }
 

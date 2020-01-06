@@ -50,8 +50,6 @@ public class Notification extends TimerTask {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
-        System.out.println(width);
-        System.out.println(height);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConst.NOTIFICATION_WINDOW_PATH));
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle(NotificationConst.NOTIFICATION_TITLE);

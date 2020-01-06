@@ -79,6 +79,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), finishTask);
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
+        MainWindowController.getInstance().refresh();
     }
 
     @FXML
@@ -109,6 +110,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
+        MainWindowController.getInstance().refresh();
     }
 
 
@@ -121,6 +123,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
+        MainWindowController.getInstance().refresh();
     }
 
     @FXML
@@ -132,6 +135,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
+        MainWindowController.getInstance().refresh();
     }
 
 
@@ -161,6 +165,7 @@ public class NotificationController {
             Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
             Stage stage = (Stage) deferButton.getScene().getWindow();
             stage.close();
+            MainWindowController.getInstance().refresh();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(NotificationControllerConst.ALERT_TITLE);
