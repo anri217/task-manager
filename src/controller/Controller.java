@@ -57,6 +57,7 @@ public class Controller {
         task2.setStatus(Status.CANCELED);
         journal.changeTask(id, task2);
     }
+
     public List<Task> getAll(){
         return journal.getAll();
     }
