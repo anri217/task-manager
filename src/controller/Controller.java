@@ -52,10 +52,10 @@ public class Controller {
         }
     }
 
-    public void cancelTask (int id, Task task2){
-        notifier.deleteNotification(journal.getTask(id));
-        task2.setStatus(Status.CANCELED);
-        journal.changeTask(id, task2);
+    public void cancelTask (int id){
+        if (getTask(id).getStatus() != Status.CANCELED)
+            notifier.deleteNotification(journal.getTask(id));
+        journal.getTask(id).setStatus(Status.CANCELED);
     }
 
     public List<Task> getAll(){
