@@ -6,7 +6,7 @@ package view;
  * @see NotificationController
  */
 
-public class NotificationControllerConst {
+public class NotificationControllerConstants {
     public final static String ALERT_TITLE = "ERROR";
     public final static String ALERT_HEADER_TEXT = "Не удается отложить задачу";
     public final static String ALERT_CONTEXT_TEXT = "Введены неверные данные. Проверьте, что назначаемая дата позже настоящей даты";

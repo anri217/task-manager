@@ -94,11 +94,6 @@ public class NotificationController {
         tenMinutesButton.setVisible(true);
         fifteenMinutesButton.setVisible(true);
         cancelButton.setVisible(true);
-        /*setDateLabel.setVisible(true);
-        datePicker.setVisible(true);
-        hoursNewTextField.setVisible(true);
-        pointsLabel.setVisible(true);
-        minutesNewTextField.setVisible(true);*/
     }
 
     @FXML
@@ -168,9 +163,9 @@ public class NotificationController {
             MainWindowController.getInstance().refresh();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(NotificationControllerConst.ALERT_TITLE);
-            alert.setHeaderText(NotificationControllerConst.ALERT_HEADER_TEXT);
-            alert.setContentText(NotificationControllerConst.ALERT_CONTEXT_TEXT);
+            alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
+            alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
+            alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
             alert.showAndWait();
         }
     }
