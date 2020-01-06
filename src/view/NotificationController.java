@@ -64,15 +64,25 @@ public class NotificationController {
     public NotificationController() {
     }
 
+    /**
+     * notificatioon field change function
+     * @param notification
+     */
     public void setNotification(Notification notification) {
         this.notification = notification;
     }
 
-
+    /**
+     * description label changing function
+     */
     public void setLabel() {
         descLabel.setText(notification.getTask().getName() + " ." + notification.getTask().getDescription());
     }
 
+    /**
+     * Function for finish task in notification window
+     * @param actionEvent
+     */
     @FXML
     public void finishTaskAction(ActionEvent actionEvent) {
         Task finishTask = notification.getTask();
@@ -84,6 +94,10 @@ public class NotificationController {
         MainWindowController.getInstance().refresh();
     }
 
+    /**
+     * Function for display UI required for defer task
+     * @param actionEvent
+     */
     @FXML
     public void deferButtonAction(ActionEvent actionEvent) {
         descLabel.setVisible(false);
@@ -98,6 +112,10 @@ public class NotificationController {
         cancelButton.setVisible(true);
     }
 
+    /**
+     * Function for defer task for 5 minutes
+     * @param actionEvent
+     */
     @FXML
     public void fiveMinutesButtonActive(ActionEvent actionEvent) {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(5);
@@ -110,7 +128,10 @@ public class NotificationController {
         MainWindowController.getInstance().refresh();
     }
 
-
+    /**
+     * Function for defer task for 10 minutes
+     * @param actionEvent
+     */
     @FXML
     public void tenMinutesButtonActive(ActionEvent actionEvent) {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(10);
@@ -123,6 +144,10 @@ public class NotificationController {
         MainWindowController.getInstance().refresh();
     }
 
+    /**
+     * Funtion for defer task for 15 minutes
+     * @param actionEvent
+     */
     @FXML
     public void fifteenMinutesButtonAction(ActionEvent actionEvent) {
         LocalDateTime dateNow = LocalDateTime.now().plusMinutes(15);
@@ -135,7 +160,10 @@ public class NotificationController {
         MainWindowController.getInstance().refresh();
     }
 
-
+    /**
+     * Funtion for display UI required for defer task time specified by user
+     * @param actionEvent
+     */
     @FXML
     public void chooseTimeButtonAction(ActionEvent actionEvent) {
         cancelButton.setVisible(false);
@@ -153,6 +181,10 @@ public class NotificationController {
 
     }
 
+    /**
+     * Function for defer task for time specified by user
+     * @param actionEvent
+     */
     public void deferTaskButtonAction(ActionEvent actionEvent) {
         LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
         if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
@@ -172,6 +204,10 @@ public class NotificationController {
         }
     }
 
+    /**
+     * Function for limiting entered date on datePicker field
+     * @return
+     */
     private Callback<DatePicker, DateCell> getDayCellFactory() {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
@@ -191,6 +227,9 @@ public class NotificationController {
         return dayCellFactory;
     }
 
+    /**
+     * Function for initialize datePicker, hoursNewTextField and minutesNewTextField fields with their limits entered information
+     */
     private void initItems() {
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);

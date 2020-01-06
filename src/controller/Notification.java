@@ -24,27 +24,51 @@ public class Notification extends TimerTask {
     private Timer timer;//todo if task has canceled recreate timer
     private Task task;
 
+    /**
+     * Getting timer field function
+     * @return current timer
+     */
     public Timer getTimer() {
         return timer;
     }
 
+    /**
+     * Constructor for creating new notification
+     * @param task
+     */
     public Notification(Task task) {
         setTask(task);
         createTimer();
     }
 
+    /**
+     * timer field initializaton function
+     */
     public void createTimer() {
         this.timer = new Timer();
     }
 
+    /**
+     * Getting task field function
+     * @return task, which associated with this notification
+     */
     public Task getTask() {
         return task;
     }
 
+    /**
+     * task field change function
+     * @param task, which associated with this notification
+     */
     public void setTask(Task task) {
         this.task = task;
     }
 
+    /**
+     * Сreate stage for Notification Window function
+     * @return created stage
+     * @throws IOException
+     */
     // todo looks like that you do not know single responsibility principle and do not delete debug code
     public Stage createStage() throws IOException {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -53,8 +77,8 @@ public class Notification extends TimerTask {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConstants.NOTIFICATION_WINDOW_PATH));
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setTitle(NotificationConstants.NOTIFICATION_TITLE);
-        stage.setX(width * 0.81);
-        stage.setY(height * 0.78);
+        stage.setX(width * NotificationConstants.NOTIFICATION_WINDOW_WIDTH_COEFFICIENT);
+        stage.setY(height * NotificationConstants.NOTIFICATION_WINDOW_HEIGHT_COEFFICIENT);
         stage.setScene(new Scene(loader.load()));
         NotificationController nc = loader.<NotificationController>getController();
         nc.setNotification(this);
@@ -62,11 +86,16 @@ public class Notification extends TimerTask {
         return stage;
     }
 
+    /**
+     * Notification window launch function
+     * @throws Exception
+     */
     public void showNotification() throws Exception {
         NotificationWindow nw = new NotificationWindow();
         nw.start(createStage());
     }
 
+    @Override
     public void run() {
         Platform.runLater(() -> {
             try {
@@ -78,10 +107,16 @@ public class Notification extends TimerTask {
         timer.cancel();
     }
 
+    /**
+     * timer kill function for current notification
+     */
     public void cancelTimer() {
         timer.cancel();
     }
 
+    /**
+     * Start-up timer function
+     */
     public void startTask() {
         timer.schedule(this, Date.from(task.getPlannedDate().atZone(ZoneId.systemDefault()).toInstant()));
     }
