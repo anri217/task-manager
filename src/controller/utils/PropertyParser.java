@@ -1,4 +1,4 @@
-package controller.util;
+package controller.utils;
 
 import exceptions.PropertyParserInitException;
 

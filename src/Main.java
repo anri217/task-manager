@@ -1,5 +1,5 @@
 import controller.Controller;
-import controller.util.IOUtil;
+import controller.utils.IOUtil;
 import exceptions.BackupFileException;
 import exceptions.PropertyParserInitException;
 import model.Journal;
