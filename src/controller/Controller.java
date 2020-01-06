@@ -1,18 +1,9 @@
 package controller;
 
-import model.Journal;
-import model.Status;
-import model.Task;
-import view.MainWindowRow;
+import model.*;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-
-/**
- * This is the main MVC pattern controller used to update the model (Journal)
- *
- * @see Journal
- */
 
 public class Controller {
     private static Controller instance;
@@ -56,7 +47,7 @@ public class Controller {
     public void changeTask(int id, Task task2) {
         notifier.deleteNotification(journal.getTask(id));
         journal.changeTask(id, task2);
-        if (task2.getStatus() != Status.COMPLETED && task2.getStatus() != Status.CANCELED) {
+        if ((task2.getStatus() != Status.COMPLETED) && (task2.getStatus() != Status.CANCELED)) {
             notifier.createNotification(task2);
         }
     }
@@ -66,10 +57,7 @@ public class Controller {
         task2.setStatus(Status.CANCELED);
         journal.changeTask(id, task2);
     }
-
-    public List<Task> getAll() {
-        return Collections.unmodifiableList(journal.getAll());
+    public List<Task> getAll(){
+        return journal.getAll();
     }
-
-
 }

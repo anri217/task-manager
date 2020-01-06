@@ -21,7 +21,7 @@ import java.util.TimerTask;
  */
 
 public class Notification extends TimerTask {
-    private Timer timer;
+    private Timer timer;//todo if task has canceled recreate timer
     private Task task;
 
     public Timer getTimer() {
