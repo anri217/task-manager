@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import controller.Notification;
+import javafx.util.Callback;
 import model.Status;
 import model.Task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 
 /**
  * This is controller of NotificationWindow
@@ -67,7 +70,6 @@ public class NotificationController {
 
 
     public void setLabel() {
-
         descLabel.setText(notification.getTask().getName() + " ." + notification.getTask().getDescription());
     }
 
@@ -170,9 +172,39 @@ public class NotificationController {
         }
     }
 
+    private Callback<DatePicker, DateCell> getDayCellFactory() {
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        // Disable Monday, Tuesday, Wednesday.
+                        if (item.isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
+                            setDisable(true);
+                        }
+                    }
+                };
+            }
+        };
+        return dayCellFactory;
+    }
+
+    private void initItems() {
+        Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
+        datePicker.setDayCellFactory(dayCellFactory);
+
+        hoursNewTextField.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 2 ? change : null));
+
+        minutesNewTextField.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 2 ? change : null));
+    }
 
     @FXML
     public void initialize() {
+        initItems();
     }
 
 }
