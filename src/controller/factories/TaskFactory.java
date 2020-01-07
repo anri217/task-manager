@@ -6,7 +6,7 @@ import model.Task;
 import java.time.LocalDateTime;
 
 /**
- * This is the Factory pattern creating tasks
+ * This is the Factory pattern class creating tasks
  *
  * @see Task
  */

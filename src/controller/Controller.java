@@ -3,6 +3,7 @@ package controller;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Controller {
@@ -59,6 +60,6 @@ public class Controller {
     }
 
     public List<Task> getAll(){
-        return journal.getAll();
+        return Collections.unmodifiableList(journal.getAll());
     }
 }
