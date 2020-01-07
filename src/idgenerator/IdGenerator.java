@@ -1,7 +1,7 @@
 package idgenerator;
 
 /**
- * This is class generating id
+ * This is class generating id for comfortable iteration
  */
 
 public class IdGenerator {
@@ -9,7 +9,10 @@ public class IdGenerator {
     private static IdGenerator instance;
     private static int id = 0;
 
-    private IdGenerator() {};
+    private IdGenerator() {
+    }
+
+    ;
 
     public static synchronized IdGenerator getInstance() {
         if (instance == null) {
@@ -18,6 +21,11 @@ public class IdGenerator {
         return instance;
     }
 
+    /**
+     * Getter function
+     *
+     * @return id
+     */
 
     public int getId() {
         return id++;

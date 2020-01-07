@@ -11,8 +11,17 @@ import java.io.*;
 
 public class IOUtil {
 
+
     private static IOUtil instance;
+
+
     private static final String PATH_TO_BACKUP_FILE = "path_to_backup_file", EX_STR = "Can't find backup file ";
+
+    /**
+     * Singleton implementation
+     *
+     * @return current single object
+     */
 
     public static synchronized IOUtil getInstance() {
         if (instance == null) {
@@ -21,7 +30,18 @@ public class IOUtil {
         return instance;
     }
 
-    private IOUtil() {};
+    private IOUtil() {
+    }
+
+    ;
+
+    /**
+     * Serialization function
+     *
+     * @param obj - serializable object
+     * @throws BackupFileException
+     * @throws PropertyParserInitException
+     */
 
     //for using methods without create objects
     public void serializeObject(Object obj) throws BackupFileException, PropertyParserInitException {
@@ -33,12 +53,20 @@ public class IOUtil {
                 // todo code format and close oos
                 oos.writeObject(obj);
                 oos.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 throw new BackupFileException(EX_STR + ex.getMessage());
             }
         }
     }
+
+    /**
+     * Deserialization function
+     *
+     * @return deserialized object
+     * @throws ClassNotFoundException
+     * @throws PropertyParserInitException
+     * @throws BackupFileException
+     */
 
     public Object deserializeObject() throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
         PropertyParser propertyParser = new PropertyParser();
@@ -48,17 +76,17 @@ public class IOUtil {
             Object obj = ois.readObject();
             ois.close();
             return obj;
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new BackupFileException("Can't find backup file " + ex.getMessage());
         }
     }
+
 
     public void backupFunction(Object object) throws PropertyParserInitException, BackupFileException {
         serializeObject(object);
     }
 
     public Object restoreFunction() throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
-       return deserializeObject();
+        return deserializeObject();
     }
 }

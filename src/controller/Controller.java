@@ -1,10 +1,17 @@
 package controller;
 
-import model.*;
+import model.Journal;
+import model.Status;
+import model.Task;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+/**
+ * This is class responsible for implementing actions with the journal
+ *
+ * @see Journal
+ */
 
 public class Controller {
     private static Controller instance;
@@ -27,23 +34,41 @@ public class Controller {
         return journal;
     }
 
-    public void setJournal(Journal journal) {
-        this.journal = journal;
-    }
+    /**
+     * Getter function by id
+     *
+     * @return desired task
+     */
 
     public Task getTask(int id) {
         return journal.getTask(id);
     }
+
+    /**
+     * Add function
+     *
+     * @param task - new task
+     */
 
     public void addTask(Task task) {
         journal.addTask(task);
         notifier.createNotification(task);
     }
 
+    /**
+     * Delete function by id
+     */
+
     public void deleteTask(int id) {
         if (journal.getTask(id).getStatus() != Status.COMPLETED) notifier.deleteNotification(journal.getTask(id));
         journal.deleteTask(id);
     }
+
+    /**
+     * Change function by id
+     *
+     * @param task2 - new task
+     */
 
     public void changeTask(int id, Task task2) {
         if (getTask(id).getStatus() != Status.CANCELED) notifier.deleteNotification(journal.getTask(id));
@@ -53,13 +78,22 @@ public class Controller {
         }
     }
 
-    public void cancelTask (int id){
+    /**
+     * Function for cancelling task by id
+     */
+
+    public void cancelTask(int id) {
         if (getTask(id).getStatus() != Status.CANCELED)
             notifier.deleteNotification(journal.getTask(id));
         journal.getTask(id).setStatus(Status.CANCELED);
     }
 
-    public List<Task> getAll(){
+
+    /**
+     * @return unmodifiable list of all tasks
+     */
+
+    public List<Task> getAll() {
         return Collections.unmodifiableList(journal.getAll());
     }
 }

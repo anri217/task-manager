@@ -19,6 +19,12 @@ public class Task implements Serializable {
 
     private int id;
 
+    /**
+     * Copy constructor
+     *
+     * @param task - copied object
+     */
+
     public Task(Task task) {
         id = task.id;
         name = task.name;
@@ -27,6 +33,16 @@ public class Task implements Serializable {
         dateOfDone = task.dateOfDone;
         status = task.status;
     }
+
+    /**
+     * Constructor with certain values
+     *
+     * @param id          - id of task
+     * @param name        - name of task
+     * @param description - description of task
+     * @param plannedDate - planned date of task
+     * @param status      - status of task
+     */
 
 
     public Task(int id, String name, String description, LocalDateTime plannedDate, Status status) {
@@ -38,9 +54,15 @@ public class Task implements Serializable {
         this.status = status;
     }
 
+
+    /**
+     * Default constructor
+     */
+
     public Task() {
         id = IdGenerator.getInstance().getId();
     }
+
 
     public String getName() {
         return name;

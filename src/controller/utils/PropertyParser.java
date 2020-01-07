@@ -14,6 +14,12 @@ public class PropertyParser {
     private static final String PATH_TO_PROPERTIES = "staff/properties/file.properties", EX_STR = "Can't init file ";
     private Properties properties;
 
+    /**
+     * Constructor loading data in properties
+     *
+     * @throws PropertyParserInitException
+     */
+
     public PropertyParser() throws PropertyParserInitException {
         properties = new Properties();
         try (FileInputStream fis = new FileInputStream(PATH_TO_PROPERTIES)) {
@@ -23,6 +29,13 @@ public class PropertyParser {
         }
     }
 
+
+    /**
+     * Function returning the desired property
+     *
+     * @param key - desired key
+     * @return desired property
+     */
 
     public String getProperty(String key) {
         return properties.getProperty(key);

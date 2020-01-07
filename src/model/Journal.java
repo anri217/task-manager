@@ -16,18 +16,38 @@ public class Journal implements Serializable {
         tasks = new HashMap<Integer, Task>();
     }
 
+    /**
+     * Add task in map
+     * @param task - new task
+     */
+
     public void addTask(Task task) {
         tasks.put(task.getId(), task);
     }
+
+    /**
+     * Delete task from map by id
+     * @param id - desired id
+     */
 
     public void deleteTask(int id) {
         tasks.remove(id);
     }
 
+    /**
+     * Getter function by id
+     * @param id - desired id
+     */
+
 
     public Task getTask(int id) {
         return tasks.get(id);
     }
+
+    /**
+     * Getter function by name
+     * @param name - desired name
+     */
 
     public Task getTaskByName(String name) {
         Task res = null;
@@ -37,6 +57,12 @@ public class Journal implements Serializable {
         return res;
     }
 
+    /**
+     * Getter function by date
+     * @param date - desired date
+     * @return desired task
+     */
+
     public Task getTaskByDate(LocalDateTime date) {
         Task res = null;
         for (int i = 0; i < tasks.size(); ++i) {
@@ -44,6 +70,12 @@ public class Journal implements Serializable {
         }
         return res;
     }
+
+    /**
+     * Change function by id
+     * @param id - desired id
+     * @param task - new task
+     */
 
     public void changeTask(int id, Task task) {
         Task res = tasks.get(id);
@@ -55,12 +87,17 @@ public class Journal implements Serializable {
         res.setStatus(task.getStatus());
     }
 
+
     public void changeStatus(String taskName, Status status) {
         getTaskByName(taskName).setStatus(status);
     }
 
+    /**
+     * @return unmodifiable list of all tasks
+     */
+
     public List<Task> getAll() {
         Task[] arr = tasks.values().toArray(new Task[0]);
-        return Collections.unmodifiableList(new ArrayList<>(Arrays.asList(arr)));
+        return List.of(arr);
     }
 }
