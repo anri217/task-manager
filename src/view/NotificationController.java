@@ -91,7 +91,8 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), finishTask);
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
-        MainWindowController.getInstance().refresh();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
+      //  MainWindowController.getInstance().refresh();
     }
 
     /**
@@ -125,7 +126,8 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        MainWindowController.getInstance().refresh();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
+      //  MainWindowController.getInstance().refresh();
     }
 
     /**
@@ -141,7 +143,8 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        MainWindowController.getInstance().refresh();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
+     //   MainWindowController.getInstance().refresh();
     }
 
     /**
@@ -157,7 +160,8 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        MainWindowController.getInstance().refresh();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
+      //  MainWindowController.getInstance().refresh();
     }
 
     /**
@@ -187,14 +191,15 @@ public class NotificationController {
      */
     public void deferTaskButtonAction(ActionEvent actionEvent) {
         LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
-        if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
+            if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
             Task deferTask = notification.getTask();
             deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
             deferTask.setStatus(Status.DEFERRED);
             Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
             Stage stage = (Stage) deferButton.getScene().getWindow();
             stage.close();
-            MainWindowController.getInstance().refresh();
+            RefreshHelper.getInstance().getMainWindowController().refresh();
+          //  MainWindowController.getInstance().refresh();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(NotificationControllerConstants.ALERT_TITLE);

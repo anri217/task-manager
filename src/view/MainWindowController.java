@@ -71,6 +71,7 @@ public class MainWindowController implements Initializable {
             });
         }
         taskTable.setItems(FXCollections.observableList(rows));
+        RefreshHelper.getInstance().setMainWindowController(this);
     }
 
     private void selectedCheckBox() {
@@ -165,7 +166,7 @@ public class MainWindowController implements Initializable {
         for (int i = 0; i < arr.size(); ++i) {
             journal1.addTask(arr.get(i));
         }
-        Controller.getInstance().setJournal(journal1);
+        //Controller.getInstance().setJournal(journal1);
         refresh();
     }
 

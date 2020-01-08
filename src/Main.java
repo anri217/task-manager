@@ -6,10 +6,12 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
 import model.Journal;
+import model.Status;
 import model.Task;
 import view.MainWindow;
 import view.MainWindowController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
@@ -19,6 +21,10 @@ public class Main {
             Journal journal = (Journal) ioUtil.restoreFunction();
             List<Task> tasks = journal.getAll();
             for (Task task : tasks) {
+                if (task.getPlannedDate().isBefore(LocalDateTime.now()))
+                {
+                    task.setStatus(Status.OVERDUE);
+                }
                 Controller.getInstance().addTask(task);
             }
             MainWindow.run(args);
