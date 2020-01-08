@@ -52,7 +52,8 @@ public class Controller {
 
     public void addTask(Task task) {
         journal.addTask(task);
-        notifier.createNotification(task);
+        if ((task.getStatus() != Status.CANCELED) && (task.getStatus() != Status.COMPLETED) && (task.getStatus() != Status.OVERDUE))
+            notifier.createNotification(task);
     }
 
     /**
