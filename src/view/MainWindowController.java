@@ -113,6 +113,7 @@ public class MainWindowController implements Initializable {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
         addTaskWindow.start(stage);
+        System.out.println("1");
         refresh();
     }
 
