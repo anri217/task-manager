@@ -81,10 +81,12 @@ public class MainWindowController implements Initializable {
         for (MainWindowRow row : rows) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
+                if (Controller.getInstance().getTask(row.getId()).getStatus() == Status.OVERDUE ||
+                        Controller.getInstance().getTask(row.getId()).getStatus() == Status.CANCELED) {
+                    overdueCount++;
+                }
             }
-            if (Controller.getInstance().getTask(row.getId()).getStatus() == Status.OVERDUE) {
-                overdueCount++;
-            }
+
         }
 
         if (count == 0) {
@@ -135,6 +137,7 @@ public class MainWindowController implements Initializable {
 
     /**
      * Action from pushing add button
+     *
      * @param actionEvent
      * @throws Exception
      */
@@ -149,6 +152,7 @@ public class MainWindowController implements Initializable {
 
     /**
      * Action from pushing delete button
+     *
      * @param actionEvent
      * @throws Exception
      */
@@ -170,6 +174,7 @@ public class MainWindowController implements Initializable {
 
     /**
      * Action from pushing change button
+     *
      * @param actionEvent
      * @throws Exception
      */
@@ -188,7 +193,7 @@ public class MainWindowController implements Initializable {
     }
 
     /**
-     *  Function saving journal by push button Save
+     * Function saving journal by push button Save
      */
 
 
@@ -198,6 +203,7 @@ public class MainWindowController implements Initializable {
 
     /**
      * Function download journal by push button Download
+     *
      * @param actionEvent
      * @throws ClassNotFoundException
      * @throws BackupFileException
@@ -218,6 +224,7 @@ public class MainWindowController implements Initializable {
 
     /**
      * Function cancelling tasks by push button Cancel
+     *
      * @param actionEvent
      */
 

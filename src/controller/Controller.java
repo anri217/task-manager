@@ -30,6 +30,10 @@ public class Controller {
         return instance;
     }
 
+    /**
+     * Function deleted all notifications for real journal is tasks
+     */
+
     public void deleteAllNotification() {
         List<Task> tasks = journal.getAll();
         for (Task task : tasks) {
