@@ -23,21 +23,14 @@ public class Main {
             Journal journal = (Journal) ioUtil.restoreFunction();
             List<Task> tasks = journal.getAll();
             for (Task task : tasks) {
-                if (task.getDateOfDone() == null)
-                {
-                    if (task.getPlannedDate().isBefore(LocalDateTime.now()))
-                    {
+                if (task.getDateOfDone() == null) {
+                    if (task.getPlannedDate().isBefore(LocalDateTime.now())) {
                         task.setStatus(Status.OVERDUE);
                     }
                 }
                 Controller.getInstance().addTask(task);
             }
-//            MainWindow.run(args);
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.start(new Stage());
-
-            RefreshHelper.getInstance().getMainWindowController().refresh();
+            MainWindow.run(args);
             ioUtil.backupFunction(Controller.getInstance().getJournal());
         } catch (BackupFileException e) {
             showAlert(e.getMessage());
