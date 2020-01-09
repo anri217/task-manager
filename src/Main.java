@@ -33,8 +33,10 @@ public class Main {
                 Controller.getInstance().addTask(task);
             }
 //            MainWindow.run(args);
+
             MainWindow mainWindow = new MainWindow();
             mainWindow.start(new Stage());
+
             RefreshHelper.getInstance().getMainWindowController().refresh();
             ioUtil.backupFunction(Controller.getInstance().getJournal());
         } catch (BackupFileException e) {
