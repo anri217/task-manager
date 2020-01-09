@@ -16,8 +16,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException {
         try {
-           IOUtil ioUtil = IOUtil.getInstance();
-            /*Journal journal = (Journal) ioUtil.restoreFunction();
+            IOUtil ioUtil = IOUtil.getInstance();
+            Journal journal = (Journal) ioUtil.restoreFunction();
             List<Task> tasks = journal.getAll();
             for (Task task : tasks) {
                 if (task.getDateOfDone() == null) {
@@ -26,7 +26,7 @@ public class Main {
                     }
                 }
                 Controller.getInstance().addTask(task);
-            }*/
+            }
             MainWindow.run(args);
             Controller.getInstance().deleteAllNotification();
             ioUtil.backupFunction(Controller.getInstance().getJournal());
@@ -36,9 +36,9 @@ public class Main {
         } catch (PropertyParserInitException e) {
             showAlert(e.getMessage());
             throw new PropertyParserInitException(e.getMessage());
-        /*} catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             showAlert(e.getMessage());
-            throw new ClassNotFoundException(e.getMessage());*/
+            throw new ClassNotFoundException(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
