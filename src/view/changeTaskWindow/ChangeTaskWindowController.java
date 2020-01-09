@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Status;
+import model.Task;
 import view.SelectedTasksController;
 
 import java.net.URL;
@@ -108,11 +109,20 @@ public class ChangeTaskWindowController implements Initializable {
             Stage stage = (Stage) changeButton.getScene().getWindow();
             stage.close();
         } else {
-            TaskFactory taskFactory = new TaskFactory();
-            Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(),
-                    taskFactory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur, Status.PLANNED));
-            Stage stage = (Stage) changeButton.getScene().getWindow();
-            stage.close();
+            TaskFactory factory = new TaskFactory();
+            Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
+                    descTextArea.getText(), cur, Status.PLANNED));
+            if (Controller.getInstance().isTaskInJournal(newTask)){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ALERT");
+                alert.setHeaderText("This task already exists");
+                alert.showAndWait();
+            }
+            else {
+                Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), newTask);
+                Stage stage = (Stage) changeButton.getScene().getWindow();
+                stage.close();
+            }
         }
     }
 

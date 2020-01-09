@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Status;
+import model.Task;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -92,10 +93,19 @@ public class AddTaskWindowController implements Initializable {
             alert.showAndWait();
         } else {
             TaskFactory factory = new TaskFactory();
-            Controller.getInstance().addTask(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur,
-                    Status.PLANNED));
-            Stage stage = (Stage) addButton.getScene().getWindow();
-            stage.close();
+            Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
+                    descTextArea.getText(), cur, Status.PLANNED));
+            if (Controller.getInstance().isTaskInJournal(newTask)){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ALERT");
+                alert.setHeaderText("This task already exists");
+                alert.showAndWait();
+            }
+            else {
+                Controller.getInstance().addTask(newTask);
+                Stage stage = (Stage) addButton.getScene().getWindow();
+                stage.close();
+            }
         }
     }
 
