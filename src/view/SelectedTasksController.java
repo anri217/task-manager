@@ -1,7 +1,5 @@
 package view;
 
-import model.Task;
-
 /**
  * This is class for defining the selected task
  */

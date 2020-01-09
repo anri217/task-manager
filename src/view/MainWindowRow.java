@@ -21,16 +21,13 @@ public class MainWindowRow {
         name = new SimpleStringProperty(task.getName());
         description = new SimpleStringProperty(task.getDescription());
         String time;
-        if (task.getPlannedDate().getHour() < 10 && task.getPlannedDate().getMinute() < 10){
+        if (task.getPlannedDate().getHour() < 10 && task.getPlannedDate().getMinute() < 10) {
             time = "0" + task.getPlannedDate().getHour() + ":" + "0" + task.getPlannedDate().getMinute();
-        }
-        else if (task.getPlannedDate().getHour() < 10) {
+        } else if (task.getPlannedDate().getHour() < 10) {
             time = "0" + task.getPlannedDate().getHour() + ":" + task.getPlannedDate().getMinute();
-        }
-        else if (task.getPlannedDate().getMinute() < 10){
+        } else if (task.getPlannedDate().getMinute() < 10) {
             time = task.getPlannedDate().getHour() + ":" + "0" + task.getPlannedDate().getMinute();
-        }
-        else {
+        } else {
             time = task.getPlannedDate().getHour() + ":" + task.getPlannedDate().getMinute();
         }
         date = new SimpleStringProperty(time +
@@ -41,7 +38,8 @@ public class MainWindowRow {
         id = task.getId();
     }
 
-    public MainWindowRow(){}
+    public MainWindowRow() {
+    }
 
     public int getId() {
         return id;
