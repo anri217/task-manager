@@ -217,24 +217,34 @@ public class NotificationController {
      * @param actionEvent - button click event
      */
     public void deferTaskButtonAction(ActionEvent actionEvent) {
-        LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
-                Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
-        if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
-            Task deferTask = notification.getTask();
-            deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
-                    Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
-            deferTask.setStatus(Status.DEFERRED);
-            Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
-            Stage stage = (Stage) deferButton.getScene().getWindow();
-            stage.close();
-            RefreshHelper.getInstance().getMainWindowController().refresh();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
-            alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
-            alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
-            alert.showAndWait();
+        try {
+            LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
+                    Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
+            if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
+                Task deferTask = notification.getTask();
+                deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
+                        Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
+                deferTask.setStatus(Status.DEFERRED);
+                Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
+                Stage stage = (Stage) deferButton.getScene().getWindow();
+                stage.close();
+                RefreshHelper.getInstance().getMainWindowController().refresh();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
+                alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
+                alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
+                alert.showAndWait();
+            }
         }
+        catch (NullPointerException | NumberFormatException exp){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
+                alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
+                alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
+                alert.showAndWait();
+        }
+
     }
 
     /**
