@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Journal;
+import model.Status;
 import model.Task;
 
 import java.io.IOException;
@@ -70,11 +71,14 @@ public class MainWindowController implements Initializable {
      */
 
     private void selectedCheckBox() {
-        int count = 0;
+        int count = 0, overdueCount = 0;
 
         for (MainWindowRow row : rows) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
+            }
+            if (Controller.getInstance().getTask(row.getId()).getStatus() == Status.OVERDUE) {
+                overdueCount++;
             }
         }
 
@@ -94,6 +98,10 @@ public class MainWindowController implements Initializable {
             delTask.setDisable(false);
             changeTask.setDisable(true);
             cancelTask.setDisable(false);
+        }
+
+        if (overdueCount != 0) {
+            cancelTask.setDisable(true);
         }
     }
 
