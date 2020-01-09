@@ -6,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Task;
-import view.NotificationController;
-import view.NotificationWindow;
+import view.notificationWindow.NotificationController;
+import view.notificationWindow.NotificationWindow;
 
 import java.awt.*;
 import java.io.IOException;

@@ -5,13 +5,10 @@ import exceptions.PropertyParserInitException;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 import model.Journal;
 import model.Status;
 import model.Task;
-import view.MainWindow;
-import view.MainWindowController;
-import view.RefreshHelper;
+import view.mainWindow.MainWindow;
 
 import java.time.LocalDateTime;
 import java.util.List;
