@@ -103,4 +103,8 @@ public class Controller {
     public void setJournal(Journal journal) {
         this.journal = journal;
     }
+
+    public boolean isTaskInJournal(Task task) {
+        return journal.isTaskInJournal(task);
+    }
 }

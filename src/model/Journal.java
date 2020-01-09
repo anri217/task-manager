@@ -109,4 +109,8 @@ public class Journal implements Serializable {
         Task[] arr = tasks.values().toArray(new Task[0]);
         return List.of(arr);
     }
+
+    public boolean isTaskInJournal(Task task) {
+        return tasks.containsValue(task);
+    }
 }
