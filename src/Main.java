@@ -10,6 +10,7 @@ import model.Status;
 import model.Task;
 import view.MainWindow;
 import view.MainWindowController;
+import view.RefreshHelper;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Main {
                 Controller.getInstance().addTask(task);
             }
             MainWindow.run(args);
-            MainWindowController.getInstance().refresh();
+            RefreshHelper.getInstance().getMainWindowController().refresh();
             ioUtil.backupFunction(Controller.getInstance().getJournal());
         } catch (BackupFileException e) {
             showAlert(e.getMessage());

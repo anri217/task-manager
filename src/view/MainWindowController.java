@@ -104,6 +104,8 @@ public class MainWindowController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        RefreshHelper.getInstance().setMainWindowController(this);
     }
 
     @FXML
