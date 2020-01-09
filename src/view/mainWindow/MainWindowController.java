@@ -1,4 +1,4 @@
-package view;
+package view.mainWindow;
 
 import controller.Controller;
 import controller.utils.IOUtil;
@@ -14,6 +14,11 @@ import javafx.stage.Stage;
 import model.Journal;
 import model.Status;
 import model.Task;
+import view.MainWindowRow;
+import view.RefreshHelper;
+import view.SelectedTasksController;
+import view.addTaskWindow.AddTaskWindow;
+import view.changeTaskWindow.ChangeTaskWindow;
 
 import java.io.IOException;
 import java.net.URL;

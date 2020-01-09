@@ -1,5 +1,7 @@
 package view;
 
+import view.mainWindow.MainWindowController;
+
 /**
  * Class helping refresh table, stores controller
  */

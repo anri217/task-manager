@@ -8,7 +8,7 @@ import javafx.scene.control.Alert;
 import model.Journal;
 import model.Status;
 import model.Task;
-import view.MainWindow;
+import view.mainWindow.MainWindow;
 
 import java.time.LocalDateTime;
 import java.util.List;

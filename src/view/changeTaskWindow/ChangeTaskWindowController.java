@@ -1,4 +1,4 @@
-package view;
+package view.changeTaskWindow;
 
 import controller.Controller;
 import controller.factories.TaskFactory;
@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Status;
+import view.SelectedTasksController;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -17,18 +18,18 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.ResourceBundle;
 
 /**
- * Class for catch events from items on AddTask window
+ * Class for catch events from items on ChangeTask window
  *
- * @see AddTaskWindow
+ * @see ChangeTaskWindow
  */
 
-public class AddTaskWindowController implements Initializable {
+public class ChangeTaskWindowController implements Initializable {
     public TextField nameTextField;
     public TextArea descTextArea;
     public DatePicker datePicker;
     public TextField hoursTextField;
     public TextField minTextField;
-    public Button addButton;
+    public Button changeButton;
     public Button declineButton;
 
     private Callback<DatePicker, DateCell> getDayCellFactory() {
@@ -39,7 +40,6 @@ public class AddTaskWindowController implements Initializable {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        // Disable Monday, Tuesday, Wednesday.
                         if (item.isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
                             setDisable(true);
                         }
@@ -60,8 +60,19 @@ public class AddTaskWindowController implements Initializable {
      */
 
     private void initItems() {
+        nameTextField.setText(SelectedTasksController.getInstance().getRow().getName());
+
+        descTextArea.setText(SelectedTasksController.getInstance().getRow().getDescription());
+
+        LocalDateTime localDateTime = Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()).getPlannedDate();
+
+        datePicker.setValue(LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth()));
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);
+
+        hoursTextField.setText(String.valueOf(localDateTime.getHour()));
+
+        minTextField.setText(String.valueOf(localDateTime.getMinute()));
 
         hoursTextField.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 2 ? change : null));
@@ -71,12 +82,11 @@ public class AddTaskWindowController implements Initializable {
     }
 
     /**
-     * Function adding task in table
+     * Function changing task in table
      * @param actionEvent
-     * @throws Exception
      */
 
-    public void clickAdd(ActionEvent actionEvent) throws Exception {
+    public void clickChange(ActionEvent actionEvent) {
         LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
                 datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
                 Integer.parseInt(minTextField.getText()));
@@ -90,17 +100,24 @@ public class AddTaskWindowController implements Initializable {
             alert.setTitle("ALERT");
             alert.setHeaderText("Enter correct time");
             alert.showAndWait();
+        } else if (Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()) == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ALERT");
+            alert.setHeaderText("This task has already deleted");
+            alert.showAndWait();
+            Stage stage = (Stage) changeButton.getScene().getWindow();
+            stage.close();
         } else {
-            TaskFactory factory = new TaskFactory();
-            Controller.getInstance().addTask(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur,
-                    Status.PLANNED));
-            Stage stage = (Stage) addButton.getScene().getWindow();
+            TaskFactory taskFactory = new TaskFactory();
+            Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(),
+                    taskFactory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(), descTextArea.getText(), cur, Status.PLANNED));
+            Stage stage = (Stage) changeButton.getScene().getWindow();
             stage.close();
         }
     }
 
     /**
-     * Closing add task window
+     * Closing change task window
      * @param actionEvent
      */
 
