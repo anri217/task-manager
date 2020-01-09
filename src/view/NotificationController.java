@@ -190,6 +190,10 @@ public class NotificationController {
         cancelChooseTimeButton.setVisible(true);
     }
 
+    /**
+     * Function for return previous UI with choice time
+     * @param actionEvent - button click event
+     */
     @FXML
     public void cancelChooseTimeButtonAction(ActionEvent actionEvent){
         cancelButton.setVisible(true);
@@ -250,7 +254,7 @@ public class NotificationController {
 
     /**
      * Function for limiting entered date on datePicker field
-     * @return dayCellFactory -
+     * @return dayCellFactory
      */
     private Callback<DatePicker, DateCell> getDayCellFactory() {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {

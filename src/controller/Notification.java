@@ -34,7 +34,7 @@ public class Notification extends TimerTask {
 
     /**
      * Constructor for creating new notification
-     * @param task
+     * @param task - task which associated with this notification
      */
     public Notification(Task task) {
         setTask(task);

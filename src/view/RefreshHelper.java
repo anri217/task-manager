@@ -3,7 +3,7 @@ package view;
 public class RefreshHelper {
     private MainWindowController mainWindowController;
     private static RefreshHelper instance;
-    
+
     private RefreshHelper(){
     }
 
