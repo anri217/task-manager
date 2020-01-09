@@ -5,6 +5,7 @@ import exceptions.PropertyParserInitException;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import model.Journal;
 import model.Status;
 import model.Task;
@@ -43,6 +44,8 @@ public class Main {
         } catch (ClassNotFoundException e) {
             showAlert(e.getMessage());
             throw new ClassNotFoundException(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
