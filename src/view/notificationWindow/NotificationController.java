@@ -1,4 +1,4 @@
-package view;
+package view.notificationWindow;
 
 import controller.Controller;
 import javafx.event.ActionEvent;
@@ -9,6 +9,7 @@ import controller.Notification;
 import javafx.util.Callback;
 import model.Status;
 import model.Task;
+import view.RefreshHelper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
