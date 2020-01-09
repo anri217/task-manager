@@ -16,7 +16,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException {
         try {
-           IOUtil ioUtil = IOUtil.getInstance();
+            IOUtil ioUtil = IOUtil.getInstance();
             Journal journal = (Journal) ioUtil.restoreFunction();
             List<Task> tasks = journal.getAll();
             for (Task task : tasks) {
