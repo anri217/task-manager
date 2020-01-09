@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * Class helping refresh table, stores controller
+ */
+
 public class RefreshHelper {
     private MainWindowController mainWindowController;
     private static RefreshHelper instance;

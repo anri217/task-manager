@@ -1,7 +1,7 @@
 package view;
 
 /**
- * This is class for defining the selected task
+ * Class for defining the selected task
  */
 
 public class SelectedTasksController {

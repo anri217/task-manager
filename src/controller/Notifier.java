@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TimerTask;
 
 /**
- * This is controller for Notification
+ * Class is using for change, add, delete and create notifications
  *
  * @see Notification
  */

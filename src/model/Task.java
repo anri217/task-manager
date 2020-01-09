@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * This is Task class, which have a name, description, date of complete, planned date and status
+ * Task class, which have a name, description, date of complete, planned date and status
  */
 
 

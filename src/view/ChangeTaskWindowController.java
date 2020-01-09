@@ -17,7 +17,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.ResourceBundle;
 
 /**
- * This is controller for ChangeTaskWindow
+ * Class for catch events from items on ChangeTask window
  *
  * @see ChangeTaskWindow
  */
@@ -54,6 +54,10 @@ public class ChangeTaskWindowController implements Initializable {
         initItems();
     }
 
+    /**
+     * Initialization of some fields
+     */
+
     private void initItems() {
         nameTextField.setText(SelectedTasksController.getInstance().getRow().getName());
 
@@ -75,6 +79,11 @@ public class ChangeTaskWindowController implements Initializable {
         minTextField.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 2 ? change : null));
     }
+
+    /**
+     * Function changing task in table
+     * @param actionEvent
+     */
 
     public void clickChange(ActionEvent actionEvent) {
         LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
@@ -105,6 +114,11 @@ public class ChangeTaskWindowController implements Initializable {
             stage.close();
         }
     }
+
+    /**
+     * Closing change task window
+     * @param actionEvent
+     */
 
     public void clickDecline(ActionEvent actionEvent) {
         Stage stage = (Stage) declineButton.getScene().getWindow();

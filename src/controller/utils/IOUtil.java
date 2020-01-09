@@ -6,7 +6,7 @@ import exceptions.PropertyParserInitException;
 import java.io.*;
 
 /**
- * This is utility class used for serialization and deserialization objects
+ * Utility class used for serialization and deserialization objects
  */
 
 public class IOUtil {

@@ -17,7 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * This is class for working with notifications
+ * Class for working with notifications
  */
 
 public class Notification extends TimerTask {

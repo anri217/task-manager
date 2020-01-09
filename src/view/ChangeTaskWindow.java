@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * This is class for opening window of changing task
+ * Class for opening window of changing task
  */
 
 public class ChangeTaskWindow extends Application {
