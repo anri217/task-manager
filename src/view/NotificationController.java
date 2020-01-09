@@ -55,6 +55,10 @@ public class NotificationController {
     private Button chooseTimeButton;
     @FXML
     private Button cancelButton;
+    @FXML
+    private Label nameTaskLabel;
+    @FXML
+    private Button cancelChooseTimeButton;
 
 
     public NotificationController(Notification notification) {
@@ -66,7 +70,7 @@ public class NotificationController {
 
     /**
      * notificatioon field change function
-     * @param notification
+     * @param notification - displayed notification
      */
     public void setNotification(Notification notification) {
         this.notification = notification;
@@ -76,18 +80,19 @@ public class NotificationController {
      * description label changing function
      */
     public void setLabel() {
-        descLabel.setText(notification.getTask().getName() + " ." + notification.getTask().getDescription());
+        nameTaskLabel.setText(notification.getTask().getName() + ".");
+        descLabel.setText(notification.getTask().getDescription() + ".");
     }
 
     /**
      * Function for finish task in notification window
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     @FXML
     public void finishTaskAction(ActionEvent actionEvent) {
         Task finishTask = notification.getTask();
         finishTask.setStatus(Status.COMPLETED);
-        finishTask.setDateOfDone(notification.getTask().getPlannedDate());
+        finishTask.setDateOfDone(LocalDateTime.now());
         Controller.getInstance().changeTask(notification.getTask().getId(), finishTask);
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
@@ -97,7 +102,7 @@ public class NotificationController {
 
     /**
      * Function for display UI required for defer task
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     @FXML
     public void deferButtonAction(ActionEvent actionEvent) {
@@ -115,7 +120,7 @@ public class NotificationController {
 
     /**
      * Function for defer task for 5 minutes
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     @FXML
     public void fiveMinutesButtonActive(ActionEvent actionEvent) {
@@ -132,7 +137,7 @@ public class NotificationController {
 
     /**
      * Function for defer task for 10 minutes
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     @FXML
     public void tenMinutesButtonActive(ActionEvent actionEvent) {
@@ -149,7 +154,7 @@ public class NotificationController {
 
     /**
      * Funtion for defer task for 15 minutes
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     @FXML
     public void fifteenMinutesButtonAction(ActionEvent actionEvent) {
@@ -166,7 +171,7 @@ public class NotificationController {
 
     /**
      * Funtion for display UI required for defer task time specified by user
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     @FXML
     public void chooseTimeButtonAction(ActionEvent actionEvent) {
@@ -182,12 +187,29 @@ public class NotificationController {
         pointsLabel.setVisible(true);
         minutesNewTextField.setVisible(true);
         deferTaskButton.setVisible(true);
+        cancelChooseTimeButton.setVisible(true);
+    }
 
+    @FXML
+    public void cancelChooseTimeButtonAction(ActionEvent actionEvent){
+        cancelButton.setVisible(true);
+        chooseTimeButton.setVisible(true);
+        chooseTimeLabel.setVisible(true);
+        fiveMinutesButton.setVisible(true);
+        tenMinutesButton.setVisible(true);
+        fifteenMinutesButton.setVisible(true);
+        setDateLabel.setVisible(false);
+        datePicker.setVisible(false);
+        hoursNewTextField.setVisible(false);
+        pointsLabel.setVisible(false);
+        minutesNewTextField.setVisible(false);
+        deferTaskButton.setVisible(false);
+        cancelChooseTimeButton.setVisible(false);
     }
 
     /**
      * Function for defer task for time specified by user
-     * @param actionEvent
+     * @param actionEvent - button click event
      */
     public void deferTaskButtonAction(ActionEvent actionEvent) {
         LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
@@ -210,8 +232,25 @@ public class NotificationController {
     }
 
     /**
+     * Function for cancel click defer task button
+     * @param actionEvent - button click event
+     */
+    public void cancelButtonAction(ActionEvent actionEvent){
+        descLabel.setVisible(true);
+        finishButton.setVisible(true);
+        deferButton.setVisible(true);
+        //deferTaskButton.setVisible(true);
+        chooseTimeButton.setVisible(false);
+        chooseTimeLabel.setVisible(false);
+        fiveMinutesButton.setVisible(false);
+        tenMinutesButton.setVisible(false);
+        fifteenMinutesButton.setVisible(false);
+        cancelButton.setVisible(false);
+    }
+
+    /**
      * Function for limiting entered date on datePicker field
-     * @return
+     * @return dayCellFactory -
      */
     private Callback<DatePicker, DateCell> getDayCellFactory() {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -224,6 +263,7 @@ public class NotificationController {
                         // Disable Monday, Tuesday, Wednesday.
                         if (item.isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
                             setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
                         }
                     }
                 };
@@ -244,6 +284,9 @@ public class NotificationController {
 
         minutesNewTextField.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 2 ? change : null));
+        descLabel.setWrapText(true);
+        descLabel.setMaxWidth(315);
+        descLabel.setMaxHeight(120);
     }
 
     @FXML

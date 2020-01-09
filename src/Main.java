@@ -21,9 +21,12 @@ public class Main {
             Journal journal = (Journal) ioUtil.restoreFunction();
             List<Task> tasks = journal.getAll();
             for (Task task : tasks) {
-                if (task.getPlannedDate().isBefore(LocalDateTime.now()))
+                if (task.getDateOfDone() == null)
                 {
-                    task.setStatus(Status.OVERDUE);
+                    if (task.getPlannedDate().isBefore(LocalDateTime.now()))
+                    {
+                        task.setStatus(Status.OVERDUE);
+                    }
                 }
                 Controller.getInstance().addTask(task);
             }
