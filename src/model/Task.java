@@ -28,7 +28,7 @@ public class Task implements Serializable {
     public Task(Task task) {
         id = task.id;
         name = task.name;
-        description = task.name;
+        description = task.description;
         plannedDate = task.plannedDate;
         dateOfDone = task.dateOfDone;
         status = task.status;
