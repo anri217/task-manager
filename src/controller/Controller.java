@@ -31,7 +31,7 @@ public class Controller {
     }
 
     /**
-     * Function deleted all notifications for real journal's tasks
+     * Function deleted all notifications for real journal is tasks
      */
 
     public void deleteAllNotification() {
