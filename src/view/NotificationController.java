@@ -60,16 +60,12 @@ public class NotificationController {
     @FXML
     private Button cancelChooseTimeButton;
 
-
-    public NotificationController(Notification notification) {
-        this.notification = notification;
-    }
-
     public NotificationController() {
     }
 
     /**
      * notificatioon field change function
+     *
      * @param notification - displayed notification
      */
     public void setNotification(Notification notification) {
@@ -86,6 +82,7 @@ public class NotificationController {
 
     /**
      * Function for finish task in notification window
+     *
      * @param actionEvent - button click event
      */
     @FXML
@@ -97,11 +94,11 @@ public class NotificationController {
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
         RefreshHelper.getInstance().getMainWindowController().refresh();
-      //  MainWindowController.getInstance().refresh();
     }
 
     /**
      * Function for display UI required for defer task
+     *
      * @param actionEvent - button click event
      */
     @FXML
@@ -109,7 +106,6 @@ public class NotificationController {
         descLabel.setVisible(false);
         finishButton.setVisible(false);
         deferButton.setVisible(false);
-        //deferTaskButton.setVisible(true);
         chooseTimeButton.setVisible(true);
         chooseTimeLabel.setVisible(true);
         fiveMinutesButton.setVisible(true);
@@ -120,6 +116,7 @@ public class NotificationController {
 
     /**
      * Function for defer task for 5 minutes
+     *
      * @param actionEvent - button click event
      */
     @FXML
@@ -132,11 +129,11 @@ public class NotificationController {
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
         RefreshHelper.getInstance().getMainWindowController().refresh();
-      //  MainWindowController.getInstance().refresh();
     }
 
     /**
      * Function for defer task for 10 minutes
+     *
      * @param actionEvent - button click event
      */
     @FXML
@@ -149,11 +146,11 @@ public class NotificationController {
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
         RefreshHelper.getInstance().getMainWindowController().refresh();
-     //   MainWindowController.getInstance().refresh();
     }
 
     /**
      * Funtion for defer task for 15 minutes
+     *
      * @param actionEvent - button click event
      */
     @FXML
@@ -166,11 +163,11 @@ public class NotificationController {
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
         RefreshHelper.getInstance().getMainWindowController().refresh();
-      //  MainWindowController.getInstance().refresh();
     }
 
     /**
      * Funtion for display UI required for defer task time specified by user
+     *
      * @param actionEvent - button click event
      */
     @FXML
@@ -192,10 +189,11 @@ public class NotificationController {
 
     /**
      * Function for return previous UI with choice time
+     *
      * @param actionEvent - button click event
      */
     @FXML
-    public void cancelChooseTimeButtonAction(ActionEvent actionEvent){
+    public void cancelChooseTimeButtonAction(ActionEvent actionEvent) {
         cancelButton.setVisible(true);
         chooseTimeButton.setVisible(true);
         chooseTimeLabel.setVisible(true);
@@ -213,19 +211,21 @@ public class NotificationController {
 
     /**
      * Function for defer task for time specified by user
+     *
      * @param actionEvent - button click event
      */
     public void deferTaskButtonAction(ActionEvent actionEvent) {
-        LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
-            if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
+        LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
+                Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
+        if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
             Task deferTask = notification.getTask();
-            deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
+            deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
+                    Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
             deferTask.setStatus(Status.DEFERRED);
             Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
             Stage stage = (Stage) deferButton.getScene().getWindow();
             stage.close();
             RefreshHelper.getInstance().getMainWindowController().refresh();
-          //  MainWindowController.getInstance().refresh();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
@@ -237,9 +237,10 @@ public class NotificationController {
 
     /**
      * Function for cancel click defer task button
+     *
      * @param actionEvent - button click event
      */
-    public void cancelButtonAction(ActionEvent actionEvent){
+    public void cancelButtonAction(ActionEvent actionEvent) {
         descLabel.setVisible(true);
         finishButton.setVisible(true);
         deferButton.setVisible(true);
@@ -254,6 +255,7 @@ public class NotificationController {
 
     /**
      * Function for limiting entered date on datePicker field
+     *
      * @return dayCellFactory
      */
     private Callback<DatePicker, DateCell> getDayCellFactory() {
@@ -264,7 +266,6 @@ public class NotificationController {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        // Disable Monday, Tuesday, Wednesday.
                         if (item.isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");

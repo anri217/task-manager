@@ -27,7 +27,8 @@ public class Notifier {
 
     /**
      * Adding alert to map function
-     * @param task which associated with notification
+     *
+     * @param task         which associated with notification
      * @param notification - created notification for task
      */
     public void addNotification(Task task, Notification notification) {
@@ -36,6 +37,7 @@ public class Notifier {
 
     /**
      * Delete notification from map and cancel timer function
+     *
      * @param task which associated with deleted notification
      */
     public void deleteNotification(Task task) {
@@ -46,6 +48,7 @@ public class Notifier {
 
     /**
      * Create notification and start timer function
+     *
      * @param task which associated with created notification
      */
     public void createNotification(Task task) {
@@ -56,6 +59,7 @@ public class Notifier {
 
     /**
      * Getting notification from map function
+     *
      * @param id - notification's  id
      * @return notification
      */

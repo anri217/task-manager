@@ -21,11 +21,12 @@ import java.util.TimerTask;
  */
 
 public class Notification extends TimerTask {
-    private Timer timer;//todo if task has canceled recreate timer
+    private Timer timer;
     private Task task;
 
     /**
      * Getting timer field function
+     *
      * @return current timer
      */
     public Timer getTimer() {
@@ -34,6 +35,7 @@ public class Notification extends TimerTask {
 
     /**
      * Constructor for creating new notification
+     *
      * @param task - task which associated with this notification
      */
     public Notification(Task task) {
@@ -50,6 +52,7 @@ public class Notification extends TimerTask {
 
     /**
      * Getting task field function
+     *
      * @return task, which associated with this notification
      */
     public Task getTask() {
@@ -58,6 +61,7 @@ public class Notification extends TimerTask {
 
     /**
      * task field change function
+     *
      * @param task, which associated with this notification
      */
     public void setTask(Task task) {
@@ -66,10 +70,10 @@ public class Notification extends TimerTask {
 
     /**
      * Сreate stage for Notification Window function
+     *
      * @return created stage
      * @throws IOException
      */
-    // todo looks like that you do not know single responsibility principle and do not delete debug code
     public Stage createStage() throws IOException {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -88,6 +92,7 @@ public class Notification extends TimerTask {
 
     /**
      * Notification window launch function
+     *
      * @throws Exception
      */
     public void showNotification() throws Exception {
