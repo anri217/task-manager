@@ -155,7 +155,6 @@ public class MainWindowController implements Initializable {
         for (int i = 0; i < arr.size(); ++i) {
             journal1.addTask(arr.get(i));
         }
-        //Controller.getInstance().setJournal(journal1);
         refresh();
     }
 
