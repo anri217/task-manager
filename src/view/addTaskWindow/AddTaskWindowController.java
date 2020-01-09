@@ -78,35 +78,43 @@ public class AddTaskWindowController implements Initializable {
      */
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
-        LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
-                datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
-                Integer.parseInt(minTextField.getText()));
-        if (nameTextField.getText().length() == 0) {
+        if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ALERT");
-            alert.setHeaderText("Enter name of task");
-            alert.showAndWait();
-        } else if (cur.isBefore(LocalDateTime.now())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ALERT");
-            alert.setHeaderText("Enter correct time");
+            alert.setHeaderText("Enter date and time");
             alert.showAndWait();
         } else {
-            TaskFactory factory = new TaskFactory();
-            Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
-                    descTextArea.getText(), cur, Status.PLANNED));
-            if (Controller.getInstance().isTaskInJournal(newTask)){
+            LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
+                    datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
+                    Integer.parseInt(minTextField.getText()));
+            if (nameTextField.getText().length() == 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("ALERT");
-                alert.setHeaderText("This task already exists");
+                alert.setHeaderText("Enter name of task");
                 alert.showAndWait();
-            }
-            else {
-                Controller.getInstance().addTask(newTask);
-                Stage stage = (Stage) addButton.getScene().getWindow();
-                stage.close();
+            } else if (cur.isBefore(LocalDateTime.now())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ALERT");
+                alert.setHeaderText("Enter correct time");
+                alert.showAndWait();
+            } else {
+                TaskFactory factory = new TaskFactory();
+                Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
+                        descTextArea.getText(), cur, Status.PLANNED));
+                if (Controller.getInstance().isTaskInJournal(newTask)){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("ALERT");
+                    alert.setHeaderText("This task already exists");
+                    alert.showAndWait();
+                }
+                else {
+                    Controller.getInstance().addTask(newTask);
+                    Stage stage = (Stage) addButton.getScene().getWindow();
+                    stage.close();
+                }
             }
         }
+
     }
 
     /**

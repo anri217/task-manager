@@ -88,42 +88,50 @@ public class ChangeTaskWindowController implements Initializable {
      */
 
     public void clickChange(ActionEvent actionEvent) {
-        LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
-                datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
-                Integer.parseInt(minTextField.getText()));
-        if (nameTextField.getText().length() == 0) {
+        if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ALERT");
-            alert.setHeaderText("Enter name of task");
+            alert.setHeaderText("Enter date and time");
             alert.showAndWait();
-        } else if (cur.isBefore(LocalDateTime.now())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ALERT");
-            alert.setHeaderText("Enter correct time");
-            alert.showAndWait();
-        } else if (Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()) == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ALERT");
-            alert.setHeaderText("This task has already deleted");
-            alert.showAndWait();
-            Stage stage = (Stage) changeButton.getScene().getWindow();
-            stage.close();
         } else {
-            TaskFactory factory = new TaskFactory();
-            Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
-                    descTextArea.getText(), cur, Status.PLANNED));
-            if (Controller.getInstance().isTaskInJournal(newTask)){
+            LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
+                    datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
+                    Integer.parseInt(minTextField.getText()));
+            if (nameTextField.getText().length() == 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("ALERT");
-                alert.setHeaderText("This task already exists");
+                alert.setHeaderText("Enter name of task");
                 alert.showAndWait();
-            }
-            else {
-                Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), newTask);
+            } else if (cur.isBefore(LocalDateTime.now())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ALERT");
+                alert.setHeaderText("Enter correct time");
+                alert.showAndWait();
+            } else if (Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()) == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("ALERT");
+                alert.setHeaderText("This task has already deleted");
+                alert.showAndWait();
                 Stage stage = (Stage) changeButton.getScene().getWindow();
                 stage.close();
+            } else {
+                TaskFactory factory = new TaskFactory();
+                Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
+                        descTextArea.getText(), cur, Status.PLANNED));
+                if (Controller.getInstance().isTaskInJournal(newTask)){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("ALERT");
+                    alert.setHeaderText("This task already exists");
+                    alert.showAndWait();
+                }
+                else {
+                    Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), newTask);
+                    Stage stage = (Stage) changeButton.getScene().getWindow();
+                    stage.close();
+                }
             }
         }
+
     }
 
     /**
