@@ -98,7 +98,7 @@ public class Controller {
      */
 
     public void cancelTask(int id) {
-        if (getTask(id).getStatus() != Status.CANCELED)
+        if ((getTask(id).getStatus() != Status.CANCELED) && (getTask(id).getStatus() != Status.COMPLETED) && (getTask(id).getStatus() != Status.OVERDUE))
             notifier.deleteNotification(journal.getTask(id));
         journal.getTask(id).setStatus(Status.CANCELED);
     }

@@ -22,6 +22,7 @@ import view.changeTaskWindow.ChangeTaskWindow;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -218,6 +219,11 @@ public class MainWindowController implements Initializable {
         List<Task> arr = journal2.getAll();
         for (int i = 0; i < arr.size(); ++i) {
             if(!(journal1.isTaskInJournal(arr.get(i).getId()))) {
+                if (arr.get(i).getDateOfDone() == null){
+                    if (arr.get(i).getPlannedDate().isBefore(LocalDateTime.now())){
+                        arr.get(i).setStatus(Status.OVERDUE);
+                    }
+                }
                 journal1.addTask(arr.get(i));
             }
         }

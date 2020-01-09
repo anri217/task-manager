@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import controller.Notification;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import model.Status;
 import model.Task;
@@ -252,6 +253,10 @@ public class NotificationController {
         tenMinutesButton.setVisible(false);
         fifteenMinutesButton.setVisible(false);
         cancelButton.setVisible(false);
+    }
+
+    public void handle(WindowEvent event){
+        event.consume();
     }
 
     /**

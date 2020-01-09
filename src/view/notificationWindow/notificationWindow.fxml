@@ -17,9 +17,9 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button fx:id="deferButton" layoutX="13.0" layoutY="166.0" mnemonicParsing="false" onAction="#deferButtonAction" text="Отложить задачу" />
-      <Button fx:id="finishButton" layoutX="223.0" layoutY="166.0" mnemonicParsing="false" onAction="#finishTaskAction" text="Завершить задачу" />
-      <Label fx:id="setDateLabel" layoutX="7.0" layoutY="74.0" text="Новое время: " visible="false">
+      <Button fx:id="deferButton" layoutX="13.0" layoutY="166.0" mnemonicParsing="false" onAction="#deferButtonAction" text="Defer task" />
+      <Button fx:id="finishButton" layoutX="260.0" layoutY="166.0" mnemonicParsing="false" onAction="#finishTaskAction" text="Finish task" />
+      <Label fx:id="setDateLabel" layoutX="7.0" layoutY="74.0" text="Planned time:" visible="false">
          <font>
             <Font size="13.0" />
          </font></Label>
@@ -27,21 +27,21 @@
       <TextField fx:id="hoursNewTextField" layoutX="101.0" layoutY="70.0" prefHeight="25.0" prefWidth="30.0" visible="false" />
       <Label fx:id="pointsLabel" layoutX="134.0" layoutY="74.0" prefHeight="17.0" prefWidth="0.0" text=":" visible="false" />
       <TextField fx:id="minutesNewTextField" layoutX="138.0" layoutY="70.0" prefHeight="25.0" prefWidth="30.0" visible="false" />
-      <Button fx:id="deferTaskButton" layoutX="14.0" layoutY="166.0" mnemonicParsing="false" onAction="#deferTaskButtonAction" prefHeight="25.0" prefWidth="116.0" text="Отложить задачу" visible="false" />
-      <Label fx:id="chooseTimeLabel" layoutX="10.0" layoutY="82.0" text="Выберите время:" visible="false">
+      <Button fx:id="deferTaskButton" layoutX="14.0" layoutY="166.0" mnemonicParsing="false" onAction="#deferTaskButtonAction" prefHeight="25.0" prefWidth="71.0" text="Defer task" visible="false" />
+      <Label fx:id="chooseTimeLabel" layoutX="10.0" layoutY="82.0" text="Choose time" visible="false">
          <font>
             <Font size="13.0" />
          </font></Label>
-      <Button fx:id="fiveMinutesButton" layoutX="122.0" layoutY="79.0" mnemonicParsing="false" onAction="#fiveMinutesButtonActive" text="5 минут" visible="false" />
-      <Button fx:id="tenMinutesButton" layoutX="190.0" layoutY="79.0" mnemonicParsing="false" onAction="#tenMinutesButtonActive" text="10 минут" visible="false" />
-      <Button fx:id="fifteenMinutesButton" layoutX="263.0" layoutY="79.0" mnemonicParsing="false" onAction="#fifteenMinutesButtonAction" text="15 минут" visible="false" />
-      <Button fx:id="chooseTimeButton" layoutX="11.0" layoutY="166.0" mnemonicParsing="false" onAction="#chooseTimeButtonAction" prefHeight="25.0" prefWidth="116.0" text="Назначить время" visible="false" />
-      <Button fx:id="cancelButton" layoutX="223.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="116.0" text="Отмена" visible="false" />
+      <Button fx:id="fiveMinutesButton" layoutX="121.0" layoutY="79.0" mnemonicParsing="false" onAction="#fiveMinutesButtonActive" prefHeight="25.0" prefWidth="64.0" text="5 min" visible="false" />
+      <Button fx:id="tenMinutesButton" layoutX="190.0" layoutY="79.0" mnemonicParsing="false" onAction="#tenMinutesButtonActive" prefHeight="25.0" prefWidth="64.0" text="10 min" visible="false" />
+      <Button fx:id="fifteenMinutesButton" layoutX="263.0" layoutY="79.0" mnemonicParsing="false" onAction="#fifteenMinutesButtonAction" prefHeight="25.0" prefWidth="64.0" text="15 min" visible="false" />
+      <Button fx:id="chooseTimeButton" layoutX="11.0" layoutY="166.0" mnemonicParsing="false" onAction="#chooseTimeButtonAction" prefHeight="25.0" prefWidth="78.0" text="Point time" visible="false" />
+      <Button fx:id="cancelButton" layoutX="261.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="78.0" text="Cancel" visible="false" />
       <Label fx:id="descLabel" layoutX="14.0" layoutY="27.0" text="Описание">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="cancelChooseTimeButton" layoutX="223.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelChooseTimeButtonAction" prefHeight="25.0" prefWidth="116.0" text="Отмена" visible="false" />
+      <Button fx:id="cancelChooseTimeButton" layoutX="261.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelChooseTimeButtonAction" prefHeight="25.0" prefWidth="78.0" text="Cancel" visible="false" />
    </children>
 </Pane>

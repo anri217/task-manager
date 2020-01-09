@@ -1,10 +1,12 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import model.Task;
 import view.notificationWindow.NotificationController;
 import view.notificationWindow.NotificationWindow;
@@ -84,6 +86,12 @@ public class Notification extends TimerTask {
         stage.setX(width * NotificationConstants.NOTIFICATION_WINDOW_WIDTH_COEFFICIENT);
         stage.setY(height * NotificationConstants.NOTIFICATION_WINDOW_HEIGHT_COEFFICIENT);
         stage.setScene(new Scene(loader.load()));
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                windowEvent.consume();
+            }
+        });
         NotificationController nc = loader.<NotificationController>getController();
         nc.setNotification(this);
         nc.setLabel();
