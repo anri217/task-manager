@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * This is class of main window
+ * Class of main window
  */
 
 public class MainWindow extends Application {

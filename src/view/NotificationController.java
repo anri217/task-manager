@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
 
 /**
- * This is controller of NotificationWindow
+ * Controller of NotificationWindow
  *
  * @see NotificationWindow
  */

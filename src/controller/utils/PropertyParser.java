@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * This is utility class used to work with properties
+ * Utility class used to work with properties
  */
 
 public class PropertyParser {

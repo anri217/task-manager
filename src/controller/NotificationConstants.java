@@ -1,7 +1,7 @@
 package controller;
 
 /**
- * This is class for named constants used in Notification
+ * Class for named constants used in Notification
  *
  * @see Notification
  */

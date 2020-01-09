@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * This is controller of MainWindow
+ * Class for catch events from items on main window
  *
  * @see MainWindow
  */
@@ -45,6 +45,10 @@ public class MainWindowController implements Initializable {
 
     private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
+    /**
+     * Refreshing table
+     */
+
     public void refresh() {
         delTask.setDisable(true);
         changeTask.setDisable(true);
@@ -60,6 +64,10 @@ public class MainWindowController implements Initializable {
         taskTable.setItems(FXCollections.observableList(rows));
         RefreshHelper.getInstance().setMainWindowController(this);
     }
+
+    /**
+     * Set disable for buttons
+     */
 
     private void selectedCheckBox() {
         int count = 0;
@@ -94,6 +102,10 @@ public class MainWindowController implements Initializable {
         initColumns();
     }
 
+    /**
+     * Initialization columns of table
+     */
+
     private void initColumns() {
         chooseColumn.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 
@@ -108,6 +120,12 @@ public class MainWindowController implements Initializable {
         RefreshHelper.getInstance().setMainWindowController(this);
     }
 
+    /**
+     * Action from pushing add button
+     * @param actionEvent
+     * @throws Exception
+     */
+
     @FXML
     public void clickAddTask(ActionEvent actionEvent) throws Exception {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
@@ -115,6 +133,13 @@ public class MainWindowController implements Initializable {
         addTaskWindow.start(stage);
         refresh();
     }
+
+    /**
+     * Action from pushing delete button
+     * @param actionEvent
+     * @throws Exception
+     */
+
 
     @FXML
     public void clickDelTask(ActionEvent actionEvent) {
@@ -130,6 +155,12 @@ public class MainWindowController implements Initializable {
         selectedCheckBox();
     }
 
+    /**
+     * Action from pushing change button
+     * @param actionEvent
+     * @throws Exception
+     */
+
     public void clickChangeTask(ActionEvent actionEvent) throws Exception {
         int length = taskTable.getItems().size();
         for (int i = 0; i < length; i++) {
@@ -143,9 +174,23 @@ public class MainWindowController implements Initializable {
         refresh();
     }
 
+    /**
+     *  Function saving journal by push button Save
+     */
+
+
     public void saveJournal(ActionEvent actionEvent) throws PropertyParserInitException, IOException, BackupFileException {
         IOUtil.getInstance().serializeObject(Controller.getInstance().getJournal());
     }
+
+    /**
+     * Function download journal by push button Download
+     * @param actionEvent
+     * @throws ClassNotFoundException
+     * @throws BackupFileException
+     * @throws PropertyParserInitException
+     * @throws IOException
+     */
 
     public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException,
             PropertyParserInitException, IOException {
@@ -157,6 +202,11 @@ public class MainWindowController implements Initializable {
         }
         refresh();
     }
+
+    /**
+     * Function cancelling tasks by push button Cancel
+     * @param actionEvent
+     */
 
     public void clickCancelTask(ActionEvent actionEvent) {
         int length = taskTable.getItems().size();

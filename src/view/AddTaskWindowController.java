@@ -17,7 +17,7 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.ResourceBundle;
 
 /**
- * This is controller for AddTaskWindow class
+ * Class for catch events from items on AddTask window
  *
  * @see AddTaskWindow
  */
@@ -55,6 +55,10 @@ public class AddTaskWindowController implements Initializable {
         initItems();
     }
 
+    /**
+     * Initialization of some fields
+     */
+
     private void initItems() {
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);
@@ -65,6 +69,12 @@ public class AddTaskWindowController implements Initializable {
         minTextField.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 2 ? change : null));
     }
+
+    /**
+     * Function adding task in table
+     * @param actionEvent
+     * @throws Exception
+     */
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
         LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
@@ -88,6 +98,11 @@ public class AddTaskWindowController implements Initializable {
             stage.close();
         }
     }
+
+    /**
+     * Closing add task window
+     * @param actionEvent
+     */
 
     public void clickDecline(ActionEvent actionEvent) {
         Stage stage = (Stage) declineButton.getScene().getWindow();

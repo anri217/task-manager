@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * This is class for opening window of adding task
+ * Class for opening window of adding task
  */
 
 public class AddTaskWindow extends Application {

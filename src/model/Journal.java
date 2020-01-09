@@ -2,10 +2,13 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * This is main model class, which stores tasks
+ * Main model class, which stores tasks
+ *
  * @see Task
  */
 
@@ -18,6 +21,7 @@ public class Journal implements Serializable {
 
     /**
      * Add task in map
+     *
      * @param task - new task
      */
 
@@ -27,6 +31,7 @@ public class Journal implements Serializable {
 
     /**
      * Delete task from map by id
+     *
      * @param id - desired id
      */
 
@@ -36,6 +41,7 @@ public class Journal implements Serializable {
 
     /**
      * Getter function by id
+     *
      * @param id - desired id
      */
 
@@ -46,6 +52,7 @@ public class Journal implements Serializable {
 
     /**
      * Getter function by name
+     *
      * @param name - desired name
      */
 
@@ -59,6 +66,7 @@ public class Journal implements Serializable {
 
     /**
      * Getter function by date
+     *
      * @param date - desired date
      * @return desired task
      */
@@ -73,7 +81,8 @@ public class Journal implements Serializable {
 
     /**
      * Change function by id
-     * @param id - desired id
+     *
+     * @param id   - desired id
      * @param task - new task
      */
 

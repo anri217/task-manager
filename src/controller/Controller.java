@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This is class responsible for implementing actions with the journal
+ * Class is using for change journal of tasks, to control journal
  *
  * @see Journal
  */

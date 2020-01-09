@@ -1,7 +1,7 @@
 package model;
 
 /**
- * This is enum statuses for tasks
+ * Enum statuses for tasks
  */
 
 
