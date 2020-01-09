@@ -96,4 +96,8 @@ public class Controller {
     public List<Task> getAll() {
         return Collections.unmodifiableList(journal.getAll());
     }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
+    }
 }
