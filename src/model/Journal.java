@@ -118,4 +118,8 @@ public class Journal implements Serializable {
     public boolean isTaskInJournal(Task task) {
         return tasks.containsValue(task);
     }
+
+    public boolean isTaskInJournal(int id) {
+        return tasks.containsKey(id);
+    }
 }
