@@ -1,5 +1,7 @@
 package model;
 
+import idgenerator.IdGenerator;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -26,6 +28,9 @@ public class Journal implements Serializable {
      */
 
     public void addTask(Task task) {
+        while (tasks.containsKey(task.getId())) {
+            task.setId(IdGenerator.getInstance().getId());
+        }
         tasks.put(task.getId(), task);
     }
 
