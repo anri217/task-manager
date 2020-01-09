@@ -30,6 +30,14 @@ public class Controller {
         return instance;
     }
 
+    public void deleteAllNotification() {
+        List<Task> tasks = journal.getAll();
+        for (Task task : tasks) {
+            if ((task.getStatus() != Status.CANCELED) && (task.getStatus() != Status.COMPLETED) && (task.getStatus() != Status.OVERDUE))
+                notifier.deleteNotification(task);
+        }
+    }
+
     public Journal getJournal() {
         return journal;
     }

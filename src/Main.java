@@ -28,6 +28,7 @@ public class Main {
                 Controller.getInstance().addTask(task);
             }
             MainWindow.run(args);
+            Controller.getInstance().deleteAllNotification();
             ioUtil.backupFunction(Controller.getInstance().getJournal());
         } catch (BackupFileException e) {
             showAlert(e.getMessage());
