@@ -217,8 +217,11 @@ public class MainWindowController implements Initializable {
         Journal journal2 = (Journal) IOUtil.getInstance().deserializeObject();
         List<Task> arr = journal2.getAll();
         for (int i = 0; i < arr.size(); ++i) {
-            journal1.addTask(arr.get(i));
+            if(!(journal1.isTaskInJournal(arr.get(i).getId()))) {
+                journal1.addTask(arr.get(i));
+            }
         }
+        Controller.getInstance().setJournal(journal1);
         refresh();
     }
 
