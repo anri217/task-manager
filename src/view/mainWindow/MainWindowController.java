@@ -77,14 +77,13 @@ public class MainWindowController implements Initializable {
      */
 
     private void selectedCheckBox() {
-        int count = 0, overdueCount = 0;
+        int count = 0, plannedCount = 0;
 
         for (MainWindowRow row : rows) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
-                if (Controller.getInstance().getTask(row.getId()).getStatus() == Status.OVERDUE ||
-                        Controller.getInstance().getTask(row.getId()).getStatus() == Status.CANCELED) {
-                    overdueCount++;
+                if (Controller.getInstance().getTask(row.getId()).getStatus() != Status.PLANNED) {
+                    plannedCount++;
                 }
             }
 
@@ -108,7 +107,7 @@ public class MainWindowController implements Initializable {
             cancelTask.setDisable(false);
         }
 
-        if (overdueCount != 0) {
+        if (plannedCount != 0) {
             cancelTask.setDisable(true);
         }
     }
