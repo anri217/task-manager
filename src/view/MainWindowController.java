@@ -43,20 +43,7 @@ public class MainWindowController implements Initializable {
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
 
-    private ArrayList<MainWindowRow> rows;
-
-    private static MainWindowController instance;
-
-    public MainWindowController() {
-        rows = new ArrayList<>();
-    }
-
-    public static synchronized MainWindowController getInstance(){
-        if (instance == null) {
-            instance = new MainWindowController();
-        }
-        return instance;
-    }
+    private ArrayList<MainWindowRow> rows = new ArrayList<>();
 
     public void refresh() {
         delTask.setDisable(true);
