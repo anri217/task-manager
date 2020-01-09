@@ -116,6 +116,7 @@ public class Controller {
         this.journal = journal;
     }
 
+
     public boolean isTaskInJournal(Task task) {
         return journal.isTaskInJournal(task);
     }
