@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Enum statuses for tasks
+ */
+
+
 public enum Status {
-    PLANNED, FINISHED, DEFERRED, ONGOING;
+    PLANNED, COMPLETED, OVERDUE, CANCELED, DEFERRED;
 }
