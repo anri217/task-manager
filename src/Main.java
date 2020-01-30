@@ -1,14 +1,14 @@
-import controller.Controller;
-import controller.utils.IOUtil;
-import exceptions.BackupFileException;
-import exceptions.PropertyParserInitException;
+import server.controller.Controller;
+import server.controller.utils.IOUtil;
+import server.exceptions.BackupFileException;
+import server.exceptions.PropertyParserInitException;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
-import model.Journal;
-import model.Status;
-import model.Task;
-import view.mainWindow.MainWindow;
+import server.model.Journal;
+import server.model.Status;
+import server.model.Task;
+import server.view.mainWindow.MainWindow;
 
 import java.time.LocalDateTime;
 import java.util.List;
