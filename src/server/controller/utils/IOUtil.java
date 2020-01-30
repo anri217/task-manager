@@ -11,11 +11,10 @@ import java.io.*;
 
 public class IOUtil {
 
-
     private static IOUtil instance;
 
-
-    private static final String PATH_TO_BACKUP_FILE = "path_to_backup_file", EX_STR = "Can't find backup file ";
+    private static final String PATH_TO_BACKUP_FILE = "path_to_backup_file",
+            EX_STR = "Can't find backup file ";
 
     /**
      * Singleton implementation
@@ -33,8 +32,6 @@ public class IOUtil {
     private IOUtil() {
     }
 
-    ;
-
     /**
      * Serialization function
      *
@@ -43,16 +40,13 @@ public class IOUtil {
      * @throws PropertyParserInitException
      */
 
-    //for using methods without create objects
     public void serializeObject(Object obj) throws BackupFileException, PropertyParserInitException {
         if (obj != null) {
             PropertyParser propertyParser = new PropertyParser();
             String path = propertyParser.getProperty(PATH_TO_BACKUP_FILE);
             try (OutputStream out = new FileOutputStream(new File(path));
                  ObjectOutputStream oos = new ObjectOutputStream(out)) {
-                // todo code format and close oos
                 oos.writeObject(obj);
-                oos.close();
             } catch (IOException ex) {
                 throw new BackupFileException(EX_STR + ex.getMessage());
             }
