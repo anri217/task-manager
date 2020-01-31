@@ -13,7 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import server.controller.Controller;
-import server.controller.utils.IOUtil;
+import server.controller.utils.BinarySerializer;
 import server.exceptions.BackupFileException;
 import server.exceptions.PropertyParserInitException;
 import server.model.Journal;
@@ -198,7 +198,7 @@ public class MainWindowController implements Initializable {
 
 
     public void saveJournal(ActionEvent actionEvent) throws PropertyParserInitException, IOException, BackupFileException {
-        IOUtil.getInstance().serializeObject(Controller.getInstance().getJournal());
+        BinarySerializer.getInstance().serializeObject(Controller.getInstance().getJournal());
     }
 
     /**
@@ -214,7 +214,7 @@ public class MainWindowController implements Initializable {
     public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException,
             PropertyParserInitException, IOException {
         Journal journal1 = Controller.getInstance().getJournal();
-        Journal journal2 = (Journal) IOUtil.getInstance().deserializeObject();
+        Journal journal2 = (Journal) BinarySerializer.getInstance().deserializeObject();
         List<Task> arr = journal2.getAll();
         for (int i = 0; i < arr.size(); ++i) {
             if(!(journal1.isTaskInJournal(arr.get(i).getId()))) {

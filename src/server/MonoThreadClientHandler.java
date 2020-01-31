@@ -24,9 +24,6 @@ public class MonoThreadClientHandler implements Runnable {
 
 // канал чтения из сокета
             DataInputStream in = new DataInputStream(clientDialog.getInputStream());
-            System.out.println("DataInputStream created");
-
-            System.out.println("DataOutputStream  created");
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // основная рабочая часть //
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,10 +56,11 @@ public class MonoThreadClientHandler implements Runnable {
 
                 System.out.println("Server try writing to channel");
                 out.writeUTF("Server reply - " + entry + " - OK");
+                out.flush();
                 System.out.println("Server Wrote message to clientDialog.");
 
                 // освобождаем буфер сетевых сообщений
-                out.flush();
+
 
                 // возвращаемся в началло для считывания нового сообщения
             }
@@ -85,6 +83,6 @@ public class MonoThreadClientHandler implements Runnable {
             System.out.println("Closing connections & channels - DONE.");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } 
     }
 }

@@ -20,7 +20,6 @@ public class MultiThreadServer {
         // стартуем сервер на порту 3345 и инициализируем переменную для обработки консольных команд с самого сервера
         try (ServerSocket server = new ServerSocket(3345);
              BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Server socket created, command console reader for listen to server commands");
 
 
             // стартуем цикл при условии что серверный сокет не закрыт
@@ -41,9 +40,7 @@ public class MultiThreadServer {
                     }
                 }
 
-                // если комманд от сервера нет то становимся в ожидание
-                // подключения к сокету общения под именем - "clientDialog" на
-                // серверной стороне
+
                 Socket client = server.accept();
 
                 // после получения запроса на подключение сервер создаёт сокет

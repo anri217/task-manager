@@ -9,9 +9,9 @@ import java.io.*;
  * Utility class used for serialization and deserialization objects
  */
 
-public class IOUtil {
+public class BinarySerializer implements IOUtils {
 
-    private static IOUtil instance;
+    private static BinarySerializer instance;
 
     private static final String PATH_TO_BACKUP_FILE = "path_to_backup_file",
             EX_STR = "Can't find backup file ";
@@ -22,14 +22,14 @@ public class IOUtil {
      * @return current single object
      */
 
-    public static synchronized IOUtil getInstance() {
+    public static synchronized BinarySerializer getInstance() {
         if (instance == null) {
-            instance = new IOUtil();
+            instance = new BinarySerializer();
         }
         return instance;
     }
 
-    private IOUtil() {
+    private BinarySerializer() {
     }
 
     /**

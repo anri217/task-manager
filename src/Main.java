@@ -1,5 +1,5 @@
 import server.controller.Controller;
-import server.controller.utils.IOUtil;
+import server.controller.utils.BinarySerializer;
 import server.exceptions.BackupFileException;
 import server.exceptions.PropertyParserInitException;
 import javafx.application.Platform;
@@ -16,7 +16,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException {
         try {
-            IOUtil ioUtil = IOUtil.getInstance();
+            BinarySerializer ioUtil = BinarySerializer.getInstance();
             Journal journal = (Journal) ioUtil.restoreFunction();
             List<Task> tasks = journal.getAll();
             for (Task task : tasks) {
