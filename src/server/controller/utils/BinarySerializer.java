@@ -42,7 +42,7 @@ public class BinarySerializer implements IOUtils {
 
     public void serializeObject(Object obj) throws BackupFileException, PropertyParserInitException {
         if (obj != null) {
-            PropertyParser propertyParser = new PropertyParser();
+            PropertyParser propertyParser = new PropertyParser(Paths.FILE);
             String path = propertyParser.getProperty(PATH_TO_BACKUP_FILE);
             try (OutputStream out = new FileOutputStream(new File(path));
                  ObjectOutputStream oos = new ObjectOutputStream(out)) {
@@ -63,7 +63,7 @@ public class BinarySerializer implements IOUtils {
      */
 
     public Object deserializeObject() throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
-        PropertyParser propertyParser = new PropertyParser();
+        PropertyParser propertyParser = new PropertyParser(Paths.FILE);
         String path = propertyParser.getProperty(PATH_TO_BACKUP_FILE);
         try (InputStream in = new FileInputStream(new File(path));
              ObjectInputStream ois = new ObjectInputStream(in)) {
