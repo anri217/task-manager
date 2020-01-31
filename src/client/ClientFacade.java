@@ -1,6 +1,5 @@
 package client;
 
-
 public class ClientFacade {
     void sendCommand(String command) {
         //build json and send to server json file
