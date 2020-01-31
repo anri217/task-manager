@@ -1,5 +1,7 @@
 package server;
 
+//singleton class
+
 public class ServerFacade {
     void sendCommand(String command) {
         //build json and send to client json file
