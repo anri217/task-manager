@@ -1,5 +1,5 @@
 package client;
 
-public class commandController {
+public class CommandController {
     //"switch" for server commands
 }

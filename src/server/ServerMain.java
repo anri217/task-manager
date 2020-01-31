@@ -1,5 +1,5 @@
 package server;
 
-public class serverMain {
+public class ServerMain {
     //main file in server
 }

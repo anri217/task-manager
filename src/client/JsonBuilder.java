@@ -1,5 +1,5 @@
 package client;
 
-public class jsonBuilder {
+public class JsonBuilder {
     //for building correct json
 }
