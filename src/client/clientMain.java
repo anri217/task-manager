@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client1 {
+public class clientMain {
 
     /**
      *
