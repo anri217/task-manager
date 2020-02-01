@@ -3,6 +3,7 @@ package client;
 //singleton class
 
 import client.view.mainWindow.MainWindow;
+import javafx.application.Application;
 
 import java.io.*;
 import java.net.Socket;
@@ -25,6 +26,9 @@ public class ClientFacade {
              DataInputStream ois = new DataInputStream(socket.getInputStream())) {
 
             System.out.println("Client connected to socket." + '\n');
+
+            MainWindow.run(args);
+
             while (!socket.isClosed()) {
                 if (br.ready()) {
                     System.out.println("Client start writing in channel...");
@@ -37,7 +41,6 @@ public class ClientFacade {
                         System.out.println("Client kill connections");
                         break;
                     }
-
 
                     System.out.println("Client sent message & start waiting for data from server...");
                 }
@@ -53,6 +56,4 @@ public class ClientFacade {
         dos.writeUTF(command);
         dos.flush();
     }
-
-
 }
