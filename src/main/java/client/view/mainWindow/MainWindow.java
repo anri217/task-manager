@@ -22,6 +22,6 @@ public class MainWindow extends Application {
         stage.setTitle("TASK MANAGER");
         stage.setScene(new Scene(root));
         stage.show();
-        RefreshHelper.getInstance().getMainWindowController().refresh();
+//        RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 }

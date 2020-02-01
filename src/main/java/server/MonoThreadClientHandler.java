@@ -27,7 +27,6 @@ public class MonoThreadClientHandler implements Runnable {
 
 
                 System.out.println("READ from clientDialog message - " + entry);
-
                 // инициализация проверки условия продолжения работы с клиентом
                 // по этому сокету по кодовому слову - quit в любом регистре
                 if (entry.equalsIgnoreCase("quit")) {
