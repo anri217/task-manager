@@ -17,27 +17,15 @@ public class MonoThreadClientHandler implements Runnable {
     public void run() {
 
         try {
-            // инициируем каналы общения в сокете, для сервера
-
-            // канал записи в сокет следует инициализировать сначала канал чтения для избежания блокировки выполнения программы на ожидании заголовка в сокете
             DataOutputStream out = new DataOutputStream(clientDialog.getOutputStream());
-
-// канал чтения из сокета
             DataInputStream in = new DataInputStream(clientDialog.getInputStream());
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // основная рабочая часть //
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            // начинаем диалог с подключенным клиентом в цикле, пока сокет не
-            // закрыт клиентом
+
             while (!clientDialog.isClosed()) {
                 System.out.println("Server reading from channel");
-
-                // серверная нить ждёт в канале чтения (inputstream) получения
-                // данных клиента после получения данных считывает их
                 String entry = in.readUTF();
 
-                // и выводит в консоль
+
                 System.out.println("READ from clientDialog message - " + entry);
 
                 // инициализация проверки условия продолжения работы с клиентом

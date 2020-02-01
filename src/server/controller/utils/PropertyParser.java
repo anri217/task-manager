@@ -30,8 +30,7 @@ public class PropertyParser {
 
     public PropertyParser(Paths paths) throws PropertyParserInitException {
         String pathToProperties = "";
-        int number = paths.ordinal();
-        switch(number){
+        switch(paths.ordinal()){
             case(0):
                 pathToProperties = CLIENT_PATH;
                 break;

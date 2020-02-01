@@ -2,6 +2,8 @@ package client;
 
 //singleton class
 
+import client.view.mainWindow.MainWindow;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,7 +18,7 @@ public class ClientFacade {
         this.port = port;
     }
 
-    void connect() {
+    void connect(String[] args) {
         try (Socket socket = new Socket(host, port);
              BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
              DataOutputStream oos = new DataOutputStream(socket.getOutputStream());
@@ -24,7 +26,6 @@ public class ClientFacade {
 
             System.out.println("Client connected to socket." + '\n');
             while (!socket.isClosed()) {
-
                 if (br.ready()) {
                     System.out.println("Client start writing in channel...");
                     String clientCommand = br.readLine();
@@ -52,4 +53,6 @@ public class ClientFacade {
         dos.writeUTF(command);
         dos.flush();
     }
+
+
 }
