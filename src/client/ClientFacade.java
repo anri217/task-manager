@@ -24,7 +24,6 @@ public class ClientFacade {
 
             System.out.println("Client connected to socket." + '\n');
             while (!socket.isClosed()) {
-
                 if (br.ready()) {
                     System.out.println("Client start writing in channel...");
                     String clientCommand = br.readLine();
@@ -36,7 +35,6 @@ public class ClientFacade {
                         System.out.println("Client kill connections");
                         break;
                     }
-
 
                     System.out.println("Client sent message & start waiting for data from server...");
                 }
