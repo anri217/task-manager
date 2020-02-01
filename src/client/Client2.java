@@ -25,7 +25,6 @@ public class Client2 {
 // запускаем подключение сокета по известным координатам и нициализируем приём сообщений с консоли клиента
         try {
             PropertyParser propertyParser = new PropertyParser(Paths.CLIENT);
-            System.out.println(propertyParser.getProperty("host") + propertyParser.getProperty("port"));
 
             ClientFacade clientFacade = new ClientFacade(propertyParser.getProperty("host"),
                                                             Integer.parseInt(propertyParser.getProperty("port")));
