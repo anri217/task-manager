@@ -19,7 +19,7 @@ public class ClientFacade {
         this.port = port;
     }
 
-    void connect() {
+    void connect(String[] args) {
         try (Socket socket = new Socket(host, port);
              BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
              DataOutputStream oos = new DataOutputStream(socket.getOutputStream());
@@ -27,7 +27,7 @@ public class ClientFacade {
 
             System.out.println("Client connected to socket." + '\n');
 
-            MainWindow.run();
+            MainWindow.run(args);
 
             while (!socket.isClosed()) {
                 if (br.ready()) {

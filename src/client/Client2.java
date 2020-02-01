@@ -28,7 +28,7 @@ public class Client2 {
 
             ClientFacade clientFacade = new ClientFacade(propertyParser.getProperty("host"),
                                                             Integer.parseInt(propertyParser.getProperty("port")));
-            clientFacade.connect();
+            clientFacade.connect(args);
         } catch (PropertyParserInitException ex) {
             throw new PropertyParserInitException(ex.getMessage());
         }
