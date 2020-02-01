@@ -11,8 +11,8 @@ import java.util.Properties;
  */
 
 public class PropertyParser {
-    private static final String EX_STR = "Can't init file ", CLIENT_PATH = "staff\\properties\\client.properties",
-    FILE_PATH = "staff\\properties\\file.properties", SERVER_PATH = "staff\\properties\\server.properties";
+    private static final String EX_STR = "Can't init file ", CLIENT_PATH = "staff/properties/client.properties",
+    FILE_PATH = "staff/properties/file.properties", SERVER_PATH = "staff/properties/server.properties";
     private Properties properties;
 
 
