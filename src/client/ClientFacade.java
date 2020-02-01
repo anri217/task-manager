@@ -2,6 +2,9 @@ package client;
 
 //singleton class
 
+import client.view.mainWindow.MainWindow;
+import javafx.application.Application;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -23,6 +26,9 @@ public class ClientFacade {
              DataInputStream ois = new DataInputStream(socket.getInputStream())) {
 
             System.out.println("Client connected to socket." + '\n');
+
+            MainWindow.run();
+
             while (!socket.isClosed()) {
                 if (br.ready()) {
                     System.out.println("Client start writing in channel...");
