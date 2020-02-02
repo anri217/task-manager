@@ -5,7 +5,7 @@ package server;
 import java.net.Socket;
 
 public class ServerFacade {
-
+    //map
    private int port;
 
    public ServerFacade(int port) {
@@ -17,7 +17,7 @@ public class ServerFacade {
     }
 
 
-    //map
+
     void sendCommand(String command) {
         //build json and send to client json file
         //may be we can separate this method like addTask, changeTask and etc

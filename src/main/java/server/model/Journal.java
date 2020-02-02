@@ -118,8 +118,7 @@ public class Journal implements Serializable {
     public boolean isTaskInJournal(Task task) {
         boolean res = false;
         List<Task> taskList = this.getAll();
-        for (int i = 0; i < taskList.size(); ++i) {
-            Task curTask = taskList.get(i);
+        for (Task curTask : taskList) {
             res = (task.getPlannedDate().isEqual(curTask.getPlannedDate())) && (task.getStatus() == curTask.getStatus()) &&
                     (task.getName().equals(curTask.getName())) && (task.getDateOfDone() == curTask.getDateOfDone()) &&
                     (task.getDescription().equals(curTask.getDescription()));

@@ -27,7 +27,6 @@ public class ClientFacade {
 
             System.out.println("Client connected to socket." + '\n');
 
-            MainWindow.run(args);
 
             while (!socket.isClosed()) {
                 if (br.ready()) {
