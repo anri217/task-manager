@@ -28,12 +28,12 @@ public class CommandCreator {
         this.journal = journal;
     }
 
-    public CommandCreator(server.model.Task task, int command_id, int task_count){
+  /*  public CommandCreator(server.model.Task task, int command_id, int task_count){
         setTask(task);
         setTask_count(task_count);
         setCommand_id(command_id);
         journal = new HashMap<Integer, Task>();
-    }
+    }*/
 
     public void CreateJson() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -43,6 +43,7 @@ public class CommandCreator {
 
     public void addTask(Task task){
         journal.put(task.getId(), task);
+        increaseTaskCount();
     }
 
     public void increaseTaskCount(){
