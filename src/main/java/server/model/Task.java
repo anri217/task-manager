@@ -1,5 +1,10 @@
 package server.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import server.idgenerator.IdGenerator;
 
 import java.io.Serializable;
@@ -13,7 +18,13 @@ import java.time.LocalDateTime;
 public class Task implements Serializable {
     private String name;
     private String description;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    /*@JsonSerialize(as = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class, as = LocalDateTime.class)*/
     private LocalDateTime plannedDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    /*@JsonSerialize(as = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class, as = LocalDateTime.class)*/
     private LocalDateTime dateOfDone;
     private Status status;
 
