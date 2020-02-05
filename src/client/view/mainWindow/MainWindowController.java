@@ -1,5 +1,6 @@
 package client.view.mainWindow;
 
+import client.SendCommandHelper;
 import client.view.MainWindowRow;
 import client.view.RefreshHelper;
 import client.view.SelectedTasksController;
@@ -147,7 +148,8 @@ public class MainWindowController implements Initializable {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
         addTaskWindow.start(stage);
-        refresh();
+//        refresh();
+//        SendCommandHelper.getInstance().getFacade().sendCommand("Hello");
     }
 
     /**

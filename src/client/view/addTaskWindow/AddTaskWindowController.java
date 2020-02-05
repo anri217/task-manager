@@ -1,5 +1,6 @@
 package client.view.addTaskWindow;
 
+import client.SendCommandHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -101,17 +102,22 @@ public class AddTaskWindowController implements Initializable {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
-                if (Controller.getInstance().isTaskInJournal(newTask)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("ALERT");
-                    alert.setHeaderText("This task already exists");
-                    alert.showAndWait();
-                }
-                else {
-                    Controller.getInstance().addTask(newTask);
-                    Stage stage = (Stage) addButton.getScene().getWindow();
-                    stage.close();
-                }
+//                if (Controller.getInstance().isTaskInJournal(newTask)){
+//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                    alert.setTitle("ALERT");
+//                    alert.setHeaderText("This task already exists");
+//                    alert.showAndWait();
+//                }
+//                else {
+//                    Controller.getInstance().addTask(newTask);
+//                    Stage stage = (Stage) addButton.getScene().getWindow();
+//                    stage.close();
+//                }
+
+//                Controller.getInstance().addTask(newTask);
+                SendCommandHelper.getInstance().getFacade().sendCommand(newTask.getName());
+                Stage stage = (Stage) addButton.getScene().getWindow();
+                stage.close();
             }
         }
 
