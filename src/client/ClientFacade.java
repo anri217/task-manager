@@ -1,13 +1,7 @@
 package client;
 
-//singleton class
-
-import client.view.mainWindow.MainWindow;
-import javafx.application.Application;
-
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class ClientFacade {
 
@@ -27,7 +21,6 @@ public class ClientFacade {
 
             System.out.println("Client connected to socket." + '\n');
 
-
             while (!socket.isClosed()) {
                 if (br.ready()) {
                     System.out.println("Client start writing in channel...");
@@ -45,7 +38,6 @@ public class ClientFacade {
                 }
             }
             System.out.println("Closing connections & channels on clientSide - DONE.");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
