@@ -1,7 +1,5 @@
 package server;
 
-//singleton class
-
 import java.net.Socket;
 
 public class ServerFacade {
