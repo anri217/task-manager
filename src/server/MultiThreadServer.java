@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class MultiThreadServer {
 
-    static ExecutorService executeIt = Executors.newFixedThreadPool(2);
+    private static ExecutorService executeIt = Executors.newCachedThreadPool();
 
     /**
      * @param args
@@ -34,7 +34,6 @@ public class MultiThreadServer {
                 executeIt.execute(new MonoThreadClientHandler(client));
                 System.out.print("Connection accepted.");
             }
-
             executeIt.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
