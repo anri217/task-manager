@@ -14,7 +14,6 @@ public class Client2 {
     
     public static void main(String[] args) throws PropertyParserInitException {
 
-// запускаем подключение сокета по известным координатам и нициализируем приём сообщений с консоли клиента
         try {
             PropertyParser propertyParser = new PropertyParser(Paths.CLIENT);
 
