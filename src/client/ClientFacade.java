@@ -2,32 +2,48 @@ package client;
 
 import client.view.mainWindow.MainWindow;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 public class ClientFacade {
 
     private String host;
     private int port;
-    private Socket socket;
+    private DataOutputStream dos;
+    private DataInputStream dis;
 
-    public ClientFacade() {}
+    public DataOutputStream getDos() {
+        return dos;
+    }
+
+    public void setDos(DataOutputStream dos) {
+        this.dos = dos;
+    }
+
+    public DataInputStream getDis() {
+        return dis;
+    }
+
+    public void setDis(DataInputStream dis) {
+        this.dis = dis;
+    }
+
+    public ClientFacade() {
+    }
 
     public ClientFacade(String host, int port) {
         this.host = host;
         this.port = port;
     }
 
-    void connect(String[] args) {
-        try (Socket socket = new Socket(host, port)) {
+    void connect() throws IOException {
+        Socket socket = new Socket(host, port);
+        dos = new DataOutputStream(socket.getOutputStream());
+        dis = new DataInputStream(socket.getInputStream());
 
-            System.out.println("Client connected to socket." + '\n');
 
-            this.socket = socket;
-
-            SendCommandHelper.getInstance().setFacade(this);
-
-            MainWindow.run(args);
 //            while (!socket.isClosed()) {
 //                if (br.ready()) {
 //                    System.out.println("Client start writing in channel...");
@@ -45,13 +61,9 @@ public class ClientFacade {
 //                }
 //            }
 //            System.out.println("Closing connections & channels on clientSide - DONE.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+}
 
     public void sendCommand(String command) throws IOException {
-        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         dos.writeUTF(command);
         dos.flush();
     }
