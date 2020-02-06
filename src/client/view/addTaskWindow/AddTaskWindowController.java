@@ -118,6 +118,7 @@ public class AddTaskWindowController implements Initializable {
                 SendCommandHelper.getInstance().getFacade().sendCommand(newTask.getName());
                 Stage stage = (Stage) addButton.getScene().getWindow();
                 stage.close();
+                //SendCommandHelper.getInstance().getFacade().waitCommand();
             }
         }
 

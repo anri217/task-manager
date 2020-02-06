@@ -2,9 +2,7 @@ package client;
 
 import client.view.mainWindow.MainWindow;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientFacade {
@@ -66,5 +64,18 @@ public class ClientFacade {
     public void sendCommand(String command) throws IOException {
         dos.writeUTF(command);
         dos.flush();
+    }
+
+    public void waitCommand() throws IOException {
+        while (true) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+            if (br.ready()) {
+                String clientCommand = br.readLine();
+
+                System.out.println("Server sent message " + clientCommand + " to server.");
+
+                break;
+            }
+        }
     }
 }

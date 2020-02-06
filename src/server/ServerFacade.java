@@ -1,6 +1,7 @@
 package server;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -18,6 +19,8 @@ public class ServerFacade {
        this.port = port;
    }
 
+   private DataOutputStream dos;
+
    public ServerFacade() {}
 
    public void connect() {
@@ -27,9 +30,12 @@ public class ServerFacade {
 
                BufferedReader ins = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
+               dos = new DataOutputStream(client.getOutputStream());
+
                if (ins.ready()) {
                    System.out.println("Main Server found any messages in channel, let's look at them.");
                    String serverCommand = ins.readLine();
+                   sendCommand(serverCommand);
                    if (serverCommand.equalsIgnoreCase("quit")) {
                        System.out.println("Main Server initiate exiting...");
                        server.close();
@@ -46,7 +52,8 @@ public class ServerFacade {
        }
    }
 
-    public void sendCommand(String command) {
-       //
+    public void sendCommand(String command) throws IOException {
+        dos.writeUTF(command);
+        dos.flush();
     }
 }
