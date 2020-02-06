@@ -15,10 +15,8 @@ public class CommandCreator {
     @JsonIgnore
     private server.model.Task task;
     private int command_id;
-    private int task_count;
-    @JsonIgnore
-    private String command;
     private Map<Integer, Task> journal;
+    private String command;
 
     public CommandCreator(){
         this.journal = new HashMap<Integer, Task>();
@@ -28,26 +26,17 @@ public class CommandCreator {
         this.journal = journal;
     }
 
-  /*  public CommandCreator(server.model.Task task, int command_id, int task_count){
-        setTask(task);
-        setTask_count(task_count);
-        setCommand_id(command_id);
-        journal = new HashMap<Integer, Task>();
-    }*/
-
     public void CreateJson() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        this.command = mapper.writeValueAsString(this);
-        System.out.println(this.command);
+        setCommand(JsonBuilder.createJsonString(createCommand(this.command_id, this.journal)));
     }
 
     public void addTask(Task task){
         journal.put(task.getId(), task);
-        increaseTaskCount();
     }
 
-    public void increaseTaskCount(){
-        this.task_count++;
+    public Command createCommand(int command_id, Map<Integer, Task> journal){
+        Command command = new Command(command_id, journal);
+        return command;
     }
 
     public void setJournal(Map<Integer, Task> journal) {
@@ -82,11 +71,4 @@ public class CommandCreator {
         return this.command_id;
     }
 
-    public void setTask_count(int task_count){
-        this.task_count = task_count;
-    }
-
-    public int getTask_count(){
-        return this.task_count;
-    }
 }
