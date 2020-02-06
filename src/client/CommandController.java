@@ -45,36 +45,36 @@ public class CommandController {
     public static void cancelTask(){
         List<Task> tasks = new ArrayList<Task>(journal.values());
         Task task = tasks.get(0);
-        client.Controller.getInstance().cancelTask(task.getId());
+//        client.Controller.getInstance().cancelTask(task.getId());
     }
 
     public static void changeTask(){
         List<Task> tasks = new ArrayList<Task>(journal.values());
         Task task1 = tasks.get(0);
         Task task2 = tasks.get(1);
-        client.Controller.getInstance().changeTask(task1.getId(), task2);
+//        client.Controller.getInstance().changeTask(task1.getId(), task2);
     }
 
     public static void deleteTask(){
         List<Task> tasks = new ArrayList<Task>(journal.values());
         Task task = tasks.get(0);
-        client.Controller.getInstance().deleteTask(task.getId());
+//        client.Controller.getInstance().deleteTask(task.getId());
     }
 
 
     public static void addTask(){
         List<Task> tasks = new ArrayList<Task>(journal.values());
         Task task = tasks.get(0);
-        client.Controller.getInstance().addTask(task);
+//        client.Controller.getInstance().addTask(task);
     }
 
     public static void getAllFromServer(){
         Iterator<Map.Entry<Integer, Task>> iterator = journal.entrySet().iterator();
         while(iterator.hasNext()){
             Map.Entry<Integer, Task> task = iterator.next();
-            Controller.getInstance().addTask(task.getValue());
+//            Controller.getInstance().addTask(task.getValue());
         }
-        System.out.println(Controller.getInstance().getAll());
+//        System.out.println(Controller.getInstance().getAll());
     }
 
     public static void parse_Command(Command command){

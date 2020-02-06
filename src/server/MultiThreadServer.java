@@ -10,33 +10,33 @@ import java.util.concurrent.Executors;
 
 public class MultiThreadServer {
 
-    private static ExecutorService executeIt = Executors.newCachedThreadPool();
-
     /**
      * @param args
      */
     public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(3345);
-             BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            while (!server.isClosed()) {
-                if (br.ready()) {
-                    System.out.println("Main Server found any messages in channel, let's look at them.");
-                    String serverCommand = br.readLine();
-                    if (serverCommand.equalsIgnoreCase("quit")) {
-                        System.out.println("Main Server initiate exiting...");
-                        server.close();
-                        break;
-                    }
-                }
-
-                Socket client = server.accept();
-
-                executeIt.execute(new MonoThreadClientHandler(client));
-                System.out.print("Connection accepted.");
-            }
-            executeIt.shutdown();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try (ServerSocket server = new ServerSocket(3345);
+//             BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+//            while (!server.isClosed()) {
+//                if (br.ready()) {
+//                    System.out.println("Main Server found any messages in channel, let's look at them.");
+//                    String serverCommand = br.readLine();
+//                    if (serverCommand.equalsIgnoreCase("quit")) {
+//                        System.out.println("Main Server initiate exiting...");
+//                        server.close();
+//                        break;
+//                    }
+//                }
+//
+//                Socket client = server.accept();
+//
+//                executeIt.execute(new MonoThreadClientHandler(client));
+//                System.out.print("Connection accepted.");
+//            }
+//            executeIt.shutdown();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        ServerFacade serverFacade = new ServerFacade();
+        serverFacade.connect();
     }
 }

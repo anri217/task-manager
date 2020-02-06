@@ -16,7 +16,6 @@ public class Client2 {
      */
     
     public static void main(String[] args) throws PropertyParserInitException {
-
         try {
             PropertyParser propertyParser = new PropertyParser(Paths.CLIENT);
 

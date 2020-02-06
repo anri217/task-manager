@@ -39,6 +39,6 @@ public class test {
         jsonParser.parseCommand();// парсим объект Command
         client.CommandController.parse_Command(jsonParser.getCommand()); // на клиентском command controoler распаршиваем пришедшую команду на command_id и map. - это имитация того, что клиенту пришла команда
         client.CommandController.select_action(); // выбираем, что нужно сделать, судя по command_id, который уже записан в CommandController
-        System.out.println(client.Controller.getInstance().getTask(0).getName());// распечатываем показания из Controller моделей на стороне клиента, проверяя, верно ли записывается в журнал у клиента
+        //System.out.println(client.Controller.getInstance().getTask(0).getName());// распечатываем показания из Controller моделей на стороне клиента, проверяя, верно ли записывается в журнал у клиента
     }
 }
