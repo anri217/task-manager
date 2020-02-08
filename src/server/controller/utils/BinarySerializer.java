@@ -74,13 +74,4 @@ public class BinarySerializer implements IOUtils {
             throw new BackupFileException("Can't find backup file " + ex.getMessage());
         }
     }
-
-
-    public void backupFunction(Object object) throws PropertyParserInitException, BackupFileException {
-        serializeObject(object);
-    }
-
-    public Object restoreFunction() throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
-        return deserializeObject();
-    }
 }

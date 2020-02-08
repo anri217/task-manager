@@ -3,10 +3,7 @@ package client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import server.model.Task;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import shared.model.Task;
 
 public class CommandCreator {
     private Task task;

@@ -1,6 +1,6 @@
 package client;
 
-import client.view.mainWindow.MainWindow;
+import shared.view.mainWindow.MainWindow;
 import server.controller.utils.Paths;
 import server.controller.utils.PropertyParser;
 import server.exceptions.PropertyParserInitException;

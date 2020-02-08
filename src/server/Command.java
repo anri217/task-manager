@@ -1,6 +1,6 @@
 package server;
 
-import server.model.Task;
+import shared.model.Task;
 
 import java.util.HashMap;
 import java.util.Map;

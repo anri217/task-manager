@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shared.view.mainWindow.MainWindowController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="saveJournal" mnemonicParsing="false" onAction="#saveJournal" text="Save journal" />
+                        <MenuItem fx:id="downloadJournal" mnemonicParsing="false" onAction="#downloadJournal" text="Download journal" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="chooseColumn" editable="false" prefWidth="75.0" text="Choose" />
+                <TableColumn fx:id="nameColumn" editable="false" prefWidth="137.0" text="Name" />
+                <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="255.0" text="Description" />
+                <TableColumn fx:id="dateColumn" editable="false" minWidth="0.0" prefWidth="172.0" text="Date" />
+                <TableColumn fx:id="statusColumn" editable="false" minWidth="0.0" prefWidth="172.0" text="Status" />
+            </columns>
+        </TableView>
+    </center>
+    <bottom>
+        <HBox fillHeight="false" prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="delTask" disable="true" mnemonicParsing="false" onAction="#clickDelTask" prefHeight="27.0" prefWidth="69.0" text="Delete" />
+                <Button fx:id="addTask" mnemonicParsing="false" onAction="#clickAddTask" text="Add" />
+                <Button fx:id="changeTask" disable="true" mnemonicParsing="false" onAction="#clickChangeTask" text="Change" />
+                <Button fx:id="cancelTask" disable="true" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickCancelTask" text="Cancel" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

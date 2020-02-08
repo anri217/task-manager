@@ -1,11 +1,9 @@
 package server;
 
 import server.controller.Controller;
-import server.model.Journal;
-import server.model.Task;
+import shared.model.Task;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

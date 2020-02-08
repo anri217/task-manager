@@ -5,16 +5,16 @@ import server.exceptions.PropertyParserInitException;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
-import server.model.Journal;
-import server.model.Status;
-import server.model.Task;
-import server.view.mainWindow.MainWindow;
+import shared.model.Journal;
+import shared.model.Status;
+import shared.model.Task;
+import shared.view.mainWindow.MainWindow;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException {
+    /*public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException {
         try {
             BinarySerializer ioUtil = BinarySerializer.getInstance();
             Journal journal = (Journal) ioUtil.restoreFunction();
@@ -58,5 +58,5 @@ public class Main {
                 alert.showAndWait();
             }
         });
-    }
+    }*/
 }

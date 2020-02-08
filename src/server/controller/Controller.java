@@ -1,8 +1,8 @@
 package server.controller;
 
-import server.model.Journal;
-import server.model.Status;
-import server.model.Task;
+import shared.model.Journal;
+import shared.model.Status;
+import shared.model.Task;
 
 import java.util.Collections;
 import java.util.List;

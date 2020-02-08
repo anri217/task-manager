@@ -1,7 +1,7 @@
 package server.controller.factories;
 
-import server.model.Status;
-import server.model.Task;
+import shared.model.Status;
+import shared.model.Task;
 
 import java.time.LocalDateTime;
 

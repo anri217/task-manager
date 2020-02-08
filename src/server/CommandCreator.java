@@ -2,18 +2,14 @@ package server;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import server.model.Journal;
-import server.model.Task;
+import shared.model.Task;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CommandCreator {
     @JsonIgnore
-    private server.model.Task task;
+    private shared.model.Task task;
     private int command_id;
     private Map<Integer, Task> journal;
     private String command;

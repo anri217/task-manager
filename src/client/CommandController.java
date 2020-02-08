@@ -1,7 +1,7 @@
 package client;
 
 import server.Command;
-import server.model.Task;
+import shared.model.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;

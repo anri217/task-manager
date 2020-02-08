@@ -1,6 +1,6 @@
 package server.controller;
 
-import server.model.Task;
+import shared.model.Task;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

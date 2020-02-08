@@ -1,7 +1,5 @@
 package client;
 
-import client.view.mainWindow.MainWindow;
-
 import java.io.*;
 import java.net.Socket;
 

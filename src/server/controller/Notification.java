@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import server.model.Task;
-import server.view.notificationWindow.NotificationController;
-import server.view.notificationWindow.NotificationWindow;
+import shared.model.Task;
+import shared.view.notificationWindow.NotificationController;
+import shared.view.notificationWindow.NotificationWindow;
 
 import java.awt.*;
 import java.io.IOException;
