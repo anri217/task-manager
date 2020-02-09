@@ -37,9 +37,6 @@ public class ClientFacade {
                 }
 
             }
-            dis.close();
-            dos.close();
-            socket.close();
             System.out.println("Closing connections & channels on clientSide - DONE.");
         } catch (IOException ex) {
             throw new IOException(ex.getMessage());

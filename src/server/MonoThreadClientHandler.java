@@ -29,9 +29,9 @@ public class MonoThreadClientHandler implements Runnable {
                     dos.writeUTF("Server reply - " + entry + " - OK");
                     break;
                 }
-
                 System.out.println("Server start waiting new message from client");
             }
+            clientDialog.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
