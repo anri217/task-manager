@@ -1,4 +1,4 @@
-package shared.view.notificationWindow;
+package client.view.notificationWindow;
 
 /**
  * This is class for named constants used in NotificationController

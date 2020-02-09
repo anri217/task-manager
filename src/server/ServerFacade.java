@@ -6,42 +6,38 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ServerFacade {
     //map
-   private int port;
+   private Map<Integer, Socket> clients;
 
-   private static ExecutorService executeIt = Executors.newCachedThreadPool();
+   private static ExecutorService executeIt = Executors.newFixedThreadPool(2);
 
-   public ServerFacade(int port) {
-       this.port = port;
+   public ServerFacade() {
+       clients = new HashMap<Integer, Socket>();
    }
 
-   private DataOutputStream dos;
-
-   public ServerFacade() {}
 
    public void connect() {
        try (ServerSocket server = new ServerSocket(3345)) {
+           BufferedReader ins = new BufferedReader(new InputStreamReader(System.in));
            while (!server.isClosed()) {
-               Socket client = server.accept();
-
-               BufferedReader ins = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
-               dos = new DataOutputStream(client.getOutputStream());
 
                if (ins.ready()) {
                    System.out.println("Main Server found any messages in channel, let's look at them.");
                    String serverCommand = ins.readLine();
-                   sendCommand(serverCommand);
                    if (serverCommand.equalsIgnoreCase("quit")) {
                        System.out.println("Main Server initiate exiting...");
                        server.close();
                        break;
                    }
                }
+
+               Socket client = server.accept();
 
                executeIt.execute(new MonoThreadClientHandler(client));
                System.out.print("Connection accepted.");
@@ -51,9 +47,4 @@ public class ServerFacade {
            e.printStackTrace();
        }
    }
-
-    public void sendCommand(String command) throws IOException {
-        dos.writeUTF(command);
-        dos.flush();
-    }
 }

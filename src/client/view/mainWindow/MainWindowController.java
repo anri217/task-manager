@@ -1,4 +1,4 @@
-package shared.view.mainWindow;
+package client.view.mainWindow;
 
 import server.controller.Controller;
 import server.controller.utils.BinarySerializer;
@@ -14,11 +14,11 @@ import javafx.stage.Stage;
 import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
-import shared.view.MainWindowRow;
-import shared.view.RefreshHelper;
-import shared.view.SelectedTasksController;
-import shared.view.addTaskWindow.AddTaskWindow;
-import shared.view.changeTaskWindow.ChangeTaskWindow;
+import client.view.MainWindowRow;
+import client.view.RefreshHelper;
+import client.view.SelectedTasksController;
+import client.view.addTaskWindow.AddTaskWindow;
+import client.view.changeTaskWindow.ChangeTaskWindow;
 
 import java.io.IOException;
 import java.net.URL;

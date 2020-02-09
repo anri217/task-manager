@@ -1,4 +1,4 @@
-package shared.view.mainWindow;
+package client.view.mainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

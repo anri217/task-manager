@@ -1,4 +1,4 @@
-package shared.view.addTaskWindow;
+package client.view.addTaskWindow;
 
 import server.controller.Controller;
 import server.controller.factories.TaskFactory;

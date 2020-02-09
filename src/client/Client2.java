@@ -1,6 +1,5 @@
 package client;
 
-import shared.view.mainWindow.MainWindow;
 import server.controller.utils.Paths;
 import server.controller.utils.PropertyParser;
 import server.exceptions.PropertyParserInitException;
@@ -25,9 +24,9 @@ public class Client2 {
             System.out.println("Client connected to socket." + '\n');
             SendCommandHelper.getInstance().setFacade(clientFacade);
 
-            MainWindow.run(args);
-            clientFacade.getDos().close();
-            clientFacade.getDis().close();
+            //MainWindow.run(args);
+            //clientFacade.getDos().close();
+            //clientFacade.getDis().close();
         } catch (PropertyParserInitException | IOException ex) {
             throw new PropertyParserInitException(ex.getMessage());
         }

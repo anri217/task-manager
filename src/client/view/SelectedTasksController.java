@@ -1,4 +1,4 @@
-package shared.view;
+package client.view;
 
 /**
  * Class for defining the selected task

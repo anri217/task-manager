@@ -1,4 +1,4 @@
-package shared.view.changeTaskWindow;
+package client.view.changeTaskWindow;
 
 import server.controller.Controller;
 import server.controller.factories.TaskFactory;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import shared.model.Status;
 import shared.model.Task;
-import shared.view.SelectedTasksController;
+import client.view.SelectedTasksController;
 
 import java.net.URL;
 import java.time.LocalDate;

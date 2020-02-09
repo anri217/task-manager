@@ -8,12 +8,8 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MultiThreadServer {
+public class MultiThreadServer implements Runnable {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
 //        try (ServerSocket server = new ServerSocket(3345);
 //             BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
 //            while (!server.isClosed()) {
@@ -36,6 +32,9 @@ public class MultiThreadServer {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
+    @Override
+    public void run() {
         ServerFacade serverFacade = new ServerFacade();
         serverFacade.connect();
     }

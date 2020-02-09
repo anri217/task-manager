@@ -1,4 +1,4 @@
-package shared.view;
+package client.view;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

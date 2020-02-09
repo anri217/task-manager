@@ -1,4 +1,4 @@
-package shared.view.notificationWindow;
+package client.view.notificationWindow;
 
 import server.controller.Controller;
 import javafx.event.ActionEvent;
@@ -10,7 +10,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import shared.model.Status;
 import shared.model.Task;
-import shared.view.RefreshHelper;
+import client.view.RefreshHelper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

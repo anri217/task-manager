@@ -1,6 +1,6 @@
-package shared.view;
+package client.view;
 
-import shared.view.mainWindow.MainWindowController;
+import client.view.mainWindow.MainWindowController;
 
 /**
  * Class helping refresh table, stores server.controller

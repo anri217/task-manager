@@ -1,4 +1,4 @@
-package shared.view.notificationWindow;
+package client.view.notificationWindow;
 
 import javafx.application.Application;
 import javafx.stage.Modality;
