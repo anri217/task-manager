@@ -32,19 +32,4 @@ public class ClientFacade {
             throw new IOException(ex.getMessage());
         }
     }
-
-
-
-    /*public void waitCommand() throws IOException {
-        while (true) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-            if (br.ready()) {
-                String clientCommand = br.readLine();
-
-                System.out.println("Server sent message " + clientCommand + " to server.");
-
-                break;
-            }
-        }
-    }*/
 }
