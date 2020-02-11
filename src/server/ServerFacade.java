@@ -28,15 +28,6 @@ public class ServerFacade {
        try (ServerSocket server = new ServerSocket(3345)) {
            BufferedReader ins = new BufferedReader(new InputStreamReader(System.in));
            while (!server.isClosed()) {
-               /*if (ins.ready()) {
-                   System.out.println("Main Server found any messages in channel, let's look at them.");
-                   String serverCommand = ins.readLine();
-                   if (serverCommand.equalsIgnoreCase("quit")) {
-                       System.out.println("Main Server initiate exiting...");
-                       server.close();
-                       break;
-                   }
-               }*/
                Socket client = server.accept();
 
                executeIt.execute(new MonoThreadClientHandler(client));
