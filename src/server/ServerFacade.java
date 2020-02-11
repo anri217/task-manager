@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ServerFacade {
-    //map
+
    private Map<Integer, Socket> clients;
 
    private static ExecutorService executeIt = Executors.newFixedThreadPool(2);
@@ -23,7 +23,6 @@ public class ServerFacade {
    public ServerFacade() {
        clients = new HashMap<Integer, Socket>();
    }
-
 
    public void connect() {
        try (ServerSocket server = new ServerSocket(3345)) {
