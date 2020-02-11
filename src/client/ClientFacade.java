@@ -1,5 +1,6 @@
 package client;
 
+import client.view.mainWindow.MainWindow;
 import shared.CommandSender;
 
 import java.io.*;
@@ -17,35 +18,21 @@ public class ClientFacade {
         this.port = port;
     }
 
-    void connect() throws IOException {
+    void connect(String[] args) throws IOException {
         try (Socket socket = new Socket(host, port);
-             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
              DataInputStream dis = new DataInputStream(socket.getInputStream());
-             BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            CommandSender commandSender = CommandSender.getInstance();
-            commandSender.setDos(dos);
-            while (!socket.isClosed()) {
-                System.out.println("Client start writing in channel...");
-                String clientCommand = br.readLine();
-                commandSender.sendCommand(clientCommand);
-
-
-                System.out.println("Client sent message " + clientCommand + " to server.");
-                if (clientCommand.equalsIgnoreCase("quit")) {
-                    System.out.println("Client kill connections");
-                    break;
-                }
-
-            }
-            System.out.println("Closing connections & channels on clientSide - DONE.");
+             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            CommandSender sender = CommandSender.getInstance();
+            sender.setDos(dos);
+            ReadMsg readMsg = new ReadMsg(dis);
+            readMsg.start();
+            MainWindow.run(args);
         } catch (IOException ex) {
             throw new IOException(ex.getMessage());
         }
     }
 
-    public void closeConnection() {
-
-    }
 
 
     /*public void waitCommand() throws IOException {

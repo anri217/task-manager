@@ -17,6 +17,8 @@ public class CommandSender {
         return instance;
     }
 
+    private CommandSender() {}
+
     private DataOutputStream dos;
 
     public DataOutputStream getDos() {
