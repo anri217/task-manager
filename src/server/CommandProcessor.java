@@ -26,7 +26,15 @@ public class CommandProcessor {
             break;
             case(3): changeTask();
             break;
+            case(4):cancelTask();
+            break;
         }
+    }
+
+    private void cancelTask() throws JsonProcessingException {
+        Task task = (Task)command.getContent();
+        Controller.getInstance().cancelTask(task.getId());
+        getAll();
     }
 
     private void addTask() throws JsonProcessingException {
