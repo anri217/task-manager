@@ -1,16 +1,11 @@
 package server;
 
-import shared.model.Task;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class Command {
-    private int command_id;
+    private int commandId;
     private Object content;
 
-    public Command(int command_id, Object content){
-        setCommand_id(command_id);
+    public Command(int commandId, Object content){
+        setCommandId(commandId);
         setContent(content);
     }
 
@@ -26,11 +21,11 @@ public class Command {
         this.content = content;
     }
 
-    public void setCommand_id(int command_id) {
-        this.command_id = command_id;
+    public void setCommandId(int commandId) {
+        this.commandId = commandId;
     }
 
-    public int getCommand_id() {
-        return command_id;
+    public int getCommandId() {
+        return commandId;
     }
 }

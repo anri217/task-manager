@@ -4,11 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import server.controller.Controller;
 import shared.model.Task;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 public class CommandProcessor {
     private Command command;
 
@@ -17,7 +12,7 @@ public class CommandProcessor {
     }
 
     public void chooseActivity() throws JsonProcessingException {
-        switch(command.getCommand_id()){
+        switch(command.getCommandId()){
             case(0): getAll();
             break;
             case(1): addTask();

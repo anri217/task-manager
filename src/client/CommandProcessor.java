@@ -4,10 +4,7 @@ import server.Command;
 import server.controller.Notifier;
 import shared.model.Task;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class CommandProcessor {
     private Command command;
@@ -17,7 +14,7 @@ public class CommandProcessor {
     }
 
     public void chooseActivity(){
-        switch (command.getCommand_id()){
+        switch (command.getCommandId()){
             case(0): getAll();
             break;
             case(1): getNotification();
