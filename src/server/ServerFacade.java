@@ -1,5 +1,8 @@
 package server;
 
+import server.portgenerator.PortGenerator;
+import shared.CommandSender;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -25,8 +28,7 @@ public class ServerFacade {
        try (ServerSocket server = new ServerSocket(3345)) {
            BufferedReader ins = new BufferedReader(new InputStreamReader(System.in));
            while (!server.isClosed()) {
-
-               if (ins.ready()) {
+               /*if (ins.ready()) {
                    System.out.println("Main Server found any messages in channel, let's look at them.");
                    String serverCommand = ins.readLine();
                    if (serverCommand.equalsIgnoreCase("quit")) {
@@ -34,14 +36,12 @@ public class ServerFacade {
                        server.close();
                        break;
                    }
-               }
-
+               }*/
                Socket client = server.accept();
 
                executeIt.execute(new MonoThreadClientHandler(client));
-               System.out.print("Connection accepted.");
+               System.out.print("Connection1 accepted");
            }
-           executeIt.shutdown();
        } catch (IOException e) {
            e.printStackTrace();
        }

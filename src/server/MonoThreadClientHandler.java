@@ -1,9 +1,5 @@
 package server;
 
-import server.exceptions.PropertyParserInitException;
-import shared.CommandSender;
-
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.Socket;
 
@@ -17,11 +13,11 @@ public class MonoThreadClientHandler implements Runnable {
 
     @Override
     public void run() {
-        try (DataInputStream dis = new DataInputStream(clientDialog.getInputStream());
-             DataOutputStream dos = new DataOutputStream(clientDialog.getOutputStream());
-             BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+        try (DataInputStream br = new DataInputStream(clientDialog.getInputStream());
+                DataOutputStream dos = new DataOutputStream(clientDialog.getOutputStream())) {
             while (!clientDialog.isClosed()) {
-                String entry = dis.readUTF();
+                System.out.println("Server start waiting message from client");
+                String entry = br.readUTF();
                 System.out.println("READ from clientDialog message - " + entry);
 
                 if (entry.equalsIgnoreCase("quit")) {
@@ -29,7 +25,6 @@ public class MonoThreadClientHandler implements Runnable {
                     dos.writeUTF("Server reply - " + entry + " - OK");
                     break;
                 }
-                System.out.println("Server start waiting new message from client");
             }
             clientDialog.close();
         } catch (IOException ex) {
