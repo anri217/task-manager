@@ -7,15 +7,23 @@ import java.util.Map;
 
 public class Command {
     private int command_id;
-    private Map<Integer, Task> tasks;
+    private Object content;
 
-    public Command(int command_id, Map<Integer, Task> tasks){
+    public Command(int command_id, Object content){
         setCommand_id(command_id);
-        setTasks(tasks);
+        setContent(content);
     }
 
     public Command(){
-        tasks = new HashMap<Integer, Task>();
+        this.content = new Object();
+    }
+
+    public Object getContent() {
+        return content;
+    }
+
+    public void setContent(Object content) {
+        this.content = content;
     }
 
     public void setCommand_id(int command_id) {
@@ -24,13 +32,5 @@ public class Command {
 
     public int getCommand_id() {
         return command_id;
-    }
-
-    public void setTasks(Map<Integer, Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public Map<Integer, Task> getTasks() {
-        return tasks;
     }
 }
