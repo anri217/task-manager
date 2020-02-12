@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException, IOException {
+        ///
         /*try {
             BinarySerializer ioUtil = BinarySerializer.getInstance();
             Backupper backupper = new Backupper(ioUtil);
