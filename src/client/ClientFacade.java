@@ -21,8 +21,7 @@ public class ClientFacade {
     void connect(String[] args) throws IOException {
         try (Socket socket = new Socket(host, port);
              DataInputStream dis = new DataInputStream(socket.getInputStream());
-             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+             DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
             CommandSender sender = CommandSender.getInstance();
             sender.setDos(dos);
             ReadMsg readMsg = new ReadMsg(dis);

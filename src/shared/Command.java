@@ -1,4 +1,4 @@
-package server;
+package shared;
 
 public class Command {
     private int commandId;

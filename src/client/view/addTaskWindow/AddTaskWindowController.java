@@ -1,14 +1,17 @@
 package client.view.addTaskWindow;
 
-import server.CommandCreator;
-import server.controller.Controller;
-import server.controller.factories.TaskFactory;
-import server.idgenerator.IdGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import server.controller.Controller;
+import server.controller.factories.TaskFactory;
+import server.idgenerator.IdGenerator;
+import shared.Command;
+import shared.CommandCreator;
+import shared.CommandSender;
+import shared.JsonBuilder;
 import shared.model.Status;
 import shared.model.Task;
 
@@ -74,12 +77,13 @@ public class AddTaskWindowController implements Initializable {
 
     /**
      * Function adding task in table
+     *
      * @param actionEvent
      * @throws Exception
      */
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
-        if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
+        if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ALERT");
             alert.setHeaderText("Enter date and time");
@@ -102,14 +106,17 @@ public class AddTaskWindowController implements Initializable {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
-                if (Controller.getInstance().isTaskInJournal(newTask)){
+                if (Controller.getInstance().isTaskInJournal(newTask)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("ALERT");
                     alert.setHeaderText("This task already exists");
                     alert.showAndWait();
-                }
-                else {
-                    Controller.getInstance().addTask(newTask);
+                } else {
+                    CommandCreator creator = new CommandCreator();
+                    Command command = creator.createCommand(1, newTask);
+                    String jsonString = JsonBuilder.createJsonString(command);
+                    CommandSender.getInstance().sendCommand(jsonString);
+                    //Controller.getInstance().addTask(newTask);
                     Stage stage = (Stage) addButton.getScene().getWindow();
                     stage.close();
                 }
@@ -120,6 +127,7 @@ public class AddTaskWindowController implements Initializable {
 
     /**
      * Closing add task window
+     *
      * @param actionEvent
      */
 
