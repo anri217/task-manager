@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MultiThreadServer implements Runnable {
+public class MultiThreadServer extends Thread {
     @Override
     public void run() {
         ServerFacade serverFacade = new ServerFacade();

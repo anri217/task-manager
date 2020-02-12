@@ -2,6 +2,11 @@ package server;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.controller.Controller;
+import server.controller.factories.TaskFactory;
+import shared.Command;
+import shared.CommandCreator;
+import shared.JsonBuilder;
+import shared.JsonParser;
 import shared.model.Status;
 import shared.model.Task;
 
@@ -12,18 +17,15 @@ public class test {
         Task task1 = new Task(0, "TaskName1", "TaskDiscription", LocalDateTime.now(), Status.PLANNED);
         Task task2 = new Task(1, "TaskName2", "TaskDiscription", LocalDateTime.now(), Status.PLANNED);
 
-        Controller.getInstance().addTask(task1);
-        Controller.getInstance().addTask(task2);
-        CommandCreator commandCreator = new CommandCreator(); //создаем экземпляр класса для создания команды
-        Command command = commandCreator.createCommand(0, Controller.getInstance().getAll()); // создаем команду
-        String stringCommand = JsonBuilder.createJsonString(command); // переводим команду в строку json
-        System.out.println(stringCommand);
-        client.CommandProcessor clientCommandProcessor = new client.CommandProcessor(command); // создаем CommandProcessor клиента
-        clientCommandProcessor.chooseActivity(); // вызываем выбор действий по пришедшей команде
-        command = commandCreator.createCommand(2, task2);
-        stringCommand = JsonBuilder.createJsonString(command);
-        System.out.println(stringCommand);
-        server.CommandProcessor serverCommandProcessor = new server.CommandProcessor(command);
-        serverCommandProcessor.chooseActivity();
+        TaskFactory taskFactory = new TaskFactory();
+        Task task3 = new Task(taskFactory.createTask(3, "Task3", "TaskDiscription", LocalDateTime.now(), Status.PLANNED));
+        CommandCreator commandCreator = new CommandCreator();
+        Command command = commandCreator.createCommand(1,task3);
+        String jsonString = JsonBuilder.createJsonString(command);
+        JsonParser parser = new JsonParser(jsonString);
+        parser.parseCommand();
+        Command newCommand = parser.getCommand();
+        Task task = (Task)newCommand.getContent();
+        System.out.println(task);
     }
 }

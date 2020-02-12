@@ -1,6 +1,6 @@
 package client;
 
-import server.Command;
+import shared.Command;
 import server.controller.Notifier;
 import shared.model.Task;
 

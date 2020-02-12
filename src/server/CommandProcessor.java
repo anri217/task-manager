@@ -1,7 +1,12 @@
 package server;
 
+import client.view.RefreshHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.controller.Controller;
+import server.view.mainWindow.MainWindowController;
+import shared.Command;
+import shared.CommandCreator;
+import shared.JsonBuilder;
 import shared.model.Task;
 
 public class CommandProcessor {
@@ -35,7 +40,9 @@ public class CommandProcessor {
     private void addTask() throws JsonProcessingException {
         Task task = (Task)command.getContent();
         Controller.getInstance().addTask(task);
-        getAll();
+        MainWindowController controller = new MainWindowController();
+        controller.refresh();
+        //getAll();
     }
 
     private void deleteTask() throws JsonProcessingException {

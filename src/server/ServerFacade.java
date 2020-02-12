@@ -31,7 +31,7 @@ public class ServerFacade {
                Socket client = server.accept();
 
                executeIt.execute(new MonoThreadClientHandler(client));
-               System.out.print("Connection1 accepted");
+               System.out.println("Connection accepted");
            }
        } catch (IOException e) {
            e.printStackTrace();

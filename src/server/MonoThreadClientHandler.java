@@ -1,5 +1,9 @@
 package server;
 
+import shared.Command;
+import shared.JsonParser;
+import shared.model.Task;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -18,6 +22,11 @@ public class MonoThreadClientHandler implements Runnable {
             while (!clientDialog.isClosed()) {
                 System.out.println("Server start waiting message from client");
                 String entry = br.readUTF();
+                JsonParser parser = new JsonParser(entry);
+                parser.parseCommand();
+                Command command = parser.getCommand();
+               /* CommandProcessor processor = new CommandProcessor(command);
+                processor.chooseActivity();*/
                 System.out.println("READ from clientDialog message - " + entry);
 
                 if (entry.equalsIgnoreCase("quit")) {
