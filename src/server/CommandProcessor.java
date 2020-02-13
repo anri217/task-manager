@@ -11,13 +11,17 @@ import shared.model.Task;
 
 public class CommandProcessor {
     private Command command;
+    private CommandProcessorHandler handler;
 
     public CommandProcessor(Command command){
         this.command = command;
+        handler = new GetAllHandler(command);
+        handler.linkWith(new AddTaskHandler(command)).linkWith(new DeleteTaskHandler(command)).linkWith(new ChangeTaskHandler(command)).linkWith(new CancelTaskHandler(command));
     }
 
     public void chooseActivity() throws JsonProcessingException {
-        switch(command.getCommandId()){
+        handler.check(command);
+        /*switch(command.getCommandId()){
             case(0): getAll();
             break;
             case(1): addTask();
@@ -28,7 +32,7 @@ public class CommandProcessor {
             break;
             case(4):cancelTask();
             break;
-        }
+        }*/
     }
 
     private void cancelTask() throws JsonProcessingException {

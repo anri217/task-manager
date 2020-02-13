@@ -8,20 +8,24 @@ import java.util.List;
 
 public class CommandProcessor {
     private Command command;
+    private CommandProcessorHandler handler;
 
     public CommandProcessor(Command command){
         this.command = command;
+        handler = new GetAllClientHandler(command);
+        handler.linkWith(new GetNotificationHandler(command)).linkWith(new GetNotificationHandler(command)).linkWith(new GetErrorHandler(command));
     }
 
     public void chooseActivity(){
-        switch (command.getCommandId()){
+        handler.check(command);
+        /*switch (command.getCommandId()){
             case(0): getAll();
             break;
             case(1): getNotification();
             break;
             case(99): getError();
             break;
-        }
+        }*/
     }
 
     private void getError(){
