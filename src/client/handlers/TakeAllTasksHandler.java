@@ -1,7 +1,10 @@
-package client;
+package client.handlers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import server.TaskConverter;
 import server.controller.factories.TaskFactory;
 import shared.Command;
+import shared.Handler;
 import shared.model.Status;
 import shared.model.Task;
 
@@ -11,27 +14,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class GetAllClientHandler extends CommandProcessorHandler {
-    private Command command;
-    private List<LinkedHashMap<String, Object>> taskMap;
+public class TakeAllTasksHandler implements Handler {
+
     private List<Task> tasks;
 
-    public GetAllClientHandler(Command command){
-        setCommand(command);
-        tasks = new ArrayList<>();
-
-    }
-
     @Override
-    public boolean check(Command command) {
-        if(command.getCommandId() == 0){
-            taskMap = (List)command.getContent();
-            for (int i = 0; i < taskMap.size(); i++){
-                createTask(taskMap.get(i));
-            }
-            System.out.println(tasks);
+    public void handle(Command command) throws JsonProcessingException {
+        tasks = new ArrayList<>();
+        List<LinkedHashMap<String, Object>> taskList = (List)command.getContent();
+        TaskConverter taskConverter = new TaskConverter();
+        for (int i = 0; i < taskList.size(); i++){
+           tasks.add(taskConverter.convert(taskList.get(i)));
         }
-        return checkNext(command);
+        System.out.println(tasks);
+        // todo рефреш таблицы тасками из списка tasks
     }
 
     private void createTask(LinkedHashMap<String, Object> map){
@@ -56,13 +52,5 @@ public class GetAllClientHandler extends CommandProcessorHandler {
                 }
             }
         }
-    }
-
-    public Command getCommand() {
-        return command;
-    }
-
-    public void setCommand(Command command) {
-        this.command = command;
     }
 }

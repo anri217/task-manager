@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class JsonBuilder {
+
+    //в папку
     private final static String PATH_TO_JSON = "staff/task.json";
 
     public static void toJson(Task task) throws IOException {

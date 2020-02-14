@@ -1,47 +1,39 @@
 package client;
 
+import client.handlers.DisconnectHandler;
+import client.handlers.ErrorHandler;
+import client.handlers.TakeAllTasksHandler;
+import client.handlers.TakeNotificationHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import shared.Command;
 import server.controller.Notifier;
+import shared.Handler;
 import shared.model.Task;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CommandProcessor {
     private Command command;
-    private CommandProcessorHandler handler;
+    private Map<Integer, Handler> handlerMap;
 
-    public CommandProcessor(Command command){
-        this.command = command;
-        handler = new GetAllClientHandler(command);
-        handler.linkWith(new GetNotificationHandler(command)).linkWith(new GetNotificationHandler(command)).linkWith(new GetErrorHandler(command));
+    public CommandProcessor(){
+        handlerMap = new HashMap<Integer, Handler>();
+        handlerMap.put(0, new TakeAllTasksHandler());
+        handlerMap.put(1, new TakeNotificationHandler());
+        handlerMap.put(99, new ErrorHandler());
+        handlerMap.put(70, new DisconnectHandler());
     }
 
-    public void chooseActivity(){
-        handler.check(command);
-        /*switch (command.getCommandId()){
-            case(0): getAll();
-            break;
-            case(1): getNotification();
-            break;
-            case(99): getError();
-            break;
-        }*/
+    public void addHandler(Integer key, Handler handler){
+        handlerMap.put(key, handler);
     }
 
-    private void getError(){
-        String errorMessage = (String) command.getContent();
-        System.out.println(errorMessage);
-    }
-
-    private void getNotification(){
-        Task task = (Task)command.getContent();
-        Notifier notifier = new Notifier();
-        notifier.createNotification(task);
-    }
-
-    private void getAll(){
-        List<Task> tasks = (List<Task>) command.getContent();
-        System.out.println(tasks); // заменить потом на вызов рефреша в табличке
+    public void processCommand(Command command) throws JsonProcessingException {
+        int  commandId = command.getCommandId();
+        handlerMap.get(commandId).handle(command);
+        //это вся логика. + проверить на налл.
     }
 
     public void setCommand(Command command) {
