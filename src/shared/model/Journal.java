@@ -130,4 +130,8 @@ public class Journal implements Serializable {
     public boolean isTaskInJournal(int id) {
         return tasks.containsKey(id);
     }
+
+    public int size() {
+        return tasks.size();
+    }
 }

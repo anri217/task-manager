@@ -15,7 +15,7 @@ import shared.model.Task;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-public class AddTaskHandler1 implements Handler {
+public class AddTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws IOException {

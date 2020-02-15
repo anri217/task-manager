@@ -50,17 +50,32 @@ public class MainWindowController implements Initializable {
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
 
-    private ArrayList<MainWindowRow> rows = new ArrayList<>();
+    private ArrayList<MainWindowRow> rows;
+    private Journal journal;
+
+    public MainWindowController() {
+        this.rows = new ArrayList<>();
+        this.journal = new Journal();
+    }
+
+    public Journal getJournal() {
+        return journal;
+    }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
+    }
 
     /**
      * Refreshing table
      */
 
-    public void refresh(ArrayList<Task> tasks) {
+    public void refresh() {
         delTask.setDisable(true);
         changeTask.setDisable(true);
         cancelTask.setDisable(true);
         rows.clear();
+        List<Task> tasks = journal.getAll();
         for (int i = 0; i < tasks.size(); i++) {
             rows.add(new MainWindowRow(tasks.get(i)));
             rows.get(i).getCheckBox().setOnAction(actionEvent -> {
@@ -83,7 +98,7 @@ public class MainWindowController implements Initializable {
         for (MainWindowRow row : rows) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
-                if (Controller.getInstance().getTask(row.getId()).getStatus() != Status.PLANNED) {
+                if (this.journal.getTask(row.getId()).getStatus() != Status.PLANNED) {
                     plannedCount++;
                 }
             }

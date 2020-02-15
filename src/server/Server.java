@@ -17,7 +17,7 @@ import shared.model.Journal;
 public class Server extends Application {
     public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException {
         Backupper backupper = new Backupper(BinarySerializer.getInstance());
-        backupper.restoreFunction(1);
+        //backupper.restoreFunction(1);
         MultiThreadServer multiThreadServer = new MultiThreadServer();
         multiThreadServer.start();
         Application.launch(args);
