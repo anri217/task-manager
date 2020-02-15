@@ -15,16 +15,15 @@ public class AddTaskHandler1 implements Handler {
 
     @Override
     public void handle(Command command) throws JsonProcessingException {
-        TaskConverter taskConverter = new TaskConverter();
-        Task task =  taskConverter.convert((LinkedHashMap<String, Object>)command.getContent());
+        Task task =  TaskConverter.getInstance().convert((LinkedHashMap<String, Object>)command.getContent());
         Controller.getInstance().addTask(task);
         System.out.println(createStringCommand()); // todo вместо вывода в консоль - отправка клиенту той строки.
     }
 
     private String createStringCommand() throws JsonProcessingException {
-        CommandCreator commandCreator = new CommandCreator();
-        Command newCommand = commandCreator.createCommand(0, Controller.getInstance().getAll());
-        String stringJson = JsonBuilder.createJsonString(newCommand);
-        return stringJson;
+        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());;
+        JsonBuilder.getInstance().createJsonString(newCommand);
+        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);;
+        return stringCommand;
     }
 }

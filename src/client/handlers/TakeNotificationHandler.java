@@ -25,8 +25,7 @@ public class TakeNotificationHandler implements Handler {
     @Override
     public void handle(Command command) throws JsonProcessingException {
         LinkedHashMap<String, Object> taskMap = (LinkedHashMap<String, Object>) command.getContent();
-        TaskConverter taskConverter = new TaskConverter();
-        task = taskConverter.convert(taskMap);
+        task = TaskConverter.getInstance().convert(taskMap);
         //showNotification();
         System.out.println(this.task); //todo вместо вывода в консоль сделать появление в окне через метод showNotification
     }

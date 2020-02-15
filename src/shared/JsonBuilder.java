@@ -9,6 +9,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class JsonBuilder {
+    private static JsonBuilder instance;
+
+    private JsonBuilder(){
+
+    }
+
+    public static JsonBuilder getInstance(){
+        if (instance == null){
+            instance = new JsonBuilder();
+        }
+        return instance;
+    }
 
     //в папку
     private final static String PATH_TO_JSON = "staff/task.json";
@@ -18,7 +30,7 @@ public class JsonBuilder {
         mapper.writeValue(new File(PATH_TO_JSON), task);
     }
 
-    public static String createJsonString(Object object) throws JsonProcessingException {
+    public String createJsonString(Object object) throws JsonProcessingException {
         //ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
         ObjectMapper mapper = new ObjectMapper().findAndRegisterModules().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return mapper.writeValueAsString(object);
