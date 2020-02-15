@@ -1,13 +1,13 @@
 package server;
 
 import client.CommandProcessor;
-import client.view.mainWindow.MainWindow;
 import client.view.notificationWindow.NotificationWindow;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.application.Application;
 import server.controller.Controller;
 import server.controller.Notification;
 import server.controller.factories.TaskFactory;
+import server.view.mainWindow.MainWindow;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
@@ -19,11 +19,12 @@ import java.time.LocalDateTime;
 
 public class test {
     public static void main(String[] args) throws Exception {
-      //  test1();
-        test2();
-        //test3();
-        //testn();
-       // testServerCommandProcessor();
+//      //  test1();
+//        test2();
+//        //test3();
+//        //testn();
+//       // testServerCommandProcessor();
+        MainWindow.run(args);
     }
 
     public static void testn() throws JsonProcessingException {
