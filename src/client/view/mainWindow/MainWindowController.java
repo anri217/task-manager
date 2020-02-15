@@ -1,9 +1,10 @@
 package client.view.mainWindow;
 
-import server.controller.Controller;
-import server.controller.utils.BinarySerializer;
-import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
+import client.view.MainWindowRow;
+import client.view.RefreshHelper;
+import client.view.SelectedTasksController;
+import client.view.addTaskWindow.AddTaskWindow;
+import client.view.changeTaskWindow.ChangeTaskWindow;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,14 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import server.controller.Controller;
+import server.controller.utils.BinarySerializer;
+import server.exceptions.BackupFileException;
+import server.exceptions.PropertyParserInitException;
 import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
-import client.view.MainWindowRow;
-import client.view.RefreshHelper;
-import client.view.SelectedTasksController;
-import client.view.addTaskWindow.AddTaskWindow;
-import client.view.changeTaskWindow.ChangeTaskWindow;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,14 +56,13 @@ public class MainWindowController implements Initializable {
      * Refreshing table
      */
 
-    public void refresh() {
+    public void refresh(ArrayList<Task> tasks) {
         delTask.setDisable(true);
         changeTask.setDisable(true);
         cancelTask.setDisable(true);
         rows.clear();
-        int length = Controller.getInstance().getAll().size();
-        for (int i = 0; i < length; i++) {
-            rows.add(new MainWindowRow(Controller.getInstance().getAll().get(i)));
+        for (int i = 0; i < tasks.size(); i++) {
+            rows.add(new MainWindowRow(tasks.get(i)));
             rows.get(i).getCheckBox().setOnAction(actionEvent -> {
                 selectedCheckBox();
             });
@@ -71,6 +70,8 @@ public class MainWindowController implements Initializable {
         taskTable.setItems(FXCollections.observableList(rows));
         RefreshHelper.getInstance().setMainWindowController(this);
     }
+
+
 
     /**
      * Set disable for buttons
@@ -147,7 +148,7 @@ public class MainWindowController implements Initializable {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
         addTaskWindow.start(stage);
-        refresh();
+        //refresh();
     }
 
     /**
@@ -189,7 +190,7 @@ public class MainWindowController implements Initializable {
         ChangeTaskWindow changeWindow = new ChangeTaskWindow();
         Stage stage = new Stage();
         changeWindow.start(stage);
-        refresh();
+        //refresh();
     }
 
     /**
@@ -217,9 +218,9 @@ public class MainWindowController implements Initializable {
         Journal journal2 = (Journal) BinarySerializer.getInstance().deserializeObject();
         List<Task> arr = journal2.getAll();
         for (int i = 0; i < arr.size(); ++i) {
-            if(!(journal1.isTaskInJournal(arr.get(i).getId()))) {
-                if (arr.get(i).getDateOfDone() == null){
-                    if (arr.get(i).getPlannedDate().isBefore(LocalDateTime.now())){
+            if (!(journal1.isTaskInJournal(arr.get(i).getId()))) {
+                if (arr.get(i).getDateOfDone() == null) {
+                    if (arr.get(i).getPlannedDate().isBefore(LocalDateTime.now())) {
                         arr.get(i).setStatus(Status.OVERDUE);
                     }
                 }
@@ -227,7 +228,7 @@ public class MainWindowController implements Initializable {
             }
         }
         Controller.getInstance().setJournal(journal1);
-        refresh();
+        //refresh();
     }
 
     /**
@@ -238,11 +239,12 @@ public class MainWindowController implements Initializable {
 
     public void clickCancelTask(ActionEvent actionEvent) {
         int length = taskTable.getItems().size();
+
         for (int i = 0; i < length; i++) {
             if (taskTable.getItems().get(i).getCheckBox().isSelected()) {
                 Controller.getInstance().cancelTask(taskTable.getItems().get(i).getId());
             }
         }
-        refresh();
+        //refresh();
     }
 }

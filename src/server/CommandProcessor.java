@@ -12,14 +12,25 @@ import shared.Handler;
 import shared.JsonBuilder;
 import shared.model.Task;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandProcessor {
+    private static CommandProcessor instance;
+
+    public static synchronized CommandProcessor getInstance() {
+        if (instance == null) {
+            instance = new CommandProcessor();
+        }
+        return instance;
+    }
+
+
     private Command command;
     private Map<Integer, Handler> handlerMap;
 
-    public CommandProcessor(){
+    private CommandProcessor(){
         handlerMap = new HashMap<Integer, Handler>();
         handlerMap.put(0, new GiveTaskToClientHandler());
         handlerMap.put(1,new AddTaskHandler1());
@@ -33,7 +44,7 @@ public class CommandProcessor {
         handlerMap.put(key, handler);
     }
 
-    public void processCommand(Command command) throws JsonProcessingException {
+    public void processCommand(Command command) throws IOException {
        int  commandId = command.getCommandId();
        handlerMap.get(commandId).handle(command);
         //это вся логика. + проверить на налл.

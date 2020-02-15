@@ -5,9 +5,10 @@ public class Command {
     private Object content;
     //без сетов
 
-    public Command(int commandId, Object content){
-        setCommandId(commandId);
-        setContent(content);
+
+    public Command( int commandId, Object content){
+        this.commandId = commandId;
+        this.content = content;
     }
 
     public Command(){
@@ -29,4 +30,5 @@ public class Command {
     public int getCommandId() {
         return commandId;
     }
+
 }

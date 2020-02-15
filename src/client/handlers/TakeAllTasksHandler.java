@@ -1,5 +1,7 @@
 package client.handlers;
 
+import client.view.RefreshHelper;
+import client.view.mainWindow.MainWindowController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.TaskConverter;
 import server.controller.factories.TaskFactory;
@@ -16,16 +18,19 @@ import java.util.List;
 
 public class TakeAllTasksHandler implements Handler {
 
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
 
     @Override
     public void handle(Command command) throws JsonProcessingException {
-        tasks = new ArrayList<>();
+        tasks = new ArrayList<Task>();
         List<LinkedHashMap<String, Object>> taskList = (List)command.getContent();
         for (int i = 0; i < taskList.size(); i++){
            tasks.add(TaskConverter.getInstance().convert(taskList.get(i)));
         }
-        System.out.println(tasks);
+        RefreshHelper helper = RefreshHelper.getInstance();
+        MainWindowController controller = helper.getMainWindowController();
+        controller.refresh(tasks);
+        //System.out.println(tasks);
         // todo рефреш таблицы тасками из списка tasks
     }
 

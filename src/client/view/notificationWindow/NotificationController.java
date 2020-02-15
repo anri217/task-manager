@@ -100,7 +100,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), finishTask);
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
-        RefreshHelper.getInstance().getMainWindowController().refresh();
+        //RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -135,7 +135,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        RefreshHelper.getInstance().getMainWindowController().refresh();
+       // RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -152,7 +152,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        RefreshHelper.getInstance().getMainWindowController().refresh();
+        //RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -169,7 +169,7 @@ public class NotificationController {
         Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        RefreshHelper.getInstance().getMainWindowController().refresh();
+        //RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -233,7 +233,7 @@ public class NotificationController {
                 Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
                 Stage stage = (Stage) deferButton.getScene().getWindow();
                 stage.close();
-                RefreshHelper.getInstance().getMainWindowController().refresh();
+                //RefreshHelper.getInstance().getMainWindowController().refresh();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(NotificationControllerConstants.ALERT_TITLE);

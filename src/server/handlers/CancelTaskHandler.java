@@ -3,6 +3,7 @@ package server.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.TaskConverter;
 import server.controller.Controller;
+import server.view.RefreshHelper;
 import shared.Command;
 import shared.CommandCreator;
 import shared.Handler;
@@ -18,6 +19,8 @@ public class CancelTaskHandler implements Handler {
         LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) command.getContent();
         Task task = TaskConverter.getInstance().convert(map);
         Controller.getInstance().cancelTask(task.getId());
+        RefreshHelper helper = RefreshHelper.getInstance();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
         System.out.println("Сформированная команда после изменения задачи: "+createStringCommand()); // todo вместо вывода в консоль отправка клиенту строки
     }
 

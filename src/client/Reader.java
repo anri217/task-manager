@@ -1,27 +1,37 @@
 package client;
 
+import shared.Command;
+import shared.JsonParser;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class ReadMsg extends Thread {
+public class Reader extends Thread {
     private DataInputStream dis;
 
-    public ReadMsg(DataInputStream dis) {
+    public Reader(DataInputStream dis) {
         this.dis = dis;
     }
 
     public void run() {
         try {
+            CommandProcessor processor = CommandProcessor.getInstance();
             while (true) {
+                Thread.sleep(2000);
                 System.out.println("Client start waiting messages from server");
                 String answer = dis.readUTF();
+                JsonParser parser = new JsonParser(answer);
+                parser.parseCommand();
+                processor.processCommand(parser.getCommand());
                 System.out.println("Client get message from server" + answer);
                 if (answer.equals("quit")) {
                     break;
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
+
+
 }
