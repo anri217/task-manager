@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import server.view.RefreshHelper;
 
 /**
  * Class of main window
@@ -21,6 +22,6 @@ public class MainWindow extends Application {
         stage.setTitle("TASK MANAGER");
         stage.setScene(new Scene(root));
         stage.show();
-        //RefreshHelper.getInstance().getMainWindowController().refresh();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 }
