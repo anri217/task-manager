@@ -3,6 +3,7 @@ package shared;
 public class Command {
     private int commandId;
     private Object content;
+    //без сетов
 
     public Command(int commandId, Object content){
         setCommandId(commandId);

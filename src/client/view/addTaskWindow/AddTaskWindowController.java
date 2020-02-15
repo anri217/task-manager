@@ -112,9 +112,8 @@ public class AddTaskWindowController implements Initializable {
                     alert.setHeaderText("This task already exists");
                     alert.showAndWait();
                 } else {
-                    CommandCreator creator = new CommandCreator();
-                    Command command = creator.createCommand(1, newTask);
-                    String jsonString = JsonBuilder.createJsonString(command);
+                    Command command = CommandCreator.getInstance().createCommand(1, newTask);
+                    String jsonString = JsonBuilder.getInstance().createJsonString(command);
                     CommandSender.getInstance().sendCommand(jsonString);
                     //Controller.getInstance().addTask(newTask);
                     Stage stage = (Stage) addButton.getScene().getWindow();

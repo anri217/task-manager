@@ -23,7 +23,7 @@ public class Main {
             }
             MainWindow.run(args);
             Controller.getInstance().deleteAllNotification();
-            backupper.backupFunction(Controller.getInstance().getJournal());
+            backuper.backupFunction(Controller.getInstance().getJournal());
         } catch (BackupFileException e) {
             showAlert(e.getMessage());
             throw new BackupFileException(e.getMessage());

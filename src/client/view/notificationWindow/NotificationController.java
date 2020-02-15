@@ -25,6 +25,7 @@ import java.time.chrono.ChronoLocalDate;
 public class NotificationController {
 
     private Notification notification;
+    private Task task;
     @FXML
     private Label mainLabel;
     @FXML
@@ -74,12 +75,16 @@ public class NotificationController {
         this.notification = notification;
     }
 
+    public void setTask(Task task){this.task = task;}
+
     /**
      * description label changing function
      */
     public void setLabel() {
-        nameTaskLabel.setText(notification.getTask().getName() + ".");
-        descLabel.setText(notification.getTask().getDescription() + ".");
+        nameTaskLabel.setText(task.getName() + ".");
+        descLabel.setText(task.getDescription() + ".");
+        /*nameTaskLabel.setText(notification.getTask().getName() + ".");
+        descLabel.setText(notification.getTask().getDescription() + ".");*/
     }
 
     /**

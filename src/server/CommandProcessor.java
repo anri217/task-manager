@@ -1,68 +1,44 @@
 package server;
 
-import client.view.RefreshHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.controller.Controller;
+import server.handlers.*;
+import server.handlers.CancelTaskHandler;
+import server.handlers.DeleteTaskHandler;
 import server.view.mainWindow.MainWindowController;
 import shared.Command;
 import shared.CommandCreator;
+import shared.Handler;
 import shared.JsonBuilder;
 import shared.model.Task;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CommandProcessor {
     private Command command;
+    private Map<Integer, Handler> handlerMap;
 
-    public CommandProcessor(Command command){
-        this.command = command;
+    public CommandProcessor(){
+        handlerMap = new HashMap<Integer, Handler>();
+        handlerMap.put(0, new GiveTaskToClientHandler());
+        handlerMap.put(1,new AddTaskHandler1());
+        handlerMap.put(2, new DeleteTaskHandler());
+        handlerMap.put(3,new CancelTaskHandler());
+        handlerMap.put(4,new CancelTaskHandler());
+        handlerMap.put(5, new DisconnectHandler());
     }
 
-    public void chooseActivity() throws JsonProcessingException {
-        switch(command.getCommandId()){
-            case(0): getAll();
-            break;
-            case(1): addTask();
-            break;
-            case(2): deleteTask();
-            break;
-            case(3): changeTask();
-            break;
-            case(4):cancelTask();
-            break;
-        }
+    public void addHandler(Integer key, Handler handler){
+        handlerMap.put(key, handler);
     }
 
-    private void cancelTask() throws JsonProcessingException {
-        Task task = (Task)command.getContent();
-        Controller.getInstance().cancelTask(task.getId());
-        getAll();
+    public void processCommand(Command command) throws JsonProcessingException {
+       int  commandId = command.getCommandId();
+       handlerMap.get(commandId).handle(command);
+        //это вся логика. + проверить на налл.
     }
 
-    private void addTask() throws JsonProcessingException {
-        Task task = (Task)command.getContent();
-        Controller.getInstance().addTask(task);
-        MainWindowController controller = new MainWindowController();
-        controller.refresh();
-        //getAll();
-    }
-
-    private void deleteTask() throws JsonProcessingException {
-        Task task = (Task)command.getContent();
-        Controller.getInstance().deleteTask(task.getId());
-        getAll();
-    }
-
-    private void changeTask() throws JsonProcessingException {
-        Task task = (Task)command.getContent();
-        Controller.getInstance().changeTask(task.getId(), task);
-        getAll(); // сформировать команду "отдать все" клиенту и отправить ее
-    }
-
-    private void getAll() throws JsonProcessingException {
-        Command command = new CommandCreator().createCommand(0, Controller.getInstance().getAll());
-        String stringCommand = new JsonBuilder().createJsonString(command);
-        System.out.println(stringCommand); //тестовая распечатка, что сформировалась правильная команда
-        //отослать команду с журналом клиенту
-    }
 
     public Command getCommand() {
         return command;

@@ -1,6 +1,7 @@
 package shared.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import server.idgenerator.IdGenerator;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  * Task class, which have a name, description, date of complete, planned date and status
  */
 
-
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class Task implements Serializable {
     private String name;
     private String description;
@@ -18,7 +19,7 @@ public class Task implements Serializable {
     /*@JsonSerialize(as = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class, as = LocalDateTime.class)*/
     private LocalDateTime plannedDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     /*@JsonSerialize(as = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class, as = LocalDateTime.class)*/
     private LocalDateTime dateOfDone;
@@ -70,6 +71,17 @@ public class Task implements Serializable {
         id = IdGenerator.getInstance().getId();
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", plannedDate=" + plannedDate +
+                ", dateOfDone=" + dateOfDone +
+                ", status=" + status +
+                ", id=" + id +
+                '}';
+    }
 
     public String getName() {
         return name;
