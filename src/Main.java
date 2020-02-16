@@ -3,8 +3,11 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
 import server.exceptions.BackupFileException;
 import server.exceptions.PropertyParserInitException;
+import shared.*;
+import shared.model.Status;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws BackupFileException, PropertyParserInitException, ClassNotFoundException, IOException {

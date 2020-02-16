@@ -1,5 +1,6 @@
 package client.handlers;
 
+import client.view.MainWindowRow;
 import client.view.RefreshHelper;
 import client.view.mainWindow.MainWindowController;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,18 +20,22 @@ import java.util.List;
 
 public class TakeAllTasksHandler implements Handler {
 
-    private Journal journal;
+    private ArrayList<Task> tasks;
 
     @Override
     public void handle(Command command) throws JsonProcessingException {
-        journal = new Journal();
+        tasks = new ArrayList<Task>();
         List<LinkedHashMap<String, Object>> taskList = (List)command.getContent();
         for (int i = 0; i < taskList.size(); i++){
-           journal.addTask(TaskConverter.getInstance().convert(taskList.get(i)));
+           tasks.add(TaskConverter.getInstance().convert(taskList.get(i)));
         }
-        RefreshHelper helper = RefreshHelper.getInstance();
-        helper.getMainWindowController().setJournal(journal);
-        helper.getMainWindowController().refresh();
+        ArrayList<MainWindowRow> rows = RefreshHelper.getInstance().getMainWindowController().getRows();
+        rows.clear();
+        for (Task task : tasks) {
+            rows.add(new MainWindowRow(task));
+        }
+        RefreshHelper.getInstance().getMainWindowController().setRows(rows);
+        RefreshHelper.getInstance().getMainWindowController().refresh();
         //System.out.println(tasks);
         // todo рефреш таблицы тасками из списка tasks
     }
@@ -40,7 +45,7 @@ public class TakeAllTasksHandler implements Handler {
         LocalDateTime plannedDate = LocalDateTime.parse((String)map.get("plannedDate"),formatter);
         TaskFactory taskFactory = new TaskFactory();
         Task task = taskFactory.createTask((int)map.get("id"), (String) map.get("name"),(String)map.get("description"),plannedDate,chooseStatus((String)map.get("status")));
-        journal.addTask(task);
+        tasks.add(task);
         System.out.println(task);
     }
 

@@ -5,6 +5,7 @@ import client.view.RefreshHelper;
 import client.view.SelectedTasksController;
 import client.view.addTaskWindow.AddTaskWindow;
 import client.view.changeTaskWindow.ChangeTaskWindow;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,10 @@ import server.controller.Controller;
 import server.controller.utils.BinarySerializer;
 import server.exceptions.BackupFileException;
 import server.exceptions.PropertyParserInitException;
+import shared.Command;
+import shared.CommandCreator;
+import shared.CommandSender;
+import shared.JsonBuilder;
 import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
@@ -50,20 +55,20 @@ public class MainWindowController implements Initializable {
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
 
+
+
     private ArrayList<MainWindowRow> rows;
-    private Journal journal;
+
+    public ArrayList<MainWindowRow> getRows() {
+        return rows;
+    }
+
+    public void setRows(ArrayList<MainWindowRow> rows) {
+        this.rows = rows;
+    }
 
     public MainWindowController() {
         this.rows = new ArrayList<>();
-        this.journal = new Journal();
-    }
-
-    public Journal getJournal() {
-        return journal;
-    }
-
-    public void setJournal(Journal journal) {
-        this.journal = journal;
     }
 
     /**
@@ -74,11 +79,8 @@ public class MainWindowController implements Initializable {
         delTask.setDisable(true);
         changeTask.setDisable(true);
         cancelTask.setDisable(true);
-        rows.clear();
-        List<Task> tasks = journal.getAll();
-        for (int i = 0; i < tasks.size(); i++) {
-            rows.add(new MainWindowRow(tasks.get(i)));
-            rows.get(i).getCheckBox().setOnAction(actionEvent -> {
+        for (MainWindowRow row : rows) {
+            row.getCheckBox().setOnAction(actionEvent -> {
                 selectedCheckBox();
             });
         }
@@ -98,7 +100,7 @@ public class MainWindowController implements Initializable {
         for (MainWindowRow row : rows) {
             if (row.getCheckBox().isSelected()) {
                 ++count;
-                if (this.journal.getTask(row.getId()).getStatus() != Status.PLANNED) {
+                if (!row.getStatus().equals("PLANNED")) {
                     plannedCount++;
                 }
             }
@@ -252,14 +254,19 @@ public class MainWindowController implements Initializable {
      * @param actionEvent
      */
 
-    public void clickCancelTask(ActionEvent actionEvent) {
+    public void clickCancelTask(ActionEvent actionEvent) throws IOException {
         int length = taskTable.getItems().size();
+        ArrayList<Integer> ids = new ArrayList<Integer>();
 
         for (int i = 0; i < length; i++) {
             if (taskTable.getItems().get(i).getCheckBox().isSelected()) {
-                Controller.getInstance().cancelTask(taskTable.getItems().get(i).getId());
+                //Controller.getInstance().cancelTask(taskTable.getItems().get(i).getId());
+                ids.add(taskTable.getItems().get(i).getId());
             }
         }
+        Command command = CommandCreator.getInstance().createCommand(4, ids);
+        String jsonString = JsonBuilder.getInstance().createJsonString(command);
+        CommandSender.getInstance().sendCommand(jsonString);
         //refresh();
     }
 }

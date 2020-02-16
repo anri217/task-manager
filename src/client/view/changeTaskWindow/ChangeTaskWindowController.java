@@ -1,5 +1,6 @@
 package client.view.changeTaskWindow;
 
+import client.view.MainWindowRow;
 import client.view.RefreshHelper;
 import client.view.mainWindow.MainWindowController;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -25,6 +26,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -78,9 +80,11 @@ public class ChangeTaskWindowController implements Initializable {
 
         MainWindowController controller = RefreshHelper.getInstance().getMainWindowController();
 
-        this.journal = controller.getJournal();
+        ArrayList<MainWindowRow> rows = controller.getRows();
 
-        LocalDateTime localDateTime = journal.getTask(SelectedTasksController.getInstance().getRow().getId()).getPlannedDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm   dd.MM.yyyy");
+
+        LocalDateTime localDateTime = LocalDateTime.parse(rows.get(SelectedTasksController.getInstance().getRow().getId()).getDate(),formatter);
 
         datePicker.setValue(LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth()));
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
@@ -103,6 +107,8 @@ public class ChangeTaskWindowController implements Initializable {
      */
 
     public void clickChange(ActionEvent actionEvent) throws IOException {
+        MainWindowController controller = RefreshHelper.getInstance().getMainWindowController();
+        ArrayList<MainWindowRow> rows = controller.getRows();
         if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ALERT");
@@ -122,7 +128,7 @@ public class ChangeTaskWindowController implements Initializable {
                 alert.setTitle("ALERT");
                 alert.setHeaderText("Enter correct time");
                 alert.showAndWait();
-            } else if (journal.getTask(SelectedTasksController.getInstance().getRow().getId()) == null) {
+            } else if (rows.get(SelectedTasksController.getInstance().getRow().getId()) == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("ALERT");
                 alert.setHeaderText("This task has already deleted");
@@ -133,13 +139,13 @@ public class ChangeTaskWindowController implements Initializable {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
-                if (journal.isTaskInJournal(newTask)){
+                /*if (journal.isTaskInJournal(newTask)){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("ALERT");
                     alert.setHeaderText("This task already exists");
                     alert.showAndWait();
                 }
-                else {
+                else {*/
                     newTask.setId(SelectedTasksController.getInstance().getRow().getId());
                     Command command = CommandCreator.getInstance().createCommand(3, newTask);
                     String jsonString = JsonBuilder.getInstance().createJsonString(command);
@@ -150,7 +156,6 @@ public class ChangeTaskWindowController implements Initializable {
                 }
             }
         }
-    }
 
     /**
      * Closing change task window

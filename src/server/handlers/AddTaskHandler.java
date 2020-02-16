@@ -21,9 +21,7 @@ public class AddTaskHandler implements Handler {
     public void handle(Command command) throws IOException {
         Task task =  TaskConverter.getInstance().convert((LinkedHashMap<String, Object>)command.getContent());
         Controller.getInstance().addTask(task);
-        RefreshHelper helper = RefreshHelper.getInstance();
-        MainWindowController controller = helper.getMainWindowController();
-        controller.refresh();
+        RefreshHelper.getInstance().getMainWindowController().refresh();
         Writer writer = Writer.getInstance();
         writer.sendCommand(createStringCommand());
         System.out.println(createStringCommand()); // todo вместо вывода в консоль - отправка клиенту той строки.
