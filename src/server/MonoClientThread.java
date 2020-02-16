@@ -11,26 +11,37 @@ import java.net.Socket;
 public class MonoClientThread implements Runnable {
 
     private static Socket clientDialog;
-    private DataOutputStream outputStream;
+    private int port;
+    private boolean exit;
+    private DataOutputStream stream;
 
-    public MonoClientThread(Socket client) {
+
+    public MonoClientThread(Socket client, int port) {
         MonoClientThread.clientDialog = client;
+        this.port = port;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setExit(boolean exit) {
+        this.exit = exit;
     }
 
     @Override
     public void run() {
+        this.exit = true;
         try (DataInputStream dis = new DataInputStream(clientDialog.getInputStream());
              DataOutputStream dos = new DataOutputStream(clientDialog.getOutputStream())) {
-            int port = PortGenerator.getInstance().getPort();
-            dos.writeUTF(String.valueOf(port));
+            dos.writeUTF(String.valueOf(this.port));
             dos.flush();
-            Socket socket = new Socket("localhost", port);
-            DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
-            this.outputStream = stream;
-            Writer writer = Writer.getInstance();
-            writer.addStream(stream);
+            Socket socket = new Socket("localhost", this.port);
+            this.stream = new DataOutputStream(socket.getOutputStream());
+            /*Writer writer = Writer.getInstance();
+            writer.addStream(stream);*/
             CommandProcessor processor = CommandProcessor.getInstance();
-            while (!clientDialog.isClosed()) {
+            while (this.exit) {
                 Thread.sleep(2000);
                 System.out.println("Server start waiting message from client");
                 String answer = dis.readUTF();
@@ -40,7 +51,7 @@ public class MonoClientThread implements Runnable {
                 processor.processCommand(parser.getCommand());
                 System.out.println("READ from clientDialog message - " + answer);
 
-                if (answer.equalsIgnoreCase("{\"commandId\":5,\"content\":\" \"}")) {
+                /*if (answer.equalsIgnoreCase("{\"commandId\":5,\"content\":\" \"}")) {
                     System.out.println("Client initialize connections suicide ...");
                     Command command = CommandCreator.getInstance().createCommand(70, " ");
                     String jsonString = JsonBuilder.getInstance().createJsonString(command);
@@ -48,8 +59,9 @@ public class MonoClientThread implements Runnable {
                     outputStream.flush();
                     Writer.getInstance().close(outputStream);
                     break;
-                }
+                }*/
             }
+            System.out.println("Client disconnected");
             stream.close();
             socket.close();
         } catch (Exception e) {
@@ -58,7 +70,7 @@ public class MonoClientThread implements Runnable {
     }
 
     public void sendCommand(String entry) throws IOException {
-        outputStream.writeUTF(entry);
-        outputStream.flush();
+        this.stream.writeUTF(entry);
+        this.stream.flush();
     }
 }

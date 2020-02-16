@@ -15,11 +15,29 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ServerFacade {
+    private static ServerFacade instance;
+
+    public static synchronized ServerFacade getInstance() {
+        if (instance == null) {
+            instance = new ServerFacade();
+        }
+        return instance;
+    }
+
     private Map<Integer, MonoClientThread> clients; //todo port and monoclientthread
+
+    public Map<Integer, MonoClientThread> getClients() {
+        return clients;
+    }
+
+    public void setClients(Map<Integer, MonoClientThread> clients) {
+        this.clients = clients;
+    }
 
     private static ExecutorService executeIt = Executors.newFixedThreadPool(5);
 
-    public ServerFacade() {
+
+    private ServerFacade() {
         clients = new HashMap<Integer, MonoClientThread>();
     }
 
@@ -28,7 +46,10 @@ public class ServerFacade {
             BufferedReader ins = new BufferedReader(new InputStreamReader(System.in));
             while (!server.isClosed()) {
                 Socket client = server.accept();
-                executeIt.execute(new MonoClientThread(client)); //change name of class
+                int port = PortGenerator.getInstance().getPort();
+                MonoClientThread thread = new MonoClientThread(client,port);
+                clients.put(port, thread);
+                executeIt.execute(thread); //change name of class
                 System.out.println("Connection accepted");
             }
             executeIt.shutdown();

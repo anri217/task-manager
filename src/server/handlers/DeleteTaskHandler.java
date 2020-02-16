@@ -1,6 +1,8 @@
 package server.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import server.MonoClientThread;
+import server.ServerFacade;
 import server.TaskConverter;
 import server.Writer;
 import server.controller.Controller;
@@ -13,6 +15,7 @@ import shared.model.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class DeleteTaskHandler implements Handler {
@@ -23,8 +26,11 @@ public class DeleteTaskHandler implements Handler {
             Controller.getInstance().deleteTask(ids.get(i));
         }
         RefreshHelper.getInstance().getMainWindowController().refresh();
-        Writer writer = Writer.getInstance();
-        writer.sendCommand(createStringCommand());
+        HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+        String entry = createStringCommand();
+        for(int port : clients.keySet()) {
+            clients.get(port).sendCommand(entry);
+        }
         System.out.println(createStringCommand()); // todo исправить на отправку команды клиенту
     }
 

@@ -11,7 +11,6 @@ import java.util.concurrent.Executors;
 public class MultiThreadServer extends Thread {
     @Override
     public void run() {
-        ServerFacade serverFacade = new ServerFacade();
-        serverFacade.connect();
+        ServerFacade.getInstance().connect();
     }
 }

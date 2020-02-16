@@ -1,5 +1,6 @@
 package client.view.mainWindow;
 
+import client.ClientFacade;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +32,7 @@ public class MainWindow extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        Command command = CommandCreator.getInstance().createCommand(5, " ");
+        Command command = CommandCreator.getInstance().createCommand(5, ClientFacade.getSecPort());
         String jsonString = JsonBuilder.getInstance().createJsonString(command);
         CommandSender.getInstance().sendCommand(jsonString);
     }

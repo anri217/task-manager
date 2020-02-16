@@ -35,7 +35,7 @@ public class CommandProcessor {
         handlerMap.put(0, new TakeAllTasksHandler());
         handlerMap.put(1, new TakeNotificationHandler());
         handlerMap.put(99, new ErrorHandler());
-        handlerMap.put(70, new DisconnectHandler());
+        handlerMap.put(71, new DisconnectHandler());
     }
 
     public void addHandler(Integer key, Handler handler){
