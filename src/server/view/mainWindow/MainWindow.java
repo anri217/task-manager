@@ -24,4 +24,9 @@ public class MainWindow extends Application {
         stage.show();
         RefreshHelper.getInstance().getMainWindowController().refresh();
     }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+    }
 }

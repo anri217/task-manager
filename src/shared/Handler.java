@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface Handler {
 
-    public void handle(Command command) throws JsonProcessingException, IOException;
+    public void handle(Command command) throws Exception;
 }

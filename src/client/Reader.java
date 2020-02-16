@@ -24,11 +24,12 @@ public class Reader extends Thread {
                 parser.parseCommand();
                 processor.processCommand(parser.getCommand());
                 System.out.println("Client get message from server" + answer);
-                if (answer.equals("quit")) {
+                if (answer.equals("{\"commandId\":70,\"content\":\" \"}")) {
+                    System.out.println("Disconnect");
                     break;
                 }
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

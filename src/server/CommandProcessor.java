@@ -37,7 +37,7 @@ public class CommandProcessor {
         handlerMap.put(key, handler);
     }
 
-    public void processCommand(Command command) throws IOException {
+    public void processCommand(Command command) throws Exception {
         int commandId = command.getCommandId();
         handlerMap.get(commandId).handle(command);
         //это вся логика. + проверить на налл.

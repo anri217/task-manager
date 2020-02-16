@@ -1,7 +1,7 @@
 package server;
 
 import server.portgenerator.PortGenerator;
-import shared.JsonParser;
+import shared.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,6 +11,7 @@ import java.net.Socket;
 public class MonoClientThread implements Runnable {
 
     private static Socket clientDialog;
+    private DataOutputStream outputStream;
 
     public MonoClientThread(Socket client) {
         MonoClientThread.clientDialog = client;
@@ -25,8 +26,9 @@ public class MonoClientThread implements Runnable {
             dos.flush();
             Socket socket = new Socket("localhost", port);
             DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
+            this.outputStream = stream;
             Writer writer = Writer.getInstance();
-            writer.addStream(new DataOutputStream(socket.getOutputStream()));
+            writer.addStream(stream);
             CommandProcessor processor = CommandProcessor.getInstance();
             while (!clientDialog.isClosed()) {
                 Thread.sleep(2000);
@@ -38,16 +40,25 @@ public class MonoClientThread implements Runnable {
                 processor.processCommand(parser.getCommand());
                 System.out.println("READ from clientDialog message - " + answer);
 
-                if (answer.equalsIgnoreCase("quit")) {
+                if (answer.equalsIgnoreCase("{\"commandId\":5,\"content\":\" \"}")) {
                     System.out.println("Client initialize connections suicide ...");
-                    dos.writeUTF("Server reply - " + answer + " - OK");
+                    Command command = CommandCreator.getInstance().createCommand(70, " ");
+                    String jsonString = JsonBuilder.getInstance().createJsonString(command);
+                    outputStream.writeUTF(jsonString);
+                    outputStream.flush();
+                    Writer.getInstance().close(outputStream);
                     break;
                 }
             }
             stream.close();
             socket.close();
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendCommand(String entry) throws IOException {
+        outputStream.writeUTF(entry);
+        outputStream.flush();
     }
 }

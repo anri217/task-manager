@@ -177,16 +177,17 @@ public class MainWindowController implements Initializable {
 
 
     @FXML
-    public void clickDelTask(ActionEvent actionEvent) {
+    public void clickDelTask(ActionEvent actionEvent) throws IOException {
         int length = taskTable.getItems().size();
-        for (int i = 0; i < length && length > 0; i++) {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for (int i = 0; i < length; i++) {
             if (taskTable.getItems().get(i).getCheckBox().isSelected()) {
-                Controller.getInstance().deleteTask(taskTable.getItems().get(i).getId());
-                taskTable.getItems().remove(i);
-                --i;
-                --length;
+                ids.add(taskTable.getItems().get(i).getId());
             }
         }
+        Command command = CommandCreator.getInstance().createCommand(2, ids);
+        String jsonString = JsonBuilder.getInstance().createJsonString(command);
+        CommandSender.getInstance().sendCommand(jsonString);
         selectedCheckBox();
     }
 

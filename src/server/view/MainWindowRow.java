@@ -30,9 +30,30 @@ public class MainWindowRow {
         } else {
             time = task.getPlannedDate().getHour() + ":" + task.getPlannedDate().getMinute();
         }
-        date = new SimpleStringProperty(time +
-                "   " + task.getPlannedDate().getDayOfMonth() + "." + task.getPlannedDate().getMonthValue() + "." +
-                task.getPlannedDate().getYear());
+        if (task.getPlannedDate().getMonthValue() < 10) {
+            if (task.getPlannedDate().getDayOfMonth() < 10) {
+                date = new SimpleStringProperty(time +
+                        "   0" + task.getPlannedDate().getDayOfMonth() + ".0" + task.getPlannedDate().getMonthValue() + "." +
+                        task.getPlannedDate().getYear());
+            }
+            else {
+                date = new SimpleStringProperty(time +
+                        "   " + task.getPlannedDate().getDayOfMonth() + ".0" + task.getPlannedDate().getMonthValue() + "." +
+                        task.getPlannedDate().getYear());
+            }
+        }
+        else {
+            if (task.getPlannedDate().getDayOfMonth() < 10) {
+                date = new SimpleStringProperty(time +
+                        "   0" + task.getPlannedDate().getDayOfMonth() + "0" + task.getPlannedDate().getMonthValue() + "." +
+                        task.getPlannedDate().getYear());
+            }
+            else {
+                date = new SimpleStringProperty(time +
+                        "   " + task.getPlannedDate().getDayOfMonth() + "0" + task.getPlannedDate().getMonthValue() + "." +
+                        task.getPlannedDate().getYear());
+            }
+        }
         checkBox = new SimpleObjectProperty<>(new CheckBox());
         status = new SimpleStringProperty(task.getStatus().toString());
         id = task.getId();

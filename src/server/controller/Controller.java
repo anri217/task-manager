@@ -64,8 +64,8 @@ public class Controller {
 
     public void addTask(Task task) {
         journal.addTask(task);
-     /*   if ((task.getStatus() != Status.CANCELED) && (task.getStatus() != Status.COMPLETED) && (task.getStatus() != Status.OVERDUE))
-            notifier.createNotification(task);*/
+        if ((task.getStatus() != Status.CANCELED) && (task.getStatus() != Status.COMPLETED) && (task.getStatus() != Status.OVERDUE))
+            notifier.createNotification(task);
     }
 
     /**
@@ -73,8 +73,8 @@ public class Controller {
      */
 
     public void deleteTask(int id) {
-       /* if ((journal.getTask(id).getStatus() != Status.COMPLETED) && (journal.getTask(id).getStatus() != Status.OVERDUE) && (journal.getTask(id).getStatus() != Status.CANCELED))
-            notifier.deleteNotification(journal.getTask(id));*/
+        if ((journal.getTask(id).getStatus() != Status.COMPLETED) && (journal.getTask(id).getStatus() != Status.OVERDUE) && (journal.getTask(id).getStatus() != Status.CANCELED))
+            notifier.deleteNotification(journal.getTask(id));
         journal.deleteTask(id);
     }
 
@@ -85,12 +85,12 @@ public class Controller {
      */
 
     public void changeTask(int id, Task task2) {
-        /*if ((getTask(id).getStatus() != Status.CANCELED) && (getTask(id).getStatus() != Status.COMPLETED) && (getTask(id).getStatus() != Status.OVERDUE))
-            notifier.deleteNotification(journal.getTask(id));*/
+        if ((getTask(id).getStatus() != Status.CANCELED) && (getTask(id).getStatus() != Status.COMPLETED) && (getTask(id).getStatus() != Status.OVERDUE))
+            notifier.deleteNotification(journal.getTask(id));
         journal.changeTask(id, task2);
-        /*if ((task2.getStatus() != Status.COMPLETED) && (task2.getStatus() != Status.CANCELED)) {
+        if ((task2.getStatus() != Status.COMPLETED) && (task2.getStatus() != Status.CANCELED)) {
             notifier.createNotification(journal.getTask(id));
-        }*/
+        }
     }
 
     /**
@@ -98,8 +98,8 @@ public class Controller {
      */
 
     public void cancelTask(int id) {
-        /*if ((getTask(id).getStatus() != Status.CANCELED) && (getTask(id).getStatus() != Status.COMPLETED) && (getTask(id).getStatus() != Status.OVERDUE))
-            notifier.deleteNotification(journal.getTask(id));*/
+        if ((getTask(id).getStatus() != Status.CANCELED) && (getTask(id).getStatus() != Status.COMPLETED) && (getTask(id).getStatus() != Status.OVERDUE))
+            notifier.deleteNotification(journal.getTask(id));
         journal.getTask(id).setStatus(Status.CANCELED);
     }
 

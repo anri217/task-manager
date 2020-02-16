@@ -15,14 +15,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ServerFacade {
-
-    private ArrayList<MonoClientThread> arrayList;
     private Map<Integer, MonoClientThread> clients; //todo port and monoclientthread
 
     private static ExecutorService executeIt = Executors.newFixedThreadPool(5);
 
     public ServerFacade() {
-        arrayList = new ArrayList<MonoClientThread>();
         clients = new HashMap<Integer, MonoClientThread>();
     }
 

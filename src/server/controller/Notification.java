@@ -7,6 +7,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import server.Writer;
+import shared.Command;
+import shared.CommandCreator;
+import shared.JsonBuilder;
+import shared.WriteMsg;
 import shared.model.Task;
 import client.view.notificationWindow.NotificationController;
 import client.view.notificationWindow.NotificationWindow;
@@ -112,7 +117,9 @@ public class Notification extends TimerTask {
     public void run() {
         Platform.runLater(() -> {
             try {
-                showNotification();
+                Command command = CommandCreator.getInstance().createCommand(1, this.task);
+                Writer.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
+                //showNotification();
             } catch (Exception e) {
                 e.printStackTrace();
             }

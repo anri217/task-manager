@@ -2,7 +2,7 @@ package client.handlers;
 
 import client.view.notificationWindow.NotificationController;
 import client.view.notificationWindow.NotificationWindow;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,11 +23,17 @@ public class TakeNotificationHandler implements Handler {
     private Task task;
 
     @Override
-    public void handle(Command command) throws JsonProcessingException {
+    public void handle(Command command) throws Exception {
         LinkedHashMap<String, Object> taskMap = (LinkedHashMap<String, Object>) command.getContent();
         task = TaskConverter.getInstance().convert(taskMap);
-        //showNotification();
-        System.out.println(this.task); //todo вместо вывода в консоль сделать появление в окне через метод showNotification
+        Platform.runLater(() -> {
+            try {
+                showNotification();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        //System.out.println(this.task); //todo вместо вывода в консоль сделать появление в окне через метод showNotification
     }
 
     public Stage createStage() throws IOException {
@@ -55,6 +61,5 @@ public class TakeNotificationHandler implements Handler {
     public void showNotification() throws Exception {
         NotificationWindow nw = new NotificationWindow();
         nw.start(createStage());
-
     }
 }
