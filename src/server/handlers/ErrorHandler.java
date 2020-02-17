@@ -9,7 +9,7 @@ public class ErrorHandler implements Handler {
     @Override
     public void handle(Command command) throws JsonProcessingException {
         switch (command.getCommandId()) {
-            case 80:
+            /*case 80:*/
 
         }
     }

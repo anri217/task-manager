@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import server.MonoClientThread;
+import server.ServerFacade;
 import server.controller.Controller;
 import server.controller.utils.BinarySerializer;
 import server.exceptions.BackupFileException;
@@ -16,6 +18,9 @@ import server.view.RefreshHelper;
 import server.view.SelectedTasksController;
 import server.view.addTaskWindow.AddTaskWindow;
 import server.view.changeTaskWindow.ChangeTaskWindow;
+import shared.Command;
+import shared.CommandCreator;
+import shared.JsonBuilder;
 import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
@@ -24,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -227,6 +233,11 @@ public class MainWindowController implements Initializable {
             }
         }
         Controller.getInstance().setJournal(journal1);
+        Command command = CommandCreator.getInstance().createCommand(0, journal1.getAll());
+        HashMap<Integer, MonoClientThread> map = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+        for(int port : map.keySet()) {
+            map.get(port).sendCommand(JsonBuilder.getInstance().createJsonString(command));
+        }
         refresh();
     }
 
