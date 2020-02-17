@@ -212,44 +212,6 @@ public class MainWindowController implements Initializable {
     }
 
     /**
-     * Function saving journal by push button Save
-     */
-
-
-    public void saveJournal(ActionEvent actionEvent) throws PropertyParserInitException, IOException, BackupFileException {
-        BinarySerializer.getInstance().serializeObject(Controller.getInstance().getJournal());
-    }
-
-    /**
-     * Function download journal by push button Download
-     *
-     * @param actionEvent
-     * @throws ClassNotFoundException
-     * @throws BackupFileException
-     * @throws PropertyParserInitException
-     * @throws IOException
-     */
-
-    public void downloadJournal(ActionEvent actionEvent) throws ClassNotFoundException, BackupFileException,
-            PropertyParserInitException, IOException {
-        Journal journal1 = Controller.getInstance().getJournal();
-        Journal journal2 = (Journal) BinarySerializer.getInstance().deserializeObject();
-        List<Task> arr = journal2.getAll();
-        for (int i = 0; i < arr.size(); ++i) {
-            if (!(journal1.isTaskInJournal(arr.get(i).getId()))) {
-                if (arr.get(i).getDateOfDone() == null) {
-                    if (arr.get(i).getPlannedDate().isBefore(LocalDateTime.now())) {
-                        arr.get(i).setStatus(Status.OVERDUE);
-                    }
-                }
-                journal1.addTask(arr.get(i));
-            }
-        }
-        Controller.getInstance().setJournal(journal1);
-        //refresh();
-    }
-
-    /**
      * Function cancelling tasks by push button Cancel
      *
      * @param actionEvent
