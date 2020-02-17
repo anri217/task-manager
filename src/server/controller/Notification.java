@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import server.MonoClientThread;
+import server.ServerFacade;
 import server.Writer;
 import shared.Command;
 import shared.CommandCreator;
@@ -20,6 +22,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -118,7 +121,11 @@ public class Notification extends TimerTask {
         Platform.runLater(() -> {
             try {
                 Command command = CommandCreator.getInstance().createCommand(1, this.task);
-                Writer.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
+                HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+                String entry = JsonBuilder.getInstance().createJsonString(command);
+                for(int port : clients.keySet()) {
+                    clients.get(port).sendCommand(entry);
+                }
                 //showNotification();
             } catch (Exception e) {
                 e.printStackTrace();
