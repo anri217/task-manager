@@ -3,20 +3,16 @@ package server.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.MonoClientThread;
 import server.ServerFacade;
-import server.TaskConverter;
-import server.Writer;
 import server.controller.Controller;
 import server.view.RefreshHelper;
 import shared.Command;
 import shared.CommandCreator;
 import shared.Handler;
 import shared.JsonBuilder;
-import shared.model.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class DeleteTaskHandler implements Handler {
     @Override

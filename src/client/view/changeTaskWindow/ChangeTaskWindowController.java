@@ -1,7 +1,9 @@
 package client.view.changeTaskWindow;
 
+import client.ClientFacade;
 import client.view.MainWindowRow;
 import client.view.RefreshHelper;
+import client.view.mainWindow.MainWindow;
 import client.view.mainWindow.MainWindowController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.controller.Controller;
@@ -84,7 +86,14 @@ public class ChangeTaskWindowController implements Initializable {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm   dd.MM.yyyy");
 
-        LocalDateTime localDateTime = LocalDateTime.parse(rows.get(SelectedTasksController.getInstance().getRow().getId()).getDate(),formatter);
+        MainWindowRow row = new MainWindowRow();
+        for (MainWindowRow mainWindowRow : rows) {
+            if (mainWindowRow.getId() == SelectedTasksController.getInstance().getRow().getId()) {
+                row = mainWindowRow;
+            }
+        }
+
+        LocalDateTime localDateTime = LocalDateTime.parse(row.getDate(),formatter);
 
         datePicker.setValue(LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth()));
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
@@ -128,14 +137,14 @@ public class ChangeTaskWindowController implements Initializable {
                 alert.setTitle("ALERT");
                 alert.setHeaderText("Enter correct time");
                 alert.showAndWait();
-            } else if (rows.get(SelectedTasksController.getInstance().getRow().getId()) == null) {
+            } /*else if (rows.get(SelectedTasksController.getInstance().getRow().getId()) == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("ALERT");
                 alert.setHeaderText("This task has already deleted");
                 alert.showAndWait();
                 Stage stage = (Stage) changeButton.getScene().getWindow();
                 stage.close();
-            } else {
+            } */else {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
@@ -147,7 +156,7 @@ public class ChangeTaskWindowController implements Initializable {
                 }
                 else {*/
                     newTask.setId(SelectedTasksController.getInstance().getRow().getId());
-                    Command command = CommandCreator.getInstance().createCommand(3, newTask);
+                    Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getSecPort());
                     String jsonString = JsonBuilder.getInstance().createJsonString(command);
                     CommandSender.getInstance().sendCommand(jsonString);
                     //Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), newTask);

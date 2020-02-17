@@ -3,15 +3,27 @@ package shared;
 public class Command {
     private int commandId;
     private Object content;
+    private int port;
     //без сетов
 
 
-    public Command( int commandId, Object content){
+    public Command(int commandId, Object content) {
         this.commandId = commandId;
         this.content = content;
     }
 
-    public Command(){
+
+    public int getPort() {
+        return port;
+    }
+
+    public Command(int commandId, Object content, int port) {
+        this.commandId = commandId;
+        this.content = content;
+        this.port = port;
+    }
+
+    public Command() {
         this.content = new Object();
     }
 

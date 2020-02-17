@@ -9,14 +9,12 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import server.MonoClientThread;
 import server.ServerFacade;
-import server.Writer;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
-import shared.WriteMsg;
 import shared.model.Task;
-import client.view.notificationWindow.NotificationController;
-import client.view.notificationWindow.NotificationWindow;
+import server.view.notificationWindow.NotificationController;
+import server.view.notificationWindow.NotificationWindow;
 
 import java.awt.*;
 import java.io.IOException;

@@ -1,5 +1,6 @@
 package client.view.notificationWindow;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import server.controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +9,15 @@ import javafx.stage.Stage;
 import server.controller.Notification;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import server.view.RefreshHelper;
+import shared.Command;
+import shared.CommandCreator;
+import shared.CommandSender;
+import shared.JsonBuilder;
 import shared.model.Status;
 import shared.model.Task;
-import client.view.RefreshHelper;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
@@ -24,7 +30,6 @@ import java.time.chrono.ChronoLocalDate;
 
 public class NotificationController {
 
-    private Notification notification;
     private Task task;
     @FXML
     private Label mainLabel;
@@ -66,15 +71,6 @@ public class NotificationController {
     public NotificationController() {
     }
 
-    /**
-     * notificatioon field change function
-     *
-     * @param notification - displayed notification
-     */
-    public void setNotification(Notification notification) {
-        this.notification = notification;
-    }
-
     public void setTask(Task task){this.task = task;}
 
     /**
@@ -93,11 +89,11 @@ public class NotificationController {
      * @param actionEvent - button click event
      */
     @FXML
-    public void finishTaskAction(ActionEvent actionEvent) {
-        Task finishTask = notification.getTask();
-        finishTask.setStatus(Status.COMPLETED);
-        finishTask.setDateOfDone(LocalDateTime.now());
-        Controller.getInstance().changeTask(notification.getTask().getId(), finishTask);
+    public void finishTaskAction(ActionEvent actionEvent) throws IOException {
+        task.setStatus(Status.COMPLETED);
+        task.setDateOfDone(LocalDateTime.now());
+        Command command = CommandCreator.getInstance().createCommand(3, task);
+        CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
         //RefreshHelper.getInstance().getMainWindowController().refresh();
@@ -127,12 +123,11 @@ public class NotificationController {
      * @param actionEvent - button click event
      */
     @FXML
-    public void fiveMinutesButtonActive(ActionEvent actionEvent) {
-        LocalDateTime dateNow = LocalDateTime.now().plusMinutes(5);
-        Task newTask = notification.getTask();
-        newTask.setPlannedDate(dateNow);
-        newTask.setStatus(Status.DEFERRED);
-        Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
+    public void fiveMinutesButtonActive(ActionEvent actionEvent) throws IOException {
+        task.setPlannedDate(LocalDateTime.now().plusMinutes(5));
+        task.setStatus(Status.DEFERRED);
+        Command command = CommandCreator.getInstance().createCommand(3, task);
+        CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
        // RefreshHelper.getInstance().getMainWindowController().refresh();
@@ -144,12 +139,11 @@ public class NotificationController {
      * @param actionEvent - button click event
      */
     @FXML
-    public void tenMinutesButtonActive(ActionEvent actionEvent) {
-        LocalDateTime dateNow = LocalDateTime.now().plusMinutes(10);
-        Task newTask = notification.getTask();
-        newTask.setPlannedDate(dateNow);
-        newTask.setStatus(Status.DEFERRED);
-        Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
+    public void tenMinutesButtonActive(ActionEvent actionEvent) throws IOException {
+        task.setPlannedDate(LocalDateTime.now().plusMinutes(10));
+        task.setStatus(Status.DEFERRED);
+        Command command = CommandCreator.getInstance().createCommand(3, task);
+        CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
         //RefreshHelper.getInstance().getMainWindowController().refresh();
@@ -161,12 +155,11 @@ public class NotificationController {
      * @param actionEvent - button click event
      */
     @FXML
-    public void fifteenMinutesButtonAction(ActionEvent actionEvent) {
-        LocalDateTime dateNow = LocalDateTime.now().plusMinutes(15);
-        Task newTask = notification.getTask();
-        newTask.setPlannedDate(dateNow);
-        newTask.setStatus(Status.DEFERRED);
-        Controller.getInstance().changeTask(notification.getTask().getId(), newTask);
+    public void fifteenMinutesButtonAction(ActionEvent actionEvent) throws IOException {
+        task.setPlannedDate(LocalDateTime.now().plusMinutes(15));
+        task.setStatus(Status.DEFERRED);
+        Command command = CommandCreator.getInstance().createCommand(3, task);
+        CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
         //RefreshHelper.getInstance().getMainWindowController().refresh();
@@ -226,11 +219,11 @@ public class NotificationController {
             LocalDateTime dateFromDatePicker = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
                     Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText()));
             if (dateFromDatePicker.isAfter(LocalDateTime.now())) {
-                Task deferTask = notification.getTask();
-                deferTask.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
+                task.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
                         Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
-                deferTask.setStatus(Status.DEFERRED);
-                Controller.getInstance().changeTask(notification.getTask().getId(), deferTask);
+                task.setStatus(Status.DEFERRED);
+                Command command = CommandCreator.getInstance().createCommand(3, task);
+                CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
                 Stage stage = (Stage) deferButton.getScene().getWindow();
                 stage.close();
                 //RefreshHelper.getInstance().getMainWindowController().refresh();
@@ -242,12 +235,14 @@ public class NotificationController {
                 alert.showAndWait();
             }
         }
-        catch (NullPointerException | NumberFormatException exp){
+        catch (NullPointerException | NumberFormatException | JsonProcessingException exp){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
                 alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
                 alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
                 alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
