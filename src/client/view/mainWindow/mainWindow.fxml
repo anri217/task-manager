@@ -6,18 +6,6 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.mainWindow.MainWindowController">
-    <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem fx:id="saveJournal" mnemonicParsing="false" onAction="#saveJournal" text="Save journal" />
-                        <MenuItem fx:id="downloadJournal" mnemonicParsing="false" onAction="#downloadJournal" text="Download journal" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
     <center>
         <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
             <columns>
