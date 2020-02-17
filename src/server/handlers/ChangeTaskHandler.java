@@ -10,6 +10,7 @@ import shared.Command;
 import shared.CommandCreator;
 import shared.Handler;
 import shared.JsonBuilder;
+import shared.model.Status;
 import shared.model.Task;
 
 import java.io.IOException;
@@ -25,12 +26,15 @@ public class ChangeTaskHandler implements Handler {
         if (Controller.getInstance().getTask(task.getId()) == null) {
             Command command1 = CommandCreator.getInstance().createCommand(99, "THIS TASK HAS ALREADY DELETED");
             ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
-        }
-        else if(Controller.getInstance().isTaskInJournal(task)) {
+        } else if (Controller.getInstance().isTaskInJournal(task)) {
             Command command1 = CommandCreator.getInstance().createCommand(99, "THIS TASK HAS ALREADY EXIST");
             ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
+        } else if (Controller.getInstance().getTask(task.getId()).getStatus() == Status.COMPLETED &&
+        task.getStatus() == Status.DEFERRED){
+            Command command1 = CommandCreator.getInstance().createCommand(99, "THIS TASK IS COMPLETED");
+            ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
         }
-        else {
+        else{
             Controller.getInstance().changeTask(task.getId(), task);
             RefreshHelper.getInstance().getMainWindowController().refresh();
             HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
@@ -43,9 +47,11 @@ public class ChangeTaskHandler implements Handler {
     }
 
     private String createStringCommand() throws JsonProcessingException {
-        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());;
+        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
+        ;
         JsonBuilder.getInstance().createJsonString(newCommand);
-        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);;
+        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
+        ;
         return stringCommand;
     }
 }
