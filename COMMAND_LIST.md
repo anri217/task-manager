@@ -6,8 +6,6 @@ _____
 + Notification. CommandId = 1. Content = Task. This command is created to send to client a task that has expired the plannedDate.
 + Error. CommandId = 99. Content = String. This command is created to send to client a message about errors that occurred on server.
 + Disconnect. CommandId = 71. Content doesn't matter. This command is crated to close connection.
-+ DisconnectServer. CommandId = 70. Сервер закрылся, чтоб клиенты знали и тоже закрылись. 
-
 ________________
 ### Command from Client to Server
 + GetAll. CommandId = 0. Content doesn't matter. This command is created to query server for all stored tasks.
