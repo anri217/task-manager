@@ -6,9 +6,9 @@ import server.ServerFacade;
 import server.TaskConverter;
 import server.controller.Controller;
 import server.view.RefreshHelper;
-import shared.Handler;
 import shared.Command;
 import shared.CommandCreator;
+import shared.Handler;
 import shared.JsonBuilder;
 import shared.model.Task;
 
@@ -20,15 +20,14 @@ public class AddTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws IOException {
-        Task task =  TaskConverter.getInstance().convert((LinkedHashMap<String, Object>)command.getContent());
+        Task task = TaskConverter.getInstance().convert((LinkedHashMap<String, Object>) command.getContent());
         Controller.getInstance().addTask(task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
-        HashMap<Integer, MonoClientThread>  clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+        HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
         String entry = createStringCommand();
-        for(int port : clients.keySet()) {
+        for (int port : clients.keySet()) {
             clients.get(port).sendCommand(entry);
         }
-        System.out.println(createStringCommand()); // todo вместо вывода в консоль - отправка клиенту той строки.
     }
 
     private String createStringCommand() throws JsonProcessingException {

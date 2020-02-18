@@ -2,7 +2,7 @@ package shared.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import server.idgenerator.IdGenerator;
+import server.controller.utils.idgenerator.IdGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

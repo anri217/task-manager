@@ -1,7 +1,6 @@
 package shared;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import shared.model.Task;
@@ -12,18 +11,17 @@ import java.io.IOException;
 public class JsonBuilder {
     private static JsonBuilder instance;
 
-    private JsonBuilder(){
+    private JsonBuilder() {
 
     }
 
-    public static JsonBuilder getInstance(){
-        if (instance == null){
+    public static JsonBuilder getInstance() {
+        if (instance == null) {
             instance = new JsonBuilder();
         }
         return instance;
     }
 
-    //в папку
     private final static String PATH_TO_JSON = "staff/task.json";
 
     public static void toJson(Task task) throws IOException {
@@ -32,7 +30,6 @@ public class JsonBuilder {
     }
 
     public String createJsonString(Object object) throws JsonProcessingException {
-        //ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
         ObjectMapper mapper = new ObjectMapper().findAndRegisterModules().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return mapper.writeValueAsString(object);
     }

@@ -1,4 +1,4 @@
-package server.idgenerator;
+package server.controller.utils.idgenerator;
 
 /**
  * Class generating id for comfortable iteration

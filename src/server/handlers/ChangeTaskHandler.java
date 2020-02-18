@@ -30,11 +30,10 @@ public class ChangeTaskHandler implements Handler {
             Command command1 = CommandCreator.getInstance().createCommand(99, "THIS TASK HAS ALREADY EXIST");
             ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
         } else if (Controller.getInstance().getTask(task.getId()).getStatus() == Status.COMPLETED &&
-        task.getStatus() == Status.DEFERRED){
+                task.getStatus() == Status.DEFERRED) {
             Command command1 = CommandCreator.getInstance().createCommand(99, "THIS TASK IS COMPLETED");
             ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
-        }
-        else{
+        } else {
             Controller.getInstance().changeTask(task.getId(), task);
             RefreshHelper.getInstance().getMainWindowController().refresh();
             HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
@@ -43,15 +42,12 @@ public class ChangeTaskHandler implements Handler {
                 clients.get(port).sendCommand(entry);
             }
         }
-        //System.out.println(createStringCommand()); // todo заменить на отправку строки с командой клиенту.
     }
 
     private String createStringCommand() throws JsonProcessingException {
         Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
-        ;
         JsonBuilder.getInstance().createJsonString(newCommand);
         String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
-        ;
         return stringCommand;
     }
 }

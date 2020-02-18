@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import server.controller.Controller;
 import server.controller.factories.TaskFactory;
-import server.idgenerator.IdGenerator;
+import server.controller.utils.idgenerator.IdGenerator;
 import shared.model.Status;
 import shared.model.Task;
 import shared.view.AlertShowing;

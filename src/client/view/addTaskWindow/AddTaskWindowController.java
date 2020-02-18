@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import server.controller.factories.TaskFactory;
-import server.idgenerator.IdGenerator;
+import server.controller.utils.idgenerator.IdGenerator;
 import shared.Command;
 import shared.CommandCreator;
 import shared.CommandSender;
@@ -100,7 +100,6 @@ public class AddTaskWindowController implements Initializable {
                 Command command = CommandCreator.getInstance().createCommand(1, newTask);
                 String jsonString = JsonBuilder.getInstance().createJsonString(command);
                 CommandSender.getInstance().sendCommand(jsonString);
-                //Controller.getInstance().addTask(newTask);
                 Stage stage = (Stage) addButton.getScene().getWindow();
                 stage.close();
             }

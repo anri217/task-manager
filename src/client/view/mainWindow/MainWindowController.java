@@ -5,7 +5,6 @@ import client.view.RefreshHelper;
 import client.view.SelectedTasksController;
 import client.view.addTaskWindow.AddTaskWindow;
 import client.view.changeTaskWindow.ChangeTaskWindow;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,23 +12,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import server.controller.Controller;
-import server.controller.utils.BinarySerializer;
-import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
 import shared.Command;
 import shared.CommandCreator;
 import shared.CommandSender;
 import shared.JsonBuilder;
-import shared.model.Journal;
-import shared.model.Status;
-import shared.model.Task;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -54,7 +44,6 @@ public class MainWindowController implements Initializable {
 
     public MenuItem saveJournal;
     public MenuItem downloadJournal;
-
 
 
     private ArrayList<MainWindowRow> rows;
@@ -87,7 +76,6 @@ public class MainWindowController implements Initializable {
         taskTable.setItems(FXCollections.observableList(rows));
         RefreshHelper.getInstance().setMainWindowController(this);
     }
-
 
 
     /**
@@ -165,7 +153,6 @@ public class MainWindowController implements Initializable {
         AddTaskWindow addTaskWindow = new AddTaskWindow();
         Stage stage = new Stage();
         addTaskWindow.start(stage);
-        //refresh();
     }
 
     /**
@@ -208,7 +195,6 @@ public class MainWindowController implements Initializable {
         ChangeTaskWindow changeWindow = new ChangeTaskWindow();
         Stage stage = new Stage();
         changeWindow.start(stage);
-        //refresh();
     }
 
     /**
@@ -220,16 +206,13 @@ public class MainWindowController implements Initializable {
     public void clickCancelTask(ActionEvent actionEvent) throws IOException {
         int length = taskTable.getItems().size();
         ArrayList<Integer> ids = new ArrayList<Integer>();
-
         for (int i = 0; i < length; i++) {
             if (taskTable.getItems().get(i).getCheckBox().isSelected()) {
-                //Controller.getInstance().cancelTask(taskTable.getItems().get(i).getId());
                 ids.add(taskTable.getItems().get(i).getId());
             }
         }
         Command command = CommandCreator.getInstance().createCommand(4, ids);
         String jsonString = JsonBuilder.getInstance().createJsonString(command);
         CommandSender.getInstance().sendCommand(jsonString);
-        //refresh();
     }
 }

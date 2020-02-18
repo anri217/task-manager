@@ -3,25 +3,22 @@ package client.view.changeTaskWindow;
 import client.ClientFacade;
 import client.view.MainWindowRow;
 import client.view.RefreshHelper;
-import client.view.mainWindow.MainWindow;
+import client.view.SelectedTasksController;
 import client.view.mainWindow.MainWindowController;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import server.controller.Controller;
-import server.controller.factories.TaskFactory;
-import server.idgenerator.IdGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import server.controller.factories.TaskFactory;
+import server.controller.utils.idgenerator.IdGenerator;
 import shared.Command;
 import shared.CommandCreator;
 import shared.CommandSender;
 import shared.JsonBuilder;
-import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
-import client.view.SelectedTasksController;
+import shared.view.AlertShowing;
 
 import java.io.IOException;
 import java.net.URL;
@@ -92,7 +89,7 @@ public class ChangeTaskWindowController implements Initializable {
             }
         }
 
-        LocalDateTime localDateTime = LocalDateTime.parse(row.getDate(),formatter);
+        LocalDateTime localDateTime = LocalDateTime.parse(row.getDate(), formatter);
 
         datePicker.setValue(LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth()));
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
@@ -111,62 +108,40 @@ public class ChangeTaskWindowController implements Initializable {
 
     /**
      * Function changing task in table
+     *
      * @param actionEvent
      */
 
     public void clickChange(ActionEvent actionEvent) throws IOException {
         MainWindowController controller = RefreshHelper.getInstance().getMainWindowController();
         ArrayList<MainWindowRow> rows = controller.getRows();
-        if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ALERT");
-            alert.setHeaderText("Enter date and time");
-            alert.showAndWait();
+        if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0) {
+            AlertShowing.showAlert("ENTER DATA AND TIME");
         } else {
             LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
                     datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
                     Integer.parseInt(minTextField.getText()));
             if (nameTextField.getText().length() == 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("Enter name of task");
-                alert.showAndWait();
+                AlertShowing.showAlert("ENTER NAME OF TASK");
             } else if (cur.isBefore(LocalDateTime.now())) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("Enter correct time");
-                alert.showAndWait();
-            } /*else if (rows.get(SelectedTasksController.getInstance().getRow().getId()) == null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("This task has already deleted");
-                alert.showAndWait();
-                Stage stage = (Stage) changeButton.getScene().getWindow();
-                stage.close();
-            } */else {
+                AlertShowing.showAlert("ENTER CORRECT TIME");
+            } else {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
-                /*if (journal.isTaskInJournal(newTask)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("ALERT");
-                    alert.setHeaderText("This task already exists");
-                    alert.showAndWait();
-                }
-                else {*/
-                    newTask.setId(SelectedTasksController.getInstance().getRow().getId());
-                    Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getSecPort());
-                    String jsonString = JsonBuilder.getInstance().createJsonString(command);
-                    CommandSender.getInstance().sendCommand(jsonString);
-                    //Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), newTask);
-                    Stage stage = (Stage) changeButton.getScene().getWindow();
-                    stage.close();
-                }
+                newTask.setId(SelectedTasksController.getInstance().getRow().getId());
+                Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getSecPort());
+                String jsonString = JsonBuilder.getInstance().createJsonString(command);
+                CommandSender.getInstance().sendCommand(jsonString);
+                Stage stage = (Stage) changeButton.getScene().getWindow();
+                stage.close();
             }
         }
+    }
 
     /**
      * Closing change task window
+     *
      * @param actionEvent
      */
 

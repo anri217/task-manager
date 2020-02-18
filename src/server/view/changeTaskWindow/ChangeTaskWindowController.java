@@ -7,10 +7,11 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import server.controller.Controller;
 import server.controller.factories.TaskFactory;
-import server.idgenerator.IdGenerator;
+import server.controller.utils.idgenerator.IdGenerator;
 import server.view.SelectedTasksController;
 import shared.model.Status;
 import shared.model.Task;
+import shared.view.AlertShowing;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -89,29 +90,17 @@ public class ChangeTaskWindowController implements Initializable {
 
     public void clickChange(ActionEvent actionEvent) {
         if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ALERT");
-            alert.setHeaderText("Enter date and time");
-            alert.showAndWait();
+            AlertShowing.showAlert("ENTER DATA AND TIME");
         } else {
             LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
                     datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
                     Integer.parseInt(minTextField.getText()));
             if (nameTextField.getText().length() == 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("Enter name of task");
-                alert.showAndWait();
+                AlertShowing.showAlert("ENTER NAME OF TASK");
             } else if (cur.isBefore(LocalDateTime.now())) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("Enter correct time");
-                alert.showAndWait();
+                AlertShowing.showAlert("ENTER CORRECT TIME");
             } else if (Controller.getInstance().getTask(SelectedTasksController.getInstance().getRow().getId()) == null) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("This task has already deleted");
-                alert.showAndWait();
+                AlertShowing.showAlert("THIS TASK HAS ALREADY DELETED");
                 Stage stage = (Stage) changeButton.getScene().getWindow();
                 stage.close();
             } else {
@@ -119,10 +108,7 @@ public class ChangeTaskWindowController implements Initializable {
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
                 if (Controller.getInstance().isTaskInJournal(newTask)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("ALERT");
-                    alert.setHeaderText("This task already exists");
-                    alert.showAndWait();
+                    AlertShowing.showAlert("THIS TASK ALREADY EXIST");
                 }
                 else {
                     Controller.getInstance().changeTask(SelectedTasksController.getInstance().getRow().getId(), newTask);

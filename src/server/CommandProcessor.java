@@ -4,7 +4,6 @@ import server.handlers.*;
 import shared.Command;
 import shared.Handler;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +39,6 @@ public class CommandProcessor {
     public void processCommand(Command command) throws Exception {
         int commandId = command.getCommandId();
         handlerMap.get(commandId).handle(command);
-        //это вся логика. + проверить на налл.
     }
 
 

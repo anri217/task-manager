@@ -1,4 +1,4 @@
-package server.portgenerator;
+package server.controller.utils.portgenerator;
 
 public class PortGenerator {
 

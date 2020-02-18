@@ -4,7 +4,6 @@ public class Command {
     private int commandId;
     private Object content;
     private int port;
-    //без сетов
 
 
     public Command(int commandId, Object content) {

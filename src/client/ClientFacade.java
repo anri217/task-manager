@@ -6,7 +6,9 @@ import shared.CommandCreator;
 import shared.CommandSender;
 import shared.JsonBuilder;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -39,18 +41,19 @@ public class ClientFacade {
             String port = dis.readUTF();
             secPort = Integer.parseInt(port);
             System.out.println("Get port from client: " + port);
-            ServerSocket server = new ServerSocket(Integer.parseInt(port));
-            Socket client = server.accept();
-            System.out.println("Connection accepted");
-            Reader reader = new Reader(new DataInputStream(client.getInputStream()));
-            readers.put(Integer.parseInt(port), reader);
-            reader.start();
-            CommandSender sender = CommandSender.getInstance();
-            sender.setDos(dos);
-            Command command = CommandCreator.getInstance().createCommand(0, " ", secPort);
-            String jsonString = JsonBuilder.getInstance().createJsonString(command);
-            CommandSender.getInstance().sendCommand(jsonString);
-            MainWindow.run(args);
+            try (ServerSocket server = new ServerSocket(Integer.parseInt(port));
+                 Socket client = server.accept()) {
+                System.out.println("Connection accepted");
+                Reader reader = new Reader(new DataInputStream(client.getInputStream()));
+                readers.put(Integer.parseInt(port), reader);
+                reader.start();
+                CommandSender sender = CommandSender.getInstance();
+                sender.setDos(dos);
+                Command command = CommandCreator.getInstance().createCommand(0, " ", secPort);
+                String jsonString = JsonBuilder.getInstance().createJsonString(command);
+                CommandSender.getInstance().sendCommand(jsonString);
+                MainWindow.run(args);
+            }
         } catch (IOException ex) {
             throw new IOException(ex.getMessage());
         }

@@ -2,13 +2,11 @@ package client.handlers;
 
 import client.view.MainWindowRow;
 import client.view.RefreshHelper;
-import client.view.mainWindow.MainWindowController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.TaskConverter;
 import server.controller.factories.TaskFactory;
 import shared.Command;
 import shared.Handler;
-import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
 
@@ -35,8 +33,6 @@ public class TakeAllTasksHandler implements Handler {
         }
         RefreshHelper.getInstance().getMainWindowController().setRows(rows);
         RefreshHelper.getInstance().getMainWindowController().refresh();
-        //System.out.println(tasks);
-        // todo рефреш таблицы тасками из списка tasks
     }
 
     private void createTask(LinkedHashMap<String, Object> map){
@@ -45,7 +41,6 @@ public class TakeAllTasksHandler implements Handler {
         TaskFactory taskFactory = new TaskFactory();
         Task task = taskFactory.createTask((int)map.get("id"), (String) map.get("name"),(String)map.get("description"),plannedDate,chooseStatus((String)map.get("status")));
         tasks.add(task);
-        System.out.println(task);
     }
 
     private Status chooseStatus(String status){

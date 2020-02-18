@@ -33,10 +33,9 @@ public class TakeNotificationHandler implements Handler {
                 e.printStackTrace();
             }
         });
-        //System.out.println(this.task); //todo вместо вывода в консоль сделать появление в окне через метод showNotification
     }
 
-    public Stage createStage() throws IOException {
+    private Stage createStage() throws IOException {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
@@ -58,7 +57,7 @@ public class TakeNotificationHandler implements Handler {
         return stage;
     }
 
-    public void showNotification() throws Exception {
+    private void showNotification() throws Exception {
         NotificationWindow nw = new NotificationWindow();
         nw.start(createStage());
     }

@@ -14,7 +14,8 @@ public class CommandSender {
         return instance;
     }
 
-    private CommandSender() {}
+    private CommandSender() {
+    }
 
     private DataOutputStream dos;
 

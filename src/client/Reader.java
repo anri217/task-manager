@@ -18,7 +18,6 @@ public class Reader extends Thread {
     }
 
 
-
     public void setDis(DataInputStream dis) {
         this.dis = dis;
     }
