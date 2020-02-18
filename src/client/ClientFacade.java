@@ -47,7 +47,7 @@ public class ClientFacade {
             reader.start();
             CommandSender sender = CommandSender.getInstance();
             sender.setDos(dos);
-            Command command = CommandCreator.getInstance().createCommand(0, " ");
+            Command command = CommandCreator.getInstance().createCommand(0, " ", secPort);
             String jsonString = JsonBuilder.getInstance().createJsonString(command);
             CommandSender.getInstance().sendCommand(jsonString);
             MainWindow.run(args);

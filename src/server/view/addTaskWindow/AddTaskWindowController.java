@@ -10,6 +10,7 @@ import server.controller.factories.TaskFactory;
 import server.idgenerator.IdGenerator;
 import shared.model.Status;
 import shared.model.Task;
+import shared.view.AlertShowing;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -79,33 +80,21 @@ public class AddTaskWindowController implements Initializable {
 
     public void clickAdd(ActionEvent actionEvent) throws Exception {
         if (datePicker.getValue() == null || hoursTextField.getText().length() == 0 || minTextField.getText().length() == 0){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("ALERT");
-            alert.setHeaderText("Enter date and time");
-            alert.showAndWait();
+            AlertShowing.showAlert("ENTER DATE AND TIME");
         } else {
             LocalDateTime cur = LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(),
                     datePicker.getValue().getDayOfMonth(), Integer.parseInt(hoursTextField.getText()),
                     Integer.parseInt(minTextField.getText()));
             if (nameTextField.getText().length() == 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("Enter name of task");
-                alert.showAndWait();
+                AlertShowing.showAlert("ENTER NAME OF TASK");
             } else if (cur.isBefore(LocalDateTime.now())) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("ALERT");
-                alert.setHeaderText("Enter correct time");
-                alert.showAndWait();
+                AlertShowing.showAlert("ENTER CORRECT TIME");
             } else {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
                 if (Controller.getInstance().isTaskInJournal(newTask)){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("ALERT");
-                    alert.setHeaderText("This task already exists");
-                    alert.showAndWait();
+                    AlertShowing.showAlert("THIS TASK ALREADY EXIST");
                 }
                 else {
                     Controller.getInstance().addTask(newTask);

@@ -29,8 +29,7 @@ public class TakeAllTasksHandler implements Handler {
         for (int i = 0; i < taskList.size(); i++){
            tasks.add(TaskConverter.getInstance().convert(taskList.get(i)));
         }
-        ArrayList<MainWindowRow> rows = RefreshHelper.getInstance().getMainWindowController().getRows();
-        rows.clear();
+        ArrayList<MainWindowRow> rows = new ArrayList<MainWindowRow>();
         for (Task task : tasks) {
             rows.add(new MainWindowRow(task));
         }

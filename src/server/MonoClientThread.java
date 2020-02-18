@@ -38,8 +38,6 @@ public class MonoClientThread implements Runnable {
             dos.flush();
             Socket socket = new Socket("localhost", this.port);
             this.stream = new DataOutputStream(socket.getOutputStream());
-            /*Writer writer = Writer.getInstance();
-            writer.addStream(stream);*/
             CommandProcessor processor = CommandProcessor.getInstance();
             while (this.exit) {
                 Thread.sleep(2000);
@@ -50,19 +48,9 @@ public class MonoClientThread implements Runnable {
                 parser.parseCommand();
                 processor.processCommand(parser.getCommand());
                 System.out.println("READ from clientDialog message - " + answer);
-
-                /*if (answer.equalsIgnoreCase("{\"commandId\":5,\"content\":\" \"}")) {
-                    System.out.println("Client initialize connections suicide ...");
-                    Command command = CommandCreator.getInstance().createCommand(70, " ");
-                    String jsonString = JsonBuilder.getInstance().createJsonString(command);
-                    outputStream.writeUTF(jsonString);
-                    outputStream.flush();
-                    Writer.getInstance().close(outputStream);
-                    break;
-                }*/
             }
             System.out.println("Client disconnected");
-            stream.close();
+            this.stream.close();
             socket.close();
         } catch (Exception e) {
             e.printStackTrace();

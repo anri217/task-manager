@@ -46,7 +46,6 @@ public class ChangeTaskWindowController implements Initializable {
     public TextField minTextField;
     public Button changeButton;
     public Button declineButton;
-    private Journal journal;
 
     private Callback<DatePicker, DateCell> getDayCellFactory() {
         final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {

@@ -17,10 +17,7 @@ public class GiveTaskToClientHandler implements Handler {
         Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
         JsonBuilder.getInstance().createJsonString(newCommand);
         String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
-        HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-        for(int port : clients.keySet()) {
-            clients.get(port).sendCommand(stringCommand);
-        }
+        ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(stringCommand);
         System.out.println(stringCommand); // todo заменить на отправку клиенту json строки stringCommand
     }
 }
