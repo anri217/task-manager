@@ -1,9 +1,6 @@
 package client;
 
-import client.handlers.DisconnectHandler;
-import client.handlers.ErrorHandler;
-import client.handlers.TakeAllTasksHandler;
-import client.handlers.TakeNotificationHandler;
+import client.handlers.*;
 import shared.Command;
 import shared.Handler;
 
@@ -29,9 +26,9 @@ public class CommandProcessor {
         handlerMap = new HashMap<Integer, Handler>();
         handlerMap.put(0, new TakeAllTasksHandler());
         handlerMap.put(1, new TakeNotificationHandler());
+        handlerMap.put(2, new TakeAllTasksFromStartHandler());
         handlerMap.put(99, new ErrorHandler());
         handlerMap.put(71, new DisconnectHandler());
-        handlerMap.put(70, new AllDisconnectHandler());
     }
 
     public void addHandler(Integer key, Handler handler) {
