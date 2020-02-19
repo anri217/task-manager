@@ -9,7 +9,6 @@ import shared.JsonBuilder;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -41,7 +40,7 @@ public class ClientFacade {
              DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
             String port = dis.readUTF();
             secPort = Integer.parseInt(port);
-            dos.writeUTF(InetAddress.getLocalHost().getHostAddress());
+            dos.writeUTF("192.168.31.156");
             dos.flush();
             System.out.println("Get port from client: " + port);
             try (ServerSocket server = new ServerSocket(Integer.parseInt(port));
