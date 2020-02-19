@@ -9,14 +9,14 @@ import java.net.Socket;
 
 public class MonoClientThread implements Runnable {
 
-    private static Socket clientDialog;
+    private Socket clientDialog;
     private int port;
     private boolean exit;
     private DataOutputStream stream;
 
 
     public MonoClientThread(Socket client, int port) {
-        MonoClientThread.clientDialog = client;
+        this.clientDialog = client;
         this.port = port;
     }
 
@@ -52,6 +52,7 @@ public class MonoClientThread implements Runnable {
             }
             System.out.println("Client disconnected");
             this.stream.close();
+            this.clientDialog.close();
             socket.close();
         } catch (Exception e) {
             e.printStackTrace();
