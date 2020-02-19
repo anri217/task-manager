@@ -35,7 +35,8 @@ public class MonoClientThread implements Runnable {
              DataOutputStream dos = new DataOutputStream(clientDialog.getOutputStream())) {
             dos.writeUTF(String.valueOf(this.port));
             dos.flush();
-            Socket socket = new Socket("192.168.31.156", this.port);
+            String host = dis.readUTF();
+            Socket socket = new Socket(host, this.port);
             this.stream = new DataOutputStream(socket.getOutputStream());
             CommandProcessor processor = CommandProcessor.getInstance();
             while (this.exit) {
