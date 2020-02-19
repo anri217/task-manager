@@ -5,6 +5,7 @@ import server.controller.utils.PropertyParser;
 import server.exceptions.PropertyParserInitException;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class Client1 {
     public static void main(String[] args) throws PropertyParserInitException {
