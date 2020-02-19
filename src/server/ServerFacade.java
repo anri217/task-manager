@@ -1,10 +1,11 @@
 package server;
 
+import server.controller.utils.Paths;
+import server.controller.utils.PropertyParser;
 import server.controller.utils.portgenerator.PortGenerator;
+import server.exceptions.PropertyParserInitException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -39,9 +40,9 @@ public class ServerFacade {
         clients = new HashMap<Integer, MonoClientThread>();
     }
 
-    public void connect() throws IOException {
-        try (ServerSocket server = new ServerSocket(3345)) {
-            BufferedReader ins = new BufferedReader(new InputStreamReader(System.in));
+    public void connect() throws IOException, PropertyParserInitException {
+        PropertyParser parser = new PropertyParser(Paths.SERVER);
+        try (ServerSocket server = new ServerSocket(Integer.parseInt(parser.getProperty("port")))) {
             while (!server.isClosed()) {
                 Socket client = server.accept();
                 int port = PortGenerator.getInstance().getPort();

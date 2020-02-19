@@ -1,5 +1,7 @@
 package server;
 
+import server.exceptions.PropertyParserInitException;
+
 import java.io.IOException;
 
 public class MultiThreadServer extends Thread {
@@ -7,7 +9,7 @@ public class MultiThreadServer extends Thread {
     public void run() {
         try {
             ServerFacade.getInstance().connect();
-        } catch (IOException e) {
+        } catch (IOException | PropertyParserInitException e) {
             e.printStackTrace();
         }
     }
