@@ -8,10 +8,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import server.MonoClientThread;
+import server.Server;
 import server.ServerFacade;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
+import shared.model.Status;
 import shared.model.Task;
 import server.view.notificationWindow.NotificationController;
 import server.view.notificationWindow.NotificationWindow;
@@ -116,21 +118,23 @@ public class Notification extends TimerTask {
 
     @Override
     public void run() {
-        Platform.runLater(() -> {
             try {
-                Command command = CommandCreator.getInstance().createCommand(1, this.task);
-                HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-                String entry = JsonBuilder.getInstance().createJsonString(command);
-                for(int port : clients.keySet()) {
-                    clients.get(port).sendCommand(entry);
+                if(ServerFacade.getInstance().getClients().isEmpty()) {
+                    Controller.getInstance().getTask(this.task.getId()).setStatus(Status.OVERDUE);
                 }
-                //showNotification();
+                else {
+                    Command command = CommandCreator.getInstance().createCommand(1, this.task);
+                    HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+                    String entry = JsonBuilder.getInstance().createJsonString(command);
+                    for (int port : clients.keySet()) {
+                        clients.get(port).sendCommand(entry);
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
-        timer.cancel();
-    }
+            timer.cancel();
+        }
 
     /**
      * timer kill function for current notification
