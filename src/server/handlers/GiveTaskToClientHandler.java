@@ -12,13 +12,7 @@ import java.io.IOException;
 public class GiveTaskToClientHandler implements Handler {
     @Override
     public void handle(Command command) throws IOException {
-        Command newCommand;
-        if (command.getContent() == " ") {
-            newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
-        }
-        else {
-            newCommand = CommandCreator.getInstance().createCommand(2, Controller.getInstance().getAll());
-        }
+        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
         JsonBuilder.getInstance().createJsonString(newCommand);
         String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
         ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(stringCommand);

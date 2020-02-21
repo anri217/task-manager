@@ -1,6 +1,5 @@
 package server.controller;
 
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,15 +7,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import server.MonoClientThread;
-import server.Server;
 import server.ServerFacade;
+import server.view.RefreshHelper;
+import server.view.notificationWindow.NotificationController;
+import server.view.notificationWindow.NotificationWindow;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
 import shared.model.Status;
 import shared.model.Task;
-import server.view.notificationWindow.NotificationController;
-import server.view.notificationWindow.NotificationWindow;
 
 import java.awt.*;
 import java.io.IOException;
@@ -35,15 +34,6 @@ public class Notification extends TimerTask {
     private Task task;
 
     /**
-     * Getting timer field function
-     *
-     * @return current timer
-     */
-    public Timer getTimer() {
-        return timer;
-    }
-
-    /**
      * Constructor for creating new notification
      *
      * @param task - task which associated with this notification
@@ -51,6 +41,15 @@ public class Notification extends TimerTask {
     public Notification(Task task) {
         setTask(task);
         createTimer();
+    }
+
+    /**
+     * Getting timer field function
+     *
+     * @return current timer
+     */
+    public Timer getTimer() {
+        return timer;
     }
 
     /**
@@ -100,7 +99,7 @@ public class Notification extends TimerTask {
                 windowEvent.consume();
             }
         });
-        NotificationController nc = loader.<NotificationController>getController();
+        NotificationController nc = loader.getController();
         nc.setNotification(this);
         nc.setLabel();
         return stage;
@@ -118,23 +117,23 @@ public class Notification extends TimerTask {
 
     @Override
     public void run() {
-            try {
-                if(ServerFacade.getInstance().getClients().isEmpty()) {
-                    Controller.getInstance().getTask(this.task.getId()).setStatus(Status.OVERDUE);
+        try {
+            if (ServerFacade.getInstance().getClients().isEmpty()) {
+                Controller.getInstance().getTask(this.task.getId()).setStatus(Status.OVERDUE);
+                RefreshHelper.getInstance().getMainWindowController().refresh();
+            } else {
+                Command command = CommandCreator.getInstance().createCommand(1, this.task);
+                HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+                String entry = JsonBuilder.getInstance().createJsonString(command);
+                for (int port : clients.keySet()) {
+                    clients.get(port).sendCommand(entry);
                 }
-                else {
-                    Command command = CommandCreator.getInstance().createCommand(1, this.task);
-                    HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-                    String entry = JsonBuilder.getInstance().createJsonString(command);
-                    for (int port : clients.keySet()) {
-                        clients.get(port).sendCommand(entry);
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-            timer.cancel();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        timer.cancel();
+    }
 
     /**
      * timer kill function for current notification
