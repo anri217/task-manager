@@ -63,13 +63,15 @@ public class MonoClientThread extends Thread {
             e.printStackTrace();
         } catch (IOException e) {
             if (!this.exit) {
-                System.exit(0);
+                System.out.println("Catch exception to correct close connections");
             } else {
                 e.printStackTrace();
             }
         } finally {
             try {
                 this.clientSocket.close();
+                System.out.println("Connections are closed");
+                System.exit(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
