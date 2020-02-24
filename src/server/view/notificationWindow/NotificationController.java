@@ -236,13 +236,12 @@ public class NotificationController {
                 alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
                 alert.showAndWait();
             }
-        }
-        catch (NullPointerException | NumberFormatException exp){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
-                alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
-                alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
-                alert.showAndWait();
+        } catch (NullPointerException | NumberFormatException exp) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
+            alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
+            alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
+            alert.showAndWait();
         }
 
     }
@@ -265,7 +264,7 @@ public class NotificationController {
         cancelButton.setVisible(false);
     }
 
-    public void handle(WindowEvent event){
+    public void handle(WindowEvent event) {
         event.consume();
     }
 

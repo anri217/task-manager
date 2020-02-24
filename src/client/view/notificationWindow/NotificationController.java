@@ -69,7 +69,9 @@ public class NotificationController {
     public NotificationController() {
     }
 
-    public void setTask(Task task){this.task = task;}
+    public void setTask(Task task) {
+        this.task = task;
+    }
 
     /**
      * description label changing function
@@ -126,7 +128,7 @@ public class NotificationController {
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-       // RefreshHelper.getInstance().getMainWindowController().refresh();
+        // RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -230,13 +232,12 @@ public class NotificationController {
                 alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
                 alert.showAndWait();
             }
-        }
-        catch (NullPointerException | NumberFormatException | JsonProcessingException exp){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
-                alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
-                alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
-                alert.showAndWait();
+        } catch (NullPointerException | NumberFormatException | JsonProcessingException exp) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
+            alert.setHeaderText(NotificationControllerConstants.ALERT_HEADER_TEXT);
+            alert.setContentText(NotificationControllerConstants.ALERT_CONTEXT_TEXT);
+            alert.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -261,7 +262,7 @@ public class NotificationController {
         cancelButton.setVisible(false);
     }
 
-    public void handle(WindowEvent event){
+    public void handle(WindowEvent event) {
         event.consume();
     }
 

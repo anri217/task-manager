@@ -6,16 +6,13 @@ import java.io.DataInputStream;
 import java.net.Socket;
 
 public class NotificationListener extends Thread {
-    private boolean exit;
     private Socket socket;
 
     public NotificationListener(Socket socket) {
         this.socket = socket;
-        this.exit = true;
     }
 
     public void setExit(boolean exit) {
-        this.exit = exit;
     }
 
 

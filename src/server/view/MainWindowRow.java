@@ -35,20 +35,17 @@ public class MainWindowRow {
                 date = new SimpleStringProperty(time +
                         "   0" + task.getPlannedDate().getDayOfMonth() + ".0" + task.getPlannedDate().getMonthValue() + "." +
                         task.getPlannedDate().getYear());
-            }
-            else {
+            } else {
                 date = new SimpleStringProperty(time +
                         "   " + task.getPlannedDate().getDayOfMonth() + ".0" + task.getPlannedDate().getMonthValue() + "." +
                         task.getPlannedDate().getYear());
             }
-        }
-        else {
+        } else {
             if (task.getPlannedDate().getDayOfMonth() < 10) {
                 date = new SimpleStringProperty(time +
                         "   0" + task.getPlannedDate().getDayOfMonth() + "0" + task.getPlannedDate().getMonthValue() + "." +
                         task.getPlannedDate().getYear());
-            }
-            else {
+            } else {
                 date = new SimpleStringProperty(time +
                         "   " + task.getPlannedDate().getDayOfMonth() + "0" + task.getPlannedDate().getMonthValue() + "." +
                         task.getPlannedDate().getYear());

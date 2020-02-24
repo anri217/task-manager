@@ -16,10 +16,6 @@ import shared.JsonBuilder;
  */
 
 public class MainWindow extends Application {
-    public static void run(String[] args) {
-        Application.launch(args);
-    }
-
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));

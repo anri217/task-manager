@@ -11,7 +11,6 @@ import java.io.IOException;
  */
 
 public class NotificationWindow extends Application {
-    public static void run(String[] args){Application.launch();}
     @Override
     public void start(Stage stage) throws IOException {
         stage.initModality(Modality.WINDOW_MODAL);

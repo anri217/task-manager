@@ -29,7 +29,7 @@ public class AddTaskHandler implements Handler {
             clients.get(port).sendCommand(entry);
         }
     }
-    //todo
+
     private String createStringCommand() throws JsonProcessingException {
         Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
         JsonBuilder.getInstance().createJsonString(newCommand);

@@ -3,16 +3,14 @@ package client.handlers;
 import client.view.notificationWindow.NotificationController;
 import client.view.notificationWindow.NotificationWindow;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import shared.TaskConverter;
-import shared.NotificationConstants;
 import shared.Command;
 import shared.Handler;
+import shared.NotificationConstants;
+import shared.TaskConverter;
 import shared.model.Task;
 
 import java.awt.*;
@@ -45,12 +43,7 @@ public class TakeNotificationHandler implements Handler {
         stage.setX(width * NotificationConstants.NOTIFICATION_WINDOW_WIDTH_COEFFICIENT);
         stage.setY(height * NotificationConstants.NOTIFICATION_WINDOW_HEIGHT_COEFFICIENT);
         stage.setScene(new Scene(loader.load()));
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                windowEvent.consume();
-            }
-        });
+        stage.setOnCloseRequest(windowEvent -> windowEvent.consume());
         NotificationController nc = loader.<NotificationController>getController();
         nc.setTask(this.task);
         nc.setLabel();

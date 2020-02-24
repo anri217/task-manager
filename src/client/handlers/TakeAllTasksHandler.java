@@ -21,11 +21,11 @@ public class TakeAllTasksHandler implements Handler {
     private ArrayList<Task> tasks;
 
     @Override
-    public void handle(Command command) throws JsonProcessingException {
-        tasks = new ArrayList<Task>();
-        List<LinkedHashMap<String, Object>> taskList = (List)command.getContent();
-        for (int i = 0; i < taskList.size(); i++){
-           tasks.add(TaskConverter.getInstance().convert(taskList.get(i)));
+    public void handle(Command command) {
+        tasks = new ArrayList<>();
+        List<LinkedHashMap<String, Object>> taskList = (List) command.getContent();
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks.add(TaskConverter.getInstance().convert(taskList.get(i)));
         }
         ArrayList<MainWindowRow> rows = new ArrayList<MainWindowRow>();
         for (Task task : tasks) {
@@ -35,22 +35,22 @@ public class TakeAllTasksHandler implements Handler {
         RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
-    private void createTask(LinkedHashMap<String, Object> map){
+    private void createTask(LinkedHashMap<String, Object> map) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime plannedDate = LocalDateTime.parse((String)map.get("plannedDate"),formatter);
+        LocalDateTime plannedDate = LocalDateTime.parse((String) map.get("plannedDate"), formatter);
         TaskFactory taskFactory = new TaskFactory();
-        Task task = taskFactory.createTask((int)map.get("id"), (String) map.get("name"),(String)map.get("description"),plannedDate,chooseStatus((String)map.get("status")));
+        Task task = taskFactory.createTask((int) map.get("id"), (String) map.get("name"), (String) map.get("description"), plannedDate, chooseStatus((String) map.get("status")));
         tasks.add(task);
     }
 
-    private Status chooseStatus(String status){
+    private Status chooseStatus(String status) {
         if (status.equals("PLANNED"))
             return Status.PLANNED;
-        else{
+        else {
             if (status.equals("COMPLETED")) return Status.COMPLETED;
-            else{
-                if(status.equals("OVERDUE")) return Status.OVERDUE;
-                else{
+            else {
+                if (status.equals("OVERDUE")) return Status.OVERDUE;
+                else {
                     if (status.equals("CANCELED")) return Status.CANCELED;
                     else return Status.DEFERRED;
                 }

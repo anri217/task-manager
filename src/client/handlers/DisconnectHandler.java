@@ -13,7 +13,7 @@ public class DisconnectHandler implements Handler {
         ClientFacade.getListener().interrupt();
         ClientFacade.getDis().close();
         CommandSender.getInstance().close();
-        if(((String)command.getContent()).equals("full")) {
+        if (command.getContent().equals("full")) {
             System.out.println("SERVER IS DOWN");
             System.exit(0);
         }

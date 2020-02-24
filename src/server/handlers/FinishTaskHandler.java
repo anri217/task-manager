@@ -35,9 +35,9 @@ public class FinishTaskHandler implements Handler {
     }
 
     private String createStringCommand() throws JsonProcessingException {
-        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());;
+        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
         JsonBuilder.getInstance().createJsonString(newCommand);
-        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);;
+        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
         return stringCommand;
     }
 }
