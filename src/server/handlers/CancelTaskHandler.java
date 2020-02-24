@@ -34,7 +34,6 @@ public class CancelTaskHandler implements Handler {
         Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
         JsonBuilder.getInstance().createJsonString(newCommand);
         String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
-        ;
         return stringCommand;
     }
 }

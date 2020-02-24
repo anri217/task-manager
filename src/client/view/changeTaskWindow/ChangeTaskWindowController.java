@@ -130,7 +130,7 @@ public class ChangeTaskWindowController implements Initializable {
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
                 newTask.setId(SelectedTasksController.getInstance().getRow().getId());
-                Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getSecPort());
+                Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getPort());
                 String jsonString = JsonBuilder.getInstance().createJsonString(command);
                 CommandSender.getInstance().sendCommand(jsonString);
                 Stage stage = (Stage) changeButton.getScene().getWindow();

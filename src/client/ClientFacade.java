@@ -1,6 +1,5 @@
 package client;
 
-import client.view.mainWindow.MainWindow;
 import shared.Command;
 import shared.CommandCreator;
 import shared.CommandSender;
@@ -11,53 +10,45 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 
 public class ClientFacade {
 
-    private String host;
-    private int port;
-    static private int secPort;
-    static private HashMap<Integer, Reader> readers;
+    private Socket socket;
+    static private int port;
+    static private NotificationListener listener;
+    static private DataInputStream dis;
 
-    public ClientFacade(String host, int port) {
-        readers = new HashMap<Integer, Reader>();
-        this.host = host;
-        this.port = port;
+    public ClientFacade(Socket socket) {
+        this.socket = socket;
     }
 
-    static public HashMap<Integer, Reader> getReaders() {
-        return readers;
+    public static DataInputStream getDis() {
+        return dis;
     }
 
-    static public int getSecPort() {
-        return secPort;
+    static public int getPort() {
+        return port;
     }
 
-    void connect(String[] args) throws IOException {
-        try (Socket socket = new Socket(host, port);
-             DataInputStream dis = new DataInputStream(socket.getInputStream());
-             DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
-            String port = dis.readUTF();
-            secPort = Integer.parseInt(port);
-            dos.writeUTF("192.168.31.156");
-            dos.flush();
-            System.out.println("Get port from client: " + port);
-            try (ServerSocket server = new ServerSocket(Integer.parseInt(port));
-                 Socket client = server.accept()) {
-                System.out.println("Connection accepted");
-                Reader reader = new Reader(new DataInputStream(client.getInputStream()));
-                readers.put(Integer.parseInt(port), reader);
-                reader.start();
-                CommandSender sender = CommandSender.getInstance();
-                sender.setDos(dos);
-                Command command = CommandCreator.getInstance().createCommand(0, " ", secPort);
-                String jsonString = JsonBuilder.getInstance().createJsonString(command);
-                CommandSender.getInstance().sendCommand(jsonString);
-                MainWindow.run(args);
-            }
-        } catch (IOException ex) {
-            throw new IOException(ex.getMessage());
-        }
+    public static NotificationListener getListener() {
+        return listener;
+    }
+
+    void connect() throws IOException {
+        dis = new DataInputStream(socket.getInputStream());
+        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+        port = Integer.parseInt(dis.readUTF());
+        System.out.println("Get port from client: " + port);
+        ServerSocket server = new ServerSocket(port);
+        Socket clientSocket = server.accept();
+        System.out.println("Connection accepted");
+        server.close();
+        listener = new NotificationListener(clientSocket);
+        listener.start();
+        CommandSender sender = CommandSender.getInstance();
+        sender.setDos(dos);
+        Command command = CommandCreator.getInstance().createCommand(0, " ", port);
+        String jsonString = JsonBuilder.getInstance().createJsonString(command);
+        CommandSender.getInstance().sendCommand(jsonString);
     }
 }

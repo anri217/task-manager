@@ -31,4 +31,8 @@ public class CommandSender {
         dos.writeUTF(command);
         dos.flush();
     }
+
+    public void close() throws IOException {
+        dos.close();
+    }
 }

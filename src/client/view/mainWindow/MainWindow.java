@@ -31,7 +31,7 @@ public class MainWindow extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        Command command = CommandCreator.getInstance().createCommand(5, ClientFacade.getSecPort());
+        Command command = CommandCreator.getInstance().createCommand(5, ClientFacade.getPort());
         String jsonString = JsonBuilder.getInstance().createJsonString(command);
         CommandSender.getInstance().sendCommand(jsonString);
     }

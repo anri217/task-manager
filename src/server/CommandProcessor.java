@@ -29,6 +29,7 @@ public class CommandProcessor {
         handlerMap.put(3, new ChangeTaskHandler());
         handlerMap.put(4, new CancelTaskHandler());
         handlerMap.put(5, new DisconnectHandler());
+        handlerMap.put(6, new AllDisconnectHandler());
 
     }
 

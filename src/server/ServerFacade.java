@@ -4,10 +4,14 @@ import server.controller.utils.Paths;
 import server.controller.utils.PropertyParser;
 import server.controller.utils.portgenerator.PortGenerator;
 import server.exceptions.PropertyParserInitException;
+import shared.Command;
+import shared.CommandCreator;
+import shared.view.AlertShowing;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +27,12 @@ public class ServerFacade {
         return instance;
     }
 
+    private ServerSocket server;
+
+    public ServerSocket getServer() {
+        return server;
+    }
+
     private Map<Integer, MonoClientThread> clients;
 
     public Map<Integer, MonoClientThread> getClients() {
@@ -33,27 +43,52 @@ public class ServerFacade {
         this.clients = clients;
     }
 
-    private static ExecutorService executeIt = Executors.newFixedThreadPool(5);
+    private ExecutorService executeIt = Executors.newFixedThreadPool(2);
 
+    private boolean exit;
 
-    private ServerFacade() {
-        clients = new HashMap<Integer, MonoClientThread>();
+    public void setExit(boolean exit) {
+        this.exit = exit;
     }
 
-    public void connect() throws IOException, PropertyParserInitException {
-        PropertyParser parser = new PropertyParser(Paths.SERVER);
-        try (ServerSocket server = new ServerSocket(Integer.parseInt(parser.getProperty("port")))) {
-            while (!server.isClosed()) {
-                Socket client = server.accept();
-                int port = PortGenerator.getInstance().getPort();
-                MonoClientThread thread = new MonoClientThread(client, port);
-                clients.put(port, thread);
-                executeIt.execute(thread);
-                System.out.println("Connection accepted");
+    private ServerFacade() {
+        clients = new HashMap<>();
+    }
+
+    public void connect() {
+        new Thread(() -> {
+            PropertyParser parser = null;
+            try {
+                parser = new PropertyParser(Paths.SERVER);
+            } catch (PropertyParserInitException e) {
+                e.printStackTrace();
             }
-            executeIt.shutdown();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try (ServerSocket server = new ServerSocket(Integer.parseInt(parser.getProperty("port")))) {
+                this.server = server;
+                this.exit = true;
+                while (!server.isClosed()) {
+                    Socket clientSocket = server.accept();
+                    int port = PortGenerator.getInstance().getPort();
+                    MonoClientThread thread = new MonoClientThread(clientSocket, port);
+                    clients.put(port, thread);
+                    executeIt.execute(thread);
+                    System.out.println("Connection accepted");
+                }
+                executeIt.shutdown();
+            } catch (SocketException e) {
+                if (!exit) {
+                    Command command = CommandCreator.getInstance().createCommand(6, " ");
+                    try {
+                        CommandProcessor.getInstance().processCommand(command);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                AlertShowing.showAlert(e.getMessage());
+            }
+        }).start();
     }
 }

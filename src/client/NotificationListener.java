@@ -3,13 +3,14 @@ package client;
 import shared.JsonParser;
 
 import java.io.DataInputStream;
+import java.net.Socket;
 
-public class Reader extends Thread {
+public class NotificationListener extends Thread {
     private boolean exit;
-    private DataInputStream dis;
+    private Socket socket;
 
-    public Reader(DataInputStream dis) {
-        this.dis = dis;
+    public NotificationListener(Socket socket) {
+        this.socket = socket;
         this.exit = true;
     }
 
@@ -18,27 +19,22 @@ public class Reader extends Thread {
     }
 
 
-    public void setDis(DataInputStream dis) {
-        this.dis = dis;
-    }
-
     public void run() {
         try {
             CommandProcessor processor = CommandProcessor.getInstance();
-            while (this.exit) {
+            DataInputStream dis = new DataInputStream(this.socket.getInputStream());
+            while (!this.isInterrupted()) {
                 Thread.sleep(2000);
                 System.out.println("Client start waiting messages from server");
                 String answer = dis.readUTF();
-                System.out.println(answer);
+                System.out.println("Client get message from server" + answer);
                 JsonParser parser = new JsonParser(answer);
                 parser.parseCommand();
                 processor.processCommand(parser.getCommand());
-                System.out.println("Client get message from server" + answer);
             }
+            dis.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
-
-
 }
