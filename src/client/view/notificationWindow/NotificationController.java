@@ -88,9 +88,7 @@ public class NotificationController {
      */
     @FXML
     public void finishTaskAction(ActionEvent actionEvent) throws IOException {
-        task.setStatus(Status.COMPLETED);
-        task.setDateOfDone(LocalDateTime.now());
-        Command command = CommandCreator.getInstance().createCommand(3, task);
+        Command command = CommandCreator.getInstance().createCommand(7, task);
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();

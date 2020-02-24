@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+//todo сделать красиво без linkedmap и нормально оформить ретерны
 public class TaskConverter {
     private Map<String, Object> map;
     private static TaskConverter instance;
@@ -24,26 +24,36 @@ public class TaskConverter {
         return instance;
     }
 
-    public Task convert(LinkedHashMap<String, Object> taskMap) {
+    public Task convert(Map<String, Object> taskMap) {
         this.map = taskMap;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime plannedDate = LocalDateTime.parse((String) map.get("plannedDate"), formatter);
         TaskFactory taskFactory = new TaskFactory();
-        return (taskFactory.createTask((int) map.get("id"), (String) map.get("name"), (String) map.get("description"), plannedDate, chooseStatus((String) map.get("status"))));
+        Task task = taskFactory.createTask((int) map.get("id"), (String) map.get("name"),
+                (String) map.get("description"), plannedDate, chooseStatus((String) map.get("status")));
+        return task;
     }
 
-    private Status chooseStatus(String status) {
-        if (status.equals("PLANNED"))
-            return Status.PLANNED;
-        else {
-            if (status.equals("COMPLETED")) return Status.COMPLETED;
-            else {
-                if (status.equals("OVERDUE")) return Status.OVERDUE;
-                else {
-                    if (status.equals("CANCELED")) return Status.CANCELED;
-                    else return Status.DEFERRED;
-                }
-            }
-        }
+//todo через switch case
+    private Status chooseStatus(String statusString) {
+        Status status = null;
+        switch (statusString) {
+            case ("PLANNED"):
+                status = Status.PLANNED;
+                break;
+            case ("COMPLETED"):
+                status = Status.COMPLETED;
+                break;
+            case ("OVERDUE"):
+                status = Status.OVERDUE;
+                break;
+            case ("CANCELED"):
+                status = Status.CANCELED;
+                break;
+            case ("DEFERRED"):
+                status = Status.DEFERRED;
+                break;
+        };
+        return status;
     }
 }

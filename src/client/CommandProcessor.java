@@ -21,8 +21,6 @@ public class CommandProcessor {
         return instance;
     }
 
-
-    private Command command;
     private Map<Integer, Handler> handlerMap;
 
     private CommandProcessor() {
@@ -42,11 +40,4 @@ public class CommandProcessor {
         handlerMap.get(commandId).handle(command);
     }
 
-    public void setCommand(Command command) {
-        this.command = command;
-    }
-
-    public Command getCommand() {
-        return command;
-    }
 }

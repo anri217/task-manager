@@ -30,7 +30,7 @@ public class CommandProcessor {
         handlerMap.put(4, new CancelTaskHandler());
         handlerMap.put(5, new DisconnectHandler());
         handlerMap.put(6, new AllDisconnectHandler());
-
+        handlerMap.put(7, new FinishTaskHandler());
     }
 
     public void addHandler(Integer key, Handler handler) {

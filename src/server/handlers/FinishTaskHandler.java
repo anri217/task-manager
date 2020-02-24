@@ -10,18 +10,22 @@ import shared.Command;
 import shared.CommandCreator;
 import shared.Handler;
 import shared.JsonBuilder;
+import shared.model.Status;
 import shared.model.Task;
 
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class AddTaskHandler implements Handler {
+public class FinishTaskHandler implements Handler {
 
     @Override
-    public void handle(Command command) throws IOException {
-        Task task = TaskConverter.getInstance().convert((LinkedHashMap<String, Object>) command.getContent());
-        Controller.getInstance().addTask(task);
+    public void handle(Command command) throws Exception {
+        LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) command.getContent();
+        Task task = TaskConverter.getInstance().convert(map);
+        task.setStatus(Status.COMPLETED);
+        task.setDateOfDone(LocalDateTime.now());
+        Controller.getInstance().changeTask(task.getId(), task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
         HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
         String entry = createStringCommand();
@@ -29,11 +33,11 @@ public class AddTaskHandler implements Handler {
             clients.get(port).sendCommand(entry);
         }
     }
-    //todo
+
     private String createStringCommand() throws JsonProcessingException {
-        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
+        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());;
         JsonBuilder.getInstance().createJsonString(newCommand);
-        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
+        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);;
         return stringCommand;
     }
 }
