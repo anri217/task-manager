@@ -1,7 +1,9 @@
 package server.controller.utils;
 
 import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
+import shared.utils.Paths;
+import shared.utils.PropertyParser;
 
 import java.io.*;
 

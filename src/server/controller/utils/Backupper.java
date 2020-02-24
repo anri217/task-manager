@@ -1,7 +1,7 @@
 package server.controller.utils;
 
 import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
 
 public class Backupper {
     private IOUtils ioUtils;

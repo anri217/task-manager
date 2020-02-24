@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import server.controller.Controller;
 import server.controller.utils.Backupper;
 import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
 import server.view.RefreshHelper;
 import shared.model.Journal;
 import shared.model.Status;

@@ -1,4 +1,4 @@
-package server.exceptions;
+package shared.exceptions;
 
 /**
  * Exception for opening properties files

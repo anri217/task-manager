@@ -2,7 +2,9 @@ package server.controller.utils;
 
 import com.thoughtworks.xstream.XStream;
 import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
+import shared.utils.Paths;
+import shared.utils.PropertyParser;
 
 import java.io.*;
 

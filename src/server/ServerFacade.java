@@ -1,9 +1,9 @@
 package server;
 
-import server.controller.utils.Paths;
-import server.controller.utils.PropertyParser;
+import shared.utils.Paths;
+import shared.utils.PropertyParser;
 import server.controller.utils.portgenerator.PortGenerator;
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
 import shared.Command;
 import shared.CommandCreator;
 import shared.view.AlertShowing;
@@ -34,6 +34,8 @@ public class ServerFacade {
     }
 
     private Map<Integer, MonoClientThread> clients;
+
+    private boolean check;
 
     public Map<Integer, MonoClientThread> getClients() {
         return clients;

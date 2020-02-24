@@ -1,6 +1,6 @@
-package server;
+package shared;
 
-import server.controller.factories.TaskFactory;
+import shared.factories.TaskFactory;
 import shared.model.Status;
 import shared.model.Task;
 

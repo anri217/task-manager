@@ -1,6 +1,6 @@
-package server.controller.utils;
+package shared.utils;
 
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
 
 import java.io.FileInputStream;
 import java.io.IOException;

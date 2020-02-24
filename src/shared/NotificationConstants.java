@@ -1,4 +1,6 @@
-package server.controller;
+package shared;
+
+import server.controller.Notification;
 
 /**
  * Class for named constants used in Notification

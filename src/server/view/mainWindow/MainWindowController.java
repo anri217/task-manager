@@ -12,7 +12,7 @@ import server.ServerFacade;
 import server.controller.Controller;
 import server.controller.utils.BinarySerializer;
 import server.exceptions.BackupFileException;
-import server.exceptions.PropertyParserInitException;
+import shared.exceptions.PropertyParserInitException;
 import server.view.MainWindowRow;
 import server.view.RefreshHelper;
 import server.view.SelectedTasksController;

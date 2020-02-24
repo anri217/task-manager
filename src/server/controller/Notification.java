@@ -14,6 +14,7 @@ import server.view.notificationWindow.NotificationWindow;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
+import shared.NotificationConstants;
 import shared.model.Status;
 import shared.model.Task;
 

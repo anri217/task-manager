@@ -1,4 +1,4 @@
-package server.controller.factories;
+package shared.factories;
 
 import shared.model.Status;
 import shared.model.Task;
