@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import shared.Command;
-import shared.Handler;
 import shared.NotificationConstants;
 import shared.TaskConverter;
 import shared.model.Task;
@@ -21,7 +20,7 @@ public class TakeNotificationHandler implements Handler {
     private Task task;
 
     @Override
-    public void handle(Command command) throws Exception {
+    public void handle(Command command) {
         LinkedHashMap<String, Object> taskMap = (LinkedHashMap<String, Object>) command.getContent();
         task = TaskConverter.getInstance().convert(taskMap);
         Platform.runLater(() -> {

@@ -7,4 +7,5 @@ package shared.model;
 
 public enum Status {
     PLANNED, COMPLETED, OVERDUE, CANCELED, DEFERRED;
+
 }

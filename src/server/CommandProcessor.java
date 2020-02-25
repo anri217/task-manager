@@ -1,9 +1,14 @@
 package server;
 
+import server.controller.Controller;
+import server.exceptions.HandleException;
+import server.exceptions.NotFoundHandlerException;
 import server.handlers.*;
 import shared.Command;
-import shared.Handler;
+import shared.CommandCreator;
+import shared.JsonBuilder;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +42,15 @@ public class CommandProcessor {
         handlerMap.put(key, handler);
     }
 
-    public void processCommand(Command command) throws Exception {
+    public void processCommand(Command command) throws NotFoundHandlerException, HandleException {
         int commandId = command.getCommandId();
-        handlerMap.get(commandId).handle(command);
+        try {
+            handlerMap.get(commandId).handle(command);
+        } catch (NullPointerException e) {
+            throw new NotFoundHandlerException("Command with this commandId is not found");
+        } catch (IOException e) {
+            throw new HandleException(e);
+        }
     }
 
 

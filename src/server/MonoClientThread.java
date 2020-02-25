@@ -49,9 +49,8 @@ public class MonoClientThread extends Thread {
                     String answer = dis.readUTF();
                     System.out.println(answer);
                     JsonParser parser = new JsonParser(answer);
-                    parser.parseCommand();
                     try {
-                        processor.processCommand(parser.getCommand());
+                        processor.processCommand(parser.parseCommand());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

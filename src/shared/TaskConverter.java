@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 //todo сделать красиво без linkedmap и нормально оформить ретерны
 public class TaskConverter {
     private Map<String, Object> map;
@@ -28,13 +29,16 @@ public class TaskConverter {
         this.map = taskMap;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime plannedDate = LocalDateTime.parse((String) map.get("plannedDate"), formatter);
+        int taskId = Integer.parseInt(map.get("id").toString());
+        String taskName = map.get("name").toString();
+        String taskDescription = map.get("description").toString();
+        Status taskStatus = chooseStatus(map.get("status").toString());
         TaskFactory taskFactory = new TaskFactory();
-        Task task = taskFactory.createTask((int) map.get("id"), (String) map.get("name"),
-                (String) map.get("description"), plannedDate, chooseStatus((String) map.get("status")));
+        Task task = taskFactory.createTask(taskId, taskName, taskDescription, plannedDate, taskStatus);
         return task;
     }
 
-//todo через switch case
+    //todo через switch case
     private Status chooseStatus(String statusString) {
         Status status = null;
         switch (statusString) {
@@ -53,7 +57,9 @@ public class TaskConverter {
             case ("DEFERRED"):
                 status = Status.DEFERRED;
                 break;
-        };
+        }
+        ;
         return status;
     }
+
 }

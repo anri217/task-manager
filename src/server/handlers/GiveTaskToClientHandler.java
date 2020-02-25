@@ -4,7 +4,6 @@ import server.ServerFacade;
 import server.controller.Controller;
 import shared.Command;
 import shared.CommandCreator;
-import shared.Handler;
 import shared.JsonBuilder;
 
 import java.io.IOException;
@@ -12,9 +11,7 @@ import java.io.IOException;
 public class GiveTaskToClientHandler implements Handler {
     @Override
     public void handle(Command command) throws IOException {
-        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
-        JsonBuilder.getInstance().createJsonString(newCommand);
-        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
-        ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(stringCommand);
+        ServerFacade.getInstance().getClients().get(command.getPort()).sendCommand(CommandCreator.getInstance().
+                createStringCommand(0, Controller.getInstance().getAll()));
     }
 }

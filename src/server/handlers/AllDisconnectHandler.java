@@ -3,9 +3,9 @@ package server.handlers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import server.MonoClientThread;
 import server.ServerFacade;
+import server.controller.Controller;
 import shared.Command;
 import shared.CommandCreator;
-import shared.Handler;
 import shared.JsonBuilder;
 
 import java.io.IOException;
@@ -22,13 +22,8 @@ public class AllDisconnectHandler implements Handler {
             clients.get(port).setExit(false);
         }
         for (int port : clients.keySet()) {
-            clients.get(port).sendCommand(createStringCommand());
+            clients.get(port).sendCommand(CommandCreator.getInstance().createStringCommand(71, "full"));
         }
     }
 
-    private String createStringCommand() throws JsonProcessingException {
-        Command newCommand = CommandCreator.getInstance().createCommand(71, "full");
-        JsonBuilder.getInstance().createJsonString(newCommand);
-        return JsonBuilder.getInstance().createJsonString(newCommand);
-    }
 }

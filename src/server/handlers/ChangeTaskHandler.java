@@ -8,7 +8,6 @@ import server.controller.Controller;
 import server.view.RefreshHelper;
 import shared.Command;
 import shared.CommandCreator;
-import shared.Handler;
 import shared.JsonBuilder;
 import shared.model.Status;
 import shared.model.Task;
@@ -37,17 +36,11 @@ public class ChangeTaskHandler implements Handler {
             Controller.getInstance().changeTask(task.getId(), task);
             RefreshHelper.getInstance().getMainWindowController().refresh();
             HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-            String entry = createStringCommand();
+            String entry = CommandCreator.getInstance().createStringCommand(0, Controller.getInstance().getAll());
             for (int port : clients.keySet()) {
                 clients.get(port).sendCommand(entry);
             }
         }
     }
 
-    private String createStringCommand() throws JsonProcessingException {
-        Command newCommand = CommandCreator.getInstance().createCommand(0, Controller.getInstance().getAll());
-        JsonBuilder.getInstance().createJsonString(newCommand);
-        String stringCommand = JsonBuilder.getInstance().createJsonString(newCommand);
-        return stringCommand;
-    }
 }

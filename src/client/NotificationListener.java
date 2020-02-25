@@ -26,8 +26,7 @@ public class NotificationListener extends Thread {
                 String answer = dis.readUTF();
                 System.out.println("Client get message from server" + answer);
                 JsonParser parser = new JsonParser(answer);
-                parser.parseCommand();
-                processor.processCommand(parser.getCommand());
+                processor.processCommand(parser.parseCommand());
             }
             dis.close();
         } catch (Exception e) {

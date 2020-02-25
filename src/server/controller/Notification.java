@@ -1,25 +1,14 @@
 package server.controller;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import server.MonoClientThread;
 import server.ServerFacade;
 import server.view.RefreshHelper;
-import server.view.notificationWindow.NotificationController;
-import server.view.notificationWindow.NotificationWindow;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
-import shared.NotificationConstants;
 import shared.model.Status;
 import shared.model.Task;
 
-import java.awt.*;
-import java.io.IOException;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
@@ -76,44 +65,6 @@ public class Notification extends TimerTask {
      */
     public void setTask(Task task) {
         this.task = task;
-    }
-
-    /**
-     * Сreate stage for Notification Window function
-     *
-     * @return created stage
-     * @throws IOException
-     */
-    public Stage createStage() throws IOException {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(NotificationConstants.NOTIFICATION_WINDOW_PATH));
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(NotificationConstants.NOTIFICATION_TITLE);
-        stage.setX(width * NotificationConstants.NOTIFICATION_WINDOW_WIDTH_COEFFICIENT);
-        stage.setY(height * NotificationConstants.NOTIFICATION_WINDOW_HEIGHT_COEFFICIENT);
-        stage.setScene(new Scene(loader.load()));
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                windowEvent.consume();
-            }
-        });
-        NotificationController nc = loader.getController();
-        nc.setNotification(this);
-        nc.setLabel();
-        return stage;
-    }
-
-    /**
-     * Notification window launch function
-     *
-     * @throws Exception
-     */
-    public void showNotification() throws Exception {
-        NotificationWindow nw = new NotificationWindow();
-        nw.start(createStage());
     }
 
     @Override

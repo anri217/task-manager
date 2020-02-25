@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import shared.TaskConverter;
 import shared.factories.TaskFactory;
 import shared.Command;
-import shared.Handler;
 import shared.model.Status;
 import shared.model.Task;
 
@@ -33,28 +32,5 @@ public class TakeAllTasksHandler implements Handler {
         }
         RefreshHelper.getInstance().getMainWindowController().setRows(rows);
         RefreshHelper.getInstance().getMainWindowController().refresh();
-    }
-
-    private void createTask(LinkedHashMap<String, Object> map) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime plannedDate = LocalDateTime.parse((String) map.get("plannedDate"), formatter);
-        TaskFactory taskFactory = new TaskFactory();
-        Task task = taskFactory.createTask((int) map.get("id"), (String) map.get("name"), (String) map.get("description"), plannedDate, chooseStatus((String) map.get("status")));
-        tasks.add(task);
-    }
-
-    private Status chooseStatus(String status) {
-        if (status.equals("PLANNED"))
-            return Status.PLANNED;
-        else {
-            if (status.equals("COMPLETED")) return Status.COMPLETED;
-            else {
-                if (status.equals("OVERDUE")) return Status.OVERDUE;
-                else {
-                    if (status.equals("CANCELED")) return Status.CANCELED;
-                    else return Status.DEFERRED;
-                }
-            }
-        }
     }
 }

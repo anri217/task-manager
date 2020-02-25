@@ -3,7 +3,6 @@ package client.handlers;
 import client.ClientFacade;
 import shared.Command;
 import shared.CommandSender;
-import shared.Handler;
 
 import java.io.IOException;
 

@@ -1,12 +1,11 @@
 package client;
 
-import client.handlers.DisconnectHandler;
-import client.handlers.ErrorHandler;
-import client.handlers.TakeAllTasksHandler;
-import client.handlers.TakeNotificationHandler;
+import client.handlers.*;
+import client.handlers.HandlerException.HandleException;
+import client.handlers.HandlerException.NotFoundHandlerException;
 import shared.Command;
-import shared.Handler;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +36,13 @@ public class CommandProcessor {
 
     public void processCommand(Command command) throws Exception {
         int commandId = command.getCommandId();
-        handlerMap.get(commandId).handle(command);
+        try {
+            handlerMap.get(commandId).handle(command);
+        } catch (NullPointerException e) {
+            throw new NotFoundHandlerException("Command with this commandId is not found");
+        } catch (IOException e) {
+            throw new HandleException(e);
+        }
     }
 
 }
