@@ -45,7 +45,6 @@ public class MonoClientThread extends Thread {
                 CommandProcessor processor = CommandProcessor.getInstance();
                 while (this.exit) {
                     Thread.sleep(2000);
-                    System.out.println("Server start waiting message from client");
                     String answer = dis.readUTF();
                     System.out.println(answer);
                     JsonParser parser = new JsonParser(answer);
@@ -54,23 +53,19 @@ public class MonoClientThread extends Thread {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    System.out.println("READ from clientDialog message - " + answer);
                 }
-                System.out.println("Client disconnected");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
             if (!this.exit) {
-                System.out.println("Catch exception to correct close connections");
+                System.exit(0);
             } else {
                 e.printStackTrace();
             }
         } finally {
             try {
                 this.clientSocket.close();
-                System.out.println("Connections are closed");
-                System.exit(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }

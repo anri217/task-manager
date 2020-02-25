@@ -10,14 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import shared.factories.TaskFactory;
-import shared.utils.idgenerator.IdGenerator;
 import shared.Command;
 import shared.CommandCreator;
 import shared.CommandSender;
 import shared.JsonBuilder;
+import shared.factories.TaskFactory;
 import shared.model.Status;
 import shared.model.Task;
+import shared.utils.IdGenerator;
 import shared.view.AlertShowing;
 
 import java.io.IOException;
@@ -130,7 +130,7 @@ public class ChangeTaskWindowController implements Initializable {
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
                         descTextArea.getText(), cur, Status.PLANNED));
                 newTask.setId(SelectedTasksController.getInstance().getRow().getId());
-                Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getPort());
+                Command command = CommandCreator.getInstance().createCommand(3, newTask, ClientFacade.getInstance().getPort());
                 String jsonString = JsonBuilder.getInstance().createJsonString(command);
                 CommandSender.getInstance().sendCommand(jsonString);
                 Stage stage = (Stage) changeButton.getScene().getWindow();

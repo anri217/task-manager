@@ -5,13 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import shared.*;
+import shared.exceptions.PropertyParserInitException;
 import shared.utils.Paths;
 import shared.utils.PropertyParser;
-import shared.exceptions.PropertyParserInitException;
-import shared.Command;
-import shared.CommandCreator;
-import shared.CommandSender;
-import shared.JsonBuilder;
 import shared.view.AlertShowing;
 
 import java.io.IOException;
@@ -27,8 +24,9 @@ public class Client extends Application {
         }
         if (propertyParser != null) {
             try {
-                ClientFacade clientFacade = new ClientFacade(new Socket("localhost",
-                        Integer.parseInt(propertyParser.getProperty("port"))));
+                ClientFacade clientFacade = ClientFacade.getInstance();
+                clientFacade.setSocket(new Socket(propertyParser.getProperty(NamedConstants.PROPERTY_NAME_HOST),
+                        Integer.parseInt(propertyParser.getProperty(NamedConstants.PROPERTY_NAME_PORT))));
                 clientFacade.connect();
                 Application.launch(args);
             } catch (IOException e) {
@@ -39,8 +37,8 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/mainWindow/mainWindow.fxml"));
-        stage.setTitle("TASK MANAGER");
+        Parent root = FXMLLoader.load(getClass().getResource(NamedConstants.PATH_TO_FXML));
+        stage.setTitle(NamedConstants.WINDOW_NAME);
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -48,7 +46,7 @@ public class Client extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        Command command = CommandCreator.getInstance().createCommand(5, ClientFacade.getPort());
+        Command command = CommandCreator.getInstance().createCommand(5, ClientFacade.getInstance().getPort());
         String jsonString = JsonBuilder.getInstance().createJsonString(command);
         CommandSender.getInstance().sendCommand(jsonString);
     }

@@ -22,9 +22,7 @@ public class NotificationListener extends Thread {
             DataInputStream dis = new DataInputStream(this.socket.getInputStream());
             while (!this.isInterrupted()) {
                 Thread.sleep(2000);
-                System.out.println("Client start waiting messages from server");
                 String answer = dis.readUTF();
-                System.out.println("Client get message from server" + answer);
                 JsonParser parser = new JsonParser(answer);
                 processor.processCommand(parser.parseCommand());
             }

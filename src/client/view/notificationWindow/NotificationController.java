@@ -79,8 +79,6 @@ public class NotificationController {
     public void setLabel() {
         nameTaskLabel.setText(task.getName() + ".");
         descLabel.setText(task.getDescription() + ".");
-        /*nameTaskLabel.setText(notification.getTask().getName() + ".");
-        descLabel.setText(notification.getTask().getDescription() + ".");*/
     }
 
     /**
@@ -94,7 +92,6 @@ public class NotificationController {
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
-        //RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -124,7 +121,7 @@ public class NotificationController {
     public void fiveMinutesButtonActive(ActionEvent actionEvent) throws IOException {
         task.setPlannedDate(LocalDateTime.now().plusMinutes(5));
         task.setStatus(Status.DEFERRED);
-        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getPort());
+        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -140,11 +137,10 @@ public class NotificationController {
     public void tenMinutesButtonActive(ActionEvent actionEvent) throws IOException {
         task.setPlannedDate(LocalDateTime.now().plusMinutes(10));
         task.setStatus(Status.DEFERRED);
-        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getPort());
+        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        //RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -156,11 +152,10 @@ public class NotificationController {
     public void fifteenMinutesButtonAction(ActionEvent actionEvent) throws IOException {
         task.setPlannedDate(LocalDateTime.now().plusMinutes(15));
         task.setStatus(Status.DEFERRED);
-        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getPort());
+        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
-        //RefreshHelper.getInstance().getMainWindowController().refresh();
     }
 
     /**
@@ -220,11 +215,10 @@ public class NotificationController {
                 task.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
                         Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
                 task.setStatus(Status.DEFERRED);
-                Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getPort());
+                Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
                 CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
                 Stage stage = (Stage) deferButton.getScene().getWindow();
                 stage.close();
-                //RefreshHelper.getInstance().getMainWindowController().refresh();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(NotificationControllerConstants.ALERT_TITLE);
@@ -253,7 +247,6 @@ public class NotificationController {
         descLabel.setVisible(true);
         finishButton.setVisible(true);
         deferButton.setVisible(true);
-        //deferTaskButton.setVisible(true);
         chooseTimeButton.setVisible(false);
         chooseTimeLabel.setVisible(false);
         fiveMinutesButton.setVisible(false);

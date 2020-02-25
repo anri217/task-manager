@@ -70,12 +70,12 @@ public class Notification extends TimerTask {
     @Override
     public void run() {
         try {
-            if (ServerFacade.getInstance().getClients().isEmpty()) {
+            if (ServerFacade.getInstance().getClientThreadMap().isEmpty()) {
                 Controller.getInstance().getTask(this.task.getId()).setStatus(Status.OVERDUE);
                 RefreshHelper.getInstance().getMainWindowController().refresh();
             } else {
                 Command command = CommandCreator.getInstance().createCommand(1, this.task);
-                HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
+                HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClientThreadMap();
                 String entry = JsonBuilder.getInstance().createJsonString(command);
                 for (int port : clients.keySet()) {
                     clients.get(port).sendCommand(entry);

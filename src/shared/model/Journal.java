@@ -1,6 +1,6 @@
 package shared.model;
 
-import shared.utils.idgenerator.IdGenerator;
+import shared.utils.IdGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

@@ -8,8 +8,9 @@ import javafx.stage.Stage;
 import server.controller.Controller;
 import server.controller.utils.Backupper;
 import server.exceptions.BackupFileException;
-import shared.exceptions.PropertyParserInitException;
 import server.view.RefreshHelper;
+import shared.NamedConstants;
+import shared.exceptions.PropertyParserInitException;
 import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
@@ -25,7 +26,7 @@ public class Server extends Application {
         Backupper backupper = new Backupper();
         Journal journal = new Journal();
         try {
-            journal = (Journal) backupper.restoreFunction(1);
+            journal = (Journal) backupper.restoreFunction(Backupper.BIN);
         } catch (BackupFileException | ClassNotFoundException | PropertyParserInitException e) {
             AlertShowing.showAlert(e.getMessage());
         }
@@ -42,7 +43,7 @@ public class Server extends Application {
         Application.launch(args);
         Controller.getInstance().deleteAllNotification();
         try {
-            backupper.backupFunction(Controller.getInstance().getJournal(), 1);
+            backupper.backupFunction(Controller.getInstance().getJournal(), Backupper.BIN);
         } catch (PropertyParserInitException | BackupFileException e) {
             AlertShowing.showAlert(e.getMessage());
         }
@@ -51,13 +52,13 @@ public class Server extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("view/mainWindow/mainWindow.fxml"));
-            stage.setTitle("TASK MANAGER");
+            Parent root = FXMLLoader.load(getClass().getResource(NamedConstants.PATH_TO_FXML));
+            stage.setTitle(NamedConstants.WINDOW_NAME);
             stage.setScene(new Scene(root));
             stage.show();
             RefreshHelper.getInstance().getMainWindowController().refresh();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -65,7 +66,10 @@ public class Server extends Application {
     public void stop() throws Exception {
         super.stop();
         ServerFacade facade = ServerFacade.getInstance();
-        facade.setExit(false);
-        facade.getServer().close();
+        facade.setExit(true);
+        facade.getServerSocket().close();
+        if(ServerFacade.getInstance().isEmptyMap()) {
+            System.exit(0);
+        }
     }
 }

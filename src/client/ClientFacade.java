@@ -13,24 +13,35 @@ import java.net.Socket;
 
 public class ClientFacade {
 
-    private Socket socket;
-    static private int port;
-    static private NotificationListener listener;
-    static private DataInputStream dis;
+    private static ClientFacade instance;
 
-    public ClientFacade(Socket socket) {
-        this.socket = socket;
+    public static synchronized ClientFacade getInstance() {
+        if (instance == null) {
+            instance = new ClientFacade();
+        }
+        return instance;
+    }
+    private Socket socket;
+    private int port;
+    private NotificationListener listener;
+    private DataInputStream dis;
+
+    private ClientFacade() {
     }
 
-    public static DataInputStream getDis() {
+    public DataInputStream getDis() {
         return dis;
     }
 
-    static public int getPort() {
+    public int getPort() {
         return port;
     }
 
-    public static NotificationListener getListener() {
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public  NotificationListener getListener() {
         return listener;
     }
 
@@ -38,10 +49,8 @@ public class ClientFacade {
         dis = new DataInputStream(socket.getInputStream());
         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         port = Integer.parseInt(dis.readUTF());
-        System.out.println("Get port from client: " + port);
         ServerSocket server = new ServerSocket(port);
         Socket clientSocket = server.accept();
-        System.out.println("Connection accepted");
         server.close();
         listener = new NotificationListener(clientSocket);
         listener.start();

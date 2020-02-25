@@ -1,12 +1,9 @@
 package server;
 
-import server.controller.Controller;
 import server.exceptions.HandleException;
 import server.exceptions.NotFoundHandlerException;
 import server.handlers.*;
 import shared.Command;
-import shared.CommandCreator;
-import shared.JsonBuilder;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,7 +24,7 @@ public class CommandProcessor {
     private Map<Integer, Handler> handlerMap;
 
     private CommandProcessor() {
-        handlerMap = new HashMap<Integer, Handler>();
+        handlerMap = new HashMap<>();
         handlerMap.put(0, new GiveTaskToClientHandler());
         handlerMap.put(1, new AddTaskHandler());
         handlerMap.put(2, new DeleteTaskHandler());

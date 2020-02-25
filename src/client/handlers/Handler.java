@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface Handler {
 
-    public void handle(Command command) throws IOException;
+    void handle(Command command) throws IOException;
 }

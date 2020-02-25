@@ -4,6 +4,9 @@ import server.exceptions.BackupFileException;
 import shared.exceptions.PropertyParserInitException;
 
 public class Backupper {
+    public static final String BIN = "binary";
+    public static final String XML = "xml";
+
     private IOUtils ioUtils;
 
     public Backupper() {
@@ -17,22 +20,23 @@ public class Backupper {
         this.ioUtils = ioUtils;
     }
 
-    public void backupFunction(Object object, int current) throws PropertyParserInitException, BackupFileException {
+    public void backupFunction(Object object, String current) throws PropertyParserInitException, BackupFileException {
         choose(current);
         ioUtils.serializeObject(object);
     }
 
-    public Object restoreFunction(int current) throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
+    public Object restoreFunction(String current) throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
         choose(current);
         return ioUtils.deserializeObject();
     }
 
-    /**
-     * For choose need serializer, if current = 1 BinarySerializer, else XMLSerializer
-     *
-     * @param current
-     */
-    private void choose(int current) {
-        ioUtils = current == 1 ? BinarySerializer.getInstance() : XMLSerializer.getInstance();
+
+    private void choose(String current) {
+        if (current.equals(BIN)) {
+            ioUtils = BinarySerializer.getInstance();
+        }
+        else if(current.equals(XML)) {
+            ioUtils = XMLSerializer.getInstance();
+        }
     }
 }

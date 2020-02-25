@@ -1,11 +1,12 @@
 package server;
 
-import shared.utils.Paths;
-import shared.utils.PropertyParser;
-import server.controller.utils.portgenerator.PortGenerator;
-import shared.exceptions.PropertyParserInitException;
+import server.controller.utils.PortGenerator;
 import shared.Command;
 import shared.CommandCreator;
+import shared.NamedConstants;
+import shared.exceptions.PropertyParserInitException;
+import shared.utils.Paths;
+import shared.utils.PropertyParser;
 import shared.view.AlertShowing;
 
 import java.io.IOException;
@@ -27,23 +28,18 @@ public class ServerFacade {
         return instance;
     }
 
-    private ServerSocket server;
+    private ServerSocket serverSocket;
 
-    public ServerSocket getServer() {
-        return server;
+    public ServerSocket getServerSocket() {
+        return serverSocket;
     }
 
-    private Map<Integer, MonoClientThread> clients;
+    private Map<Integer, MonoClientThread> clientThreadMap;
 
-    private boolean check;
-
-    public Map<Integer, MonoClientThread> getClients() {
-        return clients;
+    public Map<Integer, MonoClientThread> getClientThreadMap() {
+        return clientThreadMap;
     }
 
-    public void setClients(Map<Integer, MonoClientThread> clients) {
-        this.clients = clients;
-    }
 
     private ExecutorService executeIt = Executors.newFixedThreadPool(2);
 
@@ -54,7 +50,25 @@ public class ServerFacade {
     }
 
     private ServerFacade() {
-        clients = new HashMap<>();
+        clientThreadMap = new HashMap<>();
+    }
+
+    public boolean isEmptyMap() {
+        return this.clientThreadMap.isEmpty();
+    }
+
+    public MonoClientThread getThread(int port) {
+        return this.clientThreadMap.get(port);
+    }
+
+    public void sendAll(String entry) throws IOException {
+        for(int port : this.clientThreadMap.keySet()) {
+            this.clientThreadMap.get(port).sendCommand(entry);
+        }
+    }
+
+    public void removeThread(int port) {
+        this.clientThreadMap.remove(port);
     }
 
     public void connect() {
@@ -65,20 +79,19 @@ public class ServerFacade {
             } catch (PropertyParserInitException e) {
                 e.printStackTrace();
             }
-            try (ServerSocket server = new ServerSocket(Integer.parseInt(parser.getProperty("port")))) {
-                this.server = server;
-                this.exit = true;
-                while (!server.isClosed()) {
-                    Socket clientSocket = server.accept();
+            try (ServerSocket serverSocket = new ServerSocket(Integer.parseInt(parser.getProperty(NamedConstants.PROPERTY_NAME_PORT)))) {
+                this.serverSocket = serverSocket;
+                this.exit = false;
+                while (!serverSocket.isClosed()) {
+                    Socket clientSocket = serverSocket.accept();
                     int port = PortGenerator.getInstance().getPort();
                     MonoClientThread thread = new MonoClientThread(clientSocket, port);
-                    clients.put(port, thread);
+                    clientThreadMap.put(port, thread);
                     executeIt.execute(thread);
-                    System.out.println("Connection accepted");
                 }
                 executeIt.shutdown();
             } catch (SocketException e) {
-                if (!exit) {
+                if (exit) {
                     Command command = CommandCreator.getInstance().createCommand(6, " ");
                     try {
                         CommandProcessor.getInstance().processCommand(command);

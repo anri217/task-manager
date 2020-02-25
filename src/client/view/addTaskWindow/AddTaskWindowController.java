@@ -5,14 +5,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import shared.factories.TaskFactory;
-import shared.utils.idgenerator.IdGenerator;
 import shared.Command;
 import shared.CommandCreator;
 import shared.CommandSender;
 import shared.JsonBuilder;
+import shared.factories.TaskFactory;
 import shared.model.Status;
 import shared.model.Task;
+import shared.utils.IdGenerator;
 import shared.view.AlertShowing;
 
 import java.net.URL;

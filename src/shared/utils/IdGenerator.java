@@ -1,4 +1,4 @@
-package shared.utils.idgenerator;
+package shared.utils;
 
 /**
  * Class generating id for comfortable iteration
