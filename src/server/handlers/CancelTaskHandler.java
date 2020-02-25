@@ -17,13 +17,14 @@ public class CancelTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws IOException {
+        Controller controller = Controller.getInstance();
         ArrayList<Integer> ids = (ArrayList<Integer>) command.getContent();
         for (int i = 0; i < ids.size(); i++) {
-            Controller.getInstance().cancelTask(ids.get(i));
+            controller.cancelTask(ids.get(i));
         }
         RefreshHelper.getInstance().getMainWindowController().refresh();
         HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-        String entry = CommandCreator.getInstance().createStringCommand(0, Controller.getInstance().getAll());
+        String entry = CommandCreator.getInstance().createStringCommand(0, controller.getAll());
         for (int port : clients.keySet()) {
             clients.get(port).sendCommand(entry);
         }

@@ -22,7 +22,8 @@ public class TakeNotificationHandler implements Handler {
     @Override
     public void handle(Command command) {
         LinkedHashMap<String, Object> taskMap = (LinkedHashMap<String, Object>) command.getContent();
-        task = TaskConverter.getInstance().convert(taskMap);
+        TaskConverter taskConverter = TaskConverter.getInstance();
+        task = taskConverter.convert(taskMap);
         Platform.runLater(() -> {
             try {
                 showNotification();

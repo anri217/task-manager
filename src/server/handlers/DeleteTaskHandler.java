@@ -16,13 +16,15 @@ import java.util.HashMap;
 public class DeleteTaskHandler implements Handler {
     @Override
     public void handle(Command command) throws IOException {
+        Controller controller = Controller.getInstance();
         ArrayList<Integer> ids = (ArrayList<Integer>) command.getContent();
         for (int i = 0; i < ids.size(); i++) {
-            Controller.getInstance().deleteTask(ids.get(i));
+            controller.deleteTask(ids.get(i));
         }
         RefreshHelper.getInstance().getMainWindowController().refresh();
         HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-        String entry = CommandCreator.getInstance().createStringCommand(0, Controller.getInstance().getAll());
+        CommandCreator commandCreator = CommandCreator.getInstance();
+        String entry = commandCreator.createStringCommand(0, controller.getAll());
         for (int port : clients.keySet()) {
             clients.get(port).sendCommand(entry);
         }

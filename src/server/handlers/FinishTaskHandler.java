@@ -25,10 +25,12 @@ public class FinishTaskHandler implements Handler {
         Task task = TaskConverter.getInstance().convert(map);
         task.setStatus(Status.COMPLETED);
         task.setDateOfDone(LocalDateTime.now());
-        Controller.getInstance().changeTask(task.getId(), task);
+        Controller controller = Controller.getInstance();
+        controller.changeTask(task.getId(), task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
         HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-        String entry = CommandCreator.getInstance().createStringCommand(0, Controller.getInstance().getAll());
+        CommandCreator commandCreator = CommandCreator.getInstance();
+        String entry = commandCreator.createStringCommand(0, controller.getAll());
         for (int port : clients.keySet()) {
             clients.get(port).sendCommand(entry);
         }

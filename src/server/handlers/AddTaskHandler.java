@@ -22,10 +22,11 @@ public class AddTaskHandler implements Handler {
     @Override
     public void handle(Command command) throws IOException {
         Task task = TaskConverter.getInstance().convert((LinkedHashMap<String, Object>) command.getContent());
-        Controller.getInstance().addTask(task);
+        Controller controller = Controller.getInstance();
+        controller.addTask(task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
         HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClients();
-        String entry = CommandCreator.getInstance().createStringCommand(0, Controller.getInstance().getAll());
+        String entry = CommandCreator.getInstance().createStringCommand(0, controller.getAll());
         for (int port : clients.keySet()) {
             clients.get(port).sendCommand(entry);
         }
