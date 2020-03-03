@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//todo сделать красиво без linkedmap и нормально оформить ретерны
 public class TaskConverter {
     private Map<String, Object> map;
     private static TaskConverter instance;
@@ -38,7 +37,6 @@ public class TaskConverter {
         return task;
     }
 
-    //todo через switch case
     private Status chooseStatus(String statusString) {
         Status status = null;
         switch (statusString) {
