@@ -4,6 +4,7 @@ import server.controller.utils.PortGenerator;
 import shared.Command;
 import shared.CommandCreator;
 import shared.NamedConstants;
+import shared.ServerCommandIdConstants;
 import shared.exceptions.PropertyParserInitException;
 import shared.utils.Paths;
 import shared.utils.PropertyParser;
@@ -92,7 +93,7 @@ public class ServerFacade {
                 executeIt.shutdown();
             } catch (SocketException e) {
                 if (exit) {
-                    Command command = CommandCreator.getInstance().createCommand(6, " ");
+                    Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.ALL_DISCONNECT, " ");
                     try {
                         CommandProcessor.getInstance().processCommand(command);
                     } catch (Exception ex) {

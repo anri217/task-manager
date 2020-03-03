@@ -14,4 +14,5 @@ ________________
 + ChangeTask. CommandId = 3. Content = Task. This command is created to change task in server Journal.
 + CancelTask. CommandId = 4. Content = Task. This command is created to cancel task in server Journal.
 + Disconnect. CommandId = 5. Content  = current port. This command is created to notify server about disconnect.
++ AllDisconnect. CommandId = 6. Content doesn't matter. This command is created to notify clients when the server is down.
 + FinishTask. CommandId = 7. Content = Task. This command is created for finish task from notification window.

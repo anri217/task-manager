@@ -46,7 +46,7 @@ public class Client extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        Command command = CommandCreator.getInstance().createCommand(5, ClientFacade.getInstance().getPort());
+        Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.DISCONNECT, ClientFacade.getInstance().getPort());
         String jsonString = JsonBuilder.getInstance().createJsonString(command);
         CommandSender.getInstance().sendCommand(jsonString);
     }

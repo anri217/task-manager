@@ -2,6 +2,7 @@ package server.handlers;
 
 import server.MonoClientThread;
 import server.ServerFacade;
+import shared.ClientCommandIdConstants;
 import shared.Command;
 import shared.CommandCreator;
 import shared.NamedConstants;
@@ -18,7 +19,7 @@ public class AllDisconnectHandler implements Handler {
         for (int port : clients.keySet()) { //здесь осталось все так же, просто ради одного хэндла добавлять метод в фасад
                                             //не имеет смысла
             clients.get(port).setExit(false);
-            clients.get(port).sendCommand(CommandCreator.getInstance().createStringCommand(71, NamedConstants.WORD1));
+            clients.get(port).sendCommand(CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.DISCONNECT, NamedConstants.WORD1));
         }
     }
 

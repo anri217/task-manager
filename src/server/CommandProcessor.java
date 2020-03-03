@@ -4,6 +4,7 @@ import server.exceptions.HandleException;
 import server.exceptions.NotFoundHandlerException;
 import server.handlers.*;
 import shared.Command;
+import shared.ServerCommandIdConstants;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,14 +26,14 @@ public class CommandProcessor {
 
     private CommandProcessor() {
         handlerMap = new HashMap<>();
-        handlerMap.put(0, new GiveTaskToClientHandler());
-        handlerMap.put(1, new AddTaskHandler());
-        handlerMap.put(2, new DeleteTaskHandler());
-        handlerMap.put(3, new ChangeTaskHandler());
-        handlerMap.put(4, new CancelTaskHandler());
-        handlerMap.put(5, new DisconnectHandler());
-        handlerMap.put(6, new AllDisconnectHandler());
-        handlerMap.put(7, new FinishTaskHandler());
+        handlerMap.put(ServerCommandIdConstants.GET_ALL_TASKS, new GiveTaskToClientHandler());
+        handlerMap.put(ServerCommandIdConstants.ADD_TASK, new AddTaskHandler());
+        handlerMap.put(ServerCommandIdConstants.DELETE_TASK, new DeleteTaskHandler());
+        handlerMap.put(ServerCommandIdConstants.CHANGE_TASK, new ChangeTaskHandler());
+        handlerMap.put(ServerCommandIdConstants.CANCEL_TASK, new CancelTaskHandler());
+        handlerMap.put(ServerCommandIdConstants.DISCONNECT, new DisconnectHandler());
+        handlerMap.put(ServerCommandIdConstants.ALL_DISCONNECT, new AllDisconnectHandler());
+        handlerMap.put(ServerCommandIdConstants.FINISH_TASK, new FinishTaskHandler());
     }
 
     public void addHandler(Integer key, Handler handler) {
@@ -44,7 +45,7 @@ public class CommandProcessor {
         try {
             handlerMap.get(commandId).handle(command);
         } catch (NullPointerException e) {
-            throw new NotFoundHandlerException("Command with this commandId is not found");
+            throw new NotFoundHandlerException(HandlerExceptionConstants.NOT_FOUND_HANDLER_EXCEPTION);
         } catch (IOException e) {
             throw new HandleException(e);
         }

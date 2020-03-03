@@ -1,9 +1,6 @@
 package client;
 
-import shared.Command;
-import shared.CommandCreator;
-import shared.CommandSender;
-import shared.JsonBuilder;
+import shared.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -56,7 +53,7 @@ public class ClientFacade {
         listener.start();
         CommandSender sender = CommandSender.getInstance();
         sender.setDos(dos);
-        Command command = CommandCreator.getInstance().createCommand(0, " ", port);
+        Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.GET_ALL_TASKS, " ", port);
         String jsonString = JsonBuilder.getInstance().createJsonString(command);
         CommandSender.getInstance().sendCommand(jsonString);
     }

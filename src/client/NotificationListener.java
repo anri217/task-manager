@@ -23,8 +23,7 @@ public class NotificationListener extends Thread {
             while (!this.isInterrupted()) {
                 Thread.sleep(2000);
                 String answer = dis.readUTF();
-                JsonParser parser = new JsonParser(answer);
-                processor.processCommand(parser.parseCommand());
+                processor.processCommand(JsonParser.getInstance().parseCommand(answer));
             }
             dis.close();
         } catch (Exception e) {

@@ -3,6 +3,7 @@ package server.handlers;
 import server.ServerFacade;
 import server.controller.Controller;
 import server.view.RefreshHelper;
+import shared.ClientCommandIdConstants;
 import shared.Command;
 import shared.CommandCreator;
 import shared.TaskConverter;
@@ -25,6 +26,6 @@ public class FinishTaskHandler implements Handler {
         controller.changeTask(task.getId(), task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
         CommandCreator commandCreator = CommandCreator.getInstance();
-        ServerFacade.getInstance().sendAll(commandCreator.createStringCommand(0, controller.getAll()));
+        ServerFacade.getInstance().sendAll(commandCreator.createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll()));
     }
 }

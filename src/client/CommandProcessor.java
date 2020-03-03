@@ -3,6 +3,7 @@ package client;
 import client.handlers.*;
 import client.handlers.HandlerException.HandleException;
 import client.handlers.HandlerException.NotFoundHandlerException;
+import shared.ClientCommandIdConstants;
 import shared.Command;
 
 import java.io.IOException;
@@ -24,10 +25,10 @@ public class CommandProcessor {
 
     private CommandProcessor() {
         handlerMap = new HashMap<Integer, Handler>();
-        handlerMap.put(0, new TakeAllTasksHandler());
-        handlerMap.put(1, new TakeNotificationHandler());
-        handlerMap.put(99, new ErrorHandler());
-        handlerMap.put(71, new DisconnectHandler());
+        handlerMap.put(ClientCommandIdConstants.GET_ALL_TASKS, new TakeAllTasksHandler());
+        handlerMap.put(ClientCommandIdConstants.NOTIFICATION, new TakeNotificationHandler());
+        handlerMap.put(ClientCommandIdConstants.ERROR, new ErrorHandler());
+        handlerMap.put(ClientCommandIdConstants.DISCONNECT, new DisconnectHandler());
     }
 
     public void addHandler(Integer key, Handler handler) {
@@ -39,7 +40,7 @@ public class CommandProcessor {
         try {
             handlerMap.get(commandId).handle(command);
         } catch (NullPointerException e) {
-            throw new NotFoundHandlerException("Command with this commandId is not found");
+            throw new NotFoundHandlerException(HandlerExceptionConstants.NOT_FOUND_HANDLER_EXCEPTION);
         } catch (IOException e) {
             throw new HandleException(e);
         }

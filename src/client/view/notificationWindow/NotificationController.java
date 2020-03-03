@@ -8,10 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-import shared.Command;
-import shared.CommandCreator;
-import shared.CommandSender;
-import shared.JsonBuilder;
+import shared.*;
 import shared.model.Status;
 import shared.model.Task;
 
@@ -88,7 +85,7 @@ public class NotificationController {
      */
     @FXML
     public void finishTaskAction(ActionEvent actionEvent) throws IOException {
-        Command command = CommandCreator.getInstance().createCommand(7, task);
+        Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.FINISH_TASK, task);
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) finishButton.getScene().getWindow();
         stage.close();
@@ -121,7 +118,7 @@ public class NotificationController {
     public void fiveMinutesButtonActive(ActionEvent actionEvent) throws IOException {
         task.setPlannedDate(LocalDateTime.now().plusMinutes(5));
         task.setStatus(Status.DEFERRED);
-        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
+        Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.CHANGE_TASK, task, ClientFacade.getInstance().getPort());
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -137,7 +134,7 @@ public class NotificationController {
     public void tenMinutesButtonActive(ActionEvent actionEvent) throws IOException {
         task.setPlannedDate(LocalDateTime.now().plusMinutes(10));
         task.setStatus(Status.DEFERRED);
-        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
+        Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.CHANGE_TASK, task, ClientFacade.getInstance().getPort());
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -152,7 +149,7 @@ public class NotificationController {
     public void fifteenMinutesButtonAction(ActionEvent actionEvent) throws IOException {
         task.setPlannedDate(LocalDateTime.now().plusMinutes(15));
         task.setStatus(Status.DEFERRED);
-        Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
+        Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.CHANGE_TASK, task, ClientFacade.getInstance().getPort());
         CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
         Stage stage = (Stage) fiveMinutesButton.getScene().getWindow();
         stage.close();
@@ -215,7 +212,7 @@ public class NotificationController {
                 task.setPlannedDate(LocalDateTime.of(datePicker.getValue().getYear(), datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth(),
                         Integer.parseInt(hoursNewTextField.getText()), Integer.parseInt(minutesNewTextField.getText())));
                 task.setStatus(Status.DEFERRED);
-                Command command = CommandCreator.getInstance().createCommand(3, task, ClientFacade.getInstance().getPort());
+                Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.CHANGE_TASK, task, ClientFacade.getInstance().getPort());
                 CommandSender.getInstance().sendCommand(JsonBuilder.getInstance().createJsonString(command));
                 Stage stage = (Stage) deferButton.getScene().getWindow();
                 stage.close();

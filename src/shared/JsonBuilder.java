@@ -3,10 +3,7 @@ package shared;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import shared.model.Task;
 
-import java.io.File;
-import java.io.IOException;
 
 public class JsonBuilder {
     private static JsonBuilder instance;
@@ -20,13 +17,6 @@ public class JsonBuilder {
             instance = new JsonBuilder();
         }
         return instance;
-    }
-
-    private final static String PATH_TO_JSON = "staff/task.json";
-
-    public static void toJson(Task task) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(new File(PATH_TO_JSON), task);
     }
 
     public String createJsonString(Object object) throws JsonProcessingException {

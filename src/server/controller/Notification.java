@@ -3,6 +3,7 @@ package server.controller;
 import server.MonoClientThread;
 import server.ServerFacade;
 import server.view.RefreshHelper;
+import shared.ClientCommandIdConstants;
 import shared.Command;
 import shared.CommandCreator;
 import shared.JsonBuilder;
@@ -74,7 +75,7 @@ public class Notification extends TimerTask {
                 Controller.getInstance().getTask(this.task.getId()).setStatus(Status.OVERDUE);
                 RefreshHelper.getInstance().getMainWindowController().refresh();
             } else {
-                Command command = CommandCreator.getInstance().createCommand(1, this.task);
+                Command command = CommandCreator.getInstance().createCommand(ClientCommandIdConstants.NOTIFICATION, this.task);
                 HashMap<Integer, MonoClientThread> clients = (HashMap<Integer, MonoClientThread>) ServerFacade.getInstance().getClientThreadMap();
                 String entry = JsonBuilder.getInstance().createJsonString(command);
                 for (int port : clients.keySet()) {

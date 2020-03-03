@@ -3,6 +3,7 @@ package server.handlers;
 import server.ServerFacade;
 import server.controller.Controller;
 import server.view.RefreshHelper;
+import shared.ClientCommandIdConstants;
 import shared.Command;
 import shared.CommandCreator;
 import shared.TaskConverter;
@@ -19,7 +20,7 @@ public class AddTaskHandler implements Handler {
         Controller controller = Controller.getInstance();
         controller.addTask(task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
-        String entry = CommandCreator.getInstance().createStringCommand(0, controller.getAll());
+        String entry = CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll());
         ServerFacade.getInstance().sendAll(entry);
     }
 
