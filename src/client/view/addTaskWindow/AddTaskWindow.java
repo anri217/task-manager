@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 /**
  * Class for opening window of adding task
  */
-
+//,p
 public class AddTaskWindow extends Application {
     @Override
     public void start(Stage stage) throws Exception {
