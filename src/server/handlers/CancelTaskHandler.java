@@ -17,7 +17,7 @@ public class CancelTaskHandler implements Handler {
         Controller controller = Controller.getInstance();
         ArrayList<Integer> ids = (ArrayList<Integer>) command.getContent();
         for (Integer id : ids) {
-            controller.cancelTask(id);
+            controller.cancelTask(id);//todo
         }
         RefreshHelper.getInstance().getMainWindowController().refresh();
         ServerFacade.getInstance().sendAll(CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll()));

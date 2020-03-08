@@ -44,13 +44,13 @@ public class MonoClientThread extends Thread {
                 this.stream = secondDos;
                 CommandProcessor processor = CommandProcessor.getInstance();
                 while (this.exit) {
-                    Thread.sleep(2000);
+                    Thread.sleep(2000);//todo
                     String answer = dis.readUTF();
                     System.out.println(answer);
                     try {
                         processor.processCommand(JsonParser.getInstance().parseCommand(answer));
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        e.printStackTrace();//todo
                     }
                 }
             }

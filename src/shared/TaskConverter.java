@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TaskConverter {
-    private Map<String, Object> map;
+    private Map<String, Object> map; //todo ненужное поле, которое не используется толком
     private static TaskConverter instance;
 
     private TaskConverter() {

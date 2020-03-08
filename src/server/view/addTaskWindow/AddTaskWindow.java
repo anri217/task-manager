@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class AddTaskWindow extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("addTaskWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("addTaskWindow.fxml")); //todo использование строковых данных?
         stage.setTitle("ADD TASK");
         stage.setResizable(false);
         stage.setScene(new Scene(root));

@@ -5,7 +5,7 @@ public class NamedConstants {
     public static final String PROPERTY_NAME_PORT = "port";
     public static final String PROPERTY_NAME_HOST = "host";
     public static final String WINDOW_NAME = "TASK MANAGER";
-    public static final String WORD1 = "full";
+    public static final String WORD1 = "full";//todo переименовать
     public static final String ALERT_NAME = "ALERT";
     public static final String ALERT_HEADER = "SERVER IS DOWN";
     public static final String ERROR1 = "THIS TASK HAS ALREADY DELETED";

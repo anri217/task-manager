@@ -21,7 +21,7 @@ public class NotificationListener extends Thread {
             CommandProcessor processor = CommandProcessor.getInstance();
             DataInputStream dis = new DataInputStream(this.socket.getInputStream());
             while (!this.isInterrupted()) {
-                Thread.sleep(2000);
+                Thread.sleep(2000);//todo в константы время
                 String answer = dis.readUTF();
                 processor.processCommand(JsonParser.getInstance().parseCommand(answer));
             }

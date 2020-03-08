@@ -42,7 +42,7 @@ public class ServerFacade {
     }
 
 
-    private ExecutorService executeIt = Executors.newFixedThreadPool(2);
+    private ExecutorService executeIt = Executors.newFixedThreadPool(2); //todo
 
     private boolean exit;
 
@@ -93,7 +93,7 @@ public class ServerFacade {
                 executeIt.shutdown();
             } catch (SocketException e) {
                 if (exit) {
-                    Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.ALL_DISCONNECT, " ");
+                    Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.ALL_DISCONNECT, " "); //todo либо перегрузить команду, либо нехардкод строки
                     try {
                         CommandProcessor.getInstance().processCommand(command);
                     } catch (Exception ex) {

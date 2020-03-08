@@ -14,6 +14,7 @@ public class ChangeTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws IOException {
+        //todo несколько if
         LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) command.getContent();
         Task task = TaskConverter.getInstance().convert(map);
         if (Controller.getInstance().getTask(task.getId()) == null) {

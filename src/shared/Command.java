@@ -32,7 +32,7 @@ public class Command {
 
     public void setContent(Object content) {
         this.content = content;
-    }
+    } //todo неиспользуемое поле???
 
     public void setCommandId(int commandId) {
         this.commandId = commandId;

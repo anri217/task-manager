@@ -96,7 +96,7 @@ public class AddTaskWindowController implements Initializable {
             } else {
                 TaskFactory factory = new TaskFactory();
                 Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
-                        descTextArea.getText(), cur, Status.PLANNED));
+                        descTextArea.getText(), cur, Status.PLANNED)); //todo idgenerator
                 Command command = CommandCreator.getInstance().createCommand(1, newTask);
                 String jsonString = JsonBuilder.getInstance().createJsonString(command);
                 CommandSender.getInstance().sendCommand(jsonString);

@@ -34,7 +34,7 @@ public class Server extends Application {
         for (Task task : tasks) {
             if (task.getDateOfDone() == null) {
                 if (task.getPlannedDate().isBefore(LocalDateTime.now())) {
-                    task.setStatus(Status.OVERDUE);
+                    task.setStatus(Status.OVERDUE);//todo
                 }
             }
             Controller.getInstance().addTask(task);
