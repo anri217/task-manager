@@ -64,6 +64,7 @@ public class AddTaskWindowController implements Initializable {
     private void initItems() {
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);
+        datePicker.setValue(LocalDateTime.now().toLocalDate());
 
         hoursTextField.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 2 ? change : null));

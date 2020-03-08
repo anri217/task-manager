@@ -1,4 +1,4 @@
-package shared;
+package shared.constants;
 
 public class GeneralConstantsPack {
     public static final String PATH_TO_FXML = "view/mainWindow/mainWindow.fxml";

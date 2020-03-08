@@ -1,4 +1,4 @@
-package shared;
+package shared.commandTools;
 
 import shared.factories.TaskFactory;
 import shared.model.Status;
@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TaskConverter {
-    private Map<String, Object> map; //todo ненужное поле, которое не используется толком
+    private Map<String, Object> map;
     private static TaskConverter instance;
 
     private TaskConverter() {

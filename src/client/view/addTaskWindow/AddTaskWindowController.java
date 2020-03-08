@@ -5,10 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import shared.Command;
-import shared.CommandCreator;
-import shared.CommandSender;
-import shared.JsonBuilder;
+import shared.commandTools.Command;
+import shared.commandTools.CommandCreator;
+import shared.commandTools.CommandSender;
+import shared.commandTools.JsonBuilder;
 import shared.factories.TaskFactory;
 import shared.model.Status;
 import shared.model.Task;
@@ -67,6 +67,7 @@ public class AddTaskWindowController implements Initializable {
     private void initItems() {
         Callback<DatePicker, DateCell> dayCellFactory = this.getDayCellFactory();
         datePicker.setDayCellFactory(dayCellFactory);
+        datePicker.setValue(LocalDateTime.now().toLocalDate());
 
         hoursTextField.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 2 ? change : null));
@@ -95,8 +96,8 @@ public class AddTaskWindowController implements Initializable {
                 AlertShowing.showAlert("ENTER CORRECT TIME");
             } else {
                 TaskFactory factory = new TaskFactory();
-                Task newTask = new Task(factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
-                        descTextArea.getText(), cur, Status.PLANNED)); //todo idgenerator
+                Task newTask = factory.createTask(IdGenerator.getInstance().getId(), nameTextField.getText(),
+                        descTextArea.getText(), cur, Status.PLANNED); //todo idgenerator
                 Command command = CommandCreator.getInstance().createCommand(1, newTask);
                 String jsonString = JsonBuilder.getInstance().createJsonString(command);
                 CommandSender.getInstance().sendCommand(jsonString);

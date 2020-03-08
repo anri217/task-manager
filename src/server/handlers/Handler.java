@@ -1,12 +1,9 @@
 package server.handlers;
 
 import server.exceptions.HandleException;
-import server.exceptions.NotFoundHandlerException;
-import shared.Command;
-
-import java.io.IOException;
+import shared.commandTools.Command;
 
 public interface Handler {
 
-    public void handle(Command command) throws IOException;
+    public void handle(Command command) throws HandleException;
 }

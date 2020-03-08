@@ -3,10 +3,10 @@ package server.controller;
 import server.MonoClientThread;
 import server.ServerFacade;
 import server.view.RefreshHelper;
-import shared.ClientCommandIdConstants;
-import shared.Command;
-import shared.CommandCreator;
-import shared.JsonBuilder;
+import shared.commandTools.ClientCommandIdConstants;
+import shared.commandTools.Command;
+import shared.commandTools.CommandCreator;
+import shared.commandTools.JsonBuilder;
 import shared.model.Status;
 import shared.model.Task;
 

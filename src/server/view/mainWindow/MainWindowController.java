@@ -17,9 +17,9 @@ import server.view.RefreshHelper;
 import server.view.SelectedTasksController;
 import server.view.addTaskWindow.AddTaskWindow;
 import server.view.changeTaskWindow.ChangeTaskWindow;
-import shared.Command;
-import shared.CommandCreator;
-import shared.JsonBuilder;
+import shared.commandTools.Command;
+import shared.commandTools.CommandCreator;
+import shared.commandTools.JsonBuilder;
 import shared.exceptions.PropertyParserInitException;
 import shared.model.Journal;
 import shared.model.Status;
@@ -36,7 +36,7 @@ import java.util.ResourceBundle;
 /**
  * Class for catch events from items on main window
  *
- * @see MainWindow
+ * @see //MainWindow
  */
 
 public class MainWindowController implements Initializable {

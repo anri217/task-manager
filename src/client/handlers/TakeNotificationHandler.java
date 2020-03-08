@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import shared.Command;
-import shared.NotificationConstants;
-import shared.TaskConverter;
+import shared.commandTools.Command;
+import shared.constants.NotificationConstants;
+import shared.commandTools.TaskConverter;
 import shared.model.Task;
 
 import java.awt.*;

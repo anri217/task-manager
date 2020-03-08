@@ -1,4 +1,4 @@
-package shared;
+package shared.constants;
 
 import server.controller.Notification;
 

@@ -12,10 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import shared.Command;
-import shared.CommandCreator;
-import shared.CommandSender;
-import shared.JsonBuilder;
+import shared.commandTools.Command;
+import shared.commandTools.CommandCreator;
+import shared.commandTools.CommandSender;
+import shared.commandTools.JsonBuilder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 /**
  * Class for catch events from items on main window
  *
- * @see MainWindow
+ * @see //MainWindow
  */
 
 public class MainWindowController implements Initializable {

@@ -1,10 +1,11 @@
 package server;
 
+import server.commandTools.CommandProcessor;
 import server.controller.utils.PortGenerator;
-import shared.Command;
-import shared.CommandCreator;
-import shared.GeneralConstantsPack;
-import shared.ServerCommandIdConstants;
+import shared.commandTools.Command;
+import shared.commandTools.CommandCreator;
+import shared.constants.GeneralConstantsPack;
+import shared.commandTools.ServerCommandIdConstants;
 import shared.exceptions.PropertyParserInitException;
 import shared.utils.Paths;
 import shared.utils.PropertyParser;
@@ -105,7 +106,7 @@ public class ServerFacade {
                 executeIt.shutdown();
             } catch (SocketException e) {
                 if (exit) {
-                    Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.ALL_DISCONNECT, " "); //todo либо перегрузить команду, либо нехардкод строки
+                    Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.ALL_DISCONNECT);
                     try {
                         CommandProcessor.getInstance().processCommand(command);
                     } catch (Exception ignored) {

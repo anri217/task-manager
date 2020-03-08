@@ -1,10 +1,9 @@
 package client.handlers;
 
-import shared.Command;
-
-import java.io.IOException;
+import client.handlers.HandlerException.HandleException;
+import shared.commandTools.Command;
 
 public interface Handler {
 
-    void handle(Command command) throws IOException;
+    void handle(Command command) throws HandleException;
 }

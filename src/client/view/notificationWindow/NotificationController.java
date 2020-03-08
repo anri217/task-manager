@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-import shared.*;
+import shared.commandTools.*;
 import shared.model.Status;
 import shared.model.Task;
 

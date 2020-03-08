@@ -1,7 +1,8 @@
 package server;
 
-import shared.GeneralConstantsPack;
-import shared.JsonParser;
+import server.commandTools.CommandProcessor;
+import shared.constants.GeneralConstantsPack;
+import shared.commandTools.JsonParser;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

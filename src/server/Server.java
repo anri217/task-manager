@@ -9,7 +9,7 @@ import server.controller.Controller;
 import server.controller.utils.Backupper;
 import server.exceptions.BackupFileException;
 import server.view.RefreshHelper;
-import shared.GeneralConstantsPack;
+import shared.constants.GeneralConstantsPack;
 import shared.exceptions.PropertyParserInitException;
 import shared.model.Journal;
 import shared.view.AlertShowing;

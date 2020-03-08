@@ -1,12 +1,11 @@
-package server;
+package server.commandTools;
 
 import server.exceptions.HandleException;
 import server.exceptions.NotFoundHandlerException;
 import server.handlers.*;
-import shared.Command;
-import shared.ServerCommandIdConstants;
+import shared.commandTools.Command;
+import shared.commandTools.ServerCommandIdConstants;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,11 +45,10 @@ public class CommandProcessor {
             handlerMap.get(commandId).handle(command);
         } catch (NullPointerException e) {
             throw new NotFoundHandlerException(HandlerExceptionConstants.NOT_FOUND_HANDLER_EXCEPTION);
-        } catch (IOException e) {
+        } catch (HandleException e) {
             throw new HandleException(e);
         }
     }
-
 
     public Command getCommand() {
         return command;

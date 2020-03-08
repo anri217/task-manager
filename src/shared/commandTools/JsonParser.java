@@ -1,4 +1,4 @@
-package shared;
+package shared.commandTools;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

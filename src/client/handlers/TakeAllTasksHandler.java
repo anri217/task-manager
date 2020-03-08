@@ -2,8 +2,8 @@ package client.handlers;
 
 import client.view.MainWindowRow;
 import client.view.RefreshHelper;
-import shared.Command;
-import shared.TaskConverter;
+import shared.commandTools.Command;
+import shared.commandTools.TaskConverter;
 import shared.model.Task;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
-package shared;
+package shared.commandTools;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import server.controller.Controller;
 
 public class CommandCreator {
     private static CommandCreator instance;
@@ -14,6 +13,10 @@ public class CommandCreator {
             instance = new CommandCreator();
         }
         return instance;
+    }
+
+    public Command createCommand(int commandId) {
+        return new Command(commandId, " ");
     }
 
     public Command createCommand(int commandId, Object content) {

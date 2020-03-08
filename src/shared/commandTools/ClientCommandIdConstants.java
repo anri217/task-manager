@@ -1,4 +1,4 @@
-package shared;
+package shared.commandTools;
 
 public class ClientCommandIdConstants {
     public final static int GET_ALL_TASKS = 0;

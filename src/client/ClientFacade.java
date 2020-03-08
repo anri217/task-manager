@@ -1,6 +1,6 @@
 package client;
 
-import shared.*;
+import shared.commandTools.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

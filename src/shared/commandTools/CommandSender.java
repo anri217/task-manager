@@ -1,4 +1,4 @@
-package shared;
+package shared.commandTools;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

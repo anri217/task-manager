@@ -1,6 +1,6 @@
 package client.handlers;
 
-import shared.Command;
+import shared.commandTools.Command;
 import shared.view.AlertShowing;
 
 public class ErrorHandler implements Handler {

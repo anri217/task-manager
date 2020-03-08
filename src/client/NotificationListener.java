@@ -1,7 +1,8 @@
 package client;
 
-import shared.GeneralConstantsPack;
-import shared.JsonParser;
+import client.commandTools.CommandProcessor;
+import shared.constants.GeneralConstantsPack;
+import shared.commandTools.JsonParser;
 
 import java.io.DataInputStream;
 import java.net.Socket;
