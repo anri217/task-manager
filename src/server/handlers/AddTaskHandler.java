@@ -20,7 +20,8 @@ public class AddTaskHandler implements Handler {
         Controller controller = Controller.getInstance();
         controller.addTask(task);
         RefreshHelper.getInstance().getMainWindowController().refresh();
-        String entry = CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll());
+        String entry = CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS,
+                controller.getAll());
         ServerFacade.getInstance().sendAll(entry);
     }
 

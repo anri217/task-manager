@@ -17,8 +17,8 @@ public class TakeAllTasksHandler implements Handler {
         ArrayList<Task> tasks = new ArrayList<>();
         List<LinkedHashMap<String, Object>> taskList = (List) command.getContent();
         TaskConverter taskConverter = TaskConverter.getInstance();
-        for (int i = 0; i < taskList.size(); i++) {
-            tasks.add(taskConverter.convert(taskList.get(i)));
+        for (LinkedHashMap<String, Object> stringObjectLinkedHashMap : taskList) {
+            tasks.add(taskConverter.convert(stringObjectLinkedHashMap));
         }
         ArrayList<MainWindowRow> rows = new ArrayList<MainWindowRow>();
         for (Task task : tasks) {

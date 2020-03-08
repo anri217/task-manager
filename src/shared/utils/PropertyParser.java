@@ -12,15 +12,9 @@ import java.util.Properties;
 
 public class PropertyParser {
     private static final String EX_STR = "Can't init file ", CLIENT_PATH = "staff/properties/client.properties",
-    FILE_PATH = "staff/properties/file.properties", SERVER_PATH = "staff/properties/server.properties";
+            FILE_PATH = "staff/properties/file.properties", SERVER_PATH = "staff/properties/server.properties";
     private Properties properties;
 
-
-
-
-    public static String getExStr() {
-        return EX_STR;
-    }
 
     /**
      * Constructor loading data in properties
@@ -30,14 +24,14 @@ public class PropertyParser {
 
     public PropertyParser(Paths paths) throws PropertyParserInitException {
         String pathToProperties = "";
-        switch(paths.ordinal()){
-            case(0):
+        switch (paths.ordinal()) {
+            case (0):
                 pathToProperties = CLIENT_PATH;
                 break;
-            case(1):
+            case (1):
                 pathToProperties = SERVER_PATH;
                 break;
-            case(2):
+            case (2):
                 pathToProperties = FILE_PATH;
                 break;
         }

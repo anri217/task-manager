@@ -1,5 +1,6 @@
 package server.handlers;
 
+import server.MonoClientThread;
 import server.ServerFacade;
 import shared.ClientCommandIdConstants;
 import shared.Command;
@@ -13,8 +14,9 @@ public class DisconnectHandler implements Handler {
     public void handle(Command command) throws IOException {
         ServerFacade facade = ServerFacade.getInstance();
         int port = (int) command.getContent();
-        facade.getThread(port).setExit(false);
-        facade.getThread(port).sendCommand(CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.DISCONNECT, port));
+        MonoClientThread thread = facade.getThread(port);
+        thread.setExit(false);
+        thread.sendCommand(CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.DISCONNECT, port));
         facade.removeThread(port);
     }
 

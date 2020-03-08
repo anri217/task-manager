@@ -3,7 +3,7 @@ package server;
 import server.controller.utils.PortGenerator;
 import shared.Command;
 import shared.CommandCreator;
-import shared.NamedConstants;
+import shared.GeneralConstantsPack;
 import shared.ServerCommandIdConstants;
 import shared.exceptions.PropertyParserInitException;
 import shared.utils.Paths;
@@ -42,7 +42,7 @@ public class ServerFacade {
     }
 
 
-    private ExecutorService executeIt = Executors.newFixedThreadPool(2); //todo
+    private ExecutorService executeIt;
 
     private boolean exit;
 
@@ -52,6 +52,12 @@ public class ServerFacade {
 
     private ServerFacade() {
         clientThreadMap = new HashMap<>();
+        try {
+            executeIt = Executors.newFixedThreadPool(
+                    Integer.parseInt(new PropertyParser(Paths.SERVER).getProperty(
+                            GeneralConstantsPack.PROPERTY_NAME_CLIENTS_COUNT)));
+        } catch (PropertyParserInitException ignored) {
+        }
     }
 
     public boolean isEmptyMap() {
@@ -63,13 +69,19 @@ public class ServerFacade {
     }
 
     public void sendAll(String entry) throws IOException {
-        for(int port : this.clientThreadMap.keySet()) {
+        for (int port : this.clientThreadMap.keySet()) {
             this.clientThreadMap.get(port).sendCommand(entry);
         }
     }
 
     public void removeThread(int port) {
         this.clientThreadMap.remove(port);
+    }
+
+    public void setAllExit(boolean arg) {
+        for (int port : this.clientThreadMap.keySet()) {
+            this.clientThreadMap.get(port).setExit(arg);
+        }
     }
 
     public void connect() {
@@ -80,7 +92,7 @@ public class ServerFacade {
             } catch (PropertyParserInitException e) {
                 e.printStackTrace();
             }
-            try (ServerSocket serverSocket = new ServerSocket(Integer.parseInt(parser.getProperty(NamedConstants.PROPERTY_NAME_PORT)))) {
+            try (ServerSocket serverSocket = new ServerSocket(Integer.parseInt(parser.getProperty(GeneralConstantsPack.PROPERTY_NAME_PORT)))) {
                 this.serverSocket = serverSocket;
                 this.exit = false;
                 while (!serverSocket.isClosed()) {
@@ -96,11 +108,8 @@ public class ServerFacade {
                     Command command = CommandCreator.getInstance().createCommand(ServerCommandIdConstants.ALL_DISCONNECT, " "); //todo либо перегрузить команду, либо нехардкод строки
                     try {
                         CommandProcessor.getInstance().processCommand(command);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    } catch (Exception ignored) {
                     }
-                } else {
-                    e.printStackTrace();
                 }
             } catch (IOException e) {
                 AlertShowing.showAlert(e.getMessage());

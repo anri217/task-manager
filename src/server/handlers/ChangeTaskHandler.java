@@ -14,24 +14,38 @@ public class ChangeTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws IOException {
-        //todo несколько if
         LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) command.getContent();
+        ServerFacade serverFacade = ServerFacade.getInstance();
+        CommandCreator commandCreator = CommandCreator.getInstance();
+        Controller controller = Controller.getInstance();
+        JsonBuilder jsonBuilder = JsonBuilder.getInstance();
+        RefreshHelper refreshHelper = RefreshHelper.getInstance();
         Task task = TaskConverter.getInstance().convert(map);
-        if (Controller.getInstance().getTask(task.getId()) == null) {
-            Command command1 = CommandCreator.getInstance().createCommand(ClientCommandIdConstants.ERROR, NamedConstants.ERROR1);
-            ServerFacade.getInstance().getThread(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
-        } else if (Controller.getInstance().isTaskInJournal(task)) {
-            Command command1 = CommandCreator.getInstance().createCommand(ClientCommandIdConstants.ERROR, NamedConstants.ERROR2);
-            ServerFacade.getInstance().getThread(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
-        } else if (Controller.getInstance().getTask(task.getId()).getStatus() == Status.COMPLETED &&
-                task.getStatus() == Status.DEFERRED) {
-            Command command1 = CommandCreator.getInstance().createCommand(ClientCommandIdConstants.ERROR, NamedConstants.ERROR3);
-            ServerFacade.getInstance().getThread(command.getPort()).sendCommand(JsonBuilder.getInstance().createJsonString(command1));
-        } else {
-            Controller.getInstance().changeTask(task.getId(), task);
-            RefreshHelper.getInstance().getMainWindowController().refresh();
-            ServerFacade.getInstance().sendAll(CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, Controller.getInstance().getAll()));
+        if (controller.getTask(task.getId()) == null) {
+            Command command1 = commandCreator.createCommand(ClientCommandIdConstants.ERROR,
+                    GeneralConstantsPack.DELETED_ERROR);
+            serverFacade.getThread(command.getPort()).sendCommand(
+                    jsonBuilder.createJsonString(command1));
+            return;
         }
+        if (controller.isTaskInJournal(task)) {
+            Command command1 = commandCreator.createCommand(ClientCommandIdConstants.ERROR,
+                    GeneralConstantsPack.EXIST_ERROR);
+            serverFacade.getThread(command.getPort()).sendCommand(
+                    jsonBuilder.createJsonString(command1));
+            return;
+        }
+        if (controller.getTask(task.getId()).getStatus() == Status.COMPLETED &&
+                task.getStatus() == Status.DEFERRED) {
+            Command command1 = commandCreator.createCommand(ClientCommandIdConstants.ERROR,
+                    GeneralConstantsPack.COMPLETED_ERROR);
+            serverFacade.getThread(command.getPort()).sendCommand(
+                    jsonBuilder.createJsonString(command1));
+            return;
+        }
+        controller.changeTask(task.getId(), task);
+        refreshHelper.getMainWindowController().refresh();
+        serverFacade.sendAll(commandCreator.createStringCommand(
+                ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll()));
     }
-
 }

@@ -12,14 +12,6 @@ public class Backupper {
     public Backupper() {
     }
 
-    public Backupper(IOUtils ioUtils) {
-        this.ioUtils = ioUtils;
-    }
-
-    public void setIoUtils(IOUtils ioUtils) {
-        this.ioUtils = ioUtils;
-    }
-
     public void backupFunction(Object object, String current) throws PropertyParserInitException, BackupFileException {
         choose(current);
         ioUtils.serializeObject(object);

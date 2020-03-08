@@ -9,16 +9,12 @@ import server.controller.Controller;
 import server.controller.utils.Backupper;
 import server.exceptions.BackupFileException;
 import server.view.RefreshHelper;
-import shared.NamedConstants;
+import shared.GeneralConstantsPack;
 import shared.exceptions.PropertyParserInitException;
 import shared.model.Journal;
-import shared.model.Status;
-import shared.model.Task;
 import shared.view.AlertShowing;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class Server extends Application {
 
@@ -30,18 +26,9 @@ public class Server extends Application {
         } catch (BackupFileException | ClassNotFoundException | PropertyParserInitException e) {
             AlertShowing.showAlert(e.getMessage());
         }
-        List<Task> tasks = journal.getAll();
-        for (Task task : tasks) {
-            if (task.getDateOfDone() == null) {
-                if (task.getPlannedDate().isBefore(LocalDateTime.now())) {
-                    task.setStatus(Status.OVERDUE);//todo
-                }
-            }
-            Controller.getInstance().addTask(task);
-        }
+        Controller.getInstance().restoreTasks(journal);
         ServerFacade.getInstance().connect();
         Application.launch(args);
-        Controller.getInstance().deleteAllNotification();
         try {
             backupper.backupFunction(Controller.getInstance().getJournal(), Backupper.BIN);
         } catch (PropertyParserInitException | BackupFileException e) {
@@ -52,8 +39,8 @@ public class Server extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(NamedConstants.PATH_TO_FXML));
-            stage.setTitle(NamedConstants.WINDOW_NAME);
+            Parent root = FXMLLoader.load(getClass().getResource(GeneralConstantsPack.PATH_TO_FXML));
+            stage.setTitle(GeneralConstantsPack.WINDOW_NAME);
             stage.setScene(new Scene(root));
             stage.show();
             RefreshHelper.getInstance().getMainWindowController().refresh();

@@ -16,11 +16,10 @@ public class CancelTaskHandler implements Handler {
     public void handle(Command command) throws IOException {
         Controller controller = Controller.getInstance();
         ArrayList<Integer> ids = (ArrayList<Integer>) command.getContent();
-        for (Integer id : ids) {
-            controller.cancelTask(id);//todo
-        }
+        controller.cancelTask(ids);
         RefreshHelper.getInstance().getMainWindowController().refresh();
-        ServerFacade.getInstance().sendAll(CommandCreator.getInstance().createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll()));
+        ServerFacade.getInstance().sendAll(CommandCreator.getInstance().createStringCommand(
+                ClientCommandIdConstants.GET_ALL_TASKS,
+                controller.getAll()));
     }
-
 }

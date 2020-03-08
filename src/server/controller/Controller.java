@@ -4,6 +4,8 @@ import shared.model.Journal;
 import shared.model.Status;
 import shared.model.Task;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -110,6 +112,31 @@ public class Controller {
 
     public List<Task> getAll() {
         return Collections.unmodifiableList(journal.getAll());
+    }
+
+    public void restoreTasks(Journal journal) {
+        List<Task> tasks = journal.getAll();
+        for (Task task : tasks) {
+            if (task.getDateOfDone() == null) {
+                if (task.getPlannedDate().isBefore(LocalDateTime.now())) {
+                    task.setStatus(Status.OVERDUE);
+                }
+            }
+            this.addTask(task);
+        }
+
+    }
+
+    public void cancelTask(ArrayList<Integer> ids) {
+        for (int i : ids) {
+            this.cancelTask(i);
+        }
+    }
+
+    public void deleteTask(ArrayList<Integer> ids) {
+        for (int i : ids) {
+            this.deleteTask(i);
+        }
     }
 
     public void setJournal(Journal journal) {

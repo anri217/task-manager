@@ -15,8 +15,8 @@ public class BinarySerializer implements IOUtils {
 
     private static BinarySerializer instance;
 
-    private static final String PATH_TO_BACKUP_FILE = "path_to_backup_file",
-            EX_STR = "Can't find backup file ";
+    private static final String PROPERTY_NAME_OF_PATH = "path_to_backup_file",
+            EX_STR = "Can't find backup file ", PATH_TO_BACKUP_FILE = "staff/backup/backup_file.txt";
 
     /**
      * Singleton implementation
@@ -45,7 +45,7 @@ public class BinarySerializer implements IOUtils {
     public void serializeObject(Object obj) throws BackupFileException, PropertyParserInitException {
         if (obj != null) {
             PropertyParser propertyParser = new PropertyParser(Paths.FILE);
-            String path = propertyParser.getProperty(PATH_TO_BACKUP_FILE);
+            String path = propertyParser.getProperty(PROPERTY_NAME_OF_PATH);
             try (OutputStream out = new FileOutputStream(new File(path));
                  ObjectOutputStream oos = new ObjectOutputStream(out)) {
                 oos.writeObject(obj);
@@ -66,7 +66,7 @@ public class BinarySerializer implements IOUtils {
 
     public Object deserializeObject() throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
         PropertyParser propertyParser = new PropertyParser(Paths.FILE);
-        String path = propertyParser.getProperty(PATH_TO_BACKUP_FILE);
+        String path = propertyParser.getProperty(PROPERTY_NAME_OF_PATH);
         try (InputStream in = new FileInputStream(new File(path));
              ObjectInputStream ois = new ObjectInputStream(in)) {
             Object obj = ois.readObject();

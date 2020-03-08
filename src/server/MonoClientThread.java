@@ -1,5 +1,6 @@
 package server;
 
+import shared.GeneralConstantsPack;
 import shared.JsonParser;
 
 import java.io.DataInputStream;
@@ -28,10 +29,6 @@ public class MonoClientThread extends Thread {
         this.exit = exit;
     }
 
-    public Socket getClientSocket() {
-        return clientSocket;
-    }
-
     @Override
     public void run() {
         this.exit = true;
@@ -44,29 +41,25 @@ public class MonoClientThread extends Thread {
                 this.stream = secondDos;
                 CommandProcessor processor = CommandProcessor.getInstance();
                 while (this.exit) {
-                    Thread.sleep(2000);//todo
+                    Thread.sleep(GeneralConstantsPack.SLEEP_TIME);
                     String answer = dis.readUTF();
                     System.out.println(answer);
                     try {
                         processor.processCommand(JsonParser.getInstance().parseCommand(answer));
-                    } catch (Exception e) {
-                        e.printStackTrace();//todo
+                    } catch (Exception ignored) {
                     }
                 }
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ignored) {
+
         } catch (IOException e) {
             if (!this.exit) {
                 System.exit(0);
-            } else {
-                e.printStackTrace();
             }
         } finally {
             try {
                 this.clientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ignored) {
             }
         }
     }

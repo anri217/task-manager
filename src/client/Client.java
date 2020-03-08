@@ -25,8 +25,8 @@ public class Client extends Application {
         if (propertyParser != null) {
             try {
                 ClientFacade clientFacade = ClientFacade.getInstance();
-                clientFacade.setSocket(new Socket(propertyParser.getProperty(NamedConstants.PROPERTY_NAME_HOST),
-                        Integer.parseInt(propertyParser.getProperty(NamedConstants.PROPERTY_NAME_PORT))));
+                clientFacade.setSocket(new Socket(propertyParser.getProperty(GeneralConstantsPack.PROPERTY_NAME_HOST),
+                        Integer.parseInt(propertyParser.getProperty(GeneralConstantsPack.PROPERTY_NAME_PORT))));
                 clientFacade.connect();
                 Application.launch(args);
             } catch (IOException e) {
@@ -37,8 +37,8 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(NamedConstants.PATH_TO_FXML));
-        stage.setTitle(NamedConstants.WINDOW_NAME);
+        Parent root = FXMLLoader.load(getClass().getResource(GeneralConstantsPack.PATH_TO_FXML));
+        stage.setTitle(GeneralConstantsPack.WINDOW_NAME);
         stage.setScene(new Scene(root));
         stage.show();
     }

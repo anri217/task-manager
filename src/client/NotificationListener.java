@@ -1,5 +1,6 @@
 package client;
 
+import shared.GeneralConstantsPack;
 import shared.JsonParser;
 
 import java.io.DataInputStream;
@@ -12,22 +13,17 @@ public class NotificationListener extends Thread {
         this.socket = socket;
     }
 
-    public void setExit(boolean exit) {
-    }
-
-
     public void run() {
         try {
             CommandProcessor processor = CommandProcessor.getInstance();
             DataInputStream dis = new DataInputStream(this.socket.getInputStream());
             while (!this.isInterrupted()) {
-                Thread.sleep(2000);//todo в константы время
+                Thread.sleep(GeneralConstantsPack.SLEEP_TIME);
                 String answer = dis.readUTF();
                 processor.processCommand(JsonParser.getInstance().parseCommand(answer));
             }
             dis.close();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+        } catch (Exception ignored) {
         }
     }
 }

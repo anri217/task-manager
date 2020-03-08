@@ -15,9 +15,7 @@ public class DeleteTaskHandler implements Handler {
     public void handle(Command command) throws IOException {
         Controller controller = Controller.getInstance();
         ArrayList<Integer> ids = (ArrayList<Integer>) command.getContent();
-        for (Integer id : ids) {
-            controller.deleteTask(id);
-        }
+        controller.deleteTask(ids);
         RefreshHelper.getInstance().getMainWindowController().refresh();
         CommandCreator commandCreator = CommandCreator.getInstance();
         ServerFacade.getInstance().sendAll(commandCreator.createStringCommand(ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll()));

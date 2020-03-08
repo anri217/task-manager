@@ -27,8 +27,7 @@ public class TakeNotificationHandler implements Handler {
         Platform.runLater(() -> {
             try {
                 showNotification();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
         });
     }
