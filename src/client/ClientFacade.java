@@ -21,14 +21,10 @@ public class ClientFacade {
     private Socket socket;
     private int port;
     private NotificationListener listener;
-    private DataInputStream dis;
 
     private ClientFacade() {
     }
 
-    public DataInputStream getDis() {
-        return dis;
-    }
 
     public int getPort() {
         return port;
@@ -43,9 +39,10 @@ public class ClientFacade {
     }
 
     void connect() throws IOException {
-        dis = new DataInputStream(socket.getInputStream());
+        DataInputStream dis = new DataInputStream(socket.getInputStream());
         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         port = Integer.parseInt(dis.readUTF());
+        this.socket.shutdownInput();
         ServerSocket server = new ServerSocket(port);
         Socket clientSocket = server.accept();
         server.close();

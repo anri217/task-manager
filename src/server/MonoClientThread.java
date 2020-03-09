@@ -37,6 +37,7 @@ public class MonoClientThread extends Thread {
              DataOutputStream dos = new DataOutputStream(this.clientSocket.getOutputStream())) {
             dos.writeUTF(String.valueOf(this.port));
             dos.flush();
+            this.clientSocket.shutdownOutput();
             try (Socket secondClientSocket = new Socket(this.clientSocket.getInetAddress().getHostAddress(), this.port);
                  DataOutputStream secondDos = new DataOutputStream(secondClientSocket.getOutputStream())) {
                 this.stream = secondDos;

@@ -16,7 +16,7 @@ public class BinarySerializer implements IOUtils {
     private static BinarySerializer instance;
 
     private static final String PROPERTY_NAME_OF_PATH = "path_to_backup_file",
-            EX_STR = "Can't find backup file ", PATH_TO_BACKUP_FILE = "staff/backup/backup_file.txt";
+            EX_STR = "Can't find backup file ";
 
     /**
      * Singleton implementation
@@ -46,11 +46,16 @@ public class BinarySerializer implements IOUtils {
         if (obj != null) {
             PropertyParser propertyParser = new PropertyParser(Paths.FILE);
             String path = propertyParser.getProperty(PROPERTY_NAME_OF_PATH);
-            try (OutputStream out = new FileOutputStream(new File(path));
+            File file = new File(path);
+            try {
+                file.createNewFile();
+            } catch(IOException ignored) {
+            }
+            try (OutputStream out = new FileOutputStream(file);
                  ObjectOutputStream oos = new ObjectOutputStream(out)) {
                 oos.writeObject(obj);
-            } catch (IOException ex) {
-                throw new BackupFileException(EX_STR + ex.getMessage());
+            } catch (IOException e) {
+                throw new BackupFileException(EX_STR + e.getMessage());
             }
         }
     }
@@ -67,13 +72,18 @@ public class BinarySerializer implements IOUtils {
     public Object deserializeObject() throws ClassNotFoundException, PropertyParserInitException, BackupFileException {
         PropertyParser propertyParser = new PropertyParser(Paths.FILE);
         String path = propertyParser.getProperty(PROPERTY_NAME_OF_PATH);
-        try (InputStream in = new FileInputStream(new File(path));
+        File file = new File(path);
+        try {
+            file.createNewFile();
+        } catch(IOException ignored) {
+        }
+        try (InputStream in = new FileInputStream(file);
              ObjectInputStream ois = new ObjectInputStream(in)) {
             Object obj = ois.readObject();
             ois.close();
             return obj;
-        } catch (IOException ex) {
-            throw new BackupFileException("Can't find backup file " + ex.getMessage());
+        } catch (IOException e) {
+            throw new BackupFileException(EX_STR + e.getMessage());
         }
     }
 }

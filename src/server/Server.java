@@ -12,7 +12,6 @@ import server.view.RefreshHelper;
 import shared.constants.GeneralConstantsPack;
 import shared.exceptions.PropertyParserInitException;
 import shared.model.Journal;
-import shared.view.AlertShowing;
 
 import java.io.IOException;
 
@@ -23,16 +22,14 @@ public class Server extends Application {
         Journal journal = new Journal();
         try {
             journal = (Journal) backupper.restoreFunction(Backupper.BIN);
-        } catch (BackupFileException | ClassNotFoundException | PropertyParserInitException e) {
-            AlertShowing.showAlert(e.getMessage());
+        } catch (BackupFileException | ClassNotFoundException | PropertyParserInitException ignored) {
         }
         Controller.getInstance().restoreTasks(journal);
         ServerFacade.getInstance().connect();
         Application.launch(args);
         try {
             backupper.backupFunction(Controller.getInstance().getJournal(), Backupper.BIN);
-        } catch (PropertyParserInitException | BackupFileException e) {
-            AlertShowing.showAlert(e.getMessage());
+        } catch (PropertyParserInitException | BackupFileException ignored) {
         }
     }
 
@@ -44,8 +41,7 @@ public class Server extends Application {
             stage.setScene(new Scene(root));
             stage.show();
             RefreshHelper.getInstance().getMainWindowController().refresh();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 
