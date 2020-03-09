@@ -18,7 +18,7 @@ target/*
 out/
 .idea/
 .idea_modules/
-src/staff/backup/*
+staff/backup/*
 *.iml
 *.ipr
 *.iws
