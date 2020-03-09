@@ -51,7 +51,7 @@ public class Server extends Application {
         ServerFacade facade = ServerFacade.getInstance();
         facade.setExit(true);
         facade.getServerSocket().close();
-        if(ServerFacade.getInstance().isEmptyMap()) {
+        if (ServerFacade.getInstance().isEmptyMap()) {
             System.exit(0);
         }
     }

@@ -6,7 +6,10 @@ import shared.exceptions.PropertyParserInitException;
 import shared.utils.Paths;
 import shared.utils.PropertyParser;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class XMLSerializer implements IOUtils {
 

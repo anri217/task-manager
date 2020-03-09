@@ -17,7 +17,7 @@ public class ChangeTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws HandleException {
-        try{
+        try {
             LinkedHashMap<String, Object> map = (LinkedHashMap<String, Object>) command.getContent();
             ServerFacade serverFacade = ServerFacade.getInstance();
             CommandCreator commandCreator = CommandCreator.getInstance();
@@ -51,8 +51,7 @@ public class ChangeTaskHandler implements Handler {
             refreshHelper.getMainWindowController().refresh();
             serverFacade.sendAll(commandCreator.createStringCommand(
                     ClientCommandIdConstants.GET_ALL_TASKS, controller.getAll()));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new ChangeTaskHandlerException(e);
         }
     }

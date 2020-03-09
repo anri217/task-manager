@@ -18,7 +18,7 @@ public class AddTaskHandler implements Handler {
 
     @Override
     public void handle(Command command) throws HandleException {
-        try{
+        try {
             Task task = TaskConverter.getInstance().convert((LinkedHashMap<String, Object>) command.getContent());
             Controller controller = Controller.getInstance();
             controller.addTask(task);

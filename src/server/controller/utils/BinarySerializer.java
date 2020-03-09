@@ -49,7 +49,7 @@ public class BinarySerializer implements IOUtils {
             File file = new File(path);
             try {
                 file.createNewFile();
-            } catch(IOException ignored) {
+            } catch (IOException ignored) {
             }
             try (OutputStream out = new FileOutputStream(file);
                  ObjectOutputStream oos = new ObjectOutputStream(out)) {
@@ -75,7 +75,7 @@ public class BinarySerializer implements IOUtils {
         File file = new File(path);
         try {
             file.createNewFile();
-        } catch(IOException ignored) {
+        } catch (IOException ignored) {
         }
         try (InputStream in = new FileInputStream(file);
              ObjectInputStream ois = new ObjectInputStream(in)) {

@@ -31,8 +31,7 @@ public class DisconnectHandler implements Handler {
                     }
                 });
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DisconnectHandlerException(e);
         }
     }

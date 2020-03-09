@@ -18,6 +18,7 @@ public class ClientFacade {
         }
         return instance;
     }
+
     private Socket socket;
     private int port;
     private NotificationListener listener;
@@ -34,7 +35,7 @@ public class ClientFacade {
         this.socket = socket;
     }
 
-    public  NotificationListener getListener() {
+    public NotificationListener getListener() {
         return listener;
     }
 

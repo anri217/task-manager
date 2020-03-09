@@ -26,8 +26,7 @@ public class Backupper {
     private void choose(String current) {
         if (current.equals(BIN)) {
             ioUtils = BinarySerializer.getInstance();
-        }
-        else if(current.equals(XML)) {
+        } else if (current.equals(XML)) {
             ioUtils = XMLSerializer.getInstance();
         }
     }
