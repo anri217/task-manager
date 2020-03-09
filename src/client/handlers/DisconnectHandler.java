@@ -19,7 +19,6 @@ public class DisconnectHandler implements Handler {
         try {
             ClientFacade clientFacade = ClientFacade.getInstance();
             clientFacade.getListener().interrupt();
-            clientFacade.getDis().close();
             CommandSender.getInstance().close();
             if (command.getContent().equals(GeneralConstantsPack.CONTENT_FOR_DISCONNECT)) {
                 Platform.runLater(() -> {
