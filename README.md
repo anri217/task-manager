@@ -18,4 +18,4 @@ See ours [issues](https://github.com/anri217/task-manager/issues) for check deve
 ## Releases
   
 - The 1st Lab: [v1.0](https://github.com/anri217/task-manager/releases/tag/v1.0)
-- The 2nd Lab: TBA
+- The 2nd Lab: [v2.0](https://github.com/anri217/task-manager/releases/tag/v2.0)
