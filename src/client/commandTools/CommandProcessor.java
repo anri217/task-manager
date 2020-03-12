@@ -34,14 +34,12 @@ public class CommandProcessor {
         handlerMap.put(key, handler);
     }
 
-    public void processCommand(Command command) throws NotFoundHandlerException, HandleException {
+    public void processCommand(Command command) throws HandleException {
         int commandId = command.getCommandId();
         try {
             handlerMap.get(commandId).handle(command);
         } catch (NullPointerException e) {
-            throw new NotFoundHandlerException(HandlerExceptionConstants.NOT_FOUND_HANDLER_EXCEPTION);
-        } catch (HandleException e) {
-            throw new HandleException(e); // todo rethrow the same exception?
+            throw new NotFoundHandlerException(e);
         }
     }
 

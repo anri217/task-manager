@@ -1,14 +1,9 @@
 package client.handlers.HandlerException;
 
-public class NotFoundHandlerException extends Exception { // todo who is my parent?
-    // todo wtf?
-    private int commandId;
+public class NotFoundHandlerException extends HandleException {
 
-    public NotFoundHandlerException(String message) {
-        super(message);
+    public NotFoundHandlerException(Throwable e) {
+        super(e);
     }
 
-    public NotFoundHandlerException(){
-        super();
-    }
 }

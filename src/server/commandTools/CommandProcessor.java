@@ -19,8 +19,7 @@ public class CommandProcessor {
         return instance;
     }
 
-       
-    private Command command; // todo ah shit, here we go again
+
     private Map<Integer, Handler> handlerMap;
 
     private CommandProcessor() {
@@ -48,13 +47,5 @@ public class CommandProcessor {
         } catch (HandleException e) {
             throw new HandleException(e);
         }
-    }
-
-    public Command getCommand() {
-        return command;
-    }
-
-    public void setCommand(Command command) {
-        this.command = command;
     }
 }
