@@ -39,7 +39,7 @@ public class ClientFacade {
         return listener;
     }
 
-    void connect() throws IOException {
+    void connect() throws IOException { // todo will be better if you caught IOExc and throw your own 
         DataInputStream dis = new DataInputStream(socket.getInputStream());
         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
         port = Integer.parseInt(dis.readUTF());
