@@ -41,7 +41,7 @@ public class CommandProcessor {
         } catch (NullPointerException e) {
             throw new NotFoundHandlerException(HandlerExceptionConstants.NOT_FOUND_HANDLER_EXCEPTION);
         } catch (HandleException e) {
-            throw new HandleException(e);
+            throw new HandleException(e); // todo rethrow the same exception?
         }
     }
 
