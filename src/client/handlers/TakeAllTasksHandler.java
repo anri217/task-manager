@@ -13,7 +13,7 @@ import java.util.List;
 public class TakeAllTasksHandler implements Handler {
 
     @Override
-    public void handle(Command command) {
+    public void handle(Command command) { // todo wow, magic!!! someone said that it is impossible if parent throw exeption and child do not do it
         ArrayList<Task> tasks = new ArrayList<>();
         List<LinkedHashMap<String, Object>> taskList = (List) command.getContent();
         TaskConverter taskConverter = TaskConverter.getInstance();
