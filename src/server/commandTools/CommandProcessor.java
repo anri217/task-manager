@@ -19,8 +19,8 @@ public class CommandProcessor {
         return instance;
     }
 
-
-    private Command command;
+       
+    private Command command; // todo ah shit, here we go again
     private Map<Integer, Handler> handlerMap;
 
     private CommandProcessor() {
