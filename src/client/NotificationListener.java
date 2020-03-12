@@ -7,7 +7,6 @@ import shared.constants.GeneralConstantsPack;
 import java.io.DataInputStream;
 import java.net.Socket;
 
-// todo design troubles, for this class will be enough have only InputStream. For what socket?
 public class NotificationListener extends Thread {
     private Socket socket;
 
